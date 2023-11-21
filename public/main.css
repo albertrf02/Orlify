@@ -1458,9 +1458,6 @@ input:checked + .toggle-bg {
   --tw-text-opacity: 1;
   color: rgb(114 59 19 / var(--tw-text-opacity));
 }
-.underline {
-  text-decoration-line: underline;
-}
 .opacity-0 {
   opacity: 0;
 }
