@@ -3,20 +3,15 @@
 return [
     /* configuració de connexió a la base dades */
     /* Path on guardarem el fitxer sqlite */
+    "db_type" => Emeset\Env::get("db_type", "PDO"),
     "sqlite" => [
         "path" => Emeset\Env::get("sqlite_path", "../"),
         "name" => Emeset\Env::get("sqlite_name", "db.sqlite")
     ],
-    /* Nom de la cookie */
-    "cookie" => [
-        "name" => Emeset\Env::get("cookie_name", 'visites')
+    "db" => [
+        "user" => Emeset\Env::get("user", "root"),
+        "pass" => Emeset\Env::get("pass", ""),
+        "db" => Emeset\Env::get("db", "pruebas"),
+        "host" => Emeset\Env::get("host", "localhost")
     ],
-    "login" => [
-        "usuari" => Emeset\Env::get("login_usuari", "dani"),
-        "clau" => Emeset\Env::get("login_clau", "1234")
-    ],
-    "app" => [
-        "name" => Emeset\Env::get("app_name", "Emeset demo"),
-        "version" => Emeset\Env::get("app_version", "0.2.5")
-    ]
 ];

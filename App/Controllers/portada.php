@@ -23,6 +23,11 @@ use \Emeset\Contracts\Container;
  **/
 function ctrlPortada(Request $request, Response $response, Container $container) :Response
 {
+
+    $user = $request->get("SESSION","user");
+    $response->set("user",$user);
+
+
     // Comptem quantes vegades has visitat aquesta pàgina
     $visites = $request->get(INPUT_COOKIE, "visites");
     if (!is_null($visites)) {

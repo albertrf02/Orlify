@@ -24,20 +24,20 @@ use \Emeset\Contracts\Container;
  **/
 function ctrlValidarLogin(Request $request, Response $response, Container $container) :Response
 {
-    // Comptem quantes vegades has visitat aquesta pàgina
-    $usuari = $request->get(INPUT_POST, "usuari");
-    $clau = $request->get(INPUT_POST, "clau");
-    $config = $container->get("config");
+    $email = $request->get(INPUT_POST, "email");
+    $password = $request->get(INPUT_POST, "password");
 
+    $model = $container->get("users");
+    $login = $model->login($email, $password);
 
-    if ($usuari === $config["login"]["usuari"] && $clau == $config["login"]["clau"]) {
-        $response->setSession("usuari", $config["login"]["usuari"]);
-        $response->setSession("logat", true);
-        $response->redirect("location: /privat");
+    if ($login) {
+        $response->setSession("logged", true);
+        $response->setSession("user", $login);
+        $response->redirect("Location: /");
     } else {
-        $response->setSession("error", "Usuari o clau incorrectes!");
-        $response->setSession("logat", false);
-        $response->redirect("location: /login");
+        $response->setSession("logged", false);
+        $response->setSession("error", "Usuari o contrasenya incorrectes");
+        $response->redirect("Location: /login");
     }
 
     return $response;

@@ -5,14 +5,28 @@ namespace App;
 
 use Emeset\Container as EmesetContainer;
 
-class Container extends EmesetContainer {
+class Container extends EmesetContainer
+{
 
-    public function __construct($config){
+    public function __construct($config)
+    {
         parent::__construct($config);
-        
-        $this["\App\Controllers\Privat"] = function ($c) {
-            // Aqui podem inicialitzar totes les dependències del controlador i passar-les com a paràmetre.
-            return new \App\Controllers\Privat($c);
-        };
+
+        $dbType = $this->get("config")["db_type"];
+        if ($dbType == "PDO") {
+
+            $this["users"] = function ($c) {
+                return new \App\Models\Users($c["db"]->getConnection());
+            };
+
+            $this["db"] = function ($c) {
+                return new \App\Models\Db(
+                    $c["config"]["db"]["user"],
+                    $c["config"]["db"]["pass"],
+                    $c["config"]["db"]["db"], 
+                    $c["config"]["db"]["host"]
+                );
+            };
+        }
     }
 }
