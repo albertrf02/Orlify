@@ -1,6 +1,9 @@
+DROP DATABASE IF EXISTS orlify;
+CREATE DATABASE orlify;
+
 -- Crear la tabla Users
 CREATE TABLE users (
-    id INT PRIMARY KEY,
+    Id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     surname VARCHAR(255),
     username VARCHAR(255) UNIQUE,
@@ -12,7 +15,7 @@ CREATE TABLE users (
 
 -- Crear la tabla ClassGroup
 CREATE TABLE classGroup (
-    id INT PRIMARY KEY,
+    Id INT AUTO_INCREMENT PRIMARY KEY,
     className VARCHAR(255)
 );
 
@@ -27,7 +30,7 @@ CREATE TABLE users_classGroup (
 
 -- Crear la tabla Orla
 CREATE TABLE orla (
-    id INT PRIMARY KEY,
+    Id INT AUTO_INCREMENT PRIMARY KEY,
     link VARCHAR(255),
     visibility BOOLEAN,
     format VARCHAR(255),
@@ -38,7 +41,7 @@ CREATE TABLE orla (
 
 -- Crear la tabla Photography
 CREATE TABLE photography (
-    id INT PRIMARY KEY,
+    Id INT AUTO_INCREMENT PRIMARY KEY,
     link VARCHAR(255),
     idStudent INT,
     idProfessor INT,
@@ -48,7 +51,7 @@ CREATE TABLE photography (
 
 -- Crear la tabla StudentCard y la relación 1 - 1 con Users
 CREATE TABLE studentCard (
-    id INT PRIMARY KEY,
+    Id INT AUTO_INCREMENT PRIMARY KEY,
     url VARCHAR(255),
     idStudent INT UNIQUE,
     FOREIGN KEY (idStudent) REFERENCES Users(id)
