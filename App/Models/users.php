@@ -45,4 +45,9 @@ class Users
         }
     }
 
+    public function register($name, $lastname, $username, $password, $email) {
+        $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email) VALUES (:name, :surname, :username, :password, :email);');
+        $stm->execute([':name' => $name, ':surname' => $lastname, ':username' => $username, ':password' => $password, ':email' => $email]);
+    }
+
 }
