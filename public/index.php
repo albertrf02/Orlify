@@ -1,7 +1,8 @@
 <?php
-
+use App\Controllers\ViewsController;
 
 use App\Controllers\LoginController;
+
 use Emeset\Contracts\Routers\Router;
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
@@ -12,9 +13,14 @@ $contenidor = new \App\Container(__DIR__ . "/../App/config.php");
 
 $app = new \Emeset\Emeset($contenidor);
 
-$app->get("/", [LoginController::class,"index"]);
-$app->get("/login", [LoginController::class,"indexlogin"]);
+$app->get("/", [ViewsController::class,"index"]);
+$app->get("/login", [ViewsController::class,"login"]);
+$app->get("/register", [ViewsController::class,"register"]);
+
+
 $app->post("/dologin", [LoginController::class,"login"]);
+
+
 
 $app->route(Router::DEFAULT_ROUTE, "\App\Controllers\ErrorController:error404");
 

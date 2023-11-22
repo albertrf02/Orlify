@@ -4,28 +4,6 @@ namespace App\Controllers;
 
 class LoginController 
 {
-    public function index($request, $response, $container)
-    {
-        $error = $request->get("SESSION", "error");
-
-        $response->set("error", $error);
-        $response->setSession("error", "");
-        $response->SetTemplate("portada.php");
-
-        return $response;
-    }
-
-
-    public function indexlogin($request, $response, $container)
-    {
-        $error = $request->get("SESSION", "error");
-
-        $response->set("error", $error);
-        $response->setSession("error", "");
-        $response->SetTemplate("login.php");
-
-        return $response;
-    }
 
     function login($request, $response, $container) {
         $user = $request->get(INPUT_POST, "email");

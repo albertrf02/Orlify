@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="/main.css">
 
-  <title>Exemple de portada</title>
+  <title>Exemple de portad</title>
 </head>
 
 <body>
