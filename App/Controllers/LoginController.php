@@ -30,14 +30,15 @@ class LoginController
     {
 
         $response->setSession("logged", false);
-        $response->setSession("user", []);
+        $response->setSession("user", null);
         $response->redirect("Location: /");
 
         return $response;
     }
 
 
-    function register($request, $response, $container) {
+    function register($request, $response, $container)
+    {
         $name = $request->get(INPUT_POST, "name");
         $lastname = $request->get(INPUT_POST, "lastname");
         $username = $request->get(INPUT_POST, "username");
