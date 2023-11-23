@@ -37,7 +37,8 @@ class LoginController
     }
 
 
-    function register($request, $response, $container) {
+    function register($request, $response, $container)
+    {
         $name = $request->get(INPUT_POST, "name");
         $lastname = $request->get(INPUT_POST, "lastname");
         $username = $request->get(INPUT_POST, "username");

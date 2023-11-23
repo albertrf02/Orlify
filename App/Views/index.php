@@ -19,8 +19,7 @@
   <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="../img/logo.png" class="h-8" alt="Logo" />
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Orlify</span>
+        <img src="../img/logo.png" class="h-11" alt="Logo" />
       </a>
       <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
         <button type="button"
@@ -36,27 +35,34 @@
           id="user-dropdown">
           <div class="px-4 py-3">
 
-            <?php if (isset($_SESSION["user"])) : ?>
-              <span class="block text-sm text-gray-900 dark:text-white"><?= $_SESSION["user"]["name"] ?></span>
-              <span class="block text-sm  text-gray-500 truncate dark:text-gray-400"><?= $_SESSION["user"]["email"] ?></span>
+            <?php if (isset($_SESSION["user"])): ?>
+              <span class="block text-sm text-gray-900 dark:text-white">
+                <?= $_SESSION["user"]["name"] ?>
+              </span>
+              <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                <?= $_SESSION["user"]["email"] ?>
+              </span>
             <?php endif ?>
 
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
 
-          <?php if (isset($_SESSION["user"])) : ?>
-            <li>
-            <a href="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
-            </li>
-          <?php else : ?>
-            <li>
-              <a href="/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">LogIn</a>
-            </li>
-            <li>
-              <a href="/register" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Registre</a>
-            </li>
-          <?php endif ?>
-            
+            <?php if (isset($_SESSION["user"])): ?>
+              <li>
+                <a href="logout"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
+              </li>
+            <?php else: ?>
+              <li>
+                <a href="/login"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">LogIn</a>
+              </li>
+              <li>
+                <a href="/register"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Registre</a>
+              </li>
+            <?php endif ?>
+
           </ul>
         </div>
         <button data-collapse-toggle="navbar-user" type="button"
@@ -95,12 +101,70 @@
           </li>
         </ul>
       </div>
-
     </div>
   </nav>
+  <div class="fixed bottom-6 flex-grow flex justify-center items-end p-4" id="cardContainer">
+    <div class="card">
+      <a class="card1" href="#">
+        <p>This is heading</p>
+        <p class="small">Card description with lots of great facts and interesting details.</p>
+        <div class="go-corner" href="#">
+          <div class="go-arrow">
+            →
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a class="card1" href="#">
+        <p>This is heading</p>
+        <p class="small">Card description with lots of great facts and interesting details.</p>
+        <div class="go-corner" href="#">
+          <div class="go-arrow">
+            →
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="card">
+      <a class="card1" href="#">
+        <p>This is heading</p>
+        <p class="small">Card description with lots of great facts and interesting details.</p>
+        <div class="go-corner" href="#">
+          <div class="go-arrow">
+            →
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="card">
+      <a class="card1" href="#">
+        <p>This is heading</p>
+        <p class="small">Card description with lots of great facts and interesting details.</p>
+        <div class="go-corner" href="#">
+          <div class="go-arrow">
+            →
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="card">
+      <a class="card1" href="#">
+        <p>This is heading</p>
+        <p class="small">Card description with lots of great facts and interesting details.</p>
+        <div class="go-corner" href="#">
+          <div class="go-arrow">
+            →
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
 
   <script src="/js/bundle.js"></script>
   <script src="/js/flowbite.js"></script>
+
 
 </body>
 
