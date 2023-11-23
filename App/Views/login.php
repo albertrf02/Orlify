@@ -13,10 +13,15 @@
 
 <body class="bg-background">
     <div class="min-h-screen flex items-center justify-center">
-        <div class="bg-white p-8 rounded shadow-md w-full sm:w-96">
+        <div class="bg-white p-5 rounded shadow-md w-full sm:w-96">
             <form class="max-w-sm mx-auto" action="/dologin" method="post">
-                <h1 class="text-2xl font-semibold text-center mb-4 text-gray-900 dark:text-white">Login</h1>
-                <?php if ($error != "") { ?>
+                <div class="mb-5 flex items-center justify-center">
+                    <a href="/"> 
+                        <img src="/img/logo.png" class="h-10" alt="orlify">
+                    </a>
+                </div>
+            
+            <?php if ($error != "") { ?>
                     <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                         <?= $error ?>
                     </div>
@@ -41,15 +46,16 @@
                     </span>
                     <input type="password" name="password" id="website-adminn" class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="******">
                 </div>
-                <button type="submit" class="mt-4 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Hola!</button>
+                <button type="submit" class="mt-4 w-full text-white bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:focus:ring-blue-800">Iniciar sessiò</button>
             </form>
             <div class="mt-4">
-            <button type="button" onclick="window.location.href = '/register';" class="w-full text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" style="background-color: #008759;">
-              Registra't
-          </button>
+            <a href="/register">
+            <button type="button" class="w-full text-white bg-button focus:ring-4 focus:outline-none focus:ring-button-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            Registra't
+          </button></a>
             </div>
             <div class="mt-6 text-center">
-              <a href="/" class="text-blue-600 hover:underline font-medium text-sm dark:text-blue-400 dark:hover:text-blue-300">Anar a la pàgina d'inici</a>
+              <a href="/" class="text-blue-600 font-medium text-sm dark:text-blue-400">Anar a la pàgina d'inici</a>
             </div>
     </div>
 
