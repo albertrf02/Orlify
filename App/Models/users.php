@@ -50,4 +50,6 @@ class Users
         $stm->execute([':name' => $name, ':surname' => $lastname, ':username' => $username, ':password' => $password, ':email' => $email]);
     }
 
+    
+
 }
