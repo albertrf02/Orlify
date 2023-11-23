@@ -1115,6 +1115,9 @@ input:checked + .toggle-bg {
 .h-10 {
   height: 2.5rem;
 }
+.h-11 {
+  height: 2.75rem;
+}
 .h-4 {
   height: 1rem;
 }
@@ -1129,15 +1132,6 @@ input:checked + .toggle-bg {
 }
 .h-9 {
   height: 2.25rem;
-}
-.h-7 {
-  height: 1.75rem;
-}
-.h-12 {
-  height: 3rem;
-}
-.h-11 {
-  height: 2.75rem;
 }
 .min-h-screen {
   min-height: 100vh;
