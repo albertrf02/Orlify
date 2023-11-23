@@ -13,12 +13,13 @@ $contenidor = new \App\Container(__DIR__ . "/../App/config.php");
 
 $app = new \Emeset\Emeset($contenidor);
 
-$app->get("/", [ViewsController::class,"index"]);
-$app->get("/login", [ViewsController::class,"login"]);
-$app->get("/register", [ViewsController::class,"register"]);
+$app->get("/", [ViewsController::class, "index"]);
+$app->get("/login", [ViewsController::class, "login"]);
+$app->get("/register", [ViewsController::class, "register"]);
+$app->get("/logout", [LoginController::class, "logout"]);
 
 
-$app->post("/dologin", [LoginController::class,"login"]);
+$app->post("/dologin", [LoginController::class, "login"]);
 
 
 
