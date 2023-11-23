@@ -2,10 +2,11 @@
 
 namespace App\Controllers;
 
-class LoginController 
+class LoginController
 {
 
-    function login($request, $response, $container) {
+    function login($request, $response, $container)
+    {
         $user = $request->get(INPUT_POST, "email");
         $password = $request->get(INPUT_POST, "password");
 
@@ -25,12 +26,27 @@ class LoginController
         return $response;
     }
 
-    function logout($request, $response, $container) {
-        
+    function logout($request, $response, $container)
+    {
+
         $response->setSession("logged", false);
         $response->setSession("user", []);
-        $response->redirect("Location: /login");
+        $response->redirect("Location: /");
 
+        return $response;
+    }
+
+
+    function register($request, $response, $container) {
+        $name = $request->get(INPUT_POST, "name");
+        $lastname = $request->get(INPUT_POST, "lastname");
+        $username = $request->get(INPUT_POST, "username");
+        $password = $request->get(INPUT_POST, "password");
+        $email = $request->get(INPUT_POST, "email");
+
+        $model = $container->get("users");
+        $register = $model->register($name, $lastname, $username, $password, $email);
+        $response->redirect("Location: /");
         return $response;
     }
 
