@@ -19,6 +19,7 @@ $app->get("/register", [ViewsController::class,"register"]);
 
 
 $app->post("/dologin", [LoginController::class,"login"]);
+$app->post("/doregister", [LoginController::class,"register"]);
 
 
 
