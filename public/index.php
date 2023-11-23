@@ -20,6 +20,7 @@ $app->get("/logout", [LoginController::class, "logout"]);
 
 
 $app->post("/dologin", [LoginController::class, "login"]);
+$app->post("/doregister", [LoginController::class, "register"]);
 
 
 
