@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class ViewsController 
+class ViewsController
 {
     public function index($request, $response, $container)
     {
@@ -11,7 +11,7 @@ class ViewsController
         $response->setSession("error", "");
         $response->SetTemplate("index.php");
         return $response;
-    }    
+    }
 
     public function login($request, $response, $container)
     {
@@ -20,7 +20,7 @@ class ViewsController
         $response->setSession("error", "");
         $response->SetTemplate("login.php");
         return $response;
-    }  
+    }
 
     public function register($request, $response, $container)
     {
@@ -29,6 +29,6 @@ class ViewsController
         $response->setSession("error", "");
         $response->SetTemplate("register.php");
         return $response;
-    } 
+    }
 }
 
