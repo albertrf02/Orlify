@@ -34,5 +34,19 @@ class LoginController
         return $response;
     }
 
+
+    function register($request, $response, $container) {
+        $name = $request->get(INPUT_POST, "name");
+        $lastname = $request->get(INPUT_POST, "lastname");
+        $username = $request->get(INPUT_POST, "username");
+        $password = $request->get(INPUT_POST, "password");
+        $email = $request->get(INPUT_POST, "email");
+
+        $model = $container->get("users");
+        $register = $model->register($name, $lastname, $username, $password, $email);
+        $response->redirect("Location: /");
+        return $response;
+    }
+
 }
 
