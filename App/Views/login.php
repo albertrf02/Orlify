@@ -27,7 +27,7 @@
                     </div>
                 <?php } ?>
                 <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correu electrònic</label>
-                <div class="flex">
+                <div class="flex mb-4">
                     <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                       <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
                         <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
@@ -48,14 +48,8 @@
                 </div>
                 <button type="submit" class="mt-4 w-full text-white bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:focus:ring-blue-800">Iniciar sessiò</button>
             </form>
-            <div class="mt-4">
-            <a href="/register">
-            <button type="button" class="w-full text-white bg-button focus:ring-4 focus:outline-none focus:ring-button-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-            Registra't
-          </button></a>
-            </div>
-            <div class="mt-6 text-center">
-              <a href="/" class="text-blue-600 font-medium text-sm dark:text-blue-400">Anar a la pàgina d'inici</a>
+            <div class="mt-6 flex items-center justify-center">
+                <p class="block mb-2 text-sm font-medium text-grey-800 dark:text-white">No tens compte ? <a href="/register" class="text-customBlue hover:text-customDarkBlue">Registra't</a></p>
             </div>
     </div>
 
