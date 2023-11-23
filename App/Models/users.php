@@ -51,9 +51,16 @@ class Users
         $stm->execute([':name' => $name, ':surname' => $lastname, ':username' => $username, ':password' => $password, ':email' => $email]);
     }
 
+    public function hashPassword($password) {
+        $hash = password_hash($password, PASSWORD_DEFAULT, $this->options);
+    
+        return $hash;
+    }
+
+
     public function getUser($email)
     {
-        $query = 'select id, email, password from users where email=:email;';
+        $query = 'select * from users where email=:email;';
         $stm = $this->sql->prepare($query);
         $result = $stm->execute([':email' => $email]);
 

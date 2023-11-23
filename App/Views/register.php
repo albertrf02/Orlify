@@ -10,8 +10,12 @@
 
 <body class="bg-background">
     <div class="min-h-screen flex items-center justify-center">
-        <div class="bg-white p-8 rounded shadow-md w-full sm:w-96">
+        <div class="bg-white p-5 rounded shadow-md w-full sm:w-96">
             <form class="max-w-sm mx-auto" id="registerForm" action="/doregister" method="post">
+
+                <div class="mb-5 flex items-center justify-center">
+                    <a href="/"><img src="../img/logo.png" alt="Orlify" class="h-10"></a>
+                </div>  
 
                 <label for="name" class="block mb-2 text-sm font-medium text-grey-800 dark:text-white">Nom</label>
 
@@ -74,7 +78,7 @@
 
                 <div class="mb-5 flex items-center justify-center">
                     <p class="block mb-2 text-sm font-medium text-grey-800 dark:text-white">Ja tens un compte creat ? <a href="/login" class="text-customBlue hover:text-customDarkBlue">Iniciar sessió</a></p>
-                </div>  
+                </div>
             </form>
         </div>
     </div>

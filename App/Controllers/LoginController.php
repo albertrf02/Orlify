@@ -30,7 +30,7 @@ class LoginController
     {
 
         $response->setSession("logged", false);
-        $response->setSession("user", []);
+        $response->setSession("user", null);
         $response->redirect("Location: /");
 
         return $response;
@@ -45,7 +45,10 @@ class LoginController
         $email = $request->get(INPUT_POST, "email");
 
         $model = $container->get("users");
-        $register = $model->register($name, $lastname, $username, $password, $email);
+
+        $hashPassword = $model->hashPassword($password);
+        $register = $model->register($name, $lastname, $username, $hashPassword, $email);
+
         $response->redirect("Location: /");
         return $response;
     }
