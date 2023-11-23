@@ -35,34 +35,28 @@
           class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
           id="user-dropdown">
           <div class="px-4 py-3">
-            <?php
-            if (isset($_SESSION["user"])) {
-              echo '<span class="block text-sm text-gray-900 dark:text-white">' . $_SESSION["user"]["name"] . '</span>';
-              echo '<span class="block text-sm  text-gray-500 truncate dark:text-gray-400">' . $_SESSION["user"]["email"] . '</span>';
-            }
-            ?>
+
+            <?php if (isset($_SESSION["user"])) : ?>
+              <span class="block text-sm text-gray-900 dark:text-white"><?= $_SESSION["user"]["name"] ?></span>
+              <span class="block text-sm  text-gray-500 truncate dark:text-gray-400"><?= $_SESSION["user"]["email"] ?></span>
+            <?php endif ?>
+
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
-            <?php
-            if (isset($_SESSION["user"])) {
-              echo
-                '<li>
-              <a href="logout"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
-            </li>';
-            } else {
-              echo
-                '<li>
-              <a href="login"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">LogIn</a>
-            </li>';
-              echo
-                '<li>
-              <a href="#"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Registre</a>
-            </li>';
-            }
-            ?>
+
+          <?php if (isset($_SESSION["user"])) : ?>
+            <li>
+            <a href="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
+            </li>
+          <?php else : ?>
+            <li>
+              <a href="/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">LogIn</a>
+            </li>
+            <li>
+              <a href="/register" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Registre</a>
+            </li>
+          <?php endif ?>
+            
           </ul>
         </div>
         <button data-collapse-toggle="navbar-user" type="button"
