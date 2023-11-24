@@ -9,13 +9,10 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="/main.css">
 
-  <title>
-  </title>
+  <title>index</title>
 </head>
 
-<?php var_dump($_SESSION); ?>
-
-<body>
+<body class="bg-background" id="bodyIndex">
   <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -102,70 +99,24 @@
         </ul>
       </div>
     </div>
+    <hr>
   </nav>
-  <div class="fixed bottom-6 flex-grow flex justify-center items-end p-4" id="cardContainer">
-    <div class="card">
-      <a class="card1" href="#">
-        <p>This is heading</p>
-        <p class="small">Card description with lots of great facts and interesting details.</p>
-        <div class="go-corner" href="#">
-          <div class="go-arrow">
-            →
-          </div>
-        </div>
-      </a>
-    </div>
 
-    <div class="card">
-      <a class="card1" href="#">
-        <p>This is heading</p>
-        <p class="small">Card description with lots of great facts and interesting details.</p>
-        <div class="go-corner" href="#">
-          <div class="go-arrow">
-            →
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="card">
-      <a class="card1" href="#">
-        <p>This is heading</p>
-        <p class="small">Card description with lots of great facts and interesting details.</p>
-        <div class="go-corner" href="#">
-          <div class="go-arrow">
-            →
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="card">
-      <a class="card1" href="#">
-        <p>This is heading</p>
-        <p class="small">Card description with lots of great facts and interesting details.</p>
-        <div class="go-corner" href="#">
-          <div class="go-arrow">
-            →
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="card">
-      <a class="card1" href="#">
-        <p>This is heading</p>
-        <p class="small">Card description with lots of great facts and interesting details.</p>
-        <div class="go-corner" href="#">
-          <div class="go-arrow">
-            →
-          </div>
-        </div>
-      </a>
+  <div id="container">
+    <div class="center-text">
+      <p>This is the centered text.</p>
+      <div class="redirect-buttons">
+        <a href="/button2"
+          class="py-2 px-6 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Orles
+          Disponibles</a>
+      </div>
+      <div class="inverted-polygon"></div>
+      <div class="rectangle"></div>
     </div>
   </div>
-
+  </div>
   <script src="/js/bundle.js"></script>
   <script src="/js/flowbite.js"></script>
-
-
 </body>
 
 </html>
