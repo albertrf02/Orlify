@@ -13,6 +13,9 @@ CREATE TABLE users (
     role VARCHAR(255)
 );
 
+ALTER TABLE users
+MODIFY COLUMN role ENUM('user', 'teacher', 'admin', 'team') NOT NULL;
+
 -- Crear la tabla ClassGroup
 CREATE TABLE classGroup (
     Id INT AUTO_INCREMENT PRIMARY KEY,
