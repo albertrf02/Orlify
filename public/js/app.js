@@ -22,3 +22,26 @@ $(document).ready(function () {
 
     return regex.test(contrasenya);
 }
+
+
+
+$(document).ready(function () {
+  $("#pagina-users, #pagina-classes").hide();
+});
+
+
+$(document).ready(function() {
+  $("#users").click(function(e) {
+      e.preventDefault();
+      $(".pagina").hide();
+      $("#pagina-users").show();
+  });
+});
+
+$(document).ready(function() {
+  $("#classes").click(function(e) {
+      e.preventDefault();
+      $(".pagina").hide();
+      $("#pagina-classes").show();
+  });
+});
