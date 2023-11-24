@@ -13,7 +13,6 @@ CREATE TABLE users (
     role VARCHAR(255)
 );
 
---
 ALTER TABLE users
 MODIFY COLUMN role ENUM('user', 'teacher', 'admin', 'team') NOT NULL;
 
@@ -64,3 +63,5 @@ CREATE TABLE studentCard (
 -- Agregar la relación 1 - N entre Users y Photography
 ALTER TABLE photography
 ADD FOREIGN KEY (idStudent) REFERENCES Users(id);
+
+--
