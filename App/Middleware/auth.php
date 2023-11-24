@@ -1,37 +1,39 @@
 <?php
 
-use \Emeset\Contracts\Http\Request;
-use \Emeset\Contracts\Http\Response;
-use \Emeset\Contracts\Container;
+namespace App\Middleware;
 
-/**
- * Middleware que gestiona l'autenticació
- *
- * @param \Emeset\Contracts\Http\Request $request petició HTTP
- * @param \Emeset\Contracts\Http\Response $response resposta HTTP
- * @param \Emeset\Contracts\Container $container  
- * @param callable $next  següent middleware o controlador.   
- * @return \Emeset\Contracts\Http\Response resposta HTTP
- */
-function auth(Request $request, Response $response, Container $container, $next) : Response
-{
+class Auth {
 
-    $usuari = $request->get("SESSION", "usuari");
-    $logat = $request->get("SESSION", "logat");
+    /**
+     * Middleware que gestiona l'autenticació
+     *
+     * @param \Emeset\Http\Request $request petició HTTP
+     * @param \Emeset\Http\Response $response resposta HTTP
+     * @param \Emeset\Container $container  
+     * @param callable $next  següent middleware o controlador.   
+     * @return \Emeset\Http\Response resposta HTTP
+     */
+    public static function auth($request, $response, $container, $next)
+    {
 
-    if (!isset($logat)) {
-        $usuari = "";
-        $logat = false;
+        $user = $request->get("SESSION", "user");
+        $logged = $request->get("SESSION", "logged");
+
+        if (!isset($logged)) {
+            $user = "";
+            $logged = false;
+        }
+
+        $response->set("user", $user);
+        $response->set("logged", $logged);
+
+        // si l'usuari està logat permetem carregar el recurs
+        if ($logged) {
+            $response = \Emeset\Middleware::next($request, $response, $container, $next);
+        } else {
+            $response->redirect("location: /login");
+        }
+        
+        return $response;
     }
-
-    $response->set("usuari", $usuari);
-    $response->set("logat", $logat);
-
-    // si l'usuari està logat permetem carregar el recurs
-    if ($logat) {
-        $response = \Emeset\Middleware::next($request, $response, $container, $next);
-    } else {
-        $response->redirect("location: /login");
-    }
-    return $response;
 }

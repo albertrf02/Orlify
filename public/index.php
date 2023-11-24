@@ -17,6 +17,7 @@ $app->get("/", [ViewsController::class, "index"]);
 $app->get("/login", [ViewsController::class, "login"]);
 $app->get("/register", [ViewsController::class, "register"]);
 $app->get("/logout", [LoginController::class, "logout"]);
+$app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::class,"auth"]]);
 
 
 $app->post("/dologin", [LoginController::class, "login"]);

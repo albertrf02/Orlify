@@ -30,5 +30,10 @@ class ViewsController
         $response->SetTemplate("register.php");
         return $response;
     }
+
+    public function admin($request, $response, $container) {
+        $response->SetTemplate("AdminView.php");
+        return $response;
+    }
 }
 
