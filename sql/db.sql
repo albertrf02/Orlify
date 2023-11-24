@@ -13,6 +13,7 @@ CREATE TABLE users (
     role VARCHAR(255)
 );
 
+--
 ALTER TABLE users
 MODIFY COLUMN role ENUM('user', 'teacher', 'admin', 'team') NOT NULL;
 
