@@ -46,11 +46,9 @@ CREATE TABLE orla (
 CREATE TABLE photography (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     link VARCHAR(255),
-    idStudent INT,
-    idProfessor INT,
-    FOREIGN KEY (idStudent) REFERENCES Users(id),
-    FOREIGN KEY (idProfessor) REFERENCES Users(id)
-);
+    idUser INT,
+    FOREIGN KEY (idUser) REFERENCES users(id)
+    );
 
 -- Crear la tabla StudentCard y la relación 1 - 1 con Users
 CREATE TABLE studentCard (
@@ -62,6 +60,4 @@ CREATE TABLE studentCard (
 
 -- Agregar la relación 1 - N entre Users y Photography
 ALTER TABLE photography
-ADD FOREIGN KEY (idStudent) REFERENCES Users(id);
-
---
+ADD FOREIGN KEY (idUser) REFERENCES Users(id);

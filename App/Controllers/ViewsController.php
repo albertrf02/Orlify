@@ -31,8 +31,15 @@ class ViewsController
         return $response;
     }
 
-    public function admin($request, $response, $container) {
+    public function admin($request, $response, $container)
+    {
         $response->SetTemplate("AdminView.php");
+        return $response;
+    }
+
+    public function perfil($request, $response, $container)
+    {
+        $response->SetTemplate("PerfilView.php");
         return $response;
     }
 }
