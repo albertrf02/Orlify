@@ -1,6 +1,9 @@
 DROP DATABASE IF EXISTS orlify;
 CREATE DATABASE orlify;
 
+use orlify;
+
+
 -- Crear la tabla Users
 CREATE TABLE users (
     Id INT AUTO_INCREMENT PRIMARY KEY,
@@ -61,3 +64,6 @@ CREATE TABLE studentCard (
 -- Agregar la relación 1 - N entre Users y Photography
 ALTER TABLE photography
 ADD FOREIGN KEY (idUser) REFERENCES Users(id);
+
+INSERT INTO `users` (`Id`, `name`, `surname`, `username`, `password`, `email`, `avatar`, `role`) VALUES
+(1, 'albert', 'rocas', 'arocas', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'albert@albert.com', NULL, 'user');
