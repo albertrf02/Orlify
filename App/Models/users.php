@@ -117,4 +117,12 @@ class Users
             return false;
         }
     }
+
+    public function setDefaultPhoto($idUser, $idPhoto)
+    {
+        $stm = $this->sql->prepare('update photography set defaultPhoto=0 where idUser=:idUser;');
+        $stm->execute([':idUser' => $idUser]);
+        $stm = $this->sql->prepare('update photography set defaultPhoto=1 where idUser=:idUser and id=:idPhoto;');
+        $stm->execute([':idUser' => $idUser, ':idPhoto' => $idPhoto]);
+    }
 }
