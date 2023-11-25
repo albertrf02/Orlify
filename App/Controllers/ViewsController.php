@@ -37,10 +37,6 @@ class ViewsController
         return $response;
     }
 
-    public function perfil($request, $response, $container)
-    {
-        $response->SetTemplate("PerfilView.php");
-        return $response;
-    }
+    
 }
 

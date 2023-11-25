@@ -18,13 +18,13 @@
                 <h2 class="text-2xl font-bold mb-4">User Information</h2>
                 <!-- Add user information content here -->
                 <p>Nom:
-                    <?= $_SESSION["user"]["name"] ?>
+                    <?= $user["name"] ?>
                 </p>
                 <p>Cognom:
-                    <?= $_SESSION["user"]["surname"] ?>
+                    <?= $user["surname"] ?>
                 </p>
                 <p>Email:
-                    <?= $_SESSION["user"]["email"] ?>
+                    <?= $user["email"] ?>
                     <!-- Add more user information as needed -->
             </div>
 
@@ -34,8 +34,13 @@
                 <section class="mb-8">
                     <h2 class="text-2xl font-bold mb-4">User Images</h2>
                     <!-- Add user images content here -->
-                    <img src="path/to/photo1.jpg" alt="Photo 1" class="mb-2">
-                    <img src="path/to/photo2.jpg" alt="Photo 2" class="mb-2">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <?php foreach ($userPhotos as $photo) : ?>
+                        <div class="bg-white p-4 rounded">
+                            <img src="<?= $photo["link"] ?>" alt="photo" class="w-full rounded">
+                            <p class="text-center font-bold mt-4">default: <?= $photo["defaultPhoto"] ?></p>
+                        </div>
+                        <?php endforeach ?>
                     <!-- Add more images as needed -->
                 </section>
 

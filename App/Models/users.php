@@ -73,6 +73,15 @@ class Users
         return $stm->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function getUserById($id)
+    {
+        $query = 'select * from users where id=:id;';
+        $stm = $this->sql->prepare($query);
+        $result = $stm->execute([':id' => $id]);
+        
+        return $stm->fetch(\PDO::FETCH_ASSOC);
+    }
+
     public function validateUser($email, $password)
 {
     $login = $this->getUser($email);
@@ -97,7 +106,15 @@ class Users
     return $login;
 }
 
-
-    
-
+    public function getPhotos($idUser)
+    {
+        $stm = $this->sql->prepare('select * from photography where idUser=:idUser;');
+        $stm->execute([':idUser' => $idUser]);
+        $result = $stm->fetchAll(\PDO::FETCH_ASSOC);
+        if (is_array($result)) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }

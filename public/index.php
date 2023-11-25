@@ -3,6 +3,8 @@ use App\Controllers\ViewsController;
 
 use App\Controllers\LoginController;
 
+use App\Controllers\PerfilController;
+
 use Emeset\Contracts\Routers\Router;
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
@@ -18,7 +20,7 @@ $app->get("/login", [ViewsController::class, "login"]);
 $app->get("/register", [ViewsController::class, "register"]);
 $app->get("/logout", [LoginController::class, "logout"]);
 $app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::class, "auth"]]);
-$app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/perfil", [PerfilController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 
 
 $app->post("/dologin", [LoginController::class, "login"]);

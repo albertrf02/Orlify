@@ -49,6 +49,7 @@ CREATE TABLE orla (
 CREATE TABLE photography (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     link VARCHAR(255),
+    defaultPhoto BOOLEAN,
     idUser INT,
     FOREIGN KEY (idUser) REFERENCES users(id)
     );
@@ -67,3 +68,6 @@ ADD FOREIGN KEY (idUser) REFERENCES Users(id);
 
 INSERT INTO `users` (`Id`, `name`, `surname`, `username`, `password`, `email`, `avatar`, `role`) VALUES
 (1, 'albert', 'rocas', 'arocas', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'albert@albert.com', NULL, 'user');
+INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://www.santevet.es/uploads/images/es_ES/razas/gatocomuneuropeo.jpeg', '1', '1');
+INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://hospitalveterinariodonostia.com/wp-content/uploads/2020/10/gatos.png', '0', '1');
+INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://www.petz.com.br/blog/wp-content/uploads/2021/11/enxoval-para-gato-Copia.jpg', '0', '1');
