@@ -21,6 +21,7 @@ $app->get("/register", [ViewsController::class, "register"]);
 $app->get("/logout", [LoginController::class, "logout"]);
 $app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/perfil", [PerfilController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->post("/perfil", [PerfilController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 
 
 $app->post("/dologin", [LoginController::class, "login"]);

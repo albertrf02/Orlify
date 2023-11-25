@@ -35,13 +35,20 @@
                     <h2 class="text-2xl font-bold mb-4">User Images</h2>
                     <!-- Add user images content here -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <?php foreach ($userPhotos as $photo) : ?>
-                        <div class="bg-white p-4 rounded">
-                            <img src="<?= $photo["link"] ?>" alt="photo" class="w-full rounded">
-                            <p class="text-center font-bold mt-4">default: <?= $photo["defaultPhoto"] ?></p>
-                        </div>
+                        <?php foreach ($userPhotos as $photo): ?>
+                            <div class="bg-white p-4 rounded">
+                                <img src="<?= $photo["link"] ?>" alt="photo" class="w-full rounded">
+                                <?php if ($photo["defaultPhoto"] == 0): ?>
+                                <form method="POST" action="/perfil?action=setDefaultPhoto">
+                                    <input type="hidden" name="idPhoto" value="<?php echo $photo['Id']; ?>">
+                                    <button type="submit" class="btn btn-danger">canviar foto per defecte</button>
+                                </form>
+                                <?php else: ?>
+                                <p>Foto per defecte</p>
+                                <?php endif ?>
+                            </div>
                         <?php endforeach ?>
-                    <!-- Add more images as needed -->
+                        <!-- Add more images as needed -->
                 </section>
 
                 <!-- Orles Section -->
