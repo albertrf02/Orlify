@@ -130,13 +130,20 @@ public function deleteUser($id) {
 }
 
 
-public function searchUser($query) {
+public function searchUserAjax($query) {
     $stm = $this->sql->prepare('SELECT * FROM users WHERE name LIKE :query;');
     $query = "{$query}%";
     $stm->execute([':query' => $query]);
     return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+
+
+public function getUserById($id) {
+    $stm = $this->sql->prepare('SELECT * FROM users WHERE id = :id;');
+    $stm->execute([':id' => $id]);
+    return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+}
 
 
 

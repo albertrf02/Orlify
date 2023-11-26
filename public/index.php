@@ -27,7 +27,13 @@ $app->post("/doregister", [LoginController::class, "register"]);
 $app->post("/updateuser", [UserController::class, "update"]);
 $app->post("/deleteuser", [UserController::class, "delete"]);
 
-$app->post("/searchuser", [UserController::class, "searchUser"]);
+
+$app->post("/updateuserajax", [UserController::class, "updateAjax"]);
+
+
+$app->post("/searchuserajax", [UserController::class, "searchUserAjax"]);
+
+
 
 
 
