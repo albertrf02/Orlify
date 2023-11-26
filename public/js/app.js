@@ -1,25 +1,19 @@
 $(document).ready(function () {
     $("#registerForm").submit(function (event) {
-      // Obtener el valor de la contraseña introducida
-      const contrasenya = $("#password").val();
 
-      // Validar la contraseña
+      const contrasenya = $("#password").val();
       const esValida = validarContrasenya(contrasenya);
 
-      // Si la contraseña no es válida, prevenir el envío del formulario y mostrar un mensaje de error
       if (!esValida) {
         event.preventDefault(); // Prevenir el envío del formulario
         alert("La contraseña debe tener entre 6 y 13 caracteres, incluyendo al menos una letra y un número.");
       }
-      // Si la contraseña es válida, el formulario se enviará normalmente
     });
   });
 
-
   function validarContrasenya(contrasenya) {
-    // La expresión regular para validar la contraseña
-    const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d-]{6,13}$/;
 
+    const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d-]{6,13}$/;
     return regex.test(contrasenya);
 }
 
@@ -35,7 +29,6 @@ $(document).ready(function () {
     e.preventDefault();
     $(".pagina").hide();
     $("#pagina-users").show();
-    // No es necesario cambiar la URL aquí, ya que es la página de usuarios.
   });
 });
 
@@ -44,9 +37,35 @@ $(document).ready(function () {
     e.preventDefault();
     $(".pagina").hide();
     $("#pagina-classes").show();
-    // Cambiar la URL a "/admin" cuando se hace clic en la página "Classes"
     window.history.pushState(null, null, '/admin');
   });
 });
 
 
+$(document).ready(function () {
+    $('#table-search-users').on('input', function () {
+
+      var searchQuery = $(this).val();
+
+      console.log(searchQuery);
+
+        if (searchQuery.length >= 3) {
+
+            $.ajax({
+                url: '/searchuser', 
+                method: 'POST',
+                data: { query: searchQuery },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                  console.log(data);
+                    // $('.pagina:visible').html(data);
+                },
+                error: function (error) {
+                    console.error('Error en la solicitud AJAX: ', error);
+                }
+            });
+        }
+    });
+});

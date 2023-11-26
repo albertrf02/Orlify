@@ -130,6 +130,16 @@ public function deleteUser($id) {
 }
 
 
+public function searchUser($query) {
+    $stm = $this->sql->prepare('SELECT * FROM users WHERE name LIKE :query;');
+    $query = "{$query}%";
+    $stm->execute([':query' => $query]);
+    return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+
+
+
     
 
 }

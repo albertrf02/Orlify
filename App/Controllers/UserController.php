@@ -48,6 +48,25 @@ class UserController {
         return $response;
     }
 
+    public function searchUser($request, $response, $container) {
+        
+        $query = $request->get(INPUT_POST, "query");
+    
+        $model = $container->get("users");
+    
+        $newUsers = $model->searchUser($query);
+    
+        $response->setJSON();
+    
+        if (!empty($newUsers)) {
+            $response->values = ['hola' => 'funciona'];
+        } else {
+            $response->values = ['error' => 'No se encontraron usuarios'];
+        }
+    
+        return $response;
+    }
+
 
 
 
