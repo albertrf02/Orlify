@@ -74,27 +74,59 @@ class Users
     }
 
     public function validateUser($email, $password)
-{
-    $login = $this->getUser($email);
-
-    if ($login) {
-        $hash = $login["password"];
-        if (password_verify($password, $hash)) {
-            $newHash = password_hash($password, PASSWORD_DEFAULT);
-            $query = 'UPDATE users SET password=:hash WHERE email=:email;';
-            $stm = $this->sql->prepare($query);
-            $result = $stm->execute([
-                ':email' => $email,
-                ':hash' => $newHash,
-            ]);
-            // Actualizar el hash en la variable $login para devolver el usuario actualizado
-            $login["password"] = $newHash;
+    {
+        $login = $this->getUser($email);
+    
+        if (isset($login) && $login['role'] !== NULL) {
+            $hash = $login["password"];
+    
+            if (password_verify($password, $hash)) {
+                $newHash = password_hash($password, PASSWORD_DEFAULT);
+    
+                $query = 'UPDATE users SET password=:hash WHERE email=:email;';
+                $stm = $this->sql->prepare($query);
+                $result = $stm->execute([
+                    ':email' => $email,
+                    ':hash' => $newHash,
+                ]);
+    
+                $login["password"] = $newHash;
+            } else {
+                $login = false;
+            }
         } else {
             $login = false;
         }
+    
+        return $login;
     }
 
-    return $login;
+
+    public function getAllUsers() {
+        $stm = $this->sql->prepare('SELECT users.*, roles.name AS roleName FROM users LEFT JOIN roles ON users.role = roles.idRole;');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+
+
+public function updateUser($id, $name, $surname, $username, $hashPassword, $email, $role) {
+    $stm = $this->sql->prepare('UPDATE users SET name = :name, surname = :surname, username = :username, password = :password, email = :email, role = :role WHERE id = :id;');
+    $stm->execute([':id' => $id, ':name' => $name, ':surname' => $surname, ':username' => $username, ':password' => $hashPassword, ':email' => $email, ':role' => $role]);
+}
+
+
+public function getRoles() {
+    $stm = $this->sql->prepare('SELECT * FROM roles;');
+    $stm->execute();
+    return $stm->fetchAll(\PDO::FETCH_ASSOC);
+
+}
+
+
+public function deleteUser($id) {
+    $stm = $this->sql->prepare('UPDATE users SET role = NULL WHERE id = :id;');
+    $stm->execute([":id" => $id]);
 }
 
 

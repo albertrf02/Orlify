@@ -26,22 +26,27 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-  $("#pagina-users, #pagina-classes").hide();
+  $("#pagina-users").show();
+  $("#pagina-classes").hide();
 });
 
-
-$(document).ready(function() {
-  $("#users").click(function(e) {
-      e.preventDefault();
-      $(".pagina").hide();
-      $("#pagina-users").show();
+$(document).ready(function () {
+  $("#users").click(function (e) {
+    e.preventDefault();
+    $(".pagina").hide();
+    $("#pagina-users").show();
+    // No es necesario cambiar la URL aquí, ya que es la página de usuarios.
   });
 });
 
-$(document).ready(function() {
-  $("#classes").click(function(e) {
-      e.preventDefault();
-      $(".pagina").hide();
-      $("#pagina-classes").show();
+$(document).ready(function () {
+  $("#classes").click(function (e) {
+    e.preventDefault();
+    $(".pagina").hide();
+    $("#pagina-classes").show();
+    // Cambiar la URL a "/admin" cuando se hace clic en la página "Classes"
+    window.history.pushState(null, null, '/admin');
   });
 });
+
+

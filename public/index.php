@@ -3,6 +3,8 @@ use App\Controllers\ViewsController;
 
 use App\Controllers\LoginController;
 
+use App\Controllers\UserController;
+
 use Emeset\Contracts\Routers\Router;
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
@@ -22,6 +24,9 @@ $app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::c
 
 $app->post("/dologin", [LoginController::class, "login"]);
 $app->post("/doregister", [LoginController::class, "register"]);
+$app->post("/updateuser", [UserController::class, "update"]);
+$app->post("/deleteuser", [UserController::class, "delete"]);
+
 
 
 

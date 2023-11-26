@@ -10,6 +10,8 @@ module.exports = {
       colors: {
         button: "#3d7ca7",
         background: "#4180ab",
+        background2: "#e4ebf0",
+        background3: "#bdd1de",
         customBlue: '#2d71e6',
         customDarkBlue: '#1c4a9e',
       },
