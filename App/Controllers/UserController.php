@@ -72,6 +72,24 @@ class UserController {
         return $response;
     }
 
+    public function deleteAjax($request, $response, $container) {
+
+        $userId = $request->get(INPUT_POST, "userId");
+
+        $model = $container->get("users");
+        $infoUser = $model->getUserById($userId);
+
+        if (!empty($infoUser)) {
+            $response->set('user', $infoUser);
+            $response->setJSON();
+        } else {
+            $response->set ('error', 'error');
+            $response->setJSON();
+        }
+    
+        return $response;
+    }
+
 
 
 

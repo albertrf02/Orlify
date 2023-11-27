@@ -31,6 +31,9 @@ $app->post("/deleteuser", [UserController::class, "delete"]);
 
 
 $app->post("/updateuserajax", [UserController::class, "updateAjax"]);
+$app->post("/deleteuserajax", [UserController::class, "deleteAjax"]);
+
+
 
 
 $app->post("/searchuserajax", [UserController::class, "searchUserAjax"]);
