@@ -1,68 +1,83 @@
+-- Crear la base de dades
 DROP DATABASE IF EXISTS orlify;
 CREATE DATABASE orlify;
 
+<<<<<<< HEAD
 use orlify;
 
 
 -- Crear la tabla Users
+=======
+-- Crear la taula d'usuaris
+>>>>>>> Feature-Adrian-4
 CREATE TABLE users (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     surname VARCHAR(255),
     username VARCHAR(255) UNIQUE,
     password VARCHAR(255),
     email VARCHAR(255) UNIQUE,
     avatar VARCHAR(255),
-    role VARCHAR(255)
+    role INT
 );
 
+<<<<<<< HEAD
 ALTER TABLE users
 MODIFY COLUMN role ENUM('user', 'teacher', 'admin', 'team') NOT NULL;
 
 -- Crear la tabla ClassGroup
+=======
+-- Crear la taula de classes
+>>>>>>> Feature-Adrian-4
 CREATE TABLE classGroup (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     className VARCHAR(255)
 );
 
--- Crear la tabla Users_ClassGroup para la relación N - M
+-- Crear la taula de la relació users - classGroup
 CREATE TABLE users_classGroup (
-    userId INT,
-    classGroupId INT,
-    PRIMARY KEY (userId, classGroupId),
-    FOREIGN KEY (userId) REFERENCES Users(id),
-    FOREIGN KEY (classGroupId) REFERENCES ClassGroup(id)
+    idUser INT,
+    idGroupClass INT,
+    PRIMARY KEY (idUser, idGroupClass),
+    FOREIGN KEY (idUser) REFERENCES users(id),
+    FOREIGN KEY (idGroupClass) REFERENCES classGroup(id)
 );
 
--- Crear la tabla Orla
+-- Crear la taula de les orles
 CREATE TABLE orla (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     link VARCHAR(255),
     visibility BOOLEAN,
     format VARCHAR(255),
     creationDate DATE,
     creator INT,
-    FOREIGN KEY (creator) REFERENCES Users(id)
+    FOREIGN KEY (creator) REFERENCES users(id)
 );
 
--- Crear la tabla Photography
+-- Crear la taula per a les imatges
 CREATE TABLE photography (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     link VARCHAR(255),
     defaultPhoto BOOLEAN,
     idUser INT,
     FOREIGN KEY (idUser) REFERENCES users(id)
     );
 
--- Crear la tabla StudentCard y la relación 1 - 1 con Users
+-- Crear la taula per a la tarjeta
 CREATE TABLE studentCard (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     url VARCHAR(255),
     idStudent INT UNIQUE,
-    FOREIGN KEY (idStudent) REFERENCES Users(id)
+    FOREIGN KEY (idStudent) REFERENCES users(id)
 );
 
--- Agregar la relación 1 - N entre Users y Photography
+-- Crear la taula per als rols
+CREATE TABLE roles (
+    idRole INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) UNIQUE
+);
+
+-- Modificar les taules
 ALTER TABLE photography
 ADD FOREIGN KEY (idUser) REFERENCES Users(id);
 
@@ -71,3 +86,6 @@ INSERT INTO `users` (`Id`, `name`, `surname`, `username`, `password`, `email`, `
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://www.santevet.es/uploads/images/es_ES/razas/gatocomuneuropeo.jpeg', '1', '1');
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://hospitalveterinariodonostia.com/wp-content/uploads/2020/10/gatos.png', '0', '1');
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://www.petz.com.br/blog/wp-content/uploads/2021/11/enxoval-para-gato-Copia.jpg', '0', '1');
+
+ALTER TABLE users
+ADD FOREIGN KEY (role) REFERENCES roles(idRole);

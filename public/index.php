@@ -4,6 +4,7 @@ use App\Controllers\ViewsController;
 use App\Controllers\LoginController;
 
 use App\Controllers\PerfilController;
+use App\Controllers\UserController;
 
 use Emeset\Contracts\Routers\Router;
 
@@ -26,6 +27,17 @@ $app->post("/perfil", [PerfilController::class, "perfil"], [[\App\Middleware\Aut
 
 $app->post("/dologin", [LoginController::class, "login"]);
 $app->post("/doregister", [LoginController::class, "register"]);
+$app->post("/updateuser", [UserController::class, "update"]);
+$app->post("/deleteuser", [UserController::class, "delete"]);
+
+
+$app->post("/updateuserajax", [UserController::class, "updateAjax"]);
+
+
+$app->post("/searchuserajax", [UserController::class, "searchUserAjax"]);
+
+
+
 
 
 
