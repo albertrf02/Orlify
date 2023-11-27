@@ -4,7 +4,8 @@ namespace App\Controllers;
 
 class ViewsController
 {
-    public function index($request, $response, $container) {
+    public function index($request, $response, $container)
+    {
 
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
@@ -13,7 +14,8 @@ class ViewsController
         return $response;
     }
 
-    public function login($request, $response, $container) {
+    public function login($request, $response, $container)
+    {
 
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
@@ -22,7 +24,8 @@ class ViewsController
         return $response;
     }
 
-    public function register($request, $response, $container) {
+    public function register($request, $response, $container)
+    {
 
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
@@ -31,7 +34,8 @@ class ViewsController
         return $response;
     }
 
-    public function admin($request, $response, $container) {
+    public function admin($request, $response, $container)
+    {
 
         $model = $container->get("users");
         $allUsers = $model->getAllUsers();
@@ -41,7 +45,7 @@ class ViewsController
         $start = ($page - 1) * $countUsers;
         $users = array_slice($allUsers, $start, $countUsers);
         $totalPages = ceil(count($allUsers) / $countUsers);
-    
+
         $response->set("users", $users);
         $response->set("currentPage", $page);
         $response->set("totalPages", $totalPages);
@@ -49,6 +53,29 @@ class ViewsController
         $response->SetTemplate("AdminView.php");
         return $response;
     }
-    
+
+    public function perfil($request, $response, $container)
+    {
+        $userId = $_SESSION["user"]["id"];
+        $userModel = $container->get("users");
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST["action"])) {
+            $action = $_REQUEST["action"];
+
+            if ($action === "setDefaultPhoto") {
+                $userModel->setDefaultPhoto($userId, $_POST['idPhoto']);
+            }
+        }
+
+        $user = $userModel->getUserById($userId);
+        $userPhotos = $userModel->getPhotos($userId);
+
+        $response->set("user", $user);
+        $response->set("userPhotos", $userPhotos);
+
+        $response->SetTemplate("PerfilView.php");
+        return $response;
+    }
+
 }
 

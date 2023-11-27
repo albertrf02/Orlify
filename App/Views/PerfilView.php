@@ -16,15 +16,14 @@
             <!-- User Information Column -->
             <div class="md:col-span-1 bg-gray-100 p-4 rounded mb-8">
                 <h2 class="text-2xl font-bold mb-4">User Information</h2>
-                <!-- Add user information content here -->
                 <p>Nom:
-                    <?= $user["name"] ?>
+                    <?= $_SESSION["user"]["name"] ?>
                 </p>
                 <p>Cognom:
-                    <?= $user["surname"] ?>
+                    <?= $_SESSION["user"]["surname"] ?>
                 </p>
                 <p>Email:
-                    <?= $user["email"] ?>
+                    <?= $_SESSION["user"]["email"] ?>
                     <!-- Add more user information as needed -->
             </div>
 
@@ -39,25 +38,16 @@
                             <div class="bg-white p-4 rounded">
                                 <img src="<?= $photo["link"] ?>" alt="photo" class="w-full rounded">
                                 <?php if ($photo["defaultPhoto"] == 0): ?>
-                                <form method="POST" action="/perfil?action=setDefaultPhoto">
-                                    <input type="hidden" name="idPhoto" value="<?php echo $photo['Id']; ?>">
-                                    <button type="submit" class="btn btn-danger">canviar foto per defecte</button>
-                                </form>
+                                    <form method="POST" action="/perfil?action=setDefaultPhoto">
+                                        <input type="hidden" name="idPhoto" value="<?php echo $photo['Id']; ?>">
+                                        <button type="submit" class="btn btn-danger">canviar foto per defecte</button>
+                                    </form>
                                 <?php else: ?>
-                                <p>Foto per defecte</p>
+                                    <p>Foto per defecte</p>
                                 <?php endif ?>
                             </div>
                         <?php endforeach ?>
                         <!-- Add more images as needed -->
-                </section>
-
-                <!-- Orles Section -->
-                <section>
-                    <h2 class="text-2xl font-bold mb-4">Orles</h2>
-                    <!-- Add content related to orles here -->
-                    <p>Orla 1</p>
-                    <p>Orla 2</p>
-                    <!-- Add more orles as needed -->
                 </section>
             </div>
         </div>

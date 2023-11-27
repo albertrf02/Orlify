@@ -2,14 +2,10 @@
 DROP DATABASE IF EXISTS orlify;
 CREATE DATABASE orlify;
 
-<<<<<<< HEAD
 use orlify;
 
 
 -- Crear la tabla Users
-=======
--- Crear la taula d'usuaris
->>>>>>> Feature-Adrian-4
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
@@ -21,14 +17,9 @@ CREATE TABLE users (
     role INT
 );
 
-<<<<<<< HEAD
-ALTER TABLE users
-MODIFY COLUMN role ENUM('user', 'teacher', 'admin', 'team') NOT NULL;
+
 
 -- Crear la tabla ClassGroup
-=======
--- Crear la taula de classes
->>>>>>> Feature-Adrian-4
 CREATE TABLE classGroup (
     id INT AUTO_INCREMENT PRIMARY KEY,
     className VARCHAR(255)
@@ -77,15 +68,21 @@ CREATE TABLE roles (
     name VARCHAR(255) UNIQUE
 );
 
+ALTER TABLE users
+ADD FOREIGN KEY (role) REFERENCES roles(idRole);
+
+INSERT INTO `roles` (`name`) VALUES ('student');
+INSERT INTO `roles` (`name`) VALUES ('teacher');
+INSERT INTO `roles` (`name`) VALUES ('team');
+INSERT INTO `roles` (`name`) VALUES ('admin');
+
 -- Modificar les taules
 ALTER TABLE photography
 ADD FOREIGN KEY (idUser) REFERENCES Users(id);
 
-INSERT INTO `users` (`Id`, `name`, `surname`, `username`, `password`, `email`, `avatar`, `role`) VALUES
-(1, 'albert', 'rocas', 'arocas', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'albert@albert.com', NULL, 'user');
+INSERT INTO `users` (`Id`, `name`, `surname`, `username`, `password`, `email`, `avatar`, role) VALUES
+(1, 'albert', 'rocas', 'arocas', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'albert@albert.com', NULL, 1);
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://www.santevet.es/uploads/images/es_ES/razas/gatocomuneuropeo.jpeg', '1', '1');
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://hospitalveterinariodonostia.com/wp-content/uploads/2020/10/gatos.png', '0', '1');
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://www.petz.com.br/blog/wp-content/uploads/2021/11/enxoval-para-gato-Copia.jpg', '0', '1');
 
-ALTER TABLE users
-ADD FOREIGN KEY (role) REFERENCES roles(idRole);
