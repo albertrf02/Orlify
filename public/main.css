@@ -1053,12 +1053,6 @@ input:checked + .toggle-bg {
 .top-3 {
   top: 0.75rem;
 }
-.right-2 {
-  right: 0.5rem;
-}
-.top-2 {
-  top: 0.5rem;
-}
 .z-10 {
   z-index: 10;
 }
@@ -1123,6 +1117,9 @@ input:checked + .toggle-bg {
 .mr-2 {
   margin-right: 0.5rem;
 }
+.mr-3 {
+  margin-right: 0.75rem;
+}
 .ms-0 {
   margin-inline-start: 0px;
 }
@@ -1137,6 +1134,9 @@ input:checked + .toggle-bg {
 }
 .mt-10 {
   margin-top: 2.5rem;
+}
+.mt-12 {
+  margin-top: 3rem;
 }
 .mt-14 {
   margin-top: 3.5rem;
@@ -1201,6 +1201,9 @@ input:checked + .toggle-bg {
 .h-4 {
   height: 1rem;
 }
+.h-48 {
+  height: 12rem;
+}
 .h-5 {
   height: 1.25rem;
 }
@@ -1221,12 +1224,6 @@ input:checked + .toggle-bg {
 }
 .h-screen {
   height: 100vh;
-}
-.h-48 {
-  height: 12rem;
-}
-.h-40 {
-  height: 10rem;
 }
 .max-h-full {
   max-height: 100%;
@@ -1258,6 +1255,9 @@ input:checked + .toggle-bg {
 .w-4 {
   width: 1rem;
 }
+.w-48 {
+  width: 12rem;
+}
 .w-5 {
   width: 1.25rem;
 }
@@ -1276,18 +1276,6 @@ input:checked + .toggle-bg {
 .w-full {
   width: 100%;
 }
-.w-48 {
-  width: 12rem;
-}
-.w-36 {
-  width: 9rem;
-}
-.w-44 {
-  width: 11rem;
-}
-.w-60 {
-  width: 15rem;
-}
 .min-w-0 {
   min-width: 0px;
 }
@@ -1296,6 +1284,9 @@ input:checked + .toggle-bg {
 }
 .max-w-md {
   max-width: 28rem;
+}
+.max-w-screen-md {
+  max-width: 768px;
 }
 .max-w-screen-xl {
   max-width: 1280px;
@@ -1402,17 +1393,14 @@ input:checked + .toggle-bg {
 .justify-between {
   justify-content: space-between;
 }
+.gap-2 {
+  gap: 0.5rem;
+}
 .gap-4 {
   gap: 1rem;
 }
 .gap-6 {
   gap: 1.5rem;
-}
-.gap-2 {
-  gap: 0.5rem;
-}
-.gap-1 {
-  gap: 0.25rem;
 }
 .-space-x-px > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1709,9 +1697,6 @@ input:checked + .toggle-bg {
 .pt-4 {
   padding-top: 1rem;
 }
-.pr-2 {
-  padding-right: 0.5rem;
-}
 .text-center {
   text-align: center;
 }
@@ -1734,13 +1719,6 @@ input:checked + .toggle-bg {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-.font-bold {
-  font-weight: 700;
 }
 .font-extrabold {
   font-weight: 800;
@@ -1804,10 +1782,6 @@ input:checked + .toggle-bg {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.text-yellow-500 {
-  --tw-text-opacity: 1;
-  color: rgb(194 120 3 / var(--tw-text-opacity));
 }
 .opacity-0 {
   opacity: 0;
@@ -2094,6 +2068,11 @@ input:checked + .toggle-bg {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-gray-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-orange-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 90 31 / var(--tw-bg-opacity));
@@ -2221,6 +2200,11 @@ input:checked + .toggle-bg {
 :is(.dark .dark\:divide-gray-600) > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-divide-opacity));
+}
+
+:is(.dark .dark\:divide-gray-700) > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(55 65 81 / var(--tw-divide-opacity));
 }
 
 :is(.dark .dark\:border-blue-500) {
@@ -2430,6 +2414,10 @@ input:checked + .toggle-bg {
     margin-left: 16rem;
   }
 
+  .sm\:flex {
+    display: flex;
+  }
+
   .sm\:hidden {
     display: none;
   }
@@ -2445,10 +2433,6 @@ input:checked + .toggle-bg {
   .sm\:translate-x-0 {
     --tw-translate-x: 0px;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-
-  .sm\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sm\:grid-cols-3 {
@@ -2468,10 +2452,6 @@ input:checked + .toggle-bg {
 
   .md\:order-2 {
     order: 2;
-  }
-
-  .md\:col-span-1 {
-    grid-column: span 1 / span 1;
   }
 
   .md\:me-0 {
@@ -2504,22 +2484,6 @@ input:checked + .toggle-bg {
 
   .md\:w-auto {
     width: auto;
-  }
-
-  .md\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .md\:grid-cols-1 {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-
-  .md\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .md\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .md\:flex-row {
@@ -2612,10 +2576,6 @@ input:checked + .toggle-bg {
 
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .lg\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .lg\:px-5 {

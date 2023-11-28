@@ -69,9 +69,11 @@ class ViewsController
 
         $user = $userModel->getUserById($userId);
         $userPhotos = $userModel->getPhotos($userId);
+        $defaultPhoto = $userModel->getDefaultPhoto($userId);
 
         $response->set("user", $user);
         $response->set("userPhotos", $userPhotos);
+        $response->set("defaultPhoto", $defaultPhoto);
 
         $response->SetTemplate("PerfilView.php");
         return $response;
