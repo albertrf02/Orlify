@@ -77,5 +77,18 @@ class ViewsController
         return $response;
     }
 
+    public function team($request, $response, $container)
+    {
+        $model = $container->get("orla");
+        $orles = $model->getAllOrles();
+        
+        $response->set("orles", $orles);
+
+
+
+        $response->SetTemplate("TeamView.php");
+        return $response;
+    }
+
 }
 

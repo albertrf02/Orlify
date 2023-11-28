@@ -19,6 +19,10 @@ class Container extends EmesetContainer
                 return new \App\Models\Users($c["db"]->getConnection());
             };
 
+            $this["orla"] = function ($c) {
+                return new \App\Models\Orla($c["db"]->getConnection());
+            };
+
             $this["db"] = function ($c) {
                 return new \App\Models\Db(
                     $c["config"]["db"]["user"],
