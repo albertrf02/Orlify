@@ -174,6 +174,17 @@ class Users
     }
 
 
+    public function getDefaultPhoto($idUser)
+    {
+        $stm = $this->sql->prepare('select * from photography where idUser=:idUser and defaultPhoto=1;');
+        $stm->execute([':idUser' => $idUser]);
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
+        if (is_array($result)) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 
 
 
