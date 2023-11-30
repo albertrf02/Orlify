@@ -68,6 +68,17 @@ CREATE TABLE roles (
     name VARCHAR(255) UNIQUE
 );
 
+-- Create a table to relate users with orla
+CREATE TABLE user_orla_relation (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idUser INT,
+    idOrla INT,
+    PRIMARY KEY (idUser, idOrla),
+    FOREIGN KEY (idUser) REFERENCES users(id),
+    FOREIGN KEY (idOrla) REFERENCES orla(id)
+);
+
+
 ALTER TABLE users
 ADD FOREIGN KEY (role) REFERENCES roles(idRole);
 
