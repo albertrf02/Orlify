@@ -54,6 +54,26 @@ class ViewsController
         return $response;
     }
 
+    public function equipDirectiu($request, $response, $container)
+    {
+
+        $model = $container->get("users");
+        $allUsers = $model->getAllUsers();
+
+        $countUsers = 6;
+        $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
+        $start = ($page - 1) * $countUsers;
+        $users = array_slice($allUsers, $start, $countUsers);
+        $totalPages = ceil(count($allUsers) / $countUsers);
+
+        $response->set("users", $users);
+        $response->set("currentPage", $page);
+        $response->set("totalPages", $totalPages);
+
+        $response->SetTemplate("equipDirectiuView.php");
+        return $response;
+    }
+
     public function perfil($request, $response, $container)
     {
         $userId = $_SESSION["user"]["id"];

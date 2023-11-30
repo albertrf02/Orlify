@@ -20,6 +20,7 @@ $app->get("/login", [ViewsController::class, "login"]);
 $app->get("/register", [ViewsController::class, "register"]);
 $app->get("/logout", [LoginController::class, "logout"]);
 $app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 
