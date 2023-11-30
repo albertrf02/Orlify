@@ -123,9 +123,11 @@
                         </div>
                     </div>
                 </div>
-
-                <h2>Contenido de Orla</h2>
-                <p>Esta es la información de la página "Orla".</p>
+                <?php foreach ($orles as $orla): ?> 
+                   <option value="<?= $orla['id']; ?>">
+                       <?= $orla['name']; ?>
+                   </option>
+               <?php endforeach; ?>
             </div>
         </div>
     </div>

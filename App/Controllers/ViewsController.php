@@ -58,9 +58,13 @@ class ViewsController
     {
 
         $modelUsers = $container->get("users");
+        $modelOrles = $container->get("orles");
 
         $allGroups = $modelUsers->getClassGroups();
+        $allOrles = $modelOrles->getOrles();
+
         $response->set("groups", $allGroups);
+        $response->set("orles", $allOrles);
 
         $name = $request->get(INPUT_POST, "name");
         $group = $request->get(INPUT_POST, "group");
