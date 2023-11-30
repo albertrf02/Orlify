@@ -115,11 +115,14 @@ class Users
 
 
 
-    public function updateUser($id, $name, $surname, $username, $hashPassword, $email, $role)
+    public function updateUser($id, $name, $surname, $hashPassword, $role)
     {
-        $stm = $this->sql->prepare('UPDATE users SET name = :name, surname = :surname, username = :username, password = :password, email = :email, role = :role WHERE id = :id;');
-        $stm->execute([':id' => $id, ':name' => $name, ':surname' => $surname, ':username' => $username, ':password' => $hashPassword, ':email' => $email, ':role' => $role]);
+        $stm = $this->sql->prepare('UPDATE users SET name = :name, surname = :surname, password = :password, role = :role WHERE id = :id;');
+        $stm->execute([':id' => $id, ':name' => $name, ':surname' => $surname, ':password' => $hashPassword, ':role' => $role]);
     }
+
+
+    
 
     public function getPhotos($idUser)
     {
