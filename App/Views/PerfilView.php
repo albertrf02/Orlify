@@ -23,6 +23,7 @@
                         alt="<?= $_SESSION["user"]["name"] ?>" />
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
                         <?= $_SESSION["user"]["name"] ?>
+                        <?= $_SESSION["user"]["surname"] ?>
                     </h5>
                     <span class=" mb-2 text-sm text-gray-500 dark:text-gray-400">
                         <?= $_SESSION["user"]["email"] ?>
@@ -31,7 +32,8 @@
             </div>
             <!-- Tailwind Tab with Options -->
             <div class="w-full max-w-screen-md p-4 rounded">
-                <ul class="hidden text-sm font-medium text-center rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400 border border-grey mb-4">
+                <ul
+                    class="hidden text-sm font-medium text-center rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400 border border-grey mb-4">
                     <li class="w-full">
                         <a href="#"
                             class="tab-link inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700 rounded-s-lg"
