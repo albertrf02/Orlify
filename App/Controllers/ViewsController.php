@@ -57,18 +57,17 @@ class ViewsController
     public function equipDirectiu($request, $response, $container)
     {
 
-        $model = $container->get("users");
-        $allUsers = $model->getAllUsers();
+        $modelUsers = $container->get("users");
 
-        $countUsers = 6;
-        $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
-        $start = ($page - 1) * $countUsers;
-        $users = array_slice($allUsers, $start, $countUsers);
-        $totalPages = ceil(count($allUsers) / $countUsers);
+        $allGroups = $modelUsers->getClassGroups();
+        $response->set("groups", $allGroups);
 
-        $response->set("users", $users);
-        $response->set("currentPage", $page);
-        $response->set("totalPages", $totalPages);
+        $name = $request->get(INPUT_POST, "name");
+        $group = $request->get(INPUT_POST, "group");
+        $idCreator = $_SESSION["user"]["id"];
+
+        $modelOrles = $container->get("orles");
+        $postOrla = $modelOrles->createOrla($name, $group, $idCreator);
 
         $response->SetTemplate("equipDirectiuView.php");
         return $response;

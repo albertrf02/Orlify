@@ -37,12 +37,10 @@ CREATE TABLE users_classGroup (
 -- Crear la taula de les orles
 CREATE TABLE orla (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    link VARCHAR(255),
+    name VARCHAR(255),
     visibility BOOLEAN,
-    format VARCHAR(255),
-    creationDate DATE,
-    creator INT,
-    FOREIGN KEY (creator) REFERENCES users(id)
+    idCreator INT,
+    FOREIGN KEY (idCreator) REFERENCES users(id)
 );
 
 -- Crear la taula per a les imatges
@@ -68,12 +66,17 @@ CREATE TABLE roles (
     name VARCHAR(255) UNIQUE
 );
 
+-- Alter the orla table to include a foreign key for classGroup
+ALTER TABLE orla
+ADD COLUMN idClassGroup INT,
+ADD FOREIGN KEY (idClassGroup) REFERENCES classGroup(id);
+
+
 -- Create a table to relate users with orla
-CREATE TABLE user_orla_relation (
+CREATE TABLE user_orla (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idUser INT,
     idOrla INT,
-    PRIMARY KEY (idUser, idOrla),
     FOREIGN KEY (idUser) REFERENCES users(id),
     FOREIGN KEY (idOrla) REFERENCES orla(id)
 );
@@ -96,4 +99,9 @@ INSERT INTO `users` (`Id`, `name`, `surname`, `username`, `password`, `email`, `
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://www.santevet.es/uploads/images/es_ES/razas/gatocomuneuropeo.jpeg', '1', '1');
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://hospitalveterinariodonostia.com/wp-content/uploads/2020/10/gatos.png', '0', '1');
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://www.petz.com.br/blog/wp-content/uploads/2021/11/enxoval-para-gato-Copia.jpg', '0', '1');
+
+INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'DAW2');
+INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'DAW1');
+INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'SMX1');
+INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'SMX2');
 

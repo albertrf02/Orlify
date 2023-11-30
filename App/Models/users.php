@@ -122,8 +122,6 @@ class Users
     }
 
 
-    
-
     public function getPhotos($idUser)
     {
         $stm = $this->sql->prepare('select * from photography where idUser=:idUser;');
@@ -189,6 +187,12 @@ class Users
         }
     }
 
+    public function getClassGroups()
+    {
+        $stm = $this->sql->prepare('SELECT * FROM classgroup;');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
 
 }
