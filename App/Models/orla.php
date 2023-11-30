@@ -40,5 +40,16 @@ class Orla
     return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function updateOrla($id, $link, $visibility, $format, $creationDate)
+    {
+    $stm = $this->sql->prepare('UPDATE orla SET link = :link, visibility = :visibility, format = :format, creation_date = :creationDate WHERE id = :id;');
+    $stm->execute([
+        ':id' => $id,
+        ':link' => $link,
+        ':visibility' => $visibility,
+        ':format' => $format,
+        ':creationDate' => $creationDate
+    ]);
+    }
 
 }
