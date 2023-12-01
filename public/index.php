@@ -34,6 +34,9 @@ $app->post("/updateuserajax", [UserController::class, "updateAjax"]);
 $app->post("/deleteuserajax", [UserController::class, "deleteAjax"]);
 
 
+$app->post("/importcsv", [UserController::class, "importCSV"]);
+
+
 
 
 $app->post("/searchuserajax", [UserController::class, "searchUserAjax"]);

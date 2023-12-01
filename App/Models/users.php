@@ -178,6 +178,12 @@ class Users
 
 
 
+    public function insert($name, $surname, $username, $password, $email) {
+        $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email) VALUES (:name, :surname, :username, :password, :email);');
+        $stm->execute([':name' => $name, ':surname' => $surname, ':username' => $username, ':password' => $password, ':email' => $email]);
+    }
+    
+    
 
 
 }

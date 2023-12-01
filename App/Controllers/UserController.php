@@ -46,7 +46,7 @@ class UserController {
         $model = $container->get("users");
         $newUsers = $model->searchUserAjax($query);
 
-        $countUsers = 6;
+        $countUsers = 9;
         $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
         $start = ($page - 1) * $countUsers;
         $users = array_slice($newUsers, $start, $countUsers);
@@ -109,8 +109,42 @@ class UserController {
     }
 
 
-
-
+    public function importCSV($request, $response, $container) {
+        $fileCSV = $_FILES['file'];
+    
+        // Check if a file was uploaded
+        if (!empty($fileCSV['name'])) {
+            // Validate file type
+            $allowedMimes = array('text/csv', 'application/csv', 'application/vnd.ms-excel');
+    
+            if (in_array($fileCSV['type'], $allowedMimes)) {
+                // Process CSV file
+                $csvFile = fopen($fileCSV['tmp_name'], 'r');
+    
+                // Skip the first line (header) of the CSV file
+                $header = fgetcsv($csvFile);
+    
+                while (($userData = fgetcsv($csvFile)) !== FALSE) {
+                    // Assuming CSV columns match the order of parameters in your insert method
+                    list($name, $surname, $username, $password, $email, $avatar) = $userData;
+    
+                    $model = $container->get("users");
+    
+                    // Hash the password using your hashPassword method
+                    $hashedPassword = $model->hashPassword($password);
+    
+                    // Insert data into the database using the model's insert method
+                    $insert = $model->insert($name, $surname, $username, $hashedPassword, $email, $avatar);
+                }
+    
+                fclose($csvFile);
+    
+                // Redirect after processing CSV
+                $response->redirect("Location: /admin");
+                return $response;
+            }
+        }
+    }
     
     
 }

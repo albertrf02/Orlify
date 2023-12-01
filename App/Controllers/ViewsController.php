@@ -40,7 +40,7 @@ class ViewsController
         $model = $container->get("users");
         $allUsers = $model->getAllUsers();
 
-        $countUsers = 6;
+        $countUsers = 9;
         $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
         $start = ($page - 1) * $countUsers;
         $users = array_slice($allUsers, $start, $countUsers);
