@@ -97,6 +97,8 @@ class ViewsController
 
             if ($action === "setDefaultPhoto") {
                 $userModel->setDefaultPhoto($userId, $_POST['idPhoto']);
+
+                header("Location: /perfil");
             }
         }
 

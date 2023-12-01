@@ -193,10 +193,10 @@ class Users
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
-    public function insertReport()
+    public function insertReport($idPhoto)
     {
         $stm = $this->sql->prepare('INSERT INTO reports (idUser, idPhoto) VALUES (:idUser, :idPhoto);');
-        $stm->execute([':idUser' => $_SESSION["user"]["id"], ':idPhoto' => $_POST["idPhoto"]]);
+        $stm->execute([':idUser' => $_SESSION["user"]["id"], ':idPhoto' => $idPhoto]);
     }
 
     public function getReportedImages()

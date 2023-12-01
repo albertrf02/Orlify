@@ -117,11 +117,15 @@ class UserController
     public function reportImages($request, $response, $container)
     {
         $model = $container->get("users");
-        $reportedImages = $model->insertReport();
 
-        $response->set("reportedImages", $reportedImages);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $idPhoto = $_POST["idPhoto"];
+            $postPhoto = $model->insertReport($idPhoto);
 
-        header("Location: /perfil");
+            $response->set("postPhoto", $postPhoto);
+            header("Location: /perfil");
+        }
+
 
         $response->SetTemplate("perfilView.php");
         return $response;

@@ -141,23 +141,22 @@
                     </option>
                 <?php endforeach; ?>
             </div>
-            <div id="pagina-reportsEd" class="paginaEd" style="display: none;">
-                <h1>Imatges Reportades</h1>
+            <div id="pagina-reportsEd" class="paginaEd hidden">
+                <p class="text-lg font-medium text-gray-900 dark:text-white">Imatges Reportades</p>
 
                 <?php foreach ($reportedImages as $image): ?>
-                    <div class="reported-image">
-                        <p>Report ID:
+                    <div class="bg-white p-4 mb-4 border border-gray-300 rounded">
+                        <p class="text-gray-600">Report ID:
                             <?php echo $image['report_id']; ?>
                         </p>
-                        <p>User Name:
+                        <p class="text-blue-700">User Name:
                             <?php echo $image['user_name']; ?>
                         </p>
-                        <?php echo $image['photography_link']; ?>
+                        <img width="10% " src="<?php echo $image['photography_link']; ?>" alt="Reported Image"
+                            class="mt-2 rounded-lg">
                     </div>
                 <?php endforeach; ?>
-
             </div>
-
         </div>
     </div>
     </div>
