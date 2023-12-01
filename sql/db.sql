@@ -60,6 +60,14 @@ CREATE TABLE studentCard (
     FOREIGN KEY (idStudent) REFERENCES users(id)
 );
 
+CREATE TABLE reports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idUser INT,
+    idPhoto INT,
+    FOREIGN KEY (idUser) REFERENCES users(id),
+    FOREIGN KEY (idPhoto) REFERENCES photography(id)
+);
+
 -- Crear la taula per als rols
 CREATE TABLE roles (
     idRole INT AUTO_INCREMENT PRIMARY KEY,

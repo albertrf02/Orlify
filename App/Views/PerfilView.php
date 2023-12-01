@@ -69,11 +69,19 @@
                                                 class="h-48 w-48 object-cover rounded cursor-pointer">
                                         </button>
                                     </form>
+
+                                    <!-- Report button -->
+                                    <form method="POST" action="/report-image">
+                                        <input type="hidden" name="idPhoto" value="<?= $photo['id']; ?>">
+                                        <button type="submit" class="report-button mt-2">Report</button>
+                                    </form>
+
                                 </div>
                             <?php endforeach ?>
                         </div>
                     </div>
                 </div>
+
                 <div id="orlesTabContent" style="display: none;">
                     <p>This is the content for the "Orles" tab.</p>
                 </div>

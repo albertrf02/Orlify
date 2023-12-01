@@ -29,6 +29,7 @@ function equipDirectiuPages() {
   $(document).ready(function () {
     $("#pagina-classesEd").show();
     $("#pagina-orlesEd").hide();
+    $("#pagina-reportsEd").hide();
   });
 
   $(document).ready(function () {
@@ -44,6 +45,15 @@ function equipDirectiuPages() {
       e.preventDefault();
       $(".paginaEd").hide();
       $("#pagina-orlesEd").show();
+      window.history.pushState(null, null, "/equipDirectiu");
+    });
+  });
+
+  $(document).ready(function () {
+    $("#reportsEd").click(function (e) {
+      e.preventDefault();
+      $(".paginaEd").hide();
+      $("#pagina-reportsEd").show();
       window.history.pushState(null, null, "/equipDirectiu");
     });
   });

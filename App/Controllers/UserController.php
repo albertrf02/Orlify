@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
-class UserController {
+class UserController
+{
 
-    public function update($request, $response, $container) {
+    public function update($request, $response, $container)
+    {
 
         $id = $request->get(INPUT_POST, "id");
         $name = $request->get(INPUT_POST, "name");
@@ -28,7 +30,8 @@ class UserController {
         return $response;
     }
 
-    public function delete($request, $response, $container) {
+    public function delete($request, $response, $container)
+    {
 
         $id = $request->get(INPUT_POST, "id");
 
@@ -39,10 +42,11 @@ class UserController {
         return $response;
     }
 
-    public function searchUserAjax($request, $response, $container) {
-        
+    public function searchUserAjax($request, $response, $container)
+    {
+
         $query = $request->get(INPUT_POST, "query");
-    
+
         $model = $container->get("users");
         $newUsers = $model->searchUserAjax($query);
 
@@ -55,7 +59,7 @@ class UserController {
         $response->set("users", $users);
         $response->set("currentPage", $page);
         $response->set("totalPages", $totalPages);
-    
+
         if (!empty($newUsers)) {
             $response->set("users", $users);
             $response->set("currentPage", $page);
@@ -65,12 +69,13 @@ class UserController {
             $response->set('error', 'error');
             $response->setJSON();
         }
-    
+
         return $response;
     }
 
 
-    public function updateAjax($request, $response, $container) {
+    public function updateAjax($request, $response, $container)
+    {
 
         $userId = $request->get(INPUT_POST, "userId");
 
@@ -83,14 +88,15 @@ class UserController {
             $response->set('roles', $roles);
             $response->setJSON();
         } else {
-            $response->set ('error', 'error');
+            $response->set('error', 'error');
             $response->setJSON();
         }
-    
+
         return $response;
     }
 
-    public function deleteAjax($request, $response, $container) {
+    public function deleteAjax($request, $response, $container)
+    {
 
         $userId = $request->get(INPUT_POST, "userId");
 
@@ -101,17 +107,26 @@ class UserController {
             $response->set('user', $infoUser);
             $response->setJSON();
         } else {
-            $response->set ('error', 'error');
+            $response->set('error', 'error');
             $response->setJSON();
         }
-    
+
+        return $response;
+    }
+
+    public function reportImages($request, $response, $container)
+    {
+        $model = $container->get("users");
+        $reportedImages = $model->insertReport();
+
+        $response->set("reportedImages", $reportedImages);
+
+        header("Location: /perfil");
+
+        $response->SetTemplate("perfilView.php");
         return $response;
     }
 
 
-
-
-    
-    
 }
 

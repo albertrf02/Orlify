@@ -66,12 +66,22 @@ class ViewsController
         $response->set("groups", $allGroups);
         $response->set("orles", $allOrles);
 
-        $name = $request->get(INPUT_POST, "name");
-        $group = $request->get(INPUT_POST, "group");
-        $idCreator = $_SESSION["user"]["id"];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $name = $_POST["name"];
+            $group = $_POST["group"];
+            $idCreator = $_SESSION["user"]["id"];
+
+            $postOrla = $modelOrles->createOrla($name, $group, $idCreator);
+
+            $response->set("postOrla", $postOrla);
+        }
+
+        $reportedImages = $modelUsers->getReportedImages();
+
+        $response->set("reportedImages", $reportedImages);
 
         $modelOrles = $container->get("orles");
-        $postOrla = $modelOrles->createOrla($name, $group, $idCreator);
 
         $response->SetTemplate("equipDirectiuView.php");
         return $response;

@@ -28,6 +28,7 @@ $app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"]);
 
 
 $app->post("/equipDirectiuPost", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->post("/report-image", [UserController::class, "reportImages"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/dologin", [LoginController::class, "login"]);
 $app->post("/doregister", [LoginController::class, "register"]);
