@@ -25,6 +25,7 @@ class OrlaController
         $response->setJSON();
         $response->setBody(json_encode($usersInOrlaMap));
 
+        header("Access-Control-Allow-Origin: *");
         return $response;
     }
 
