@@ -194,10 +194,20 @@ class Users
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
     public function insertReport($idPhoto)
-    {
-        $stm = $this->sql->prepare('INSERT INTO reports (idUser, idPhoto) VALUES (:idUser, :idPhoto);');
-        $stm->execute([':idUser' => $_SESSION["user"]["id"], ':idPhoto' => $idPhoto]);
+{
+    $idUser = $_SESSION["user"]["id"];
+
+    // Check if the report already exists
+    $checkStm = $this->sql->prepare('SELECT id FROM reports WHERE idUser = :idUser AND idPhoto = :idPhoto');
+    $checkStm->execute([':idUser' => $idUser, ':idPhoto' => $idPhoto]);
+
+    if (!$checkStm->fetch()) {
+        // The report doesn't exist, so insert it
+        $insertStm = $this->sql->prepare('INSERT INTO reports (idUser, idPhoto) VALUES (:idUser, :idPhoto);');
+        $insertStm->execute([':idUser' => $idUser, ':idPhoto' => $idPhoto]);
     }
+}
+
 
     public function getReportedImages()
     {
