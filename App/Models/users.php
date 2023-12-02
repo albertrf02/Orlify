@@ -194,19 +194,19 @@ class Users
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
     public function insertReport($idPhoto)
-{
-    $idUser = $_SESSION["user"]["id"];
+    {
+        $idUser = $_SESSION["user"]["id"];
 
-    // Check if the report already exists
-    $checkStm = $this->sql->prepare('SELECT id FROM reports WHERE idUser = :idUser AND idPhoto = :idPhoto');
-    $checkStm->execute([':idUser' => $idUser, ':idPhoto' => $idPhoto]);
+        // Check if the report already exists
+        $checkStm = $this->sql->prepare('SELECT id FROM reports WHERE idUser = :idUser AND idPhoto = :idPhoto');
+        $checkStm->execute([':idUser' => $idUser, ':idPhoto' => $idPhoto]);
 
-    if (!$checkStm->fetch()) {
-        // The report doesn't exist, so insert it
-        $insertStm = $this->sql->prepare('INSERT INTO reports (idUser, idPhoto) VALUES (:idUser, :idPhoto);');
-        $insertStm->execute([':idUser' => $idUser, ':idPhoto' => $idPhoto]);
+        if (!$checkStm->fetch()) {
+            // The report doesn't exist, so insert it
+            $insertStm = $this->sql->prepare('INSERT INTO reports (idUser, idPhoto) VALUES (:idUser, :idPhoto);');
+            $insertStm->execute([':idUser' => $idUser, ':idPhoto' => $idPhoto]);
+        }
     }
-}
 
 
     public function getReportedImages()
@@ -228,6 +228,31 @@ class Users
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function deleteReportAndPhoto($reportId)
+{
+    // Retrieve idPhoto before deleting the report
+    $stm = $this->sql->prepare('
+        SELECT idPhoto
+        FROM reports
+        WHERE id = :reportId
+    ');
+    $stm->execute([':reportId' => $reportId]);
+    $idPhoto = $stm->fetchColumn();
+
+    // Delete the report
+    $stm = $this->sql->prepare('
+        DELETE FROM reports
+        WHERE id = :reportId
+    ');
+    $stm->execute([':reportId' => $reportId]);
+
+    // Delete the corresponding photo
+    $stm = $this->sql->prepare('
+        DELETE FROM photography
+        WHERE id = :idPhoto
+    ');
+    $stm->execute([':idPhoto' => $idPhoto]);
+}
 
 
 }

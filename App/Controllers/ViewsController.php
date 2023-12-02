@@ -77,6 +77,16 @@ class ViewsController
             $response->set("postOrla", $postOrla);
         }
 
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {
+            $action = $_REQUEST["action"];
+
+            if ($action === "deleteReport") {
+                $modelUsers->deleteReportAndPhoto($_GET['report_id']);
+
+                header("Location: /equipDirectiu");
+            }
+        }
+
         $reportedImages = $modelUsers->getReportedImages();
 
         $response->set("reportedImages", $reportedImages);

@@ -154,7 +154,9 @@
                         </p>
                         <img width="10% " src="<?php echo $image['photography_link']; ?>" alt="Reported Image"
                             class="mt-2 rounded-lg">
-                    </div>
+
+                            <a href="/equipDirectiu?action=deleteReport&report_id=<?php echo $image['report_id']; ?>" class="text-red-500">Delete Report</a>
+                        </div>
                 <?php endforeach; ?>
             </div>
         </div>
