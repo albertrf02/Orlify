@@ -32,6 +32,14 @@ $(document).ready(function () {
       $("#pagina-users").show();
     });
   });
+
+  $(document).ready(function () {
+    $("#recover").click(function (e) {
+        e.preventDefault();
+        $("#pagina-recover").hide();
+        $("#pagina-missatge").show();
+    });
+});
   
   $(document).ready(function () {
     $("#classes").click(function (e) {

@@ -77,5 +77,38 @@ class ViewsController
         return $response;
     }
 
+    function recover($request, $response, $container)
+    {
+        $response->SetTemplate("Recover.php");
+        return $response;
+    }
+
+
+    function invalidtoken($request, $response, $container)
+    {
+        $time = $request->get("SESSION", "time");
+        $response->set("time", $time);
+        $response->SetTemplate("InvalidToken.php");
+        return $response;
+    }
+
+    function recoverpassword($request, $response, $container)
+    {
+        $token = $request->getParam("token");
+
+        $userModel = $container->get("users");
+        $valid = $userModel->isValidToken($token);
+        $time = $userModel->CheckTime($token);
+
+        if($valid == "true"){
+            $response->setTemplate("RecoverPassword.php");
+            return $response;
+
+        }else{
+            $response->setSession("time", $time);
+            $response->redirect("Location: /invalidtoken");
+            return $response;
+        }  
+    }
 }
 
