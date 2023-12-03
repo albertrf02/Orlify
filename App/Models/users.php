@@ -115,11 +115,14 @@ class Users
 
 
 
-    public function updateUser($id, $name, $surname, $username, $hashPassword, $email, $role)
+    public function updateUser($id, $name, $surname, $hashPassword, $role)
     {
-        $stm = $this->sql->prepare('UPDATE users SET name = :name, surname = :surname, username = :username, password = :password, email = :email, role = :role WHERE id = :id;');
-        $stm->execute([':id' => $id, ':name' => $name, ':surname' => $surname, ':username' => $username, ':password' => $hashPassword, ':email' => $email, ':role' => $role]);
+        $stm = $this->sql->prepare('UPDATE users SET name = :name, surname = :surname, password = :password, role = :role WHERE id = :id;');
+        $stm->execute([':id' => $id, ':name' => $name, ':surname' => $surname, ':password' => $hashPassword, ':role' => $role]);
     }
+
+
+    
 
     public function getPhotos($idUser)
     {
@@ -174,6 +177,19 @@ class Users
     }
 
 
+    public function getDefaultPhoto($idUser)
+    {
+        $stm = $this->sql->prepare('select * from photography where idUser=:idUser and defaultPhoto=1;');
+        $stm->execute([':idUser' => $idUser]);
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
+        if (is_array($result)) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+
     public function getUserByEmail($email)
     {
         $stm = $this->sql->prepare('SELECT * FROM users WHERE email = :email;');
@@ -208,12 +224,12 @@ class Users
 
 
     public function CheckTime($token)
-{
+    {
     $stm = $this->sql->prepare('SELECT IF(token_expiration < NOW(), "No", "Si") AS token_validity FROM users WHERE token = :token');
     $stm->execute([':token' => $token]);
     $result = $stm->fetch(\PDO::FETCH_ASSOC);
     return $result;
-}
+    }
 
 
 
