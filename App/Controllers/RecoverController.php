@@ -51,23 +51,22 @@ class RecoverController
     {
         $new_passowrd = $request->get(INPUT_POST, "new_password");
         $repeat_password = $request->get(INPUT_POST, "repeat_password");
+        $token = $request->get(INPUT_POST, "token");
 
         $model = $container->get("users");
-        $recover = $model->getUserByToken($token);
+
 
         if ($new_passowrd == $repeat_password) {
+
+            $hashPassword = $model->hashPassword($new_passowrd);             //hash password
+            $recover = $model->updatePasswordByToken($hashPassword, $token);
             $response->redirect("Location: /login");
             return $response;
 
         } else{
-
-            $response->setSession("error", "No coinciden las contraseñas");
-            $response->redirect("Location: http://localhost/recoverpassword/$token");
+            $response->setSession("errorpass", "Les contrasenyes no coincideixen");
+            $response->redirect("Location: /recoverpassword/$token");
             return $response;
-
         }
-        
-        $response->redirect("Location: /");
-        return $response;
     }
 }

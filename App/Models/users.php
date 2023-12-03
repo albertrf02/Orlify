@@ -223,14 +223,21 @@ class Users
     }
 
 
-    public function CheckTime($token)
+    public function getTokenExpiration($token)
     {
-    $stm = $this->sql->prepare('SELECT IF(token_expiration < NOW(), "No", "Si") AS token_validity FROM users WHERE token = :token');
+    $stm = $this->sql->prepare('SELECT token_expiration FROM users WHERE token = :token');
     $stm->execute([':token' => $token]);
     $result = $stm->fetch(\PDO::FETCH_ASSOC);
-    return $result;
+    
+    return $result['token_expiration'];
     }
 
+
+    public function updatePasswordByToken($password, $token)
+    {
+    $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE token = :token');
+    $stm->execute([':password' => $password, ':token' => $token]);
+    }
 
 
 }

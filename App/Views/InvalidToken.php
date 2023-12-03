@@ -13,12 +13,8 @@
                         <img src="/img/logo.png" class="h-10" alt="orlify">
                     </a>
                 </div>
-                <p class="mb-4 text-sm font-medium text-grey-800 dark:text-white">Token invalido o el token ya ha caducado</p>
-                <?= $time ?>
-                <?= $time ?>
-                <?= $time ?>
-                <?= $time ?>
-
+                <p class="mb-4 text-sm font-medium text-grey-800 dark:text-white">Aquest enllaç per restablir la contrasenya és invàlid o ha caducat.</p>
+                <p class="mb-4 text-sm font-medium text-grey-800 dark:text-white">Si us plau, sol·licita un nou enllaç per restablir la teva contrasenya.</p>
         </div>
     </div>
     <?php require "Scripts.php" ?>
