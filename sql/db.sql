@@ -15,6 +15,8 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE,
     avatar VARCHAR(255),
     role INT
+    token varchar(250) NOT NULL,
+    token_expiration datetime
 );
 
 
