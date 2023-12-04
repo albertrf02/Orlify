@@ -4,9 +4,12 @@ import { editUserModal } from "./ajax.js";
 import { deleteUserModal } from "./ajax.js";
 import { searchUser } from "./ajax.js";
 import { adminPages } from "./pages.js";
+import { recoverPages } from "./pages.js";
+
 
 adminPages();
 checkPassword();
 editUserModal();
 deleteUserModal();
 searchUser();
+recoverPages();

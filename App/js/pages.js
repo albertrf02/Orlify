@@ -24,14 +24,17 @@ function adminPages() {
     });
 }
 
-    $(document).ready(function () {
-        $("#recover").click(function (e) {
-            e.preventDefault();
-            $("#pagina-recover").hide();
-            $("#pagina-missatge").show();
+    
+    function recoverPages() {
+        $(document).ready(function () {
+            $("#recover").click(function (e) {
+                e.preventDefault();
+                $("#pagina-recover").hide();
+                $("#pagina-missatge").show();
+            });
         });
-    });
 
+    }
 
 
 
@@ -39,3 +42,4 @@ function adminPages() {
 
 
 export { adminPages };
+export { recoverPages };
