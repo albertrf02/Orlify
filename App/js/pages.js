@@ -31,16 +31,17 @@ function adminPages() {
     });
 }
 
-//pagines de l'equip directiu
 function equipDirectiuPages() {
+
   $(document).ready(function () {
-    $("#pagina-classesEd").show();
-    $("#pagina-orlesEd").hide();
+    $("#pagina-classesEd").hide();
+    $("#pagina-orlesEd").show();
     $("#pagina-reportsEd").hide();
   });
 
   $(document).ready(function () {
     $("#classesEd").click(function (e) {
+      console.log("classes");
       e.preventDefault();
       $(".paginaEd").hide();
       $("#pagina-classesEd").show();
@@ -50,6 +51,7 @@ function equipDirectiuPages() {
   $(document).ready(function () {
     $("#orlesEd").click(function (e) {
       e.preventDefault();
+      console.log("orles");
       $(".paginaEd").hide();
       $("#pagina-orlesEd").show();
       window.history.pushState(null, null, "/equipDirectiu");
@@ -59,14 +61,16 @@ function equipDirectiuPages() {
   $(document).ready(function () {
     $("#reportsEd").click(function (e) {
       e.preventDefault();
+      console.log("reports");
       $(".paginaEd").hide();
       $("#pagina-reportsEd").show();
       window.history.pushState(null, null, "/equipDirectiu");
     });
   });
+  
 }
 
 
 
-export { adminPages };
-export { equipDirectiuPages };
+
+export { adminPages, equipDirectiuPages };

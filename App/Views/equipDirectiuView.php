@@ -58,12 +58,12 @@
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
             <!-- Placeholder for the "pagina-classes" section (currently hidden) -->
-            <div id="pagina-classesEd" class="paginaEd" style="display: none;">
+            <div id="pagina-classesEd" class="paginaEd">
                 <h2>Contenido de Classes</h2>
                 <p>Esta es la información de la página "Classes".</p>
             </div>
 
-            <div id="pagina-orlesEd" class="paginaEd" style="display: none;">
+            <div id="pagina-orlesEd" class="paginaEd">
 
 
                 <!-- Modal toggle -->
@@ -141,7 +141,8 @@
                     </option>
                 <?php endforeach; ?>
             </div>
-            <div id="pagina-reportsEd" class="paginaEd hidden">
+            <div id="pagina-reportsEd" class="paginaEd">
+
                 <p class="text-lg font-medium text-gray-900 dark:text-white">Imatges Reportades</p>
 
                 <?php foreach ($reportedImages as $image): ?>

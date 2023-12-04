@@ -138,7 +138,7 @@
 
     </div>
 
-    <div id="pagina-classes" class="pagina" style="display: none;">
+    <div id="pagina-classes" class="pagina">
         <h2>Contenido de Classes</h2>
         <p>Esta es la información de la página "Classes".</p>
     </div>
