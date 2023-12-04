@@ -229,30 +229,30 @@ class Users
     }
 
     public function deleteReportAndPhoto($reportId)
-{
-    // Retrieve idPhoto before deleting the report
-    $stm = $this->sql->prepare('
+    {
+        // Retrieve idPhoto before deleting the report
+        $stm = $this->sql->prepare('
         SELECT idPhoto
         FROM reports
         WHERE id = :reportId
     ');
-    $stm->execute([':reportId' => $reportId]);
-    $idPhoto = $stm->fetchColumn();
+        $stm->execute([':reportId' => $reportId]);
+        $idPhoto = $stm->fetchColumn();
 
-    // Delete the report
-    $stm = $this->sql->prepare('
+        // Delete the report
+        $stm = $this->sql->prepare('
         DELETE FROM reports
         WHERE id = :reportId
     ');
-    $stm->execute([':reportId' => $reportId]);
+        $stm->execute([':reportId' => $reportId]);
 
-    // Delete the corresponding photo
-    $stm = $this->sql->prepare('
+        // Delete the corresponding photo
+        $stm = $this->sql->prepare('
         DELETE FROM photography
         WHERE id = :idPhoto
     ');
-    $stm->execute([':idPhoto' => $idPhoto]);
-}
+        $stm->execute([':idPhoto' => $idPhoto]);
+    }
 
 
 }

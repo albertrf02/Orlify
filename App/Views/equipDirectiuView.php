@@ -142,21 +142,32 @@
                 <?php endforeach; ?>
             </div>
             <div id="pagina-reportsEd" class="paginaEd hidden">
-                <p class="text-lg font-medium text-gray-900 dark:text-white">Imatges Reportades</p>
-
+                <p class="text-lg font-medium text-gray-900 dark:text-white" style="margin-bottom: 15px">Imatges
+                    Reportades</p>
                 <?php foreach ($reportedImages as $image): ?>
                     <div class="bg-white p-4 mb-4 border border-gray-300 rounded">
-                        <p class="text-gray-600">Report ID:
-                            <?php echo $image['report_id']; ?>
-                        </p>
-                        <p class="text-blue-700">User Name:
-                            <?php echo $image['user_name']; ?>
-                        </p>
-                        <img width="10% " src="<?php echo $image['photography_link']; ?>" alt="Reported Image"
-                            class="mt-2 rounded-lg">
-
-                            <a href="/equipDirectiu?action=deleteReport&report_id=<?php echo $image['report_id']; ?>" class="text-red-500">Delete Report</a>
+                        <div class="flex items-center mb-2">
+                            <p class="font-bold">Nom de l'usuari:
+                                <?php echo $image['user_name']; ?>
+                            </p>
                         </div>
+
+                        <div class="flex items-end">
+                            <div class="mr-4">
+                                <img width="100px" height="100px" src="<?php echo $image['photography_link']; ?>"
+                                    alt="Reported Image" class="mt-2 rounded-lg">
+                            </div>
+
+                            <div class="ml-auto">
+                                <a href="/equipDirectiu?action=deleteReport&report_id=<?php echo $image['report_id']; ?>"
+                                    class="report-button text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
+                                    Delete Report
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
                 <?php endforeach; ?>
             </div>
         </div>
