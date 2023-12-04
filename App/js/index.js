@@ -12,7 +12,7 @@ checkPassword();
 editUserModal();
 deleteUserModal();
 searchUser();
-dragAndDrop();
 equipDirectiuPages();
 searchUserEquipDirectiu();
+dragAndDrop();
 
