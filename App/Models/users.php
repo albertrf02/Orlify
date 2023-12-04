@@ -260,5 +260,54 @@ class Users
     
     
 
+    public function getUserByEmail($email)
+    {
+        $stm = $this->sql->prepare('SELECT * FROM users WHERE email = :email;');
+        $stm->execute([':email' => $email]);
+        return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
+    public function token($email, $token)
+    {
+    $stm = $this->sql->prepare('UPDATE users SET token = :token, token_expiration = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE email = :email');
+    $stm->execute([':token' => $token, ':email' => $email]);
+    }
+
+
+    public function getUserByToken($token)
+    {
+        $stm = $this->sql->prepare('SELECT * FROM users WHERE token = :token;');
+        $stm->execute([':token' => $token]);
+        return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
+    public function isValidToken($token)
+    {
+    $stm = $this->sql->prepare('SELECT id FROM users WHERE token = :token');
+    $stm->execute([':token' => $token]);
+    $result = $stm->fetch(\PDO::FETCH_ASSOC);
+
+    return ($result !== false);
+    }
+
+
+    public function getTokenExpiration($token)
+    {
+    $stm = $this->sql->prepare('SELECT token_expiration FROM users WHERE token = :token');
+    $stm->execute([':token' => $token]);
+    $result = $stm->fetch(\PDO::FETCH_ASSOC);
+    
+    return $result['token_expiration'];
+    }
+
+
+    public function updatePasswordByToken($password, $token)
+    {
+    $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE token = :token');
+    $stm->execute([':password' => $password, ':token' => $token]);
+    }
+
 
 }

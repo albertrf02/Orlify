@@ -69,8 +69,19 @@ function equipDirectiuPages() {
   });
   
 }
+    
+    function recoverPages() {
+        $(document).ready(function () {
+            $("#recover").click(function (e) {
+                e.preventDefault();
+                $("#pagina-recover").hide();
+                $("#pagina-missatge").show();
+            });
+        });
+
+    }
 
 
 
 
-export { adminPages, equipDirectiuPages };
+export { adminPages, equipDirectiuPages, recoverPages };

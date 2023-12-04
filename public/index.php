@@ -6,6 +6,7 @@ use App\Controllers\LoginController;
 use App\Controllers\UserController;
 
 use App\Controllers\OrlaController;
+use App\Controllers\RecoverController;
 
 use Emeset\Contracts\Routers\Router;
 
@@ -30,10 +31,18 @@ $app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"]);
 $app->post("/equipDirectiuPost", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/report-image", [UserController::class, "reportImages"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/recover", [ViewsController::class, "recover"]);
+$app->get("/invalidtoken", [ViewsController::class, "invalidtoken"]);
+$app->get("/recoverpassword/{token}", [ViewsController::class, "recoverpassword"]);
+
+
 $app->post("/dologin", [LoginController::class, "login"]);
 $app->post("/doregister", [LoginController::class, "register"]);
 $app->post("/updateuser", [UserController::class, "update"]);
 $app->post("/deleteuser", [UserController::class, "delete"]);
+$app->post("/dorecover", [RecoverController::class, "recover"]);
+$app->post("/dorecoverpassword", [RecoverController::class, "password"]);
+
 
 
 $app->post("/updateuserajax", [UserController::class, "updateAjax"]);

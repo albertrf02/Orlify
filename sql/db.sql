@@ -14,7 +14,9 @@ CREATE TABLE users (
     password VARCHAR(255),
     email VARCHAR(255) UNIQUE,
     avatar VARCHAR(255),
-    role INT
+    role INT,
+    token varchar(250) NOT NULL,
+    token_expiration datetime
 );
 
 
@@ -108,6 +110,8 @@ INSERT INTO `users` (`Id`, `name`, `surname`, `username`, `password`, `email`, `
 (3, 'emma', 'smith', 'esmith', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'emma@smith.com', NULL, 3),
 (4, 'david', 'brown', 'dbrown', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'david@brown.com', NULL, 2),
 (5, 'sophie', 'martin', 'smartin', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'sophie@martin.com', NULL, 1);
+(6, 'alejandro', 'espinoza', 'aespinoza', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'aespinoza@cendrassos.net', NULL, 1);
+
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://www.santevet.es/uploads/images/es_ES/razas/gatocomuneuropeo.jpeg', '1', '1');
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://hospitalveterinariodonostia.com/wp-content/uploads/2020/10/gatos.png', '0', '1');
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, 'https://www.petz.com.br/blog/wp-content/uploads/2021/11/enxoval-para-gato-Copia.jpg', '0', '1');

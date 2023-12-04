@@ -4,8 +4,9 @@ import { editUserModal } from "./ajax.js";
 import { deleteUserModal } from "./ajax.js";
 import { searchUser } from "./ajax.js";
 import { searchUserEquipDirectiu } from "./ajax.js";
-import { adminPages, equipDirectiuPages } from "./pages.js";
+import { adminPages, equipDirectiuPages, recoverPages} from "./pages.js";
 import { dragAndDrop } from "./dragAndDrop.js";
+
 
 adminPages();
 checkPassword();
@@ -14,5 +15,5 @@ deleteUserModal();
 searchUser();
 equipDirectiuPages();
 searchUserEquipDirectiu();
+recoverPages();
 dragAndDrop();
-
