@@ -6,7 +6,7 @@ function editUserModal() {
         event.preventDefault();
         var $this = $(this);
         var userId = $this.data("edit-user-id");
-
+ 
         $.ajax({
             url: '/updateuserajax',
             method: 'POST',
@@ -110,7 +110,7 @@ function searchUser() {
                             // Iterar sobre los usuarios y agregarlos al contenedor
                             users.forEach(function (user) {
                                 var userHtml = `
-                                        <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/3 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                        <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                             <!-- User Status Indicator -->
                                             <div class="flex justify-end px-4 pt-4">
                                                 ${user.role === null ? `

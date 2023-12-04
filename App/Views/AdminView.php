@@ -71,7 +71,7 @@
         <div id="pagina-users" class="pagina flex flex-col">
             <div class="flex flex-wrap justify-center">
                 <?php foreach ($users as $user) : ?>
-                    <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/3 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <div class="flex justify-end px-4 pt-4">
                             <?php if (!isset($user['role']) && $user['role'] === NULL) : ?>
                                 <div class="py-4">
@@ -256,7 +256,8 @@
                                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                             </div>
-                            <input id="dropzone-file" type="file" name="file" class="" />
+                            <input type="file" id="file" name="imagen[]"/>
+
 
                         </label>
                     </div> 
