@@ -18,12 +18,15 @@ class Container extends EmesetContainer
             $this["users"] = function ($c) {
                 return new \App\Models\Users($c["db"]->getConnection());
             };
+            $this["orles"] = function ($c) {
+                return new \App\Models\Orles($c["db"]->getConnection());
+            };
 
             $this["db"] = function ($c) {
                 return new \App\Models\Db(
                     $c["config"]["db"]["user"],
                     $c["config"]["db"]["pass"],
-                    $c["config"]["db"]["db"], 
+                    $c["config"]["db"]["db"],
                     $c["config"]["db"]["host"]
                 );
             };

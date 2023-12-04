@@ -54,6 +54,49 @@ class ViewsController
         return $response;
     }
 
+    public function equipDirectiu($request, $response, $container)
+    {
+
+        $modelUsers = $container->get("users");
+        $modelOrles = $container->get("orles");
+
+        $allGroups = $modelUsers->getClassGroups();
+        $allOrles = $modelOrles->getOrles();
+
+        $response->set("groups", $allGroups);
+        $response->set("orles", $allOrles);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $name = $_POST["name"];
+            $group = $_POST["group"];
+            $idCreator = $_SESSION["user"]["id"];
+
+            $postOrla = $modelOrles->createOrla($name, $group, $idCreator);
+
+            $response->set("postOrla", $postOrla);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {
+            $action = $_REQUEST["action"];
+
+            if ($action === "deleteReport") {
+                $modelUsers->deleteReportAndPhoto($_GET['report_id']);
+
+                header("Location: /equipDirectiu");
+            }
+        }
+
+        $reportedImages = $modelUsers->getReportedImages();
+
+        $response->set("reportedImages", $reportedImages);
+
+        $modelOrles = $container->get("orles");
+
+        $response->SetTemplate("equipDirectiuView.php");
+        return $response;
+    }
+
     public function perfil($request, $response, $container)
     {
         $userId = $_SESSION["user"]["id"];
@@ -64,6 +107,8 @@ class ViewsController
 
             if ($action === "setDefaultPhoto") {
                 $userModel->setDefaultPhoto($userId, $_POST['idPhoto']);
+
+                header("Location: /perfil");
             }
         }
 
