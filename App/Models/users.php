@@ -145,7 +145,7 @@ class Users
     public function setPorfilePhoto($idUser, $avatar)
     {
         $stm = $this->sql->prepare('update users set avatar=:avatar where id=:idUser;');
-        $stm->execute([':idUser' => $idUser, ':idPhoto' => $avatar]);
+        $stm->execute([':idUser' => $idUser, ':avatar' => $avatar]);
     }
 
     public function getRoles()
@@ -261,5 +261,18 @@ class Users
         $stm->execute([':idPhoto' => $idPhoto]);
     }
 
+    public function getAvatars(){
+        $avatarPath = __DIR__ . "/../../public/avatars/";
+        $avatars = [];
+
+        $files = scandir($avatarPath);
+        foreach ($files as $file) {
+            if ($file !== "." && $file !== "..") {
+                $avatars[] = $file;
+            }
+        }
+
+        return $avatars;
+    }
 
 }

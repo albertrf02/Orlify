@@ -18,9 +18,20 @@
             <!-- User Information Column -->
             <div
                 class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8 mx-auto">
+                <form method="post" action="/perfil?action=setPorfilePhoto">
+                    <label for="avatar">Choose an Avatar:</label>
+                    <select name="avatar" id="avatar">
+                        <?php foreach($avatars as $avatar): ?>
+                            <option value="<?= $avatar ?>">
+                                <?= $avatar ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <input type="hidden" name="action" value="setPorfilePhoto">
+                    <button type="submit">Set Default Photo</button>
+                </form>
                 <div class="flex flex-col items-center pb-10">
-                    <img class="w-24 h-24 mb-3 mt-12 rounded-full shadow-lg" src="..\avatars\avatar-nen1.png"
-                        alt="user>" />
+                    <img class="w-24 h-24 mb-3 mt-12 rounded-full shadow-lg" src="<?= '../avatars/' . $_SESSION["user"]["avatar"] ?>" alt="user>" />
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
                         <?= $_SESSION["user"]["name"] ?>
                         <?= $_SESSION["user"]["surname"] ?>
@@ -55,12 +66,12 @@
                     <!-- Content for the selected tab goes here -->
                     <div id="imagesTabContent">
                         <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-2">
-                            <?php foreach ($userPhotos as $photo): ?>
+                            <?php foreach($userPhotos as $photo): ?>
                                 <div class="relative flex flex-col items-center p-2 rounded">
                                     <form method="POST" action="/perfil?action=setDefaultPhoto">
                                         <button type="submit" name="idPhoto" value="<?= $photo['id']; ?>"
                                             class="img-button relative">
-                                            <?php if ($photo["defaultPhoto"] == 1): ?>
+                                            <?php if($photo["defaultPhoto"] == 1): ?>
                                                 <div class="absolute top-0 right-0 mt-2 mr-3 text-2xl">
                                                     <img src="../img/bookmark.png" alt="Star" class="w-6 h-6">
                                                 </div>
@@ -71,7 +82,7 @@
                                     </form>
 
                                     <!-- Report button -->
-                                    <?php if ($photo["defaultPhoto"] !== 1): ?>
+                                    <?php if($photo["defaultPhoto"] !== 1): ?>
                                         <div class="absolute top-0 right-0 mt-2 mr-5 text-2xl">
                                             <button data-modal-target="popup-modal-<?= $photo['id']; ?>"
                                                 data-modal-toggle="popup-modal"
