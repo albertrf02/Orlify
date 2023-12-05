@@ -141,6 +141,13 @@ class Users
         $stm = $this->sql->prepare('update photography set defaultPhoto=1 where idUser=:idUser and id=:idPhoto;');
         $stm->execute([':idUser' => $idUser, ':idPhoto' => $idPhoto]);
     }
+
+    public function setPorfilePhoto($idUser, $avatar)
+    {
+        $stm = $this->sql->prepare('update users set avatar=:avatar where id=:idUser;');
+        $stm->execute([':idUser' => $idUser, ':idPhoto' => $avatar]);
+    }
+
     public function getRoles()
     {
         $stm = $this->sql->prepare('SELECT * FROM roles;');

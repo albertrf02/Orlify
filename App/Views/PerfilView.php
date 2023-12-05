@@ -19,8 +19,8 @@
             <div
                 class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8 mx-auto">
                 <div class="flex flex-col items-center pb-10">
-                    <img class="w-24 h-24 mb-3 mt-12 rounded-full shadow-lg" src="<?php echo $defaultPhoto['link']; ?>"
-                        alt="<?= $_SESSION["user"]["name"] ?>" />
+                    <img class="w-24 h-24 mb-3 mt-12 rounded-full shadow-lg" src="..\avatars\avatar-nen1.png"
+                        alt="user>" />
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
                         <?= $_SESSION["user"]["name"] ?>
                         <?= $_SESSION["user"]["surname"] ?>
@@ -72,18 +72,18 @@
 
                                     <!-- Report button -->
                                     <?php if ($photo["defaultPhoto"] !== 1): ?>
-                                    <div class="absolute top-0 right-0 mt-2 mr-5 text-2xl">
-                                    <button data-modal-target="popup-modal-<?= $photo['id']; ?>"
-                                        data-modal-toggle="popup-modal"
-                                        class="block text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                        type="button">
-                                        <svg class="w-6 h-6 text-red-800 dark:text-red-500" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                            <path
-                                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
-                                        </svg>
-                                    </button>
-                                    </div>
+                                        <div class="absolute top-0 right-0 mt-2 mr-5 text-2xl">
+                                            <button data-modal-target="popup-modal-<?= $photo['id']; ?>"
+                                                data-modal-toggle="popup-modal"
+                                                class="block text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                                type="button">
+                                                <svg class="w-6 h-6 text-red-800 dark:text-red-500" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
+                                                </svg>
+                                            </button>
+                                        </div>
                                     <?php endif ?>
 
                                     <!-- Modal for reporting image -->
@@ -147,7 +147,25 @@
                     </div>
                 </div>
                 <div id="orlesTabContent" style="display: none;">
-                    <p>This is the content for the "Orles" tab.</p>
+                    <p>This is the content for the "orles" tab.</p>
+                </div>
+                <div id="carnetTabContent" style="display: none;">
+                    <div
+                        class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8 mx-auto">
+                        <div class="flex items-start p-5">
+                            <img class="w-24 h-24 mr-4 rounded-lg shadow-lg" src="<?php echo $defaultPhoto['link']; ?>"
+                                alt="<?= $_SESSION["user"]["name"] ?>" />
+                            <div>
+                                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                                    <?= $_SESSION["user"]["name"] ?>
+                                    <?= $_SESSION["user"]["surname"] ?>
+                                </h5>
+                                <span class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                    <?= $_SESSION["user"]["email"] ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

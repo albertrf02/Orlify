@@ -112,6 +112,16 @@ class ViewsController
             }
         }
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST["action"])) {
+            $action = $_REQUEST["action"];
+
+            if ($action === "setDefaultPhoto") {
+                $userModel->setDefaultPhoto($userId, $_POST['avatar']);
+
+                header("Location: /perfil");
+            }
+        }
+
         $user = $userModel->getUserById($userId);
         $userPhotos = $userModel->getPhotos($userId);
         $defaultPhoto = $userModel->getDefaultPhoto($userId);
