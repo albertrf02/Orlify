@@ -110,7 +110,16 @@ class ViewsController
 
                 header("Location: /perfil");
             }
+
+            if ($action === "setPorfilePhoto") {
+                $userModel->setPorfilePhoto($userId, $_POST['avatar']);
+
+
+                header("Location: /perfil");
+            }
         }
+
+        $avatars = $userModel->getAvatars();
 
         $user = $userModel->getUserById($userId);
         $userPhotos = $userModel->getPhotos($userId);
@@ -119,6 +128,7 @@ class ViewsController
         $response->set("user", $user);
         $response->set("userPhotos", $userPhotos);
         $response->set("defaultPhoto", $defaultPhoto);
+        $response->set("avatars", $avatars);
 
         $response->SetTemplate("PerfilView.php");
         return $response;

@@ -141,6 +141,13 @@ class Users
         $stm = $this->sql->prepare('update photography set defaultPhoto=1 where idUser=:idUser and id=:idPhoto;');
         $stm->execute([':idUser' => $idUser, ':idPhoto' => $idPhoto]);
     }
+
+    public function setPorfilePhoto($idUser, $avatar)
+    {
+        $stm = $this->sql->prepare('update users set avatar=:avatar where id=:idUser;');
+        $stm->execute([':idUser' => $idUser, ':avatar' => $avatar]);
+    }
+
     public function getRoles()
     {
         $stm = $this->sql->prepare('SELECT * FROM roles;');
@@ -171,8 +178,12 @@ class Users
     {
         $stm = $this->sql->prepare('SELECT * FROM users WHERE id = :id;');
         $stm->execute([':id' => $id]);
-        return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
-    }
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
+        if (is_array($result)) {
+            return $result;
+        } else {
+            return false;
+        }    }
 
 
     public function getDefaultPhoto($idUser)
@@ -229,25 +240,25 @@ class Users
     }
 
     public function deleteReportAndPhoto($reportId)
-{
-    // Retrieve idPhoto before deleting the report
-    $stm = $this->sql->prepare('
+    {
+        // Retrieve idPhoto before deleting the report
+        $stm = $this->sql->prepare('
         SELECT idPhoto
         FROM reports
         WHERE id = :reportId
     ');
-    $stm->execute([':reportId' => $reportId]);
-    $idPhoto = $stm->fetchColumn();
+        $stm->execute([':reportId' => $reportId]);
+        $idPhoto = $stm->fetchColumn();
 
-    // Delete the report
-    $stm = $this->sql->prepare('
+        // Delete the report
+        $stm = $this->sql->prepare('
         DELETE FROM reports
         WHERE id = :reportId
     ');
-    $stm->execute([':reportId' => $reportId]);
+        $stm->execute([':reportId' => $reportId]);
 
-    // Delete the corresponding photo
-    $stm = $this->sql->prepare('
+        // Delete the corresponding photo
+        $stm = $this->sql->prepare('
         DELETE FROM photography
         WHERE id = :idPhoto
     ');
@@ -309,5 +320,18 @@ class Users
     $stm->execute([':password' => $password, ':token' => $token]);
     }
 
+    public function getAvatars(){
+        $avatarPath = __DIR__ . "/../../public/avatars/";
+        $avatars = [];
+
+        $files = scandir($avatarPath);
+        foreach ($files as $file) {
+            if ($file !== "." && $file !== "..") {
+                $avatars[] = $file;
+            }
+        }
+
+        return $avatars;
+    }
 
 }
