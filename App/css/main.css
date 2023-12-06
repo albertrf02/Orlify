@@ -2,3 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.avatar-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+.avatar-list label {
+    margin: 0;
+}
+
+.avatar-img {
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+
+}

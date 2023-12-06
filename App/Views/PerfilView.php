@@ -18,25 +18,27 @@
             <!-- User Information Column -->
             <div
                 class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8 mx-auto">
-                <form method="post" action="/perfil?action=setPorfilePhoto">
-                    <label for="avatar">Choose an Avatar:</label>
-                    <select name="avatar" id="avatar">
-                        <?php foreach($avatars as $avatar): ?>
-                            <option value="<?= $avatar ?>">
-                                <?= $avatar ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                    <input type="hidden" name="action" value="setPorfilePhoto">
-                    <button type="submit">Set Default Photo</button>
-                </form>
                 <div class="flex flex-col items-center pb-10">
-                    <img class="w-24 h-24 mb-3 mt-12 rounded-full shadow-lg" src="<?= '../avatars/' . $_SESSION["user"]["avatar"] ?>" alt="user>" />
+                    <form method="post" action="/perfil?action=setPorfilePhoto" id="avatarForm" style="display: none;">
+                        <input type="hidden" name="action" value="setPorfilePhoto">
+                        <div class="avatar-list">
+                            <?php foreach($avatars as $avatar): ?>
+                                <label>
+                                    <input type="radio" name="avatar" value="<?= $avatar ?>">
+                                    <img class="avatar-img" src="<?= '../avatars/'.$avatar ?>" alt="Avatar">
+                                </label>
+                            <?php endforeach; ?>
+                        </div>
+                        <button type="submit">Set Profile Photo</button>
+                    </form>
+                    <img class="w-24 h-24 mb-3 mt-12 rounded-full shadow-lg"
+                        src="<?= '../avatars/'.$_SESSION["user"]["avatar"] ?>" alt="user" id="avatarImage"
+                        onclick="toggleFormVisibility()">
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
                         <?= $_SESSION["user"]["name"] ?>
                         <?= $_SESSION["user"]["surname"] ?>
                     </h5>
-                    <span class=" mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                         <?= $_SESSION["user"]["email"] ?>
                     </span>
                 </div>
@@ -213,6 +215,13 @@
                 });
             });
         });
+
+        function toggleFormVisibility() {
+            var form = document.getElementById("avatarForm");
+            form.style.display = form.style.display === "none" ? "block" : "none";
+        }
+
+        
 
     </script>
 </body>
