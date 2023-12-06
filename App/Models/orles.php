@@ -79,5 +79,18 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function deleteUsersFromOrla($idOrla)
+    {
+        $stm = $this->sql->prepare('DELETE FROM user_orla WHERE idOrla = :idOrla;');
+        $stm->execute([':idOrla' => $idOrla]);
+    }
+
+    public function addUsersToOrla($idOrla, $usersOrla)
+    {
+        $stm = $this->sql->prepare('INSERT INTO user_orla (idUser, idOrla) VALUES (:idUser, :idOrla);');
+        foreach ($usersOrla as $userOrla) {
+            $stm->execute([':idUser' => $userOrla, ':idOrla' => $idOrla]);
+        }
+    }
 
 }

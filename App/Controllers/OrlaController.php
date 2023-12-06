@@ -8,8 +8,10 @@ class OrlaController
     public function getUsersFromOrla($request, $response, $container)
     {
         $orlesModel = $container->get("orles");
+        $idOrla = 1;
+        $idGroup = 1;
 
-        $usersInOrla = $orlesModel->getUserFromGroupInOrla(1, 1);
+        $usersInOrla = $orlesModel->getUserFromGroupInOrla($idOrla, $idGroup);
         $placeholderImage = 'https://cdn4.vectorstock.com/i/1000x1000/82/33/person-gray-photo-placeholder-woman-vector-24138233.jpg';
 
         // Transform the array
@@ -25,7 +27,33 @@ class OrlaController
         $response->setJSON();
         $response->setBody(json_encode($usersInOrlaMap));
 
-        header("Access-Control-Allow-Origin: *");
+        return $response;
+    }
+
+    public function saveOrla($request, $response, $container){
+        $orlesModel = $container->get("orles");
+
+        //1. Obtindre i parsejar el JSON de la orla
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST["action"])) {
+            $action = $_REQUEST["action"];
+
+            if ($action === "saveOrla") {
+                $usersOrla = $_POST["orlaValues"];
+                $idOrla = $_POST["idOrla"];
+                $usersOrla = json_decode($usersOrla, true);
+
+                //2. Esborrar els usuaris que estiguin a la orla
+                $orlesModel->deleteUsersFromOrla($idOrla);
+                //3. Guardar els usuaris a la orla
+                $orlesModel->addUsersToOrla($idOrla, $usersOrla);
+
+                var_dump($usersOrla);
+                var_dump($idOrla);
+            }
+        }
+
+        //4. redirigir a la vista de la orla
+
         return $response;
     }
 
