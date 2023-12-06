@@ -13,6 +13,8 @@ use Emeset\Contracts\Routers\Router;
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 include "../vendor/autoload.php";
 
+header("Access-Control-Allow-Origin: *");
+
 /* Creem els diferents models */
 $contenidor = new \App\Container(__DIR__ . "/../App/config.php");
 
@@ -25,9 +27,10 @@ $app->get("/logout", [LoginController::class, "logout"]);
 $app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
-$app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"]);
+$app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"]); //TODO : posar middleware
 
 
+$app->post("/saveOrla", [OrlaController::class, "saveOrla"]);//TODO: posar middleware
 $app->post("/equipDirectiuPost", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/report-image", [UserController::class, "reportImages"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);

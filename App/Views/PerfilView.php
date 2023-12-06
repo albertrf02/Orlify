@@ -26,7 +26,6 @@
                             <?php foreach($avatars as $avatar): ?>
                                 <label> 
                                     <a href="#" class="avatar-item" id="<?= $avatar ?>">
-                                    <!-- <input type="radio" onclick="submitUserAvatar(<?= $avatar ?>)" name="avatar" value="<?= $avatar ?>"> -->
                                     <img class="avatar-img" src="<?= '../avatars/'.$avatar ?>" alt="Avatar"></a>
                                 </label>
                             <?php endforeach; ?>
