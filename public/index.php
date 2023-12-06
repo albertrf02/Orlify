@@ -18,7 +18,7 @@ $contenidor = new \App\Container(__DIR__ . "/../App/config.php");
 
 $app = new \Emeset\Emeset($contenidor);
 
-$app->get("/", [ViewsController::class, "index"]);
+$app->get("/", [ViewsController::class, "index"], [[\App\Middleware\LoadUserData::class, "loadUserData"]]);
 $app->get("/login", [ViewsController::class, "login"]);
 $app->get("/register", [ViewsController::class, "register"]);
 $app->get("/logout", [LoginController::class, "logout"]);

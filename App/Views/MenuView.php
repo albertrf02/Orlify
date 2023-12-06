@@ -16,7 +16,7 @@
         id="user-dropdown">
         <div class="px-4 py-3">
 
-          <?php if (isset($user)): ?>
+          <?php if (isset($logged) && $logged): ?>
             <span class="block text-sm text-gray-900 dark:text-white">
               <?= $user["name"] ?>
             </span>
@@ -37,7 +37,7 @@
         </div>
         <ul class="py-2" aria-labelledby="user-menu-button">
 
-          <?php if (isset($_SESSION["user"])): ?>
+          <?php if (isset($logged) && $logged): ?>
             <li>
               <a href="perfil"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Perfil</a>
