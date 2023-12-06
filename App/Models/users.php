@@ -178,8 +178,12 @@ class Users
     {
         $stm = $this->sql->prepare('SELECT * FROM users WHERE id = :id;');
         $stm->execute([':id' => $id]);
-        return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
-    }
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
+        if (is_array($result)) {
+            return $result;
+        } else {
+            return false;
+        }    }
 
 
     public function getDefaultPhoto($idUser)

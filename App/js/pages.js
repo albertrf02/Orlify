@@ -56,6 +56,14 @@ function equipDirectiuPages() {
       $("#pagina-reportsEd").show();
       window.history.pushState(null, null, "/equipDirectiu");
     });
+
+    $('.avatar-item').on('click', function(e) {
+      const selectedAvatarValue = this.id;
+      document.getElementById("selectedAvatar").value = selectedAvatarValue;
+      var form = document.getElementById("avatarForm");
+      form.submit();
+    });
+
   });
 }
 

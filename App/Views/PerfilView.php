@@ -21,25 +21,26 @@
                 <div class="flex flex-col items-center pb-10">
                     <form method="post" action="/perfil?action=setPorfilePhoto" id="avatarForm" style="display: none;">
                         <input type="hidden" name="action" value="setPorfilePhoto">
+                        <input type="hidden" id="selectedAvatar" name="avatar"  value="<?= $avatar ?>">
                         <div class="avatar-list">
                             <?php foreach($avatars as $avatar): ?>
-                                <label>
-                                    <input type="radio" name="avatar" value="<?= $avatar ?>">
-                                    <img class="avatar-img" src="<?= '../avatars/'.$avatar ?>" alt="Avatar">
+                                <label> 
+                                    <a href="#" class="avatar-item" id="<?= $avatar ?>">
+                                    <!-- <input type="radio" onclick="submitUserAvatar(<?= $avatar ?>)" name="avatar" value="<?= $avatar ?>"> -->
+                                    <img class="avatar-img" src="<?= '../avatars/'.$avatar ?>" alt="Avatar"></a>
                                 </label>
                             <?php endforeach; ?>
                         </div>
-                        <button type="submit">Set Profile Photo</button>
                     </form>
                     <img class="w-24 h-24 mb-3 mt-12 rounded-full shadow-lg"
-                        src="<?= '../avatars/'.$_SESSION["user"]["avatar"] ?>" alt="user" id="avatarImage"
+                        src="<?= '../avatars/'.$user["avatar"] ?>" alt="user" id="avatarImage"
                         onclick="toggleFormVisibility()">
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                        <?= $_SESSION["user"]["name"] ?>
-                        <?= $_SESSION["user"]["surname"] ?>
+                        <?= $user["name"] ?>
+                        <?= $user["surname"] ?>
                     </h5>
                     <span class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                        <?= $_SESSION["user"]["email"] ?>
+                        <?= $user["email"] ?>
                     </span>
                 </div>
             </div>
