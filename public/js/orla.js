@@ -1,7 +1,7 @@
 // TODO move this file to include in bundle.js
 async function getUserData() {
   const idOrla = document.getElementById("idOrla").value;
-  const url = `http://localhost:8080/veureOrla?id=${idOrla}`; // Replace with your API endpoint
+  const url = `http://localhost:8080/veureOrla?idOrla=${idOrla}`; // Replace with your API endpoint
   try {
     const response = await fetch(url);
     if (!response.ok) {

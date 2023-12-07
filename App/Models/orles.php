@@ -38,7 +38,7 @@ class Orles
         $stm = $this->sql->prepare('INSERT INTO orla (name, visibility, idCreator, idClassGroup) VALUES (:name, :visibility, :idCreator, :idClassGroup);');
         $stm->execute([':name' => $name, ':visibility' => 0, ':idCreator' => $idCreator, ':idClassGroup' => $group]);
 
-        return $this->sql->lastInsertId();
+
 
     }
 
@@ -65,18 +65,13 @@ class Orles
             WHEN uo.idUser IS NOT NULL THEN TRUE
             ELSE FALSE
         END AS isInOrla
-        FROM 
-            users u
-        JOIN 
-            users_classGroup ucg ON u.id = ucg.idUser
-        LEFT JOIN 
-            user_orla uo ON u.id = uo.idUser AND uo.idOrla = :idOrla
-        LEFT JOIN 
-            photography p ON u.id = p.idUser AND p.defaultPhoto = TRUE
-        WHERE 
-            u.role IN (1,2)
-        ORDER BY 
-            u.surname ASC;
+        FROM users u
+        INNER JOIN users_classGroup ucg ON u.id = ucg.idUser
+        LEFT JOIN user_orla uo ON u.id = uo.idUser AND uo.idOrla = :idOrla
+        INNER JOIN orla o ON ucg.idGroupClass = o.idClassGroup
+        LEFT JOIN photography p ON u.id = p.idUser AND p.defaultPhoto = TRUE
+        WHERE o.id = :idOrla
+        ORDER BY u.surname ASC;
         QUERY;
         $stm = $this->sql->prepare($query);
         $stm->execute([':idOrla' => $idOrla]);
