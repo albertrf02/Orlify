@@ -54,6 +54,15 @@ class ViewsController
         return $response;
     }
 
+    public function orlaEditor($request, $response, $container)
+    {
+        $idOrla = $_GET["idOrla"];
+        $response->set("idOrla", $idOrla);
+        $response->SetTemplate("orlesView.php");
+
+        return $response;
+    }
+
     public function equipDirectiu($request, $response, $container)
     {
 
@@ -72,9 +81,11 @@ class ViewsController
             $group = $_POST["group"];
             $idCreator = $_SESSION["user"]["id"];
 
-            $postOrla = $modelOrles->createOrla($name, $group, $idCreator);
+            $idOrla = $modelOrles->createOrla($name, $group, $idCreator);
 
-            $response->set("postOrla", $postOrla);
+            $response->set("idOrla", $idOrla);
+            $response->SetTemplate("orlesView.php");
+            return $response;
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {
@@ -159,17 +170,18 @@ class ViewsController
 
         $currentTime = date('Y-m-d H:i:s');
 
-        if($valid && $currentTime < $time){
+        if ($valid && $currentTime < $time) {
             $errorpass = $request->get("SESSION", "errorpass");
             $response->set("errorpass", $errorpass);
             $response->set("token", $token);
             $response->setTemplate("RecoverPassword.php");
             return $response;
 
-        }else{
+        } else {
             $response->redirect("Location: /invalidtoken");
             return $response;
-        }  
+        }
     }
+
 }
 

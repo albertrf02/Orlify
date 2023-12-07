@@ -136,13 +136,14 @@
                     </div>
                 </div>
                 <?php foreach ($orles as $orla): ?>
-                    <option value="<?= $orla['id']; ?>">
+                    <a href="/orlaEditor?idOrla=<?= $orla['id'] ?>">
                         <?= $orla['name']; ?>
-                    </option>
+                    </a>
                 <?php endforeach; ?>
             </div>
             <div id="pagina-reportsEd" class="paginaEd hidden">
-                <p class="text-lg font-medium text-gray-900 dark:text-white" style="margin-bottom: 15px">Imatges Reportades</p>
+                <p class="text-lg font-medium text-gray-900 dark:text-white" style="margin-bottom: 15px">Imatges
+                    Reportades</p>
                 <?php foreach ($reportedImages as $image): ?>
                     <div class="bg-white p-4 mb-4 border border-gray-300 rounded">
                         <div class="flex items-center mb-2">

@@ -38,6 +38,8 @@ class Orles
         $stm = $this->sql->prepare('INSERT INTO orla (name, visibility, idCreator, idClassGroup) VALUES (:name, :visibility, :idCreator, :idClassGroup);');
         $stm->execute([':name' => $name, ':visibility' => 0, ':idCreator' => $idCreator, ':idClassGroup' => $group]);
 
+        return $this->sql->lastInsertId();
+
     }
 
     public function getOrles()
@@ -47,37 +49,42 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getUserFromGroupInOrla($idOrla, $idGroup)
+    public function getUserFromGroupInOrla($idOrla)
     {
         $query = <<<QUERY
-            SELECT 
-            u.id, 
-            u.name, 
-            u.surname, 
-            u.username, 
-            u.email, 
-            u.avatar, 
-            u.role,
-            p.link AS defaultPicture,
-            CASE 
-                WHEN uo.idUser IS NOT NULL THEN TRUE
-                ELSE FALSE
-            END AS isInOrla
-            FROM 
-                users u
-            JOIN 
-                users_classGroup ucg ON u.id = ucg.idUser
-            LEFT JOIN 
-                user_orla uo ON u.id = uo.idUser AND uo.idOrla = :idOrla
-            LEFT JOIN 
-                photography p ON u.id = p.idUser AND p.defaultPhoto = TRUE
-            WHERE 
-                ucg.idGroupClass = :idGroup AND u.role IN (1,2);
+        SELECT 
+        u.id, 
+        u.name, 
+        u.surname, 
+        u.username, 
+        u.email, 
+        u.avatar, 
+        u.role,
+        p.link AS defaultPicture,
+        CASE 
+            WHEN uo.idUser IS NOT NULL THEN TRUE
+            ELSE FALSE
+        END AS isInOrla
+        FROM 
+            users u
+        JOIN 
+            users_classGroup ucg ON u.id = ucg.idUser
+        LEFT JOIN 
+            user_orla uo ON u.id = uo.idUser AND uo.idOrla = :idOrla
+        LEFT JOIN 
+            photography p ON u.id = p.idUser AND p.defaultPhoto = TRUE
+        WHERE 
+            u.role IN (1,2)
+        ORDER BY 
+            u.surname ASC;
         QUERY;
         $stm = $this->sql->prepare($query);
-        $stm->execute([':idOrla' => $idOrla, ':idGroup' => $idGroup]);
+        $stm->execute([':idOrla' => $idOrla]);
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+
+
 
     public function deleteUsersFromOrla($idOrla)
     {
