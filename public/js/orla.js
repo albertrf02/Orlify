@@ -1,4 +1,8 @@
 // TODO move this file to include in bundle.js
+let usersNotInOrla;
+let role1Users;
+let users;
+
 async function getUserData() {
   const idOrla = document.getElementById("idOrla").value;
   const url = `http://localhost:8080/veureOrla?idOrla=${idOrla}`; // Replace with your API endpoint
@@ -28,13 +32,16 @@ function printLists() {
     }
   }
   // Assignem el contingut HTML creat a l'element "content"
-  document.getElementById("content").innerHTML = htmlContentLlista;
-  document.getElementById("orla").innerHTML = htmlContentOrla;
+  usersNotInOrla = document.getElementById("usersNotInOrla");
+  role1Users = document.getElementById("role-1");
+
+  usersNotInOrla.innerHTML = htmlContentLlista;
+  role1Users.innerHTML = htmlContentOrla;
 }
 
 function addUserToOrla(id) {
   const userData = users[id];
-  document.getElementById("orla").innerHTML += generarUserOrla(id, userData);
+  role1Users.innerHTML += generarUserOrla(id, userData);
   const element = document.getElementById(`llista-${id}`);
   element.remove();
   users[id]["isInOrla"] = true;
@@ -59,10 +66,7 @@ function removeUserFromOrla(id) {
   const element = document.getElementById(`orla-${id}`);
   element.remove();
   users[id]["isInOrla"] = false;
-  document.getElementById("content").innerHTML += generarUserLlista(
-    id,
-    userData
-  );
+  usersNotInOrla.innerHTML += generarUserLlista(id, userData);
 }
 
 function showUsersInfo() {

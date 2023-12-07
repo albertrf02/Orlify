@@ -11,9 +11,11 @@
 <body>
     <div class="flex p-4">
         <div class="flex p-4">
-            <div id="orla" class="flex-container"></div>
+            <div id="role-2" class="flex-container"></div>
             <hr style="margin-top: 500px;">
-            <div id="content" class="flex-container"></div>
+            <div id="role-1" class="flex-container"></div>
+            <hr style="margin-top: 500px;">
+            <div id="usersNotInOrla" class="flex-container"></div>
         </div>
     </div>
     <button onclick="showUsersInfo()" style="margin-left: 1000px">Mostrar Info</button>
@@ -33,14 +35,14 @@
         /* Add a gap between the images */
     }
 
-    #content,
-    #orla {
+    #usersNotInOrla,
+    #role-1 {
         flex: 1;
         /* This will make the divs share the available space equally */
     }
 
-    #content img,
-    #orla img {
+    #usersNotInOrla img,
+    #role-1 img {
         width: 80px;
         /* Set the width of the images */
         height: auto;
@@ -49,8 +51,6 @@
 </style>
 <?php require "Scripts.php" ?>
 <script>
-    let users;
-
     document.addEventListener("DOMContentLoaded", function (event) {
         getUserData()
             .then((data) => {
