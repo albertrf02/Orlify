@@ -37,9 +37,7 @@ class Orles
     {
         $stm = $this->sql->prepare('INSERT INTO orla (name, visibility, idCreator, idClassGroup) VALUES (:name, :visibility, :idCreator, :idClassGroup);');
         $stm->execute([':name' => $name, ':visibility' => 0, ':idCreator' => $idCreator, ':idClassGroup' => $group]);
-
-
-
+        return $this->sql->lastInsertId();
     }
 
     public function getOrles()

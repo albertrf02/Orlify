@@ -46,6 +46,7 @@ class OrlaController
                 //3. Guardar els usuaris a la orla
                 $orlesModel->addUsersToOrla($idOrla, $usersOrla);
 
+                header("Location: /equipDirectiu");
                 var_dump($usersOrla);
                 var_dump($idOrla);
             }
