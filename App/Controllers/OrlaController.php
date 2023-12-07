@@ -4,15 +4,13 @@ namespace App\Controllers;
 
 class OrlaController
 {
-
     public function getUsersFromOrla($request, $response, $container)
     {
         $orlesModel = $container->get("orles");
-        $idOrla = 1;
-        $idGroup = 1;
+        $idOrla = $_GET["idOrla"];
 
-        $usersInOrla = $orlesModel->getUserFromGroupInOrla($idOrla, $idGroup);
-        $placeholderImage = 'https://cdn4.vectorstock.com/i/1000x1000/82/33/person-gray-photo-placeholder-woman-vector-24138233.jpg';
+        $usersInOrla = $orlesModel->getUserFromGroupInOrla($idOrla);
+        $placeholderImage = 'img/placeholder.jpg';
 
         // Transform the array
         $usersInOrlaMap = [];
@@ -30,7 +28,8 @@ class OrlaController
         return $response;
     }
 
-    public function saveOrla($request, $response, $container){
+    public function saveOrla($request, $response, $container)
+    {
         $orlesModel = $container->get("orles");
 
         //1. Obtindre i parsejar el JSON de la orla
