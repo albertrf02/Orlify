@@ -36,13 +36,15 @@
     }
 
     #usersNotInOrla,
-    #role-1 {
+    #role-1,
+    #role-2 {
         flex: 1;
         /* This will make the divs share the available space equally */
     }
 
     #usersNotInOrla img,
-    #role-1 img {
+    #role-1 img,
+    #role-2 img {
         width: 80px;
         /* Set the width of the images */
         height: auto;

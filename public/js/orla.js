@@ -1,6 +1,7 @@
 // TODO move this file to include in bundle.js
 let usersNotInOrla;
 let role1Users;
+let role2Users;
 let users;
 
 async function getUserData() {
@@ -18,34 +19,41 @@ async function getUserData() {
 }
 
 function printLists() {
-  let htmlContentLlista = "";
-  let htmlContentOrla = "";
+  // let htmlContentLlista = "";
+  // let htmlContentOrla = "";
   // Recorrem totes les cançons de l'array
+
+  usersNotInOrla = document.getElementById("usersNotInOrla");
+  role1Users = document.getElementById("role-1");
+  role2Users = document.getElementById("role-2");
+
   for (let id in users) {
     // Obtenim la informació de cada cançó
     let userData = users[id];
     // Creem una entrada HTML per a cada cançó amb un estil i una funció de clic
     if (userData["isInOrla"]) {
-      htmlContentOrla += generarUserOrla(id, userData);
+      addUserToProperDiv(userData, id);
     } else {
-      htmlContentLlista += generarUserLlista(id, userData);
+      usersNotInOrla.innerHTML += generarUserLlista(id, userData);
     }
   }
-  // Assignem el contingut HTML creat a l'element "content"
-  usersNotInOrla = document.getElementById("usersNotInOrla");
-  role1Users = document.getElementById("role-1");
-
-  usersNotInOrla.innerHTML = htmlContentLlista;
-  role1Users.innerHTML = htmlContentOrla;
 }
 
 function addUserToOrla(id) {
   const userData = users[id];
-  role1Users.innerHTML += generarUserOrla(id, userData);
+  addUserToProperDiv(userData, id);
   const element = document.getElementById(`llista-${id}`);
   element.remove();
   users[id]["isInOrla"] = true;
   console.log(userData["name"]);
+}
+
+function addUserToProperDiv(userData, id) {
+  if (userData["role"] == 1) {
+    role1Users.innerHTML += generarUserOrla(id, userData);
+  } else if (userData["role"] == 2) {
+    role2Users.innerHTML += generarUserOrla(id, userData);
+  }
 }
 
 function generarUserOrla(id, userData) {

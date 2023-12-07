@@ -68,7 +68,7 @@ class Orles
         LEFT JOIN user_orla uo ON u.id = uo.idUser AND uo.idOrla = :idOrla
         INNER JOIN orla o ON ucg.idGroupClass = o.idClassGroup
         LEFT JOIN photography p ON u.id = p.idUser AND p.defaultPhoto = TRUE
-        WHERE o.id = :idOrla
+        WHERE u.role IN (1,2) AND o.id = :idOrla
         ORDER BY u.surname ASC;
         QUERY;
         $stm = $this->sql->prepare($query);

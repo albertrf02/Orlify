@@ -16,9 +16,10 @@ class OrlaController
         $usersInOrlaMap = [];
         foreach ($usersInOrla as $item) {
             $usersInOrlaMap[$item['id']] = [
-                'name' => $item['name'] . ' ' . $item['surname'], // Combining first and last name
-                'picture' => $item['defaultPicture'] ?? $placeholderImage, // Use default picture if available, else placeholder
-                'isInOrla' => $item['isInOrla'] ?? false // Use isInOrla if available, else false
+                'name' => $item['name'] . ' ' . $item['surname'],
+                'picture' => $item['defaultPicture'] ?? $placeholderImage,
+                'role' => $item['role'],
+                'isInOrla' => $item['isInOrla'] ?? false
             ];
         }
 
