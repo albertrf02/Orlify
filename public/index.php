@@ -28,11 +28,11 @@ $app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::c
 $app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/orles", [ViewsController::class, "orles"], [[\App\Middleware\Auth::class, "auth"]]);
-$app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"]); //TODO : posar middleware
+$app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/orlaEditor", [ViewsController::class, "orlaEditor"], [[\App\Middleware\Auth::class, "auth"]]);
 
 
-$app->post("/saveOrla", [OrlaController::class, "saveOrla"]); //TODO: posar middleware
+$app->post("/saveOrla", [OrlaController::class, "saveOrla"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/equipDirectiuPost", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/report-image", [UserController::class, "reportImages"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
