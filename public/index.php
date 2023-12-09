@@ -8,6 +8,7 @@ use App\Controllers\UserController;
 use App\Controllers\OrlaController;
 use App\Controllers\RecoverController;
 
+
 use Emeset\Contracts\Routers\Router;
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
@@ -30,6 +31,8 @@ $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth:
 $app->get("/orles", [ViewsController::class, "orles"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/orlaEditor", [ViewsController::class, "orlaEditor"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/renderedOrla", [OrlaController::class, "displayOrla"]);
+$app->get("/orla/pdf", [OrlaController::class, "orlaToPDF"], [[\App\Middleware\Auth::class, "auth"]]);
 
 
 $app->post("/saveOrla", [OrlaController::class, "saveOrla"], [[\App\Middleware\Auth::class, "auth"]]);
