@@ -56,9 +56,27 @@ class OrlaController
         return $response;
     }
 
-    private function getRenderHTML($idOrla)
+    private function getRenderHTML($idOrla, $container)
     {
         // TODO add db logic to get the data from the orla
+        $orlesModel = $container->get("orles");
+
+        $orlaUsers = $orlesModel->getOrlaById($idOrla);
+
+        $role1Users = [];
+        $role2Users = [];
+
+        foreach ($orlaUsers as &$user) {
+            if ($user['role'] == 1) {
+                array_push($role1Users, $user);
+                error_log('sdkfrjnaskdjfnbg');
+            } elseif ($user['role'] == 2) {
+                array_push($role2Users, $user);
+            }
+        }
+        error_log(print_r($role1Users, true));
+        error_log('----------------------------');
+        error_log(print_r($role2Users, true));
 
         // Specify our Twig templates location
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../twigTemplates/orla');
@@ -66,15 +84,8 @@ class OrlaController
         // Instantiate our Twig
         $twig = new \Twig\Environment($loader);
 
-        // Sample data
-        $foo = [
-            ['name' => 'Alice'],
-            ['name' => 'Bob'],
-            ['name' => 'Eve'],
-        ];
-
         // Render our view
-        $htmlContent = $twig->render('orla.html', ['foo' => $foo]);
+        $htmlContent = $twig->render('orla.html.twig', ['orla' => $orlaUsers, 'role1Users' => $role1Users, 'role2Users' => $role2Users]);
         return $htmlContent;
     }
 
@@ -89,17 +100,16 @@ class OrlaController
 
     public function iframeOrla($request, $response, $container)
     {
-        $htmlContent = $this->getRenderHTML(1);
+        $idOrla = $_GET["idOrla"];
+        $htmlContent = $this->getRenderHTML($idOrla, $container);
         $response->setBody($htmlContent);
         return $response;
     }
 
     public function orlaToPDF($request, $response, $container)
     {
-
-
-
-        $htmlContent = $this->getRenderHTML(1);
+        $idOrla = $_GET["idOrla"];
+        $htmlContent = $this->getRenderHTML($idOrla, $container);
         //TODO get orla name from db
         $orlaName = "orlaName";
 

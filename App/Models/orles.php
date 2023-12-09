@@ -77,8 +77,6 @@ class Orles
     }
 
 
-
-
     public function deleteUsersFromOrla($idOrla)
     {
         $stm = $this->sql->prepare('DELETE FROM user_orla WHERE idOrla = :idOrla;');
@@ -91,6 +89,21 @@ class Orles
         foreach ($usersOrla as $userOrla) {
             $stm->execute([':idUser' => $userOrla, ':idOrla' => $idOrla]);
         }
+    }
+
+    public function getOrlaById($idOrla)
+    {
+        $query = <<<QUERY
+        SELECT users.name,users.surname,users.role, photography.link  FROM users, user_orla, photography
+        WHERE 
+        users.id = user_orla.idUser
+        AND photography.idUser = users.id
+        AND photography.defaultPhoto =1
+        AND user_orla.idOrla=:idOrla;
+        QUERY;
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':idOrla' => $idOrla]);
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
 }

@@ -11,7 +11,7 @@
 <?php require "MenuView.php" ?>
 
 <body>
-    <iframe src="/orla/iframe" frameborder="0" width="100%" height="100%">
+    <iframe src="/orla/iframe?idOrla=<?= $idOrla ?>" frameborder="0" width="100%" height="100%">
     </iframe>
     <a href="/orla/edit?idOrla=<?= $idOrla ?>">Editar</a>
     <a href="/orla/pdf?idOrla=<?= $idOrla ?>">PDF</a>
