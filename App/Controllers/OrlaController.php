@@ -69,14 +69,10 @@ class OrlaController
         foreach ($orlaUsers as &$user) {
             if ($user['role'] == 1) {
                 array_push($role1Users, $user);
-                error_log('sdkfrjnaskdjfnbg');
             } elseif ($user['role'] == 2) {
                 array_push($role2Users, $user);
             }
         }
-        error_log(print_r($role1Users, true));
-        error_log('----------------------------');
-        error_log(print_r($role2Users, true));
 
         // Specify our Twig templates location
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../twigTemplates/orla');
@@ -85,7 +81,7 @@ class OrlaController
         $twig = new \Twig\Environment($loader);
 
         // Render our view
-        $htmlContent = $twig->render('orla.html.twig', ['orla' => $orlaUsers, 'role1Users' => $role1Users, 'role2Users' => $role2Users]);
+        $htmlContent = $twig->render('orla.html.twig', ['role1Users' => $role1Users, 'role2Users' => $role2Users]);
         return $htmlContent;
     }
 
@@ -110,6 +106,11 @@ class OrlaController
     {
         $idOrla = $_GET["idOrla"];
         $htmlContent = $this->getRenderHTML($idOrla, $container);
+
+        // Generar un index.html
+
+
+
         //TODO get orla name from db
         $orlaName = "orlaName";
 
@@ -137,16 +138,11 @@ class OrlaController
             $return_value = proc_close($process);
 
             // Send the generated PDF to the client
-            header('Content-Description: File Transfer');
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename=' . $orlaName . '.pdf');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
             header('Content-Length: ' . strlen($pdfContent));
             flush(); // Flush system output buffer
             echo $pdfContent;
-            exit;
         }
     }
 
