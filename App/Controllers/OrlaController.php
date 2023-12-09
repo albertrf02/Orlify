@@ -47,9 +47,7 @@ class OrlaController
                 //3. Guardar els usuaris a la orla
                 $orlesModel->addUsersToOrla($idOrla, $usersOrla);
 
-                header("Location: /equipDirectiu");
-                var_dump($usersOrla);
-                var_dump($idOrla);
+                header("Location: /orla/view?idOrla=" . $idOrla);
             }
         }
 
@@ -60,6 +58,8 @@ class OrlaController
 
     private function getRenderHTML($idOrla)
     {
+        // TODO add db logic to get the data from the orla
+
         // Specify our Twig templates location
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../twigTemplates/orla');
 
@@ -78,16 +78,30 @@ class OrlaController
         return $htmlContent;
     }
 
-    public function displayOrla($request, $response, $container)
+    public function viewOrla($request, $response, $container)
     {
-        $response->setBody($this->getRenderHTML(1));
+        $idOrla = $_GET["idOrla"];
+        $response->setTemplate("orlaRenderedView.php");
+        $response->set("idOrla", $idOrla);
 
+        return $response;
+    }
+
+    public function iframeOrla($request, $response, $container)
+    {
+        $htmlContent = $this->getRenderHTML(1);
+        $response->setBody($htmlContent);
         return $response;
     }
 
     public function orlaToPDF($request, $response, $container)
     {
+
+
+
         $htmlContent = $this->getRenderHTML(1);
+        //TODO get orla name from db
+        $orlaName = "orlaName";
 
         // Execute wkhtmltopdf command
         $descriptorspec = array(
@@ -115,7 +129,7 @@ class OrlaController
             // Send the generated PDF to the client
             header('Content-Description: File Transfer');
             header('Content-Type: application/pdf');
-            header('Content-Disposition: attachment; filename="download.pdf"');
+            header('Content-Disposition: attachment; filename=' . $orlaName . '.pdf');
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
             header('Pragma: public');
@@ -124,6 +138,15 @@ class OrlaController
             echo $pdfContent;
             exit;
         }
+    }
+
+    public function editOrla($request, $response, $container)
+    {
+        $idOrla = $_GET["idOrla"];
+
+        $response->set("idOrla", $idOrla);
+        $response->SetTemplate("editorOrlesView.php");
+        return $response;
     }
 
 }

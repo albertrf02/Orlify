@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor Orles</title>
-    <script src="js/orla.js"></script>
+    <!-- <?php require "Head.php" ?> -->
+    <script src="/js/orla.js"></script>
 </head>
 
 <body>
+    <!-- <?php require "MenuView.php" ?> -->
     <div class="flex p-4">
         <div class="flex p-4">
             <div id="role-2" class="flex-container"></div>
@@ -19,7 +21,7 @@
         </div>
     </div>
     <button onclick="showUsersInfo()" style="margin-left: 1000px">Mostrar Info</button>
-    <form method="post" action="http://localhost:8080/saveOrla?action=saveOrla" id="saveOrla">
+    <form method="post" action="/saveOrla?action=saveOrla" id="saveOrla">
         <input type="hidden" id="orlaValues" name="orlaValues" value="">
         <input type="hidden" id="idOrla" name="idOrla" value="<?= $idOrla ?>">
         <input type="button" onclick="saveUpdatedOrla()" id="saveOrlaButton">Guardar Orla</input>

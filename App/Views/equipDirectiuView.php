@@ -136,7 +136,7 @@
                     </div>
                 </div>
                 <?php foreach ($orles as $orla): ?>
-                    <a href="/orlaEditor?idOrla=<?= $orla['id'] ?>">
+                    <a href="/orla/view?idOrla=<?= $orla['id'] ?>">
                         <?= $orla['name']; ?>
                     </a>
                 <?php endforeach; ?>

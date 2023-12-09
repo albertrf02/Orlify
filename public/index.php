@@ -30,9 +30,11 @@ $app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Mi
 $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/orles", [ViewsController::class, "orles"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"], [[\App\Middleware\Auth::class, "auth"]]);
-$app->get("/orlaEditor", [ViewsController::class, "orlaEditor"], [[\App\Middleware\Auth::class, "auth"]]);
-$app->get("/renderedOrla", [OrlaController::class, "displayOrla"]);
+
+$app->get("/orla/edit", [OrlaController::class, "editOrla"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/orla/view", [OrlaController::class, "viewOrla"]);
 $app->get("/orla/pdf", [OrlaController::class, "orlaToPDF"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/orla/iframe", [OrlaController::class, "iframeOrla"], [[\App\Middleware\Auth::class, "auth"]]);
 
 
 $app->post("/saveOrla", [OrlaController::class, "saveOrla"], [[\App\Middleware\Auth::class, "auth"]]);

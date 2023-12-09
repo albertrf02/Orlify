@@ -86,9 +86,7 @@ class ViewsController
                 $idOrla = $modelOrles->createOrla($name, $group, $idCreator);
                 error_log("--------------" . $idOrla);
 
-                $response->set("idOrla", $idOrla);
-                $response->SetTemplate("editorOrlesView.php");
-                return $response;
+                header("Location: /orla/edit?idOrla=" . $idOrla);
             }
         }
 
