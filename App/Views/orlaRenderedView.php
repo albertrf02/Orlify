@@ -16,5 +16,6 @@
     <a href="/orla/edit?idOrla=<?= $idOrla ?>">Editar</a>
     <a href="/orla/pdf?idOrla=<?= $idOrla ?>">PDF</a>
 </body>
+<?php require "Scripts.php" ?>
 
 </html>
