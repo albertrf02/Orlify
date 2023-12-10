@@ -107,10 +107,6 @@ class OrlaController
         $idOrla = $_GET["idOrla"];
         $htmlContent = $this->getRenderHTML($idOrla, $container);
 
-        // Generar un index.html
-
-
-
         //TODO get orla name from db
         $orlaName = "orlaName";
 

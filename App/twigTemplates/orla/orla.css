@@ -16,22 +16,26 @@ h1 {
   color: #333;
 }
 
-img {
+.user {
   display: inline-block;
   margin: 20px;
+  text-align: center;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
   border-radius: 5%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100px;
   height: 150px;
 }
 
+p {
+  margin: 10px 0 0 0;
+}
+
 hr {
   border: 1px solid #313030;
   width: 1000px;
-}
-
-#profes img,
-#alumnes img {
-  display: inline;
-  margin: 5px 5px auto auto;
 }

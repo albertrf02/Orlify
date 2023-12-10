@@ -10,11 +10,16 @@
   </head>
   <body>
     <div id="profes">
-      {% for i in role2Users %} {% block users %}
-      <img src="{{ i.link }}" alt="" />
-      {{ i.name }}
-      {% endblock %} {% endfor %}
-    </div>
+    {% for i in role2Users %}
+        {% block users %}
+            <div class="user">
+                <img src="{{ i.link }}" alt="" />
+                <p>{{ i.name }}</p>
+            </div>
+        {% endblock %}
+    {% endfor %}
+</div>
+
 
     <hr />
     <div id="alumnes">

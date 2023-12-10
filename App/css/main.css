@@ -16,4 +16,14 @@
   width: 45px;
   height: 45px;
   cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#avatarImage:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.avatar-img:hover {
+  transform: scale(1.5);
 }

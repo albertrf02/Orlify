@@ -34,23 +34,28 @@
     .flex-container {
         display: flex;
         gap: 20px;
-        /* Add a gap between the images */
+        /* Add a gap between the items */
     }
 
-    #usersNotInOrla,
-    #role-1,
-    #role-2 {
+    .column {
         flex: 1;
-        /* This will make the divs share the available space equally */
+        padding: 0 20px;
+        /* Adjust padding as needed */
     }
 
     #usersNotInOrla img,
     #role-1 img,
     #role-2 img {
-        width: 80px;
-        /* Set the width of the images */
-        height: auto;
-        /* Maintain the aspect ratio */
+        width: 100px;
+        height: 150px;
+        object-fit: cover;
+        /* Maintain aspect ratio */
+    }
+
+    .divider {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
     }
 </style>
 <?php require "Scripts.php" ?>

@@ -14,25 +14,24 @@
 
     <div class="container mx-auto my-10 p-4">
         <div class="flex flex-col items-center">
-
-            <!-- User Information Column -->
             <div
                 class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8 mx-auto">
                 <div class="flex flex-col items-center pb-10">
                     <form method="post" action="/perfil?action=setPorfilePhoto" id="avatarForm" style="display: none;">
                         <input type="hidden" name="action" value="setPorfilePhoto">
-                        <input type="hidden" id="selectedAvatar" name="avatar"  value="<?= $avatar ?>">
-                        <div class="avatar-list">
-                            <?php foreach($avatars as $avatar): ?>
-                                <label> 
+                        <input type="hidden" id="selectedAvatar" name="avatar" value="<?= $avatar ?>">
+                        <div class="avatar-list" style="margin-bottom:-30px; margin-top:20px">
+                            <?php foreach ($avatars as $avatar): ?>
+                                <label>
                                     <a href="#" class="avatar-item" id="<?= $avatar ?>">
-                                    <img class="avatar-img" src="<?= '../avatars/'.$avatar ?>" alt="Avatar"></a>
+                                        <img class="avatar-img" src="<?= '../avatars/' . $avatar ?>" alt="avatar"></a>
                                 </label>
                             <?php endforeach; ?>
                         </div>
                     </form>
                     <img class="w-24 h-24 mb-3 mt-12 rounded-full shadow-lg"
-                        src="<?= '../avatars/'.$user["avatar"] ?>" alt="user" id="avatarImage"
+                        src="<?= '../avatars/' . $user["avatar"] ?>" alt="Alternative Text"
+                        onerror="this.onerror=null; this.src='../avatars/avatar-nen1.png';" id="avatarImage"
                         onclick="toggleFormVisibility()">
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
                         <?= $user["name"] ?>
@@ -68,12 +67,12 @@
                     <!-- Content for the selected tab goes here -->
                     <div id="imagesTabContent">
                         <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-2">
-                            <?php foreach($userPhotos as $photo): ?>
+                            <?php foreach ($userPhotos as $photo): ?>
                                 <div class="relative flex flex-col items-center p-2 rounded">
                                     <form method="POST" action="/perfil?action=setDefaultPhoto">
                                         <button type="submit" name="idPhoto" value="<?= $photo['id']; ?>"
                                             class="img-button relative">
-                                            <?php if($photo["defaultPhoto"] == 1): ?>
+                                            <?php if ($photo["defaultPhoto"] == 1): ?>
                                                 <div class="absolute top-0 right-0 mt-2 mr-3 text-2xl">
                                                     <img src="../img/bookmark.png" alt="Star" class="w-6 h-6">
                                                 </div>
@@ -84,7 +83,7 @@
                                     </form>
 
                                     <!-- Report button -->
-                                    <?php if($photo["defaultPhoto"] !== 1): ?>
+                                    <?php if ($photo["defaultPhoto"] !== 1): ?>
                                         <div class="absolute top-0 right-0 mt-2 mr-5 text-2xl">
                                             <button data-modal-target="popup-modal-<?= $photo['id']; ?>"
                                                 data-modal-toggle="popup-modal"
@@ -188,41 +187,19 @@
     <?php require "Scripts.php" ?>
 
     <script>
-        function showTab(tabName) {
-            document.getElementById('imagesTabContent').style.display = (tabName === 'images') ? 'block' : 'none';
-            document.getElementById('orlesTabContent').style.display = (tabName === 'orles') ? 'block' : 'none';
-            document.getElementById('carnetTabContent').style.display = (tabName === 'carnet') ? 'block' : 'none';
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const modalButtons = document.querySelectorAll('[data-modal-toggle]');
-            modalButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const targetModal = document.getElementById(this.getAttribute('data-modal-target'));
-                    if (targetModal) {
-                        targetModal.classList.toggle('hidden');
-                    }
-                });
-            });
-
-            const modalHideButtons = document.querySelectorAll('[data-modal-hide]');
-            modalHideButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const targetModal = document.getElementById(this.getAttribute('data-modal-hide'));
-                    if (targetModal) {
-                        targetModal.classList.add('hidden');
-                    }
-                });
-            });
-        });
-
         function toggleFormVisibility() {
             var form = document.getElementById("avatarForm");
             form.style.display = form.style.display === "none" ? "block" : "none";
         }
 
-        
-
+        function showTab(tabName) {
+            document.getElementById("imagesTabContent").style.display =
+                tabName === "images" ? "block" : "none";
+            document.getElementById("orlesTabContent").style.display =
+                tabName === "orles" ? "block" : "none";
+            document.getElementById("carnetTabContent").style.display =
+                tabName === "carnet" ? "block" : "none";
+        }
     </script>
 </body>
 
