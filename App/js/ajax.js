@@ -18,12 +18,12 @@ function editUserModal() {
 
           $("#title").text(user.id);
           $("#id-edit").val(user.id);
-          $("#name").val(user.name);
-          $("#surname").val(user.surname);
-          $("#password").val(user.password);
-          $("#email").val(user.email);
+          $("#name-edit").val(user.name);
+          $("#surname-edit").val(user.surname);
+          $("#password-edit").val(user.password);
+          $("#email-edit").val(user.email);
 
-          var roleSelect = $("#role");
+          var roleSelect = $("#role-edit");
           roleSelect.empty();
 
           roles.forEach(function (role) {
@@ -77,6 +77,40 @@ function deleteUserModal() {
     });
 }
 
+function deleteClassModal() {
+    $(document)
+    .off("click", ".deleteClassModal")
+    .on("click", ".deleteClassModal", function (event) {
+        event.preventDefault();
+        var $this = $(this);
+        var classId = $this.data("delete-class-id");
+
+        console.log(classId);
+
+        $.ajax({
+        url: "/editclassajax",
+        method: "POST",
+        data: { classId: classId },
+        dataType: "json",
+        success: function (data) {
+
+            console.log(data);
+
+            var classroom = data["class"][0];
+
+            
+            $("#id-delete-class").val(classroom.id);
+
+
+
+
+        },
+        error: function (error) {
+            console.error("Error en la solicitud AJAX: ", error);
+        },
+        });
+    });
+}
 
 function searchUser() {
     $(document).ready(function () {
@@ -109,7 +143,7 @@ function searchUser() {
                             console.log(totalPages);
 
                             // Limpiar el contenido actual antes de agregar nuevos resultados
-                            var $paginaUsers = $('#pagina-users');
+                            var $paginaUsers = $('#pagina-users-edit');
                             $paginaUsers.html('');
 
                             var usersContainer = $('<div class="flex flex-wrap justify-center"></div>');
@@ -353,3 +387,4 @@ export { searchUser };
 export { deleteUserModal };
 export { editUserModal };
 export { searchUserEquipDirectiu };
+export { deleteClassModal };

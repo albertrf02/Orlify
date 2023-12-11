@@ -46,10 +46,10 @@ class Users
     }
 
 
-    public function register($name, $lastname, $username, $password, $email)
+    public function register($name, $lastname, $username, $password, $email, $role)
     {
-        $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email) VALUES (:name, :surname, :username, :password, :email);');
-        $stm->execute([':name' => $name, ':surname' => $lastname, ':username' => $username, ':password' => $password, ':email' => $email]);
+        $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email, role) VALUES (:name, :surname, :username, :password, :email, :role);');
+        $stm->execute([':name' => $name, ':surname' => $lastname, ':username' => $username, ':password' => $password, ':email' => $email, ':role' => $role]);
     }
 
     public function hashPassword($password)
@@ -307,6 +307,16 @@ class Users
     {
     $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE token = :token');
     $stm->execute([':password' => $password, ':token' => $token]);
+    }
+
+
+    public function getUsersClass() {
+    
+        $stm = $this->sql->prepare('SELECT * FROM users WHERE role = 1 and role = 2;');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    
+
     }
 
 
