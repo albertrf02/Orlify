@@ -106,6 +106,15 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function deleteOrla($idOrla)
+    {
+        $deleteUserOrla = $this->sql->prepare('DELETE FROM user_orla WHERE idOrla = :idOrla;');
+        $deleteUserOrla->execute([':idOrla' => $idOrla]);
+
+        $deleteOrla = $this->sql->prepare('DELETE FROM orla WHERE id = :idOrla;');
+        $deleteOrla->execute([':idOrla' => $idOrla]);
+    }
+
     public function getClassByOrlaId($idOrla)
     {
         $query = <<<QUERY

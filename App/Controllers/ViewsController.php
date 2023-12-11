@@ -107,6 +107,12 @@ class ViewsController
 
                 header("Location: /equipDirectiu");
             }
+
+            if ($action === "deleteOrla") {
+                $modelOrles->deleteOrla($_GET['idOrla']);
+
+                header("Location: /equipDirectiu");
+            }
         }
 
         $reportedImages = $modelUsers->getReportedImages();

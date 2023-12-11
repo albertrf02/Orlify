@@ -149,17 +149,18 @@
                                 $className = ($classNameData[0]['className']);
                                 echo "<p class='font-medium text-gray-900 dark:text-white'>Classe: {$className}</p>";
                                 ?>
-
-                                <!-- Edit button -->
                                 <a href="/orla/edit?idOrla=<?= $orla['id'] ?>"
                                     class="edit-button text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
                                     Editar Orla
+                                </a>
+                                <a href="/equipDirectiu?action=deleteOrla&idOrla=<?php echo $orla['id']; ?>"
+                                    class="report-button text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
+                                    Delete Report
                                 </a>
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
-
             </div>
             <div id="pagina-reportsEd" class="paginaEd hidden">
                 <p class="text-lg font-medium text-gray-900 dark:text-white" style="margin-bottom: 15px">Imatges
