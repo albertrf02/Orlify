@@ -58,7 +58,7 @@ class ViewsController
     {
         $idOrla = $_GET["idOrla"];
         $response->set("idOrla", $idOrla);
-        $response->SetTemplate("orlesView.php");
+        $response->SetTemplate("editorOrlesView.php");
 
         return $response;
     }
@@ -75,17 +75,19 @@ class ViewsController
         $response->set("groups", $allGroups);
         $response->set("orles", $allOrles);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST["action"])) {
+            $action = $_REQUEST["action"];
 
-            $name = $_POST["name"];
-            $group = $_POST["group"];
-            $idCreator = $_SESSION["user"]["id"];
+            if ($action === "createOrla") {
+                $name = $_POST["name"];
+                $group = $_POST["group"];
+                $idCreator = $_SESSION["user"]["id"];
 
-            $idOrla = $modelOrles->createOrla($name, $group, $idCreator);
+                $idOrla = $modelOrles->createOrla($name, $group, $idCreator);
+                error_log("--------------" . $idOrla);
 
-            $response->set("idOrla", $idOrla);
-            $response->SetTemplate("orlesView.php");
-            return $response;
+                header("Location: /orla/edit?idOrla=" . $idOrla);
+            }
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {

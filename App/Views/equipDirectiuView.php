@@ -98,7 +98,7 @@
                             </div>
                             <!-- Modal body -->
                             <div class="p-4 md:p-5">
-                                <form class="space-y-4" method="POST" action="/equipDirectiuPost">
+                                <form class="space-y-4" method="POST" action="/equipDirectiuPost?action=createOrla">
                                     <div>
                                         <label for="name"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom de
@@ -136,7 +136,7 @@
                     </div>
                 </div>
                 <?php foreach ($orles as $orla): ?>
-                    <a href="/orlaEditor?idOrla=<?= $orla['id'] ?>">
+                    <a href="/orla/view?idOrla=<?= $orla['id'] ?>">
                         <?= $orla['name']; ?>
                     </a>
                 <?php endforeach; ?>

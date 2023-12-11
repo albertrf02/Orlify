@@ -9,7 +9,8 @@
         id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
         data-dropdown-placement="bottom">
         <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" src="<?= '../avatars/'.$user["avatar"] ?>" alt="user photo">
+        <img class="w-8 h-8 rounded-full" src="<?= '../avatars/' . $user["avatar"] ?>" alt="Alternative Text"
+          onerror="this.onerror=null; this.src='../avatars/avatar-nen1.png';" id="avatarImage">
       </button>
       <div
         class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"

@@ -37,9 +37,7 @@ class Orles
     {
         $stm = $this->sql->prepare('INSERT INTO orla (name, visibility, idCreator, idClassGroup) VALUES (:name, :visibility, :idCreator, :idClassGroup);');
         $stm->execute([':name' => $name, ':visibility' => 0, ':idCreator' => $idCreator, ':idClassGroup' => $group]);
-
-
-
+        return $this->sql->lastInsertId();
     }
 
     public function getOrles()
@@ -70,15 +68,13 @@ class Orles
         LEFT JOIN user_orla uo ON u.id = uo.idUser AND uo.idOrla = :idOrla
         INNER JOIN orla o ON ucg.idGroupClass = o.idClassGroup
         LEFT JOIN photography p ON u.id = p.idUser AND p.defaultPhoto = TRUE
-        WHERE o.id = :idOrla
+        WHERE u.role IN (1,2) AND o.id = :idOrla
         ORDER BY u.surname ASC;
         QUERY;
         $stm = $this->sql->prepare($query);
         $stm->execute([':idOrla' => $idOrla]);
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
-
-
 
 
     public function deleteUsersFromOrla($idOrla)
@@ -93,6 +89,21 @@ class Orles
         foreach ($usersOrla as $userOrla) {
             $stm->execute([':idUser' => $userOrla, ':idOrla' => $idOrla]);
         }
+    }
+
+    public function getOrlaById($idOrla)
+    {
+        $query = <<<QUERY
+        SELECT users.name,users.surname,users.role, photography.link  FROM users, user_orla, photography
+        WHERE 
+        users.id = user_orla.idUser
+        AND photography.idUser = users.id
+        AND photography.defaultPhoto =1
+        AND user_orla.idOrla=:idOrla;
+        QUERY;
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':idOrla' => $idOrla]);
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
 }
