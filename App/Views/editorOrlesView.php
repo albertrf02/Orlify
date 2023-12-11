@@ -14,48 +14,51 @@
     <div class="flex p-4">
         <div class="flex p-4">
             <div id="role-2" class="flex-container"></div>
-            <hr style="margin-top: 500px;">
+            <hr style="margin-top: 20px;" id="hr-editOrla1">
             <div id="role-1" class="flex-container"></div>
-            <hr style="margin-top: 500px;">
+            <hr style="margin-top: 200px;" id="hr-editOrla2">
             <div id="usersNotInOrla" class="flex-container"></div>
         </div>
     </div>
-    <button onclick="showUsersInfo()" style="margin-left: 1000px">Mostrar Info</button>
     <form method="post" action="/saveOrla?action=saveOrla" id="saveOrla">
         <input type="hidden" id="orlaValues" name="orlaValues" value="">
         <input type="hidden" id="idOrla" name="idOrla" value="<?= $idOrla ?>">
-        <input type="button" onclick="saveUpdatedOrla()" id="saveOrlaButton">Guardar Orla</input>
+        <button type="button" onclick="saveUpdatedOrla()" id="saveOrlaButton">Guardar Orla</button>
     </form>
 </body>
 
 
 <!-- TODO move styles to main.css -->
 <style>
-    .flex-container {
-        display: flex;
-        gap: 20px;
-        /* Add a gap between the items */
-    }
-
-    .column {
-        flex: 1;
-        padding: 0 20px;
-        /* Adjust padding as needed */
-    }
-
-    #usersNotInOrla img,
-    #role-1 img,
-    #role-2 img {
+    img {
         width: 100px;
         height: 150px;
+        border-radius: 10%;
         object-fit: cover;
-        /* Maintain aspect ratio */
+        margin: 5px 10px;
+
     }
 
-    .divider {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
+    .flex-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    #hr-editOrla1 {
+        border: 1px solid #313030;
+        width: 1000px;
+    }
+
+    #hr-editOrla2 {
+        border: 1px solid #313030;
+    }
+
+    #saveOrlaButton {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #00A2DC;
+        border-radius: 5px;
+        cursor: pointer;
     }
 </style>
 <?php require "Scripts.php" ?>
