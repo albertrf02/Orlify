@@ -68,7 +68,7 @@
 
                 <!-- Modal toggle -->
                 <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-                    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-4"
                     type="button">
                     Crear Orla
                 </button>
@@ -123,7 +123,6 @@
                                     <button type="submit"
                                         class="w-full flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         Crear Orla
-                                        <!-- Right arrow icon -->
                                         <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -136,11 +135,31 @@
                     </div>
                 </div>
                 <?php foreach ($orles as $orla): ?>
-                    <a href="/orla/view?idOrla=<?= $orla['id'] ?>">
-                        <?= $orla['name']; ?>
-                    </a>
+                    <div class="bg-white p-4 mb-4 border border-gray-300 rounded">
+                        <div class="flex items-center mb-2">
+                            <p class="font-bold">Nom de l'orla:
+                                <?= $orla['name']; ?>
+                            </p>
+                        </div>
+
+                        <div class="flex items-end">
+                            <div class="ml-auto">
+                                <?php
+                                $classNameData = $classNames[$orla['id']];
+                                $className = ($classNameData[0]['className']);
+                                echo "<p class='font-medium text-gray-900 dark:text-white'>Classe: {$className}</p>";
+                                ?>
+
+                                <!-- Edit button -->
+                                <a href="/orla/edit?idOrla=<?= $orla['id'] ?>"
+                                    class="edit-button text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
+                                    Editar Orla
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 <?php endforeach; ?>
-                <?= $className; ?>
+
             </div>
             <div id="pagina-reportsEd" class="paginaEd hidden">
                 <p class="text-lg font-medium text-gray-900 dark:text-white" style="margin-bottom: 15px">Imatges
@@ -167,8 +186,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 <?php endforeach; ?>
             </div>
         </div>

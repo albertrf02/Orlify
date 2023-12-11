@@ -73,6 +73,16 @@ class ViewsController
         $allOrles = $modelOrles->getOrles();
 
         $response->set("groups", $allGroups);
+
+        $classNames = [];
+
+        foreach ($allOrles as $orla) {
+            $idOrla = $orla["id"];
+            $className = $modelOrles->getClassByOrlaId($idOrla);
+            $classNames[$idOrla] = $className;
+        }
+
+        $response->set("classNames", $classNames);
         $response->set("orles", $allOrles);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST["action"])) {
@@ -84,9 +94,6 @@ class ViewsController
                 $idCreator = $_SESSION["user"]["id"];
 
                 $idOrla = $modelOrles->createOrla($name, $group, $idCreator);
-                $className = $modelOrles->getClassByOrlaId($idOrla);
-                error_log(print_r($className, true));
-                $response->set("className", $className);
 
                 header("Location: /orla/edit?idOrla=" . $idOrla);
             }
@@ -105,7 +112,6 @@ class ViewsController
         $reportedImages = $modelUsers->getReportedImages();
 
         $response->set("reportedImages", $reportedImages);
-
         $response->SetTemplate("equipDirectiuView.php");
         return $response;
     }
