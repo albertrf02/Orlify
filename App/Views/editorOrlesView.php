@@ -28,7 +28,6 @@
 </body>
 
 
-<!-- TODO move styles to main.css -->
 <style>
     img {
         width: 100px;
