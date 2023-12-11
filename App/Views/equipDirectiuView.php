@@ -112,7 +112,6 @@
                                     <div class="relative mt-1">
                                         <select id="group" name="group"
                                             class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
-                                            <!-- Iterate through groups and create options -->
                                             <?php foreach ($groups as $group): ?>
                                                 <option value="<?= $group['id']; ?>">
                                                     <?= $group['className']; ?>
@@ -134,6 +133,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- començament orla -->
                 <?php foreach ($orles as $orla): ?>
                     <div class="bg-white p-4 mb-4 border border-gray-300 rounded">
                         <div class="flex items-center mb-2">
@@ -141,7 +141,6 @@
                                 <?= $orla['name']; ?>
                             </p>
                         </div>
-
                         <div class="flex items-end">
                             <div class="ml-auto">
                                 <?php
@@ -153,43 +152,90 @@
                                     class="edit-button text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
                                     Editar Orla
                                 </a>
-                                <a href="/equipDirectiu?action=deleteOrla&idOrla=<?php echo $orla['id']; ?>"
-                                    class="report-button text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
-                                    Delete Report
-                                </a>
+                                <button data-modal-target="delete-modal-<?= $orla['id']; ?>"
+                                    data-modal-toggle="delete-modal-<?= $orla['id']; ?>"
+                                    class="delete-button text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
+                                    Borrar Orla
+                                </button>
+                                <div id="delete-modal-<?= $orla['id']; ?>" tabindex="-1"
+                                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="absolute inset-0 bg-black opacity-50"></div>
+
+                                    <div class="relative p-4 w-full max-w-md max-h-full">
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <button type="button"
+                                                class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-modal-hide="delete-modal-<?= $orla['id']; ?>">
+                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none" viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                </svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                            <div class="p-4 md:p-5 text-center">
+                                                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                </svg>
+                                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                                    Segur que vols borrar l'orla?</h3>
+                                                <div class="p-4 md:p-5 text-center">
+                                                    <!-- Delete and cancel buttons -->
+                                                    <div class="flex justify-center mt-2">
+                                                        <a href="/equipDirectiu?action=deleteOrla&idOrla=<?= $orla['id']; ?>"
+                                                            class="delete-button mr-2 text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-3 text-center me-2">
+                                                            Borrar
+                                                        </a>
+                                                        <button data-modal-hide="delete-modal-<?= $orla['id']; ?>"
+                                                            type="button"
+                                                            class="cancel-button text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                                            Cancelar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
-            </div>
-            <div id="pagina-reportsEd" class="paginaEd hidden">
-                <p class="text-lg font-medium text-gray-900 dark:text-white" style="margin-bottom: 15px">Imatges
-                    Reportades</p>
-                <?php foreach ($reportedImages as $image): ?>
-                    <div class="bg-white p-4 mb-4 border border-gray-300 rounded">
-                        <div class="flex items-center mb-2">
-                            <p class="font-bold">Nom de l'usuari:
-                                <?php echo $image['user_name']; ?>
-                            </p>
-                        </div>
-
-                        <div class="flex items-end">
-                            <div class="mr-4">
-                                <img width="100px" height="100px" src="<?php echo $image['photography_link']; ?>"
-                                    alt="Reported Image" class="mt-2 rounded-lg">
-                            </div>
-
-                            <div class="ml-auto">
-                                <a href="/equipDirectiu?action=deleteReport&report_id=<?php echo $image['report_id']; ?>"
-                                    class="report-button text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
-                                    Delete Report
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+                </div>
+            <?php endforeach; ?>
         </div>
+        <div id="pagina-reportsEd" class="paginaEd hidden">
+            <p class="text-lg font-medium text-gray-900 dark:text-white" style="margin-bottom: 15px">Imatges
+                Reportades</p>
+            <?php foreach ($reportedImages as $image): ?>
+                <div class="bg-white p-4 mb-4 border border-gray-300 rounded">
+                    <div class="flex items-center mb-2">
+                        <p class="font-bold">Nom de l'usuari:
+                            <?php echo $image['user_name']; ?>
+                        </p>
+                    </div>
+
+                    <div class="flex items-end">
+                        <div class="mr-4">
+                            <img width="100px" height="100px" src="<?php echo $image['photography_link']; ?>"
+                                alt="Reported Image" class="mt-2 rounded-lg">
+                        </div>
+
+                        <div class="ml-auto">
+                            <a href="/equipDirectiu?action=deleteReport&report_id=<?php echo $image['report_id']; ?>"
+                                class="report-button text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
+                                Delete Report
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
     </div>
     </div>
     </div>
