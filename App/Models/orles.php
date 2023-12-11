@@ -106,4 +106,17 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getClassByOrlaId($idOrla)
+    {
+        $query = <<<QUERY
+        SELECT classGroup.className FROM classGroup, orla
+        WHERE 
+        classGroup.id = orla.idClassGroup
+        AND orla.id=:idOrla;
+        QUERY;
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':idOrla' => $idOrla]);
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
 }

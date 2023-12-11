@@ -140,6 +140,7 @@
                         <?= $orla['name']; ?>
                     </a>
                 <?php endforeach; ?>
+                <?= $className; ?>
             </div>
             <div id="pagina-reportsEd" class="paginaEd hidden">
                 <p class="text-lg font-medium text-gray-900 dark:text-white" style="margin-bottom: 15px">Imatges
