@@ -181,17 +181,22 @@
                     <div
                         class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8 mx-auto">
                         <div class="flex items-start p-5">
-                            <img class="w-24 h-24 mr-4 rounded-lg shadow-lg" src="<?php echo $defaultPhoto['link']; ?>"
-                                alt="<?= $_SESSION["user"]["name"] ?>" />
+                            <img class="w-24 h-24 mr-4 rounded-full shadow-lg"
+                                src="<?= '../avatars/' . $user["avatar"] ?>" alt="Alternative Text">
                             <div>
                                 <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                                    <?= $_SESSION["user"]["name"] ?>
-                                    <?= $_SESSION["user"]["surname"] ?>
+                                    <?= $user["name"] ?>
+                                    <?= $user["surname"] ?>
                                 </h5>
                                 <span class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                    <?= $_SESSION["user"]["email"] ?>
+                                    <?= $user["email"] ?>
                                 </span>
                             </div>
+                        </div>
+                        <div class="text-right rtl:text-left">
+                            <a href="/carnet"
+                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-4">Veure el
+                                Carnet </a>
                         </div>
                     </div>
                 </div>

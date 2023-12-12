@@ -354,4 +354,10 @@ class Users
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function insertCard($url, $idUser)
+    {
+        $stm = $this->sql->prepare('INSERT INTO studentcard (url, idStudent) VALUES (:url, :idUser);');
+        $stm->execute([':url' => $url, ':idUser' => $idUser]);
+    }
+
 }

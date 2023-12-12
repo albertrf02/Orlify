@@ -217,5 +217,14 @@ class ViewsController
         }
     }
 
+    function carnet($request, $response, $container)
+    {
+        $modelusers = $container->get("users");
+
+
+        $response->SetTemplate("CarnetView.php");
+        return $response;
+    }
+
 }
 
