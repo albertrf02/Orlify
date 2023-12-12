@@ -7,8 +7,11 @@ class ViewsController
     public function index($request, $response, $container)
     {
 
+
+
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
+        $response->set("classes", $classes);
         $response->setSession("error", "");
         $response->SetTemplate("index.php");
         return $response;
@@ -38,7 +41,11 @@ class ViewsController
     {
 
         $model = $container->get("users");
+        $model2= $container->get("classes");
         $allUsers = $model->getAllUsers();
+        $roles = $model->getRoles();
+        $classes = $model2->getClasses();
+        $usersClasses = $model->getUsersClass();
 
         $countUsers = 9;
         $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
@@ -46,7 +53,10 @@ class ViewsController
         $users = array_slice($allUsers, $start, $countUsers);
         $totalPages = ceil(count($allUsers) / $countUsers);
 
+        $response->set("usersClasses", $usersClasses);
         $response->set("users", $users);
+        $response->set("roles", $roles);
+        $response->set("classes", $classes);
         $response->set("currentPage", $page);
         $response->set("totalPages", $totalPages);
 

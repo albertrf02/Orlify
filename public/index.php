@@ -8,6 +8,8 @@ use App\Controllers\UserController;
 use App\Controllers\OrlaController;
 use App\Controllers\RecoverController;
 
+use App\Controllers\ClassController;
+
 
 use Emeset\Contracts\Routers\Router;
 
@@ -67,7 +69,14 @@ $app->post("/importcsv", [UserController::class, "importCSV"]);
 $app->post("/searchuserajax", [UserController::class, "searchUserAjax"]);
 
 
+$app->post("/editclassajax", [ClassController::class, "editClassAjax"]);
+$app->post("/editclass", [ClassController::class, "editClass"]);
 
+$app->post("/searchuserclassajax", [ClassController::class, "searchUserClassAjax"]);
+
+
+
+$app->post("/adduserclass", [ClassController::class, "addUserClass"]);
 
 
 
