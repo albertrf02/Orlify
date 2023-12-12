@@ -157,6 +157,18 @@
                                     class="delete-button text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
                                     Borrar Orla
                                 </button>
+
+                                <?php if ($orla['visibility'] == 0): ?>
+                                    <a href="/equipDirectiu?action=activateOrla&idOrla=<?= $orla['id']; ?>"
+                                        class="edit-button text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
+                                        Activar Orla
+                                    </a>
+                                <?php else: ?>
+                                    <a href="/equipDirectiu?action=deactivateOrla&idOrla=<?= $orla['id']; ?>"
+                                        class="delete-button text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
+                                        Desactivar Orla
+                                    </a>
+                                <?php endif ?>
                                 <div id="delete-modal-<?= $orla['id']; ?>" tabindex="-1"
                                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                     <div class="absolute inset-0 bg-black opacity-50"></div>
@@ -205,8 +217,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
             <div id="pagina-reportsEd" class="paginaEd hidden">
                 <p class="text-lg font-medium text-gray-900 dark:text-white" style="margin-bottom: 15px">Imatges
                     Reportades</p>
@@ -232,8 +244,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 <?php endforeach; ?>
             </div>
         </div>

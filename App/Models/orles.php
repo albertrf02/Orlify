@@ -128,4 +128,18 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+
+
+    public function setOrlaVisibilityOn($idOrla)
+    {
+        $stm = $this->sql->prepare('UPDATE orla SET visibility = 1 WHERE id = :idOrla;');
+        $stm->execute([":idOrla" => $idOrla]);
+    }
+
+    public function setOrlaVisibilityOff($idOrla)
+    {
+        $stm = $this->sql->prepare('UPDATE orla SET visibility = 0 WHERE id = :idOrla;');
+        $stm->execute([":idOrla" => $idOrla]);
+    }
+
 }

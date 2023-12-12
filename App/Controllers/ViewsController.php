@@ -97,6 +97,7 @@ class ViewsController
 
                 header("Location: /orla/edit?idOrla=" . $idOrla);
             }
+
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {
@@ -109,7 +110,24 @@ class ViewsController
             }
 
             if ($action === "deleteOrla") {
-                $modelOrles->deleteOrla($_GET['idOrla']);
+                $idOrla = $_GET['idOrla'];
+                $modelOrles->deleteOrla($idOrla);
+
+                header("Location: /equipDirectiu");
+            }
+
+            if ($action === "activateOrla") {
+                $idOrla = $_GET["idOrla"];
+
+                $modelOrles->setOrlaVisibilityOn($idOrla);
+
+                header("Location: /equipDirectiu");
+            }
+
+            if ($action === "deactivateOrla") {
+                $idOrla = $_GET["idOrla"];
+
+                $modelOrles->setOrlaVisibilityOff($idOrla);
 
                 header("Location: /equipDirectiu");
             }
