@@ -6,6 +6,8 @@ function editUserModal() {
         event.preventDefault();
         var $this = $(this);
         var userId = $this.data("edit-user-id");
+
+
  
         $.ajax({
             url: '/updateuserajax',
@@ -13,8 +15,11 @@ function editUserModal() {
             data: { userId: userId },
             dataType: "json",
             success: function (data) {
-                var user = data['user'][0];
+                var user = data['user'];
                 var roles = data['roles'];
+
+
+
 
           $("#title").text(user.id);
           $("#id-edit").val(user.id);
@@ -56,13 +61,14 @@ function deleteUserModal() {
       var $this = $(this);
       var userId = $this.data("delete-user-id");
 
+
       $.ajax({
         url: "/deleteuserajax",
         method: "POST",
         data: { userId: userId },
         dataType: "json",
         success: function (data) {
-          var user = data["user"][0];
+          var user = data["user"];
 
           $("#id-delete").val(user.id);
 
