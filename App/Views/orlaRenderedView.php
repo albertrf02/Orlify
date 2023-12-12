@@ -15,6 +15,7 @@
     </iframe>
     <a href="/orla/edit?idOrla=<?= $idOrla ?>">Editar</a>
     <a href="/orla/pdf?idOrla=<?= $idOrla ?>">PDF</a>
+    <a href="/equipDirectiu">Tornar</a>
 </body>
 <?php require "Scripts.php" ?>
 

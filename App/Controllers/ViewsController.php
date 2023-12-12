@@ -73,6 +73,16 @@ class ViewsController
         $allOrles = $modelOrles->getOrles();
 
         $response->set("groups", $allGroups);
+
+        $classNames = [];
+
+        foreach ($allOrles as $orla) {
+            $idOrla = $orla["id"];
+            $className = $modelOrles->getClassByOrlaId($idOrla);
+            $classNames[$idOrla] = $className;
+        }
+
+        $response->set("classNames", $classNames);
         $response->set("orles", $allOrles);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST["action"])) {
@@ -84,10 +94,10 @@ class ViewsController
                 $idCreator = $_SESSION["user"]["id"];
 
                 $idOrla = $modelOrles->createOrla($name, $group, $idCreator);
-                error_log("--------------" . $idOrla);
 
                 header("Location: /orla/edit?idOrla=" . $idOrla);
             }
+
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {
@@ -98,14 +108,34 @@ class ViewsController
 
                 header("Location: /equipDirectiu");
             }
+
+            if ($action === "deleteOrla") {
+                $idOrla = $_GET['idOrla'];
+                $modelOrles->deleteOrla($idOrla);
+
+                header("Location: /equipDirectiu");
+            }
+
+            if ($action === "activateOrla") {
+                $idOrla = $_GET["idOrla"];
+
+                $modelOrles->setOrlaVisibilityOn($idOrla);
+
+                header("Location: /equipDirectiu");
+            }
+
+            if ($action === "deactivateOrla") {
+                $idOrla = $_GET["idOrla"];
+
+                $modelOrles->setOrlaVisibilityOff($idOrla);
+
+                header("Location: /equipDirectiu");
+            }
         }
 
         $reportedImages = $modelUsers->getReportedImages();
 
         $response->set("reportedImages", $reportedImages);
-
-        $modelOrles = $container->get("orles");
-
         $response->SetTemplate("equipDirectiuView.php");
         return $response;
     }
