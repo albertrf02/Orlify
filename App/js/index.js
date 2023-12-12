@@ -1,10 +1,9 @@
-import { Flowbite } from "../../public/js/flowbite.js";
 
 
 import { checkPassword } from "./checkPassword.js";
 import { editUserModal } from "./ajax.js";
 import { deleteUserModal } from "./ajax.js";
-import { searchUser } from "./ajax.js";
+import { searchUser, searchUserClass } from "./ajax.js";
 import { searchUserEquipDirectiu } from "./ajax.js";
 import { deleteClassModal } from "./ajax.js";
 import { adminPages, equipDirectiuPages, recoverPages} from "./pages.js";
@@ -21,13 +20,4 @@ searchUserEquipDirectiu();
 recoverPages();
 dragAndDrop();
 deleteClassModal();
-
-const flowbite = new Flowbite();
-flowbite.init(); 
-
-$(document).ready(function() {
-    $('#dropdownSearchButton').on('click', function() {
-        // Utilizar la función de Flowbite para manejar el desplegable
-        flowbite.toggleDropdown('dropdownSearch');
-    });
-});
+searchUserClass();

@@ -50,6 +50,23 @@ class Classes
         $stm->execute([':id' => $id, ':newState' => $newState]);
     }
     
+    public function searchUserClassAjax($query)
+{
+    $stm = $this->sql->prepare('SELECT * FROM users WHERE name LIKE :query AND role IN (1, 2);');
+    $query = "{$query}%";
+    $stm->execute([':query' => $query]);
+    return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+public function addUserClass($userIds, $classId) {
+    $stmt = $this->sql->prepare('INSERT INTO users_classgroup (idUser, idGroupClass) VALUES (:userId, :classId)');
+
+    foreach ($userIds as $userId) {
+        $stmt->execute([':userId' => $userId, ':classId' => $classId]);
+    }
+}
+
+
 
 
 }

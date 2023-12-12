@@ -7,6 +7,8 @@ function adminPages() {
         $("#pagina-users-add").hide();
         $("#pagina-classes-edit").hide();
         $("#pagina-classes-add").hide();
+        $("#search-class-user").hide();
+        
     });
 
     $(document).ready(function () {
@@ -39,6 +41,7 @@ function adminPages() {
           e.preventDefault();
           $(".pagina").hide();
           $("#pagina-classes-add").show();
+          $("#search-class-user").show();
       });
   });
 });

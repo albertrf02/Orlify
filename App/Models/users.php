@@ -312,7 +312,7 @@ class Users
 
     public function getUsersClass() {
     
-        $stm = $this->sql->prepare('SELECT * FROM users WHERE role = 1 and role = 2;');
+        $stm = $this->sql->prepare('SELECT * FROM users WHERE role = 1 OR role = 2;');
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     

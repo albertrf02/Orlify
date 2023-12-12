@@ -63,8 +63,11 @@ $app->post("/searchuserajax", [UserController::class, "searchUserAjax"]);
 $app->post("/editclassajax", [ClassController::class, "editClassAjax"]);
 $app->post("/editclass", [ClassController::class, "editClass"]);
 
+$app->post("/searchuserclassajax", [ClassController::class, "searchUserClassAjax"]);
 
 
+
+$app->post("/adduserclass", [ClassController::class, "addUserClass"]);
 
 
 
