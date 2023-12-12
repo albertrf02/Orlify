@@ -8,7 +8,7 @@
     <title>Perfil</title>
 </head>
 
-<body>
+<body style="overflow-y: visible;">
 
     <?php require "MenuView.php" ?>
 
@@ -158,7 +158,24 @@
                     </div>
                 </div>
                 <div id="orlesTabContent" style="display: none;">
-                    <p>This is the content for the "orles" tab.</p>
+                    <?php $orlesVisibles = false; ?>
+                    <?php foreach ($userOrla as $orla): ?>
+                        <?php if ($orla['visibility'] == 1): ?>
+                            <a href="/orla/iframe?idOrla=<?= $orla['id'] ?>"
+                                class="edit-button text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
+                                Veure
+                                <?= $orla['name'] ?>
+                            </a>
+                            <?php $orlesVisibles = true; ?>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                    <?php if (!$orlesVisibles): ?>
+                        <div class="flex flex-col items-center p-2 rounded">
+                            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                                No tens cap orla visible
+                            </h5>
+                        </div>
+                    <?php endif ?>
                 </div>
                 <div id="carnetTabContent" style="display: none;">
                     <div
