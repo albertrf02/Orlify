@@ -128,7 +128,18 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-
+    public function getOrlaByClassId($idClass)
+    {
+        $query = <<<QUERY
+        SELECT orla.id, orla.name, orla.visibility, orla.idCreator, orla.idClassGroup FROM orla, classGroup
+        WHERE 
+        classGroup.id = orla.idClassGroup
+        AND classGroup.id=:idClass;
+        QUERY;
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':idClass' => $idClass]);
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
     public function setOrlaVisibilityOn($idOrla)
     {

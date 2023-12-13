@@ -30,6 +30,7 @@ $app->get("/logout", [LoginController::class, "logout"]);
 $app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/carnet", [ViewsController::class, "carnet"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/orles", [ViewsController::class, "orles"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"], [[\App\Middleware\Auth::class, "auth"]]);
 

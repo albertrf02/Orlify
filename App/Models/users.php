@@ -183,7 +183,8 @@ class Users
             return $result;
         } else {
             return false;
-        }    }
+        }
+    }
 
 
     public function getDefaultPhoto($idUser)
@@ -262,14 +263,15 @@ class Users
         DELETE FROM photography
         WHERE id = :idPhoto
     ');
-    $stm->execute([':idPhoto' => $idPhoto]);
-}
-    public function insert($name, $surname, $username, $password, $email) {
+        $stm->execute([':idPhoto' => $idPhoto]);
+    }
+    public function insert($name, $surname, $username, $password, $email)
+    {
         $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email) VALUES (:name, :surname, :username, :password, :email);');
         $stm->execute([':name' => $name, ':surname' => $surname, ':username' => $username, ':password' => $password, ':email' => $email]);
     }
-    
-    
+
+
 
     public function getUserByEmail($email)
     {
@@ -281,8 +283,8 @@ class Users
 
     public function token($email, $token)
     {
-    $stm = $this->sql->prepare('UPDATE users SET token = :token, token_expiration = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE email = :email');
-    $stm->execute([':token' => $token, ':email' => $email]);
+        $stm = $this->sql->prepare('UPDATE users SET token = :token, token_expiration = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE email = :email');
+        $stm->execute([':token' => $token, ':email' => $email]);
     }
 
 
@@ -296,31 +298,32 @@ class Users
 
     public function isValidToken($token)
     {
-    $stm = $this->sql->prepare('SELECT id FROM users WHERE token = :token');
-    $stm->execute([':token' => $token]);
-    $result = $stm->fetch(\PDO::FETCH_ASSOC);
+        $stm = $this->sql->prepare('SELECT id FROM users WHERE token = :token');
+        $stm->execute([':token' => $token]);
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
 
-    return ($result !== false);
+        return ($result !== false);
     }
 
 
     public function getTokenExpiration($token)
     {
-    $stm = $this->sql->prepare('SELECT token_expiration FROM users WHERE token = :token');
-    $stm->execute([':token' => $token]);
-    $result = $stm->fetch(\PDO::FETCH_ASSOC);
-    
-    return $result['token_expiration'];
+        $stm = $this->sql->prepare('SELECT token_expiration FROM users WHERE token = :token');
+        $stm->execute([':token' => $token]);
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
+
+        return $result['token_expiration'];
     }
 
 
     public function updatePasswordByToken($password, $token)
     {
-    $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE token = :token');
-    $stm->execute([':password' => $password, ':token' => $token]);
+        $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE token = :token');
+        $stm->execute([':password' => $password, ':token' => $token]);
     }
 
-    public function getAvatars(){
+    public function getAvatars()
+    {
         $avatarPath = __DIR__ . "/../../public/avatars/";
         $avatars = [];
 
@@ -334,6 +337,29 @@ class Users
         return $avatars;
     }
 
+    public function getOrlaFromClassByUserId($idUser)
+    {
+        $query = <<<QUERY
+            SELECT classGroup.className, users.name, orla.id, orla.visibility, orla.name FROM classGroup, users, users_classgroup, orla
+            WHERE 
+            classGroup.id = users_classgroup.idGroupClass
+            AND
+            users.id = users_classgroup.idUser
+            AND 
+            classgroup.id = orla.idClassGroup
+            AND users.id=:idUser;
+        QUERY;
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':idUser' => $idUser]);
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function insertCard($url, $idUser)
+    {
+        $stm = $this->sql->prepare('INSERT INTO studentcard (url, idStudent) VALUES (:url, :idUser);');
+        $stm->execute([':url' => $url, ':idUser' => $idUser]);
+    }
+
     public function getUsersClass() {
     
         $stm = $this->sql->prepare('SELECT * FROM users WHERE role = 1 OR role = 2;');
@@ -342,6 +368,5 @@ class Users
     
 
     }
-
 
 }

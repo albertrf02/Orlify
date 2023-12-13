@@ -177,11 +177,13 @@ class ViewsController
         $user = $userModel->getUserById($userId);
         $userPhotos = $userModel->getPhotos($userId);
         $defaultPhoto = $userModel->getDefaultPhoto($userId);
+        $userOrla = $userModel->getOrlaFromClassByUserId($userId);
 
         $response->set("user", $user);
         $response->set("userPhotos", $userPhotos);
         $response->set("defaultPhoto", $defaultPhoto);
         $response->set("avatars", $avatars);
+        $response->set("userOrla", $userOrla);
 
         $response->SetTemplate("PerfilView.php");
         return $response;
@@ -223,6 +225,15 @@ class ViewsController
             $response->redirect("Location: /invalidtoken");
             return $response;
         }
+    }
+
+    function carnet($request, $response, $container)
+    {
+        $modelusers = $container->get("users");
+
+
+        $response->SetTemplate("CarnetView.php");
+        return $response;
     }
 
 }
