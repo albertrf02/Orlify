@@ -117,7 +117,7 @@ class OrlaController
             2 => array("pipe", "w")   // stderr
         );
 
-        $papersize = 'A4';
+        $papersize = isset($_GET["paperFormat"]) ? $_GET["paperFormat"] : "A4";
 
         $process = proc_open("wkhtmltopdf --orientation Landscape --page-size $papersize - -", $descriptorspec, $pipes);
 
