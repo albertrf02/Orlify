@@ -21,6 +21,9 @@ class Container extends EmesetContainer
             $this["orles"] = function ($c) {
                 return new \App\Models\Orles($c["db"]->getConnection());
             };
+            $this["classes"] = function ($c) {
+                return new \App\Models\Classes($c["db"]->getConnection());
+            };
 
             $this["db"] = function ($c) {
                 return new \App\Models\Db(

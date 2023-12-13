@@ -76,6 +76,9 @@
     </div>
   </div>
 
+  <?php var_dump($classes); ?>
+
+
   <script src="/js/bundle.js"></script>
   <script src="/js/flowbite.js"></script>
 
