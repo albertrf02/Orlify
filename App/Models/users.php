@@ -121,6 +121,12 @@ class Users
         $stm->execute([':id' => $id, ':name' => $name, ':surname' => $surname, ':password' => $hashPassword, ':role' => $role]);
     }
 
+    public function updatePassword($id, $hashPassword)
+    {
+        $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE id = :id;');
+        $stm->execute([':id' => $id, ':password' => $hashPassword]);
+    }
+
 
     public function getPhotos($idUser)
     {
@@ -360,12 +366,13 @@ class Users
         $stm->execute([':url' => $url, ':idUser' => $idUser]);
     }
 
-    public function getUsersClass() {
-    
+    public function getUsersClass()
+    {
+
         $stm = $this->sql->prepare('SELECT * FROM users WHERE role = 1 OR role = 2;');
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
-    
+
 
     }
 

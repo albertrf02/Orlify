@@ -6,12 +6,8 @@ class ViewsController
 {
     public function index($request, $response, $container)
     {
-
-
-
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
-        $response->set("classes", $classes);
         $response->setSession("error", "");
         $response->SetTemplate("index.php");
         return $response;
@@ -41,7 +37,7 @@ class ViewsController
     {
 
         $model = $container->get("users");
-        $model2= $container->get("classes");
+        $model2 = $container->get("classes");
         $allUsers = $model->getAllUsers();
         $roles = $model->getRoles();
         $classes = $model2->getClasses();
@@ -231,8 +227,33 @@ class ViewsController
     {
         $modelusers = $container->get("users");
 
-
         $response->SetTemplate("CarnetView.php");
+        return $response;
+    }
+
+    function canviarContrasenya($request, $response, $container)
+    {
+        $userModel = $container->get("users");
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $currentPassword = $_POST["currentPassword"];
+            $newPassword = $_POST["newPassword"];
+
+            $user = $userModel->login($_SESSION["user"]["email"], $currentPassword);
+
+            if ($user) {
+                $newHashedPassword = $userModel->hashPassword($newPassword);
+                $userModel->updatePassword($_SESSION["user"]["id"], $newHashedPassword);
+
+                header("Location: /perfil");
+            } else {
+                $error = "La contrasenya actual no és correcta";
+                $response->setSession("error", $error);
+            }
+        }
+
+
+        $response->SetTemplate("CanviarContrasenyaView.php");
         return $response;
     }
 
