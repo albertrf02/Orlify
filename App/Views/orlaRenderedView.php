@@ -22,7 +22,7 @@
             <option value="A5">A5</option>
         </select>
         <input type="hidden" name="idOrla" value="<?= $idOrla ?>">
-        <button type="submit">Generate PDF</button>
+        <button type="submit">Generar PDF</button>
     </form>
 
     <a href="/orla/edit?idOrla=<?= $idOrla ?>">Editar</a>

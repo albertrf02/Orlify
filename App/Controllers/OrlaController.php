@@ -47,7 +47,7 @@ class OrlaController
                 //3. Guardar els usuaris a la orla
                 $orlesModel->addUsersToOrla($idOrla, $usersOrla);
 
-                header("Location: /orla/view?idOrla=" . $idOrla);
+                $response->redirect("Location: /orla/view?idOrla=" . $idOrla);
             }
         }
 

@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="/main.css">
     <link rel="icon" href="/images/logo.jpg">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <title>Canviar Contrasenya</title>
 </head>
 
@@ -62,7 +64,7 @@
                 </div>
                 <label for="confirmPassword"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirma la contrasenya</label>
-                <div class="flex">
+                <div class="flex mb-4">
                     <span
                         class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -74,7 +76,20 @@
                     <input type="password" name="confirmPassword" id="confirmPassword"
                         class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="******">
+
                 </div>
+                <div id="passwordMatchError"
+                    class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                    role="alert"></div>
+
+                <div id="newPasswordEmptyError"
+                    class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                    role="alert"></div>
+
+                <div id="newPasswordFormatError"
+                    class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                    role="alert"></div>
+
                 <button type="submit"
                     class="mt-4 w-full text-white bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:focus:ring-blue-800">Canviar
                     contrasenya</button>
