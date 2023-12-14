@@ -6,12 +6,8 @@ class ViewsController
 {
     public function index($request, $response, $container)
     {
-
-
-
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
-        $response->set("classes", $classes);
         $response->setSession("error", "");
         $response->SetTemplate("index.php");
         return $response;
@@ -41,7 +37,7 @@ class ViewsController
     {
 
         $model = $container->get("users");
-        $model2= $container->get("classes");
+        $model2 = $container->get("classes");
         $allUsers = $model->getAllUsers();
         $roles = $model->getRoles();
         $classes = $model2->getClasses();
@@ -105,7 +101,7 @@ class ViewsController
 
                 $idOrla = $modelOrles->createOrla($name, $group, $idCreator);
 
-                header("Location: /orla/edit?idOrla=" . $idOrla);
+                $response->redirect("Location: /orla/edit?idOrla=" . $idOrla);
             }
 
         }
@@ -116,14 +112,14 @@ class ViewsController
             if ($action === "deleteReport") {
                 $modelUsers->deleteReportAndPhoto($_GET['report_id']);
 
-                header("Location: /equipDirectiu");
+                $response->redirect("Location: /equipDirectiu");
             }
 
             if ($action === "deleteOrla") {
                 $idOrla = $_GET['idOrla'];
                 $modelOrles->deleteOrla($idOrla);
 
-                header("Location: /equipDirectiu");
+                $response->redirect("Location: /equipDirectiu");
             }
 
             if ($action === "activateOrla") {
@@ -131,7 +127,7 @@ class ViewsController
 
                 $modelOrles->setOrlaVisibilityOn($idOrla);
 
-                header("Location: /equipDirectiu");
+                $response->redirect("Location: /equipDirectiu");
             }
 
             if ($action === "deactivateOrla") {
@@ -139,7 +135,7 @@ class ViewsController
 
                 $modelOrles->setOrlaVisibilityOff($idOrla);
 
-                header("Location: /equipDirectiu");
+                $response->redirect("Location: /equipDirectiu");
             }
         }
 
@@ -161,14 +157,14 @@ class ViewsController
             if ($action === "setDefaultPhoto") {
                 $userModel->setDefaultPhoto($userId, $_POST['idPhoto']);
 
-                header("Location: /perfil");
+                $response->redirect("Location: /perfil");
             }
 
             if ($action === "setPorfilePhoto") {
                 $userModel->setPorfilePhoto($userId, $_POST['avatar']);
 
 
-                header("Location: /perfil");
+                $response->redirect("Location: /perfil");
             }
         }
 
@@ -231,10 +227,39 @@ class ViewsController
     {
         $modelusers = $container->get("users");
 
-
         $response->SetTemplate("CarnetView.php");
         return $response;
     }
 
+    function canviarContrasenya($request, $response, $container)
+    {
+        $userModel = $container->get("users");
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $currentPassword = $_POST["currentPassword"];
+            $newPassword = $_POST["newPassword"];
+
+            $user = $userModel->login($_SESSION["user"]["email"], $currentPassword);
+
+            if ($user) {
+                $newHashedPassword = $userModel->hashPassword($newPassword);
+                $userModel->updatePassword($_SESSION["user"]["id"], $newHashedPassword);
+
+                $response->redirect("Location: /perfil");
+            } else {
+                $error = "La contrasenya actual no és correcta";
+                $response->setSession("error", $error);
+
+                $response->redirect("Location: /canviarContrasenya");
+                return $response;
+            }
+        }
+
+        $error = $request->get("SESSION", "error");
+        $response->setSession("error", "");
+        $response->set("error", $error);
+        $response->SetTemplate("CanviarContrasenyaView.php");
+        return $response;
+    }
 }
 
