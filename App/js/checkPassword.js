@@ -132,7 +132,6 @@ function changePassword() {
           "newPasswordFormatError",
           "La nova contrasenya no compleix el format requerit"
         );
-        event.preventDefault(); // Prevent form submission
       }
     });
   });
