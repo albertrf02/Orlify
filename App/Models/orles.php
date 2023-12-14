@@ -35,8 +35,8 @@ class Orles
 
     public function createOrla($name, $group, $idCreator)
     {
-        $stm = $this->sql->prepare('INSERT INTO orla (name, visibility, idCreator, idClassGroup) VALUES (:name, :visibility, :idCreator, :idClassGroup);');
-        $stm->execute([':name' => $name, ':visibility' => 0, ':idCreator' => $idCreator, ':idClassGroup' => $group]);
+        $stm = $this->sql->prepare('INSERT INTO orla (name, visibility, public, idCreator, idClassGroup) VALUES (:name, :visibility, :public, :idCreator, :idClassGroup);');
+        $stm->execute([':name' => $name, ':visibility' => 0, ':public' => 0, ':idCreator' => $idCreator, ':idClassGroup' => $group]);
         return $this->sql->lastInsertId();
     }
 
@@ -138,6 +138,25 @@ class Orles
         QUERY;
         $stm = $this->sql->prepare($query);
         $stm->execute([':idClass' => $idClass]);
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function setOrlaPublicOn($idOrla)
+    {
+        $stm = $this->sql->prepare('UPDATE orla SET public = 1 WHERE id = :idOrla;');
+        $stm->execute([":idOrla" => $idOrla]);
+    }
+
+    public function setOrlaPublicOff($idOrla)
+    {
+        $stm = $this->sql->prepare('UPDATE orla SET public = 0 WHERE id = :idOrla;');
+        $stm->execute([":idOrla" => $idOrla]);
+    }
+
+    public function getPublicOrles()
+    {
+        $stm = $this->sql->prepare('SELECT * FROM orla WHERE public = 1;');
+        $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 

@@ -32,6 +32,7 @@ $app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Mi
 $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/canviarContrasenya", [ViewsController::class, "canviarContrasenya"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/carnet", [ViewsController::class, "carnet"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/publicOrles", [ViewsController::class, "publicOrles"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/orles", [ViewsController::class, "orles"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"], [[\App\Middleware\Auth::class, "auth"]]);
 
@@ -42,7 +43,7 @@ $app->get("/orla/iframe", [OrlaController::class, "iframeOrla"], [[\App\Middlewa
 
 
 $app->post("/saveOrla", [OrlaController::class, "saveOrla"], [[\App\Middleware\Auth::class, "auth"]]);
-$app->post("/equipDirectiuPost", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->post("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/report-image", [UserController::class, "reportImages"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/updatePassword", [ViewsController::class, "canviarContrasenya"], [[\App\Middleware\Auth::class, "auth"]]);

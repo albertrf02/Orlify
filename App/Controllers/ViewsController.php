@@ -104,6 +104,20 @@ class ViewsController
                 $response->redirect("Location: /orla/edit?idOrla=" . $idOrla);
             }
 
+            if ($action === "toggleOrlaPublic") {
+                $idOrla = $_POST['idOrla'];
+                $isChecked = $_POST['isChecked'];
+
+                if ($isChecked) {
+                    $modelOrles->setOrlaPublicOn($idOrla);
+                } else {
+                    $modelOrles->setOrlaPublicOff($idOrla);
+                }
+
+                $response->redirect("Location: /equipDirectiu");
+
+            }
+
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {
@@ -137,6 +151,7 @@ class ViewsController
 
                 $response->redirect("Location: /equipDirectiu");
             }
+
         }
 
         $reportedImages = $modelUsers->getReportedImages();
@@ -228,6 +243,16 @@ class ViewsController
         $modelusers = $container->get("users");
 
         $response->SetTemplate("CarnetView.php");
+        return $response;
+    }
+
+    function publicOrles($request, $response, $container)
+    {
+        $modelOrles = $container->get("orles");
+        $allOrles = $modelOrles->getPublicOrles();
+        $response->set("orles", $allOrles);
+
+        $response->SetTemplate("publicOrlesView.php");
         return $response;
     }
 

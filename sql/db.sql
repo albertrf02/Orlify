@@ -41,6 +41,7 @@ CREATE TABLE orla (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     visibility BOOLEAN,
+    public BOOLEAN,
     idCreator INT,
     FOREIGN KEY (idCreator) REFERENCES users(id)
 );
