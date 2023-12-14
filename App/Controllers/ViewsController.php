@@ -11,7 +11,6 @@ class ViewsController
 
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
-        $response->set("classes", $classes);
         $response->setSession("error", "");
         $response->SetTemplate("index.php");
         return $response;
@@ -41,7 +40,7 @@ class ViewsController
     {
 
         $model = $container->get("users");
-        $model2= $container->get("classes");
+        $model2 = $container->get("classes");
         $allUsers = $model->getAllUsers();
         $roles = $model->getRoles();
         $classes = $model2->getClasses();
@@ -105,7 +104,7 @@ class ViewsController
 
                 $idOrla = $modelOrles->createOrla($name, $group, $idCreator);
 
-                header("Location: /orla/edit?idOrla=" . $idOrla);
+                $response->redirect("Location: /orla/edit?idOrla=" . $idOrla);
             }
 
         }
@@ -116,14 +115,14 @@ class ViewsController
             if ($action === "deleteReport") {
                 $modelUsers->deleteReportAndPhoto($_GET['report_id']);
 
-                header("Location: /equipDirectiu");
+                $response->redirect("Location: /equipDirectiu");
             }
 
             if ($action === "deleteOrla") {
                 $idOrla = $_GET['idOrla'];
                 $modelOrles->deleteOrla($idOrla);
 
-                header("Location: /equipDirectiu");
+                $response->redirect("Location: /equipDirectiu");
             }
 
             if ($action === "activateOrla") {
@@ -131,7 +130,7 @@ class ViewsController
 
                 $modelOrles->setOrlaVisibilityOn($idOrla);
 
-                header("Location: /equipDirectiu");
+                $response->redirect("Location: /equipDirectiu");
             }
 
             if ($action === "deactivateOrla") {
@@ -139,8 +138,9 @@ class ViewsController
 
                 $modelOrles->setOrlaVisibilityOff($idOrla);
 
-                header("Location: /equipDirectiu");
+                $response->redirect("Location: /equipDirectiu");
             }
+
         }
 
         $reportedImages = $modelUsers->getReportedImages();
@@ -161,14 +161,14 @@ class ViewsController
             if ($action === "setDefaultPhoto") {
                 $userModel->setDefaultPhoto($userId, $_POST['idPhoto']);
 
-                header("Location: /perfil");
+                $response->redirect("Location: /perfil");
             }
 
             if ($action === "setPorfilePhoto") {
                 $userModel->setPorfilePhoto($userId, $_POST['avatar']);
 
 
-                header("Location: /perfil");
+                $response->redirect("Location: /perfil");
             }
         }
 

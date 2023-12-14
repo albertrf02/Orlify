@@ -143,13 +143,13 @@ class Orles
 
     public function setOrlaPublicOn($idOrla)
     {
-        $stm = $this->sql->prepare('UPDATE orla SET visibility = 1 WHERE id = :idOrla;');
+        $stm = $this->sql->prepare('UPDATE orla SET public = 1 WHERE id = :idOrla;');
         $stm->execute([":idOrla" => $idOrla]);
     }
 
     public function setOrlaPublicOff($idOrla)
     {
-        $stm = $this->sql->prepare('UPDATE orla SET visibility = 0 WHERE id = :idOrla;');
+        $stm = $this->sql->prepare('UPDATE orla SET public = 0 WHERE id = :idOrla;');
         $stm->execute([":idOrla" => $idOrla]);
     }
 

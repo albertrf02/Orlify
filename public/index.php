@@ -41,7 +41,7 @@ $app->get("/orla/iframe", [OrlaController::class, "iframeOrla"], [[\App\Middlewa
 
 
 $app->post("/saveOrla", [OrlaController::class, "saveOrla"], [[\App\Middleware\Auth::class, "auth"]]);
-$app->post("/equipDirectiuPost", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->post("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/report-image", [UserController::class, "reportImages"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->post("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/recover", [ViewsController::class, "recover"]);
