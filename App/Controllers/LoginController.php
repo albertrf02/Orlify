@@ -39,18 +39,28 @@ class LoginController
 
     function register($request, $response, $container)
     {
+        $form = $request->get(INPUT_POST, "formType");
         $name = $request->get(INPUT_POST, "name");
         $lastname = $request->get(INPUT_POST, "lastname");
         $username = $request->get(INPUT_POST, "username");
         $password = $request->get(INPUT_POST, "password");
         $email = $request->get(INPUT_POST, "email");
+        $role = $request->get(INPUT_POST, "role");
 
         $model = $container->get("users");
 
-        $hashPassword = $model->hashPassword($password);
-        $register = $model->register($name, $lastname, $username, $hashPassword, $email);
+        $role = $role ?? NULL;
 
-        $response->redirect("Location: /");
+
+        $hashPassword = $model->hashPassword($password);
+        $register = $model->register($name, $lastname, $username, $hashPassword, $email ,$role);
+
+        if ($form === 'userRegistration') {
+            $response->redirect("Location: /");
+        } else if ($form === 'adminRegistration'){
+            $response->redirect("Location: /admin");
+
+        }
         return $response;
     }
 

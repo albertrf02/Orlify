@@ -8,12 +8,12 @@ class UserController
     public function update($request, $response, $container)
     {
 
-        $id = $request->get(INPUT_POST, "id");
-        $name = $request->get(INPUT_POST, "name");
-        $surname = $request->get(INPUT_POST, "surname");
-        $password = $request->get(INPUT_POST, "password");
-        $role = $request->get(INPUT_POST, "role");
-        $email = $request->get(INPUT_POST, "email");
+        $id = $request->get(INPUT_POST, "id-edit");
+        $name = $request->get(INPUT_POST, "name-edit");
+        $surname = $request->get(INPUT_POST, "surname-edit");
+        $password = $request->get(INPUT_POST, "password-edit");
+        $role = $request->get(INPUT_POST, "role-edit");
+        $email = $request->get(INPUT_POST, "email-edit");
 
         $model = $container->get("users");
 
@@ -133,6 +133,7 @@ class UserController
 
 
     public function importCSV($request, $response, $container) {
+        
         $fileCSV = $_FILES['file'];
     
         // Check if a file was uploaded

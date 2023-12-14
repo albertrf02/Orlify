@@ -1,8 +1,9 @@
-// Import of functions
+
+
 import { checkPassword } from "./checkPassword.js";
 import { editUserModal } from "./ajax.js";
 import { deleteUserModal } from "./ajax.js";
-import { searchUser } from "./ajax.js";
+import { searchUser, searchUserClass } from "./ajax.js";
 import { searchUserEquipDirectiu } from "./ajax.js";
 import {
   adminPages,
@@ -10,7 +11,8 @@ import {
   recoverPages,
   perfilPages,
 } from "./pages.js";
-import { dragAndDrop } from "./dragAndDrop.js";
+import { deleteClassModal } from "./ajax.js";
+import { dragAndDrop, checkFile } from "./dragAndDrop.js";
 
 adminPages();
 checkPassword();
@@ -116,3 +118,5 @@ perfilPages();
 // window.saveUpdatedOrla = saveUpdatedOrla;
 
 dragAndDrop();
+deleteClassModal();
+searchUserClass();
