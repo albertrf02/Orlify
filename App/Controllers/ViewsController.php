@@ -244,8 +244,17 @@ class ViewsController
     {
         $modelusers = $container->get("users");
 
-
         $response->SetTemplate("CarnetView.php");
+        return $response;
+    }
+
+    function publicOrles($request, $response, $container)
+    {
+        $modelOrles = $container->get("orles");
+        $allOrles = $modelOrles->getPublicOrles();
+        $response->set("orles", $allOrles);
+
+        $response->SetTemplate("publicOrlesView.php");
         return $response;
     }
 

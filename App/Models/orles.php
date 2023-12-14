@@ -153,6 +153,13 @@ class Orles
         $stm->execute([":idOrla" => $idOrla]);
     }
 
+    public function getPublicOrles()
+    {
+        $stm = $this->sql->prepare('SELECT * FROM orla WHERE public = 1;');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function setOrlaVisibilityOn($idOrla)
     {
         $stm = $this->sql->prepare('UPDATE orla SET visibility = 1 WHERE id = :idOrla;');

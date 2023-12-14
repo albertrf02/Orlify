@@ -140,7 +140,7 @@
                             <p class="font-bold">Nom de l'orla:
                                 <?= $orla['name']; ?>
                             </p>
-                            <div>
+                            <div style="margin-left:960px">
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" value="<?= $orla['id']; ?>" class="sr-only peer"
                                         onchange="toggleOrlaPublic(this)" <?= $orla['public'] == 1 ? 'checked' : ''; ?>>
