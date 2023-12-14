@@ -57,15 +57,17 @@ function addUserToProperDiv(userData, id) {
 }
 
 function generarUserOrla(id, userData) {
-  return `<div id="orla-${id}" onClick="removeUserFromOrla(${id})">
-        <img src="${userData["picture"]}" alt="Foto de ${userData["name"]}">
-        </div>`;
+  return `<div id="orla-${id}" onClick="removeUserFromOrla(${id})" style="display: flex; flex-direction: column; align-items: center;">
+  <img src="${userData["picture"]}" alt="Foto de ${userData["name"]}">
+  <div><p>${userData["name"]}</p></div>
+</div>`;
 }
 
 function generarUserLlista(id, userData) {
-  return `<div id="llista-${id}" onClick="addUserToOrla(${id})" style="display: flex;">
-    <img src="${userData["picture"]}" alt="Foto de ${userData["name"]}">
-  </div>`;
+  return `<div id="llista-${id}" onClick="addUserToOrla(${id})" style="display: flex; flex-direction: column; align-items: center;">
+  <img src="${userData["picture"]}" alt="Foto de ${userData["name"]}">
+  <div><p>${userData["name"]}</p></div>
+</div>`;
 }
 
 function removeUserFromOrla(id) {

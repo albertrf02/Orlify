@@ -140,14 +140,20 @@
                             <p class="font-bold">Nom de l'orla:
                                 <?= $orla['name']; ?>
                             </p>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="<?= $orla['id']; ?>" class="sr-only peer">
+                                <div
+                                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                </div>
+                            </label>
                         </div>
+                        <?php
+                        $classNameData = $classNames[$orla['id']];
+                        $className = ($classNameData[0]['className']);
+                        echo "<p class='font-medium text-gray-900 dark:text-white'>Classe: {$className}</p>";
+                        ?>
                         <div class="flex items-end">
                             <div class="ml-auto">
-                                <?php
-                                $classNameData = $classNames[$orla['id']];
-                                $className = ($classNameData[0]['className']);
-                                echo "<p class='font-medium text-gray-900 dark:text-white'>Classe: {$className}</p>";
-                                ?>
                                 <a href="/orla/edit?idOrla=<?= $orla['id'] ?>"
                                     class="edit-button text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
                                     Editar Orla
