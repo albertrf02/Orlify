@@ -1,5 +1,3 @@
-
-
 import { checkPassword } from "./checkPassword.js";
 import { editUserModal } from "./ajax.js";
 import { deleteUserModal } from "./ajax.js";
@@ -13,6 +11,7 @@ import {
 } from "./pages.js";
 import { deleteClassModal } from "./ajax.js";
 import { dragAndDrop, checkFile } from "./dragAndDrop.js";
+import { toggleOrlaPublic } from "./equipDirectiu.js";
 
 adminPages();
 checkPassword();
@@ -23,6 +22,7 @@ equipDirectiuPages();
 searchUserEquipDirectiu();
 recoverPages();
 perfilPages();
+window.toggleOrlaPublic = toggleOrlaPublic;
 
 // // TODO move this file to include in bundle.js
 // let usersNotInOrla;

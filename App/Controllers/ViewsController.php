@@ -107,6 +107,19 @@ class ViewsController
                 $response->redirect("Location: /orla/edit?idOrla=" . $idOrla);
             }
 
+            if ($action === "toggleOrlaPublic") {
+                $idOrla = $_POST['idOrla'];
+                $isChecked = $_POST['isChecked'];
+
+                if ($isChecked) {
+                    $modelOrles->setOrlaPublicOn($idOrla);
+                } else {
+                    $modelOrles->setOrlaPublicOff($idOrla);
+                }
+
+                $response->redirect("Location: /equipDirectiu");
+            }
+
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {
