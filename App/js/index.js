@@ -1,4 +1,4 @@
-import { checkPassword } from "./checkPassword.js";
+import { checkPassword, changePassword } from "./checkPassword.js";
 import { editUserModal } from "./ajax.js";
 import { deleteUserModal } from "./ajax.js";
 import { searchUser, searchUserClass } from "./ajax.js";
@@ -15,6 +15,7 @@ import { toggleOrlaPublic } from "./equipDirectiu.js";
 
 adminPages();
 checkPassword();
+changePassword();
 editUserModal();
 deleteUserModal();
 searchUser();

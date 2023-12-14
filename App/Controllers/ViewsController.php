@@ -6,9 +6,6 @@ class ViewsController
 {
     public function index($request, $response, $container)
     {
-
-
-
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
         $response->setSession("error", "");
@@ -118,6 +115,7 @@ class ViewsController
                 }
 
                 $response->redirect("Location: /equipDirectiu");
+
             }
 
         }
@@ -258,5 +256,35 @@ class ViewsController
         return $response;
     }
 
+    function canviarContrasenya($request, $response, $container)
+    {
+        $userModel = $container->get("users");
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $currentPassword = $_POST["currentPassword"];
+            $newPassword = $_POST["newPassword"];
+
+            $user = $userModel->login($_SESSION["user"]["email"], $currentPassword);
+
+            if ($user) {
+                $newHashedPassword = $userModel->hashPassword($newPassword);
+                $userModel->updatePassword($_SESSION["user"]["id"], $newHashedPassword);
+
+                $response->redirect("Location: /perfil");
+            } else {
+                $error = "La contrasenya actual no és correcta";
+                $response->setSession("error", $error);
+
+                $response->redirect("Location: /canviarContrasenya");
+                return $response;
+            }
+        }
+
+        $error = $request->get("SESSION", "error");
+        $response->setSession("error", "");
+        $response->set("error", $error);
+        $response->SetTemplate("CanviarContrasenyaView.php");
+        return $response;
+    }
 }
 

@@ -23,7 +23,8 @@ function printLists() {
   // let htmlContentOrla = "";
   // Recorrem totes les cançons de l'array
 
-  usersNotInOrla = document.getElementById("usersNotInOrla");
+  usersNotInOrlaRole2 = document.getElementById("usersNotInOrla-role2");
+  usersNotInOrlaRole1 = document.getElementById("usersNotInOrla-role1");
   role1Users = document.getElementById("role-1");
   role2Users = document.getElementById("role-2");
 
@@ -34,7 +35,7 @@ function printLists() {
     if (userData["isInOrla"]) {
       addUserToProperDiv(userData, id);
     } else {
-      usersNotInOrla.innerHTML += generarUserLlista(id, userData);
+      removeUserToProperDiv(userData, id);
     }
   }
 }
@@ -56,6 +57,14 @@ function addUserToProperDiv(userData, id) {
   }
 }
 
+function removeUserToProperDiv(userData, id) {
+  if (userData["role"] == 1) {
+    usersNotInOrlaRole1.innerHTML += generarUserLlista(id, userData);
+  } else if (userData["role"] == 2) {
+    usersNotInOrlaRole2.innerHTML += generarUserLlista(id, userData);
+  }
+}
+
 function generarUserOrla(id, userData) {
   return `<div id="orla-${id}" onClick="removeUserFromOrla(${id})" style="display: flex; flex-direction: column; align-items: center;">
   <img src="${userData["picture"]}" alt="Foto de ${userData["name"]}">
@@ -72,11 +81,10 @@ function generarUserLlista(id, userData) {
 
 function removeUserFromOrla(id) {
   const userData = users[id];
-  const htmlContent = generarUserLlista(id, userData);
+  removeUserToProperDiv(userData, id);
   const element = document.getElementById(`orla-${id}`);
   element.remove();
   users[id]["isInOrla"] = false;
-  usersNotInOrla.innerHTML += generarUserLlista(id, userData);
 }
 
 function showUsersInfo() {

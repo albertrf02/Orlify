@@ -47,7 +47,7 @@ class OrlaController
                 //3. Guardar els usuaris a la orla
                 $orlesModel->addUsersToOrla($idOrla, $usersOrla);
 
-                header("Location: /orla/view?idOrla=" . $idOrla);
+                $response->redirect("Location: /orla/view?idOrla=" . $idOrla);
             }
         }
 
@@ -117,7 +117,7 @@ class OrlaController
             2 => array("pipe", "w")   // stderr
         );
 
-        $papersize = 'A4';
+        $papersize = isset($_GET["paperFormat"]) ? $_GET["paperFormat"] : "A4";
 
         $process = proc_open("wkhtmltopdf --orientation Landscape --page-size $papersize - -", $descriptorspec, $pipes);
 
