@@ -30,7 +30,6 @@ class ClassController
     $classId = $request->get(INPUT_POST, "id");
     $model2 = $container->get("classes");
 
-    // Retrieve the current class state
     $class = $model2->getClass($classId);
     
     $newState = 1;
@@ -86,10 +85,69 @@ class ClassController
             echo "no funciona";
         }
     
+        $response->redirect("Location: /admin");
         return $response;
     }
     
+
+    public function viewUserClass ($request, $response, $container) {
+
+        $classId = $request->get(INPUT_POST, "userClassId");
+
+        $model2 = $container->get("classes");
+
+        $usersClass = $model2->getUsersByClassId($classId);
+
+        if (!empty($usersClass)) {
+            $response->set("usersClass", $usersClass);
+            $response->setJSON();
+        } else {
+            $response->set('error', 'error');
+            $response->setJSON();
+        }
+
+
+        return $response;
+    }
     
+
+   public function deleteUserClass ($request, $response, $container) {
+
+    $userIds = $_POST['selectedUsersClass'];
+    $classId = $request->get(INPUT_POST, "userClassId");
+
+        if (!is_null($userIds) && is_array($userIds)) {
+            $model2 = $container->get("classes");
+            $insert = $model2->deleteUserClass($userIds, $classId);
+            echo "funciona";
+        } else {
+            echo "no funciona";
+        }
+    
+        $response->redirect("Location: /admin");
+
+        return $response;
+        
+
+   }
+
+
+   public function addClass ($request, $response, $container) {
+
+    $className = $request->get(INPUT_POST, "class");
+
+    $model2 = $container->get("classes");
+
+     $insert = $model2->addClass($className);
+
+     $response->redirect("Location: /admin");
+
+    return $response;
+
+
+
+
+   }
     
 
 

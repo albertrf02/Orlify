@@ -11,7 +11,6 @@ class ViewsController
 
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
-        $response->set("classes", $classes);
         $response->setSession("error", "");
         $response->SetTemplate("index.php");
         return $response;

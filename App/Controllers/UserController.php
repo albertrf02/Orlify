@@ -169,6 +169,49 @@ class UserController
             }
         }
     }
+
+
+    public function insertGeneratedUser($request, $response, $container) {
+        $jsonPayload = file_get_contents("php://input");
+
+        // Decodificar el JSON a un array asociativo
+        $generatedUser = json_decode($jsonPayload, true);
+    
+        // Acceder a los valores
+        $name = $generatedUser['name'];
+        $surname = $generatedUser['surname'];
+        $username = $generatedUser['username'];
+        $password = $generatedUser['password'];
+        $email = $generatedUser['email'];
+        $role = $generatedUser['role'];
+    
+    
+        // Por ejemplo, puedes insertar estos valores en la base de datos
+        $model = $container->get("users");
+
+        $hashPassword = $model->hashPassword($password);
+
+        $insert = $model->insertGeneratedUser($name, $surname, $username, $hashPassword, $email, $role);
+
+        $user = $model->getUser($email);
+
+        $roles = $model->getRoles();
+
+        if ($user) {
+            $response->set('user', $user);
+            $response->set('roles', $roles);
+            $response->setJSON();       
+        }
+
+        return $response;
+
+
+    }
+
+
+
+
+
     
     
 }

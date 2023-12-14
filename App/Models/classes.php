@@ -59,11 +59,38 @@ class Classes
 }
 
 public function addUserClass($userIds, $classId) {
-    $stmt = $this->sql->prepare('INSERT INTO users_classgroup (idUser, idGroupClass) VALUES (:userId, :classId)');
+    $stmt = $this->sql->prepare('INSERT INTO users_classgroup (idUser, idGroupClass) VALUES (:userId, :classId);');
 
     foreach ($userIds as $userId) {
         $stmt->execute([':userId' => $userId, ':classId' => $classId]);
     }
+}
+
+public function deleteUserClass($userIds, $classId) {
+    $stmt = $this->sql->prepare('DELETE FROM users_classgroup WHERE idUser = :userId AND idGroupClass = :classId');
+
+    foreach ($userIds as $userId) {
+        $stmt->execute([':userId' => $userId, ':classId' => $classId]);
+    }
+}
+
+
+
+public function getUsersByClassId($classId)
+{
+    $stm = $this->sql->prepare('SELECT u.* FROM users u
+                                JOIN users_classgroup uc ON u.id = uc.idUser
+                                WHERE uc.idGroupClass = :classId;');
+    $stm->execute([':classId' => $classId]);
+    return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+
+public function addClass($className) {
+    $stmt = $this->sql->prepare('INSERT INTO classgroup (className) VALUES (:className);');
+
+    $stmt->execute([':className' => $className]);
+    
 }
 
 

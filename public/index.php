@@ -70,6 +70,21 @@ $app->post("/searchuserclassajax", [ClassController::class, "searchUserClassAjax
 $app->post("/adduserclass", [ClassController::class, "addUserClass"]);
 
 
+$app->post("/viewuserclass", [ClassController::class, "viewUserClass"]);
+
+$app->post("/deleteuserclass", [ClassController::class, "deleteUserClass"]);
+
+$app->post("/addclass", [ClassController::class, "addClass"]);
+
+
+$app->post("/insertgeneratdeuser", [UserController::class, "insertGeneratedUser"]);
+
+
+
+
+
+
+
 
 $app->route(Router::DEFAULT_ROUTE, "\App\Controllers\ErrorController:error404");
 

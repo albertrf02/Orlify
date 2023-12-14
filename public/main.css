@@ -2325,12 +2325,20 @@ input:checked + .toggle-bg {
     display: none;
   }
 
+  .md\:max-h-full {
+    max-height: 100%;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
 
   .md\:w-auto {
     width: auto;
+  }
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .md\:flex-row {
