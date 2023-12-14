@@ -120,6 +120,8 @@ function changePassword() {
         event.preventDefault(); // Prevent form submission
       }
 
+      //TODO: Error prevent default també peta el login
+
       function validarContrasenya(contrasenya) {
         const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d-]{6,13}$/;
         return regex.test(contrasenya);
@@ -132,7 +134,6 @@ function changePassword() {
           "newPasswordFormatError",
           "La nova contrasenya no compleix el format requerit"
         );
-        event.preventDefault(); // Prevent form submission
       }
     });
   });
