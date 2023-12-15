@@ -153,9 +153,9 @@ class Orles
         $stm->execute([":idOrla" => $idOrla]);
     }
 
-    public function getPublicOrles()
+    public function getPublicOrlesAndClass()
     {
-        $stm = $this->sql->prepare('SELECT * FROM orla WHERE public = 1;');
+        $stm = $this->sql->prepare('SELECT * FROM orla, classgroup WHERE orla.idClassGroup = classgroup.id AND public = 1;');
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
