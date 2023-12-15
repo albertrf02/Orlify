@@ -16,7 +16,7 @@
 
 <body>
   <?php require "MenuView.php" ?>
-  
+
   <div class="fixed bottom-6 flex-grow flex justify-center items-end p-4" id="cardContainer">
     <div class="card">
       <a class="card1" href="#">

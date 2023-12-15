@@ -2,37 +2,52 @@ import $ from "jquery";
 
 function adminPages() {
     $(document).ready(function () {
-        $("#pagina-users").show();
-        $("#search-users").show();
-        $("#pagina-classes").hide();
-        $("#search-classes").hide();
+        $("#pagina-users-edit").show();
+        $("#search-users-edit").show();
+        $("#pagina-users-add").hide();
+        $("#pagina-classes-edit").hide();
+        $("#pagina-classes-add").hide();
+        $("#search-class-user").hide();
+        
     });
 
     $(document).ready(function () {
-        $("#users").click(function (e) {
+        $("#users-edit").click(function (e) {
             e.preventDefault();
             $(".pagina").hide();
-            $("#search-classes").hide();
-            $("#pagina-users").show();
-            $("#search-users").show();
+            $("#pagina-users-edit").show();
+            $("#search-users-edit").show();
             window.history.pushState(null, null, '/admin');
         });
     });
 
     $(document).ready(function () {
-        $("#classes").click(function (e) {
-            e.preventDefault();
-            $(".pagina").hide();
-            $("#search-users").hide();
-            $("#pagina-classes").show();
-            $("#search-classes").show();
-            window.history.pushState(null, null, '/admin');
-        });
+      $("#users-add").click(function (e) {
+          e.preventDefault();
+          $(".pagina").hide();
+          $("#pagina-users-add").show();
+      });
+  });
+
+  $(document).ready(function () {
+    $("#classes-edit").click(function (e) {
+        e.preventDefault();
+        $(".pagina").hide();
+        $("#pagina-classes-edit").show();
     });
+
+    $(document).ready(function () {
+      $("#classes-add").click(function (e) {
+          e.preventDefault();
+          $(".pagina").hide();
+          $("#pagina-classes-add").show();
+          $("#search-class-user").show();
+      });
+  });
+});
 }
 
 function equipDirectiuPages() {
-
   $(document).ready(function () {
     $("#pagina-classesEd").hide();
     $("#pagina-orlesEd").show();
@@ -66,21 +81,27 @@ function equipDirectiuPages() {
       $("#pagina-reportsEd").show();
       window.history.pushState(null, null, "/equipDirectiu");
     });
+
+    $(".avatar-item").on("click", function (e) {
+      const selectedAvatarValue = this.id;
+      document.getElementById("selectedAvatar").value = selectedAvatarValue;
+      var form = document.getElementById("avatarForm");
+      form.submit();
+    });
   });
-  
 }
 
-    function recoverPages() {
-        $(document).ready(function () {
-            $("#recover").click(function (e) {
-                e.preventDefault();
-                $("#pagina-recover").hide();
-                $("#pagina-missatge").show();
-            });
-        });
-    }
+function recoverPages() {
+  $(document).ready(function () {
+    $("#recover").click(function (e) {
+      e.preventDefault();
+      $("#pagina-recover").hide();
+      $("#pagina-missatge").show();
+    });
+  });
+}
 
-    function teacherPages() 
+function teacherPages() 
     {
       $(document).ready(function () {
         $("#new-users").click(function (e) {
@@ -103,14 +124,36 @@ function equipDirectiuPages() {
           $("#new-pagina-grups").hide();
           $("#new-pagina-orles").show();
       });
-
-        
+ 
       });
-    
-    
   }
 
+function perfilPages() {
+  document.addEventListener("DOMContentLoaded", function () {
+    const modalButtons = document.querySelectorAll("[data-modal-toggle]");
+    modalButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const targetModal = document.getElementById(
+          this.getAttribute("data-modal-target")
+        );
+        if (targetModal) {
+          targetModal.classList.toggle("hidden");
+        }
+      });
+    });
 
+    const modalHideButtons = document.querySelectorAll("[data-modal-hide]");
+    modalHideButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const targetModal = document.getElementById(
+          this.getAttribute("data-modal-hide")
+        );
+        if (targetModal) {
+          targetModal.classList.add("hidden");
+        }
+      });
+    });
+  });
+}
 
-
-export { adminPages, equipDirectiuPages, recoverPages, teacherPages};
+export { adminPages, equipDirectiuPages, recoverPages, teacherPages, perfilPages };

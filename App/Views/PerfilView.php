@@ -8,25 +8,37 @@
     <title>Perfil</title>
 </head>
 
-<body>
+<body style="overflow-y: visible;">
 
     <?php require "MenuView.php" ?>
 
     <div class="container mx-auto my-10 p-4">
         <div class="flex flex-col items-center">
-
-            <!-- User Information Column -->
             <div
                 class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8 mx-auto">
                 <div class="flex flex-col items-center pb-10">
-                    <img class="w-24 h-24 mb-3 mt-12 rounded-full shadow-lg" src="<?php echo $defaultPhoto['link']; ?>"
-                        alt="<?= $_SESSION["user"]["name"] ?>" />
+                    <form method="post" action="/perfil?action=setPorfilePhoto" id="avatarForm" style="display: none;">
+                        <input type="hidden" name="action" value="setPorfilePhoto">
+                        <input type="hidden" id="selectedAvatar" name="avatar" value="<?= $avatar ?>">
+                        <div class="avatar-list" style="margin-bottom:-30px; margin-top:20px">
+                            <?php foreach ($avatars as $avatar): ?>
+                                <label>
+                                    <a href="#" class="avatar-item" id="<?= $avatar ?>">
+                                        <img class="avatar-img" src="<?= '../avatars/' . $avatar ?>" alt="avatar"></a>
+                                </label>
+                            <?php endforeach; ?>
+                        </div>
+                    </form>
+                    <img class="w-24 h-24 mb-3 mt-12 rounded-full shadow-lg"
+                        src="<?= '../avatars/' . $user["avatar"] ?>" alt="Alternative Text"
+                        onerror="this.onerror=null; this.src='../avatars/avatar-nen1.png';" id="avatarImage"
+                        onclick="toggleFormVisibility()">
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                        <?= $_SESSION["user"]["name"] ?>
-                        <?= $_SESSION["user"]["surname"] ?>
+                        <?= $user["name"] ?>
+                        <?= $user["surname"] ?>
                     </h5>
-                    <span class=" mb-2 text-sm text-gray-500 dark:text-gray-400">
-                        <?= $_SESSION["user"]["email"] ?>
+                    <span class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                        <?= $user["email"] ?>
                     </span>
                 </div>
             </div>
@@ -72,18 +84,18 @@
 
                                     <!-- Report button -->
                                     <?php if ($photo["defaultPhoto"] !== 1): ?>
-                                    <div class="absolute top-0 right-0 mt-2 mr-5 text-2xl">
-                                    <button data-modal-target="popup-modal-<?= $photo['id']; ?>"
-                                        data-modal-toggle="popup-modal"
-                                        class="block text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                        type="button">
-                                        <svg class="w-6 h-6 text-red-800 dark:text-red-500" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                            <path
-                                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
-                                        </svg>
-                                    </button>
-                                    </div>
+                                        <div class="absolute top-0 right-0 mt-2 mr-5 text-2xl">
+                                            <button data-modal-target="popup-modal-<?= $photo['id']; ?>"
+                                                data-modal-toggle="popup-modal"
+                                                class="block text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                                type="button">
+                                                <svg class="w-6 h-6 text-red-800 dark:text-red-500" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
+                                                </svg>
+                                            </button>
+                                        </div>
                                     <?php endif ?>
 
                                     <!-- Modal for reporting image -->
@@ -140,14 +152,53 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             <?php endforeach ?>
                         </div>
                     </div>
                 </div>
                 <div id="orlesTabContent" style="display: none;">
-                    <p>This is the content for the "Orles" tab.</p>
+                    <?php $orlesVisibles = false; ?>
+                    <?php foreach ($userOrla as $orla): ?>
+                        <?php if ($orla['visibility'] == 1): ?>
+                            <a href="/orla/iframe?idOrla=<?= $orla['id'] ?>"
+                                class="edit-button text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
+                                Veure
+                                <?= $orla['name'] ?>
+                            </a>
+                            <?php $orlesVisibles = true; ?>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                    <?php if (!$orlesVisibles): ?>
+                        <div class="flex flex-col items-center p-2 rounded">
+                            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                                No tens cap orla visible
+                            </h5>
+                        </div>
+                    <?php endif ?>
+                </div>
+                <div id="carnetTabContent" style="display: none;">
+                    <div
+                        class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8 mx-auto">
+                        <div class="flex items-start p-5">
+                            <img class="w-24 h-24 mr-4 rounded-full shadow-lg"
+                                src="<?= '../avatars/' . $user["avatar"] ?>" alt="Alternative Text">
+                            <div>
+                                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                                    <?= $user["name"] ?>
+                                    <?= $user["surname"] ?>
+                                </h5>
+                                <span class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                    <?= $user["email"] ?>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-right rtl:text-left">
+                            <a href="/carnet"
+                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-4">Veure el
+                                Carnet </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -157,34 +208,19 @@
     <?php require "Scripts.php" ?>
 
     <script>
-        function showTab(tabName) {
-            document.getElementById('imagesTabContent').style.display = (tabName === 'images') ? 'block' : 'none';
-            document.getElementById('orlesTabContent').style.display = (tabName === 'orles') ? 'block' : 'none';
-            document.getElementById('carnetTabContent').style.display = (tabName === 'carnet') ? 'block' : 'none';
+        function toggleFormVisibility() {
+            var form = document.getElementById("avatarForm");
+            form.style.display = form.style.display === "none" ? "block" : "none";
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const modalButtons = document.querySelectorAll('[data-modal-toggle]');
-            modalButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const targetModal = document.getElementById(this.getAttribute('data-modal-target'));
-                    if (targetModal) {
-                        targetModal.classList.toggle('hidden');
-                    }
-                });
-            });
-
-            const modalHideButtons = document.querySelectorAll('[data-modal-hide]');
-            modalHideButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const targetModal = document.getElementById(this.getAttribute('data-modal-hide'));
-                    if (targetModal) {
-                        targetModal.classList.add('hidden');
-                    }
-                });
-            });
-        });
-
+        function showTab(tabName) {
+            document.getElementById("imagesTabContent").style.display =
+                tabName === "images" ? "block" : "none";
+            document.getElementById("orlesTabContent").style.display =
+                tabName === "orles" ? "block" : "none";
+            document.getElementById("carnetTabContent").style.display =
+                tabName === "carnet" ? "block" : "none";
+        }
     </script>
 </body>
 

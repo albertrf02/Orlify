@@ -13,6 +13,9 @@
         <div class="bg-white p-5 rounded shadow-md w-full sm:w-96">
             <form class="max-w-sm mx-auto" id="registerForm" action="/doregister" method="post">
 
+                <input type="hidden" name="formType" value="userRegistration">
+
+
                 <div class="mb-5 flex items-center justify-center">
                     <a href="/"><img src="../img/logo.png" alt="Orlify" class="h-10"></a>
                 </div>  

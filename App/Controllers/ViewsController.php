@@ -6,7 +6,6 @@ class ViewsController
 {
     public function index($request, $response, $container)
     {
-
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
         $response->setSession("error", "");
@@ -38,7 +37,11 @@ class ViewsController
     {
 
         $model = $container->get("users");
+        $model2 = $container->get("classes");
         $allUsers = $model->getAllUsers();
+        $roles = $model->getRoles();
+        $classes = $model2->getClasses();
+        $usersClasses = $model->getUsersClass();
 
         $countUsers = 9;
         $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
@@ -46,11 +49,23 @@ class ViewsController
         $users = array_slice($allUsers, $start, $countUsers);
         $totalPages = ceil(count($allUsers) / $countUsers);
 
+        $response->set("usersClasses", $usersClasses);
         $response->set("users", $users);
+        $response->set("roles", $roles);
+        $response->set("classes", $classes);
         $response->set("currentPage", $page);
         $response->set("totalPages", $totalPages);
 
         $response->SetTemplate("AdminView.php");
+        return $response;
+    }
+
+    public function orlaEditor($request, $response, $container)
+    {
+        $idOrla = $_GET["idOrla"];
+        $response->set("idOrla", $idOrla);
+        $response->SetTemplate("editorOrlesView.php");
+
         return $response;
     }
 
@@ -64,17 +79,45 @@ class ViewsController
         $allOrles = $modelOrles->getOrles();
 
         $response->set("groups", $allGroups);
+
+        $classNames = [];
+
+        foreach ($allOrles as $orla) {
+            $idOrla = $orla["id"];
+            $className = $modelOrles->getClassByOrlaId($idOrla);
+            $classNames[$idOrla] = $className;
+        }
+
+        $response->set("classNames", $classNames);
         $response->set("orles", $allOrles);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST["action"])) {
+            $action = $_REQUEST["action"];
 
-            $name = $_POST["name"];
-            $group = $_POST["group"];
-            $idCreator = $_SESSION["user"]["id"];
+            if ($action === "createOrla") {
+                $name = $_POST["name"];
+                $group = $_POST["group"];
+                $idCreator = $_SESSION["user"]["id"];
 
-            $postOrla = $modelOrles->createOrla($name, $group, $idCreator);
+                $idOrla = $modelOrles->createOrla($name, $group, $idCreator);
 
-            $response->set("postOrla", $postOrla);
+                $response->redirect("Location: /orla/edit?idOrla=" . $idOrla);
+            }
+
+            if ($action === "toggleOrlaPublic") {
+                $idOrla = $_POST['idOrla'];
+                $isChecked = $_POST['isChecked'];
+
+                if ($isChecked) {
+                    $modelOrles->setOrlaPublicOn($idOrla);
+                } else {
+                    $modelOrles->setOrlaPublicOff($idOrla);
+                }
+
+                $response->redirect("Location: /equipDirectiu");
+
+            }
+
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {
@@ -83,16 +126,37 @@ class ViewsController
             if ($action === "deleteReport") {
                 $modelUsers->deleteReportAndPhoto($_GET['report_id']);
 
-                header("Location: /equipDirectiu");
+                $response->redirect("Location: /equipDirectiu");
             }
+
+            if ($action === "deleteOrla") {
+                $idOrla = $_GET['idOrla'];
+                $modelOrles->deleteOrla($idOrla);
+
+                $response->redirect("Location: /equipDirectiu");
+            }
+
+            if ($action === "activateOrla") {
+                $idOrla = $_GET["idOrla"];
+
+                $modelOrles->setOrlaVisibilityOn($idOrla);
+
+                $response->redirect("Location: /equipDirectiu");
+            }
+
+            if ($action === "deactivateOrla") {
+                $idOrla = $_GET["idOrla"];
+
+                $modelOrles->setOrlaVisibilityOff($idOrla);
+
+                $response->redirect("Location: /equipDirectiu");
+            }
+
         }
 
         $reportedImages = $modelUsers->getReportedImages();
 
         $response->set("reportedImages", $reportedImages);
-
-        $modelOrles = $container->get("orles");
-
         $response->SetTemplate("equipDirectiuView.php");
         return $response;
     }
@@ -108,17 +172,29 @@ class ViewsController
             if ($action === "setDefaultPhoto") {
                 $userModel->setDefaultPhoto($userId, $_POST['idPhoto']);
 
-                header("Location: /perfil");
+                $response->redirect("Location: /perfil");
+            }
+
+            if ($action === "setPorfilePhoto") {
+                $userModel->setPorfilePhoto($userId, $_POST['avatar']);
+
+
+                $response->redirect("Location: /perfil");
             }
         }
+
+        $avatars = $userModel->getAvatars();
 
         $user = $userModel->getUserById($userId);
         $userPhotos = $userModel->getPhotos($userId);
         $defaultPhoto = $userModel->getDefaultPhoto($userId);
+        $userOrla = $userModel->getOrlaFromClassByUserId($userId);
 
         $response->set("user", $user);
         $response->set("userPhotos", $userPhotos);
         $response->set("defaultPhoto", $defaultPhoto);
+        $response->set("avatars", $avatars);
+        $response->set("userOrla", $userOrla);
 
         $response->SetTemplate("PerfilView.php");
         return $response;
@@ -149,17 +225,66 @@ class ViewsController
 
         $currentTime = date('Y-m-d H:i:s');
 
-        if($valid && $currentTime < $time){
+        if ($valid && $currentTime < $time) {
             $errorpass = $request->get("SESSION", "errorpass");
             $response->set("errorpass", $errorpass);
             $response->set("token", $token);
             $response->setTemplate("RecoverPassword.php");
             return $response;
 
-        }else{
+        } else {
             $response->redirect("Location: /invalidtoken");
             return $response;
-        }  
+        }
+    }
+
+    function carnet($request, $response, $container)
+    {
+        $modelusers = $container->get("users");
+
+        $response->SetTemplate("CarnetView.php");
+        return $response;
+    }
+
+    function publicOrles($request, $response, $container)
+    {
+        $modelOrles = $container->get("orles");
+        $allOrles = $modelOrles->getPublicOrlesAndClass();
+        $response->set("orles", $allOrles);
+
+        $response->SetTemplate("publicOrlesView.php");
+        return $response;
+    }
+
+    function canviarContrasenya($request, $response, $container)
+    {
+        $userModel = $container->get("users");
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $currentPassword = $_POST["currentPassword"];
+            $newPassword = $_POST["newPassword"];
+
+            $user = $userModel->login($_SESSION["user"]["email"], $currentPassword);
+
+            if ($user) {
+                $newHashedPassword = $userModel->hashPassword($newPassword);
+                $userModel->updatePassword($_SESSION["user"]["id"], $newHashedPassword);
+
+                $response->redirect("Location: /perfil");
+            } else {
+                $error = "La contrasenya actual no és correcta";
+                $response->setSession("error", $error);
+
+                $response->redirect("Location: /canviarContrasenya");
+                return $response;
+            }
+        }
+
+        $error = $request->get("SESSION", "error");
+        $response->setSession("error", "");
+        $response->set("error", $error);
+        $response->SetTemplate("CanviarContrasenyaView.php");
+        return $response;
     }
 
     function teacher($request, $response, $container)

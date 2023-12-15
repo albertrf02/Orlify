@@ -46,10 +46,10 @@ class Users
     }
 
 
-    public function register($name, $lastname, $username, $password, $email)
+    public function register($name, $lastname, $username, $password, $email, $role)
     {
-        $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email) VALUES (:name, :surname, :username, :password, :email);');
-        $stm->execute([':name' => $name, ':surname' => $lastname, ':username' => $username, ':password' => $password, ':email' => $email]);
+        $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email, role) VALUES (:name, :surname, :username, :password, :email, :role);');
+        $stm->execute([':name' => $name, ':surname' => $lastname, ':username' => $username, ':password' => $password, ':email' => $email, ':role' => $role]);
     }
 
     public function hashPassword($password)
@@ -121,6 +121,12 @@ class Users
         $stm->execute([':id' => $id, ':name' => $name, ':surname' => $surname, ':password' => $hashPassword, ':role' => $role]);
     }
 
+    public function updatePassword($id, $hashPassword)
+    {
+        $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE id = :id;');
+        $stm->execute([':id' => $id, ':password' => $hashPassword]);
+    }
+
 
     public function getPhotos($idUser)
     {
@@ -141,6 +147,13 @@ class Users
         $stm = $this->sql->prepare('update photography set defaultPhoto=1 where idUser=:idUser and id=:idPhoto;');
         $stm->execute([':idUser' => $idUser, ':idPhoto' => $idPhoto]);
     }
+
+    public function setPorfilePhoto($idUser, $avatar)
+    {
+        $stm = $this->sql->prepare('update users set avatar=:avatar where id=:idUser;');
+        $stm->execute([':idUser' => $idUser, ':avatar' => $avatar]);
+    }
+
     public function getRoles()
     {
         $stm = $this->sql->prepare('SELECT * FROM roles;');
@@ -171,7 +184,12 @@ class Users
     {
         $stm = $this->sql->prepare('SELECT * FROM users WHERE id = :id;');
         $stm->execute([':id' => $id]);
-        return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
+        if (is_array($result)) {
+            return $result;
+        } else {
+            return false;
+        }
     }
 
 
@@ -229,36 +247,37 @@ class Users
     }
 
     public function deleteReportAndPhoto($reportId)
-{
-    // Retrieve idPhoto before deleting the report
-    $stm = $this->sql->prepare('
+    {
+        // Retrieve idPhoto before deleting the report
+        $stm = $this->sql->prepare('
         SELECT idPhoto
         FROM reports
         WHERE id = :reportId
     ');
-    $stm->execute([':reportId' => $reportId]);
-    $idPhoto = $stm->fetchColumn();
+        $stm->execute([':reportId' => $reportId]);
+        $idPhoto = $stm->fetchColumn();
 
-    // Delete the report
-    $stm = $this->sql->prepare('
+        // Delete the report
+        $stm = $this->sql->prepare('
         DELETE FROM reports
         WHERE id = :reportId
     ');
-    $stm->execute([':reportId' => $reportId]);
+        $stm->execute([':reportId' => $reportId]);
 
-    // Delete the corresponding photo
-    $stm = $this->sql->prepare('
+        // Delete the corresponding photo
+        $stm = $this->sql->prepare('
         DELETE FROM photography
         WHERE id = :idPhoto
     ');
-    $stm->execute([':idPhoto' => $idPhoto]);
-}
-    public function insert($name, $surname, $username, $password, $email) {
+        $stm->execute([':idPhoto' => $idPhoto]);
+    }
+    public function insert($name, $surname, $username, $password, $email)
+    {
         $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email) VALUES (:name, :surname, :username, :password, :email);');
         $stm->execute([':name' => $name, ':surname' => $surname, ':username' => $username, ':password' => $password, ':email' => $email]);
     }
-    
-    
+
+
 
     public function getUserByEmail($email)
     {
@@ -270,8 +289,8 @@ class Users
 
     public function token($email, $token)
     {
-    $stm = $this->sql->prepare('UPDATE users SET token = :token, token_expiration = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE email = :email');
-    $stm->execute([':token' => $token, ':email' => $email]);
+        $stm = $this->sql->prepare('UPDATE users SET token = :token, token_expiration = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE email = :email');
+        $stm->execute([':token' => $token, ':email' => $email]);
     }
 
 
@@ -285,28 +304,28 @@ class Users
 
     public function isValidToken($token)
     {
-    $stm = $this->sql->prepare('SELECT id FROM users WHERE token = :token');
-    $stm->execute([':token' => $token]);
-    $result = $stm->fetch(\PDO::FETCH_ASSOC);
+        $stm = $this->sql->prepare('SELECT id FROM users WHERE token = :token');
+        $stm->execute([':token' => $token]);
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
 
-    return ($result !== false);
+        return ($result !== false);
     }
 
 
     public function getTokenExpiration($token)
     {
-    $stm = $this->sql->prepare('SELECT token_expiration FROM users WHERE token = :token');
-    $stm->execute([':token' => $token]);
-    $result = $stm->fetch(\PDO::FETCH_ASSOC);
-    
-    return $result['token_expiration'];
+        $stm = $this->sql->prepare('SELECT token_expiration FROM users WHERE token = :token');
+        $stm->execute([':token' => $token]);
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
+
+        return $result['token_expiration'];
     }
 
 
     public function updatePasswordByToken($password, $token)
     {
-    $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE token = :token');
-    $stm->execute([':password' => $password, ':token' => $token]);
+        $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE token = :token');
+        $stm->execute([':password' => $password, ':token' => $token]);
     }
 
     public function insertPhotoByID($link,$idUser)
@@ -314,4 +333,53 @@ class Users
     $stm = $this->sql->prepare('INSERT INTO photography(link, idUser) VALUES (:link, :idUser);');
     $stm->execute([':link' => $link, ':idUser' => $idUser]);
     }
+
+    public function getAvatars()
+    {
+        $avatarPath = __DIR__ . "/../../public/avatars/";
+        $avatars = [];
+
+        $files = scandir($avatarPath);
+        foreach ($files as $file) {
+            if ($file !== "." && $file !== "..") {
+                $avatars[] = $file;
+            }
+        }
+
+        return $avatars;
+    }
+
+    public function getOrlaFromClassByUserId($idUser)
+    {
+        $query = <<<QUERY
+            SELECT classGroup.className, users.name, orla.id, orla.visibility, orla.name FROM classGroup, users, users_classgroup, orla
+            WHERE 
+            classGroup.id = users_classgroup.idGroupClass
+            AND
+            users.id = users_classgroup.idUser
+            AND 
+            classgroup.id = orla.idClassGroup
+            AND users.id=:idUser;
+        QUERY;
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':idUser' => $idUser]);
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function insertCard($url, $idUser)
+    {
+        $stm = $this->sql->prepare('INSERT INTO studentcard (url, idStudent) VALUES (:url, :idUser);');
+        $stm->execute([':url' => $url, ':idUser' => $idUser]);
+    }
+
+    public function getUsersClass()
+    {
+
+        $stm = $this->sql->prepare('SELECT * FROM users WHERE role = 1 OR role = 2;');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+
+
+    }
+
 }
