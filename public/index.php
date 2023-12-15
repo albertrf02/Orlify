@@ -26,6 +26,8 @@ $app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::c
 $app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"]);
+$app->get("/professor", [ViewsController::class, "teacher"], [[\App\Middleware\Auth::class, "auth"]]);
+
 
 
 $app->post("/equipDirectiuPost", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
@@ -42,6 +44,9 @@ $app->post("/updateuser", [UserController::class, "update"]);
 $app->post("/deleteuser", [UserController::class, "delete"]);
 $app->post("/dorecover", [RecoverController::class, "recover"]);
 $app->post("/dorecoverpassword", [RecoverController::class, "password"]);
+$app->post("/doinsertphoto", [UserController::class, "insertPhoto"]);
+$app->post("/camera", [ViewsController::class, "camera"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->post("/doinsertphotoweb", [UserController::class, "insertPhotoWeb"]);
 
 
 

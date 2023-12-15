@@ -69,7 +69,7 @@ function equipDirectiuPages() {
   });
   
 }
-    
+
     function recoverPages() {
         $(document).ready(function () {
             $("#recover").click(function (e) {
@@ -78,10 +78,39 @@ function equipDirectiuPages() {
                 $("#pagina-missatge").show();
             });
         });
-
     }
 
+    function teacherPages() 
+    {
+      $(document).ready(function () {
+        $("#new-users").click(function (e) {
+          e.preventDefault();
+          $("#new-pagina-users").show();
+          $("#new-pagina-grups").hide();
+          $("#new-pagina-orles").hide();
+      });
+
+      $("#new-grups").click(function (e) {
+          e.preventDefault();
+          $("#new-pagina-users").hide();
+          $("#new-pagina-grups").show();
+          $("#new-pagina-orles").hide();
+      });
+
+      $("#new-classes").click(function (e) {
+          e.preventDefault();
+          $("#new-pagina-users").hide();
+          $("#new-pagina-grups").hide();
+          $("#new-pagina-orles").show();
+      });
+
+        
+      });
+    
+    
+  }
 
 
 
-export { adminPages, equipDirectiuPages, recoverPages };
+
+export { adminPages, equipDirectiuPages, recoverPages, teacherPages};

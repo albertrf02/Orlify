@@ -18,10 +18,12 @@ function editUserModal() {
 
           $("#title").text(user.id);
           $("#id-edit").val(user.id);
+          $("#id-edit2").val(user.id);
           $("#name").val(user.name);
           $("#surname").val(user.surname);
           $("#password").val(user.password);
           $("#email").val(user.email);
+          $("#username").val(user.username);
 
           var roleSelect = $("#role");
           roleSelect.empty();

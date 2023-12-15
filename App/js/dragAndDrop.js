@@ -1,34 +1,39 @@
 function dragAndDrop() {
+    const dropContainer = document.querySelector('.border-dashed');
+    const fileInput = document.getElementById('file');
+    const fileNamesParagraph = document.getElementById('fileNames');
+  
     dropContainer.ondragover = dropContainer.ondragenter = function (evt) {
-      evt.preventDefault();
+        evt.preventDefault();
+        dropContainer.classList.add('border-blue-500');
     };
   
-    let valores_ = [];
+    dropContainer.ondragleave = function () {
+        dropContainer.classList.remove('border-blue-500');
+    };
+  
     dropContainer.ondrop = function (evt) {
-      file.files = evt.dataTransfer.files;
+        evt.preventDefault();
+        dropContainer.classList.remove('border-blue-500');
   
-      const dT = new DataTransfer();
+        const files = evt.dataTransfer.files;
   
-      let i = 0;
-      for (i = 0; i < evt.dataTransfer.files.length; i++) {
-        var reader = new FileReader();
+        fileNamesParagraph.textContent = files.length > 1
+            ? `${files.length} fitxers seleccionats`
+            : files[0].name;
   
-        // Assuming you want to read the content of the file
-        reader.onload = function (event) {
-          // Access the content of the file using event.target.result
-          console.log(event.target.result);
-        };
-  
-        reader.readAsText(evt.dataTransfer.files[i]);
-        valores_.push(reader);
-        dT.items.add(evt.dataTransfer.files[i]);
-      }
-  
-      file.files = dT.files;
-  
-      evt.preventDefault();
+        for (let i = 0; i < files.length; i++) {
+            var reader = new FileReader();
+            reader.readAsText(files[i]);
+        }
     };
+  
+    fileInput.addEventListener('change', function () {
+        fileNamesParagraph.textContent = this.files.length > 1
+            ? `${this.files.length} fitxers seleccionats`
+            : this.files[0].name;
+    });
   }
   
-  export { dragAndDrop };
   
+  export { dragAndDrop };

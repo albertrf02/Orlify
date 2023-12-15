@@ -161,5 +161,32 @@ class ViewsController
             return $response;
         }  
     }
+
+    function teacher($request, $response, $container)
+    {
+        $model = $container->get("users");
+        $allUsers = $model->getAllUsers();
+
+        $countUsers = 9;
+        $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
+        $start = ($page - 1) * $countUsers;
+        $users = array_slice($allUsers, $start, $countUsers);
+        $totalPages = ceil(count($allUsers) / $countUsers);
+
+        $response->set("users", $users);
+        $response->set("currentPage", $page);
+        $response->set("totalPages", $totalPages);
+        $response->SetTemplate("TeacherView.php");
+        return $response;
+    }
+
+    function camera($request, $response, $container)
+    {
+        $idUser = $request->get(INPUT_POST,"id-edit");
+        $response->set("idUser", $idUser);
+
+        $response->SetTemplate("Camera.php");
+        return $response;
+    }
 }
 

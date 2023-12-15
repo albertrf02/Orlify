@@ -309,5 +309,9 @@ class Users
     $stm->execute([':password' => $password, ':token' => $token]);
     }
 
-
+    public function insertPhotoByID($link,$idUser)
+    {
+    $stm = $this->sql->prepare('INSERT INTO photography(link, idUser) VALUES (:link, :idUser);');
+    $stm->execute([':link' => $link, ':idUser' => $idUser]);
+    }
 }
