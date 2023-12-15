@@ -16,8 +16,9 @@
         <?php if ($orla['public'] == 1): ?>
             <a href="/orla/iframe?idOrla=<?= $orla['id'] ?>"
                 class="edit-button text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
-                Veure
+                Veure orla:
                 <?= $orla['name'] ?>
+                <?= $orla['className'] ?>
             </a>
             <?php $orlesPubliques = true; ?>
         <?php endif ?>

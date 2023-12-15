@@ -249,7 +249,7 @@ class ViewsController
     function publicOrles($request, $response, $container)
     {
         $modelOrles = $container->get("orles");
-        $allOrles = $modelOrles->getPublicOrles();
+        $allOrles = $modelOrles->getPublicOrlesAndClass();
         $response->set("orles", $allOrles);
 
         $response->SetTemplate("publicOrlesView.php");
