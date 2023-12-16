@@ -13,7 +13,7 @@
     {% for i in role2Users %}
         {% block users %}
             <div class="user">
-                <img src="{{ i.link }}" alt="" />
+                <img src="{{ server }}{{ i.link }}" alt="" />
                 <p>{{ i.name }}</p>
             </div>
         {% endblock %}

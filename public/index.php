@@ -38,7 +38,7 @@ $app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"], [[\App\Midd
 
 $app->get("/orla/edit", [OrlaController::class, "editOrla"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/orla/view", [OrlaController::class, "viewOrla"], [[\App\Middleware\Auth::class, "auth"]]);
-$app->get("/orla/pdf", [OrlaController::class, "orlaToPDF"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/orla-pdf", [OrlaController::class, "orlaToPDF"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/orla/iframe", [OrlaController::class, "iframeOrla"], [[\App\Middleware\Auth::class, "auth"]]);
 
 
