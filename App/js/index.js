@@ -8,6 +8,8 @@ import {
   equipDirectiuPages,
   recoverPages,
   perfilPages,
+  toggleFormVisibility,
+  showTab,
 } from "./pages.js";
 import { deleteClassModal } from "./ajax.js";
 import { dragAndDrop, checkFile } from "./dragAndDrop.js";
@@ -24,6 +26,8 @@ equipDirectiuPages();
 searchUserEquipDirectiu();
 recoverPages();
 perfilPages();
+window.toggleFormVisibility = toggleFormVisibility;
+window.showTab = showTab;
 window.toggleOrlaPublic = toggleOrlaPublic;
 
 window.getUserData = orla.getUserData;

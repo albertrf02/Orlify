@@ -206,22 +206,6 @@
     </div>
 
     <?php require "Scripts.php" ?>
-
-    <script>
-        function toggleFormVisibility() {
-            var form = document.getElementById("avatarForm");
-            form.style.display = form.style.display === "none" ? "block" : "none";
-        }
-
-        function showTab(tabName) {
-            document.getElementById("imagesTabContent").style.display =
-                tabName === "images" ? "block" : "none";
-            document.getElementById("orlesTabContent").style.display =
-                tabName === "orles" ? "block" : "none";
-            document.getElementById("carnetTabContent").style.display =
-                tabName === "carnet" ? "block" : "none";
-        }
-    </script>
 </body>
 
 </html>

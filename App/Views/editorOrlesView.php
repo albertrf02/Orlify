@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor Orles</title>
     <!-- <?php require "Head.php" ?> -->
-    <!-- <script src="/js/orla.js"></script> -->
 </head>
 
 <body>
