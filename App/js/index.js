@@ -13,6 +13,7 @@ import {
 import { deleteClassModal } from "./ajax.js";
 import { dragAndDrop, checkFile } from "./dragAndDrop.js";
 import { toggleOrlaPublic } from "./equipDirectiu.js";
+import { camera } from "./camera.js";
 
 
 adminPages();
@@ -120,8 +121,10 @@ window.toggleOrlaPublic = toggleOrlaPublic;
 // window.showUsersInfo = showUsersInfo;
 // window.saveUpdatedOrla = saveUpdatedOrla;
 
-dragAndDrop();
+
 deleteClassModal();
 searchUserClass();
 teacherPages();
-camera(); 
+camera();
+dragAndDrop();
+checkFile();

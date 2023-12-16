@@ -289,8 +289,14 @@ class ViewsController
 
     function teacher($request, $response, $container)
     {
+        $id = $request->get("SESSION", "user")["id"];
+
         $model = $container->get("users");
+        $model2 = $container->get("classes");
+        
         $allUsers = $model->getAllUsers();
+        $allClass = $model2->getClassByUser($id);
+
 
         $countUsers = 9;
         $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
@@ -301,6 +307,7 @@ class ViewsController
         $response->set("users", $users);
         $response->set("currentPage", $page);
         $response->set("totalPages", $totalPages);
+        $response->set("classes", $allClass);
         $response->SetTemplate("TeacherView.php");
         return $response;
     }

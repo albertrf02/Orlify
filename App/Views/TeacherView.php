@@ -24,7 +24,7 @@
                         <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                             <!-- SVG Path -->
                         </svg>
-                        <span class="ms-3">Grups</span>
+                        <span class="ms-3">Classes</span>
                     </a>
                 </li>
                 <li>
@@ -191,8 +191,14 @@
             </div>
             
             <div id="new-pagina-grups" class="pagina">
-                <h2>Contenido de Grupos</h2>
-                <p>Esta es la información de la página "Grupos".</p>
+                <div>
+                    <?php foreach ($classes as $class) :?>
+                        <div class="flex items-center mb-4">
+                            <input type="radio" name="selectedClass" id="class-<?= $class['id']; ?>" value="<?= $class['id']; ?>" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="class-<?= $class['id']; ?>" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"><?= $class['className']; ?></label>
+                        </div>
+                    <?php endforeach ?>
+                </div>
             </div>
 
             <div id="new-pagina-orles" class="pagina">
