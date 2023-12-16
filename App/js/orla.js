@@ -1,10 +1,10 @@
-// TODO move this file to include in bundle.js
-let usersNotInOrla;
+let usersNotInOrlaRole1;
+let usersNotInOrlaRole2;
 let role1Users;
 let role2Users;
 let users;
 
-async function getUserData() {
+export async function getUserData() {
   const idOrla = document.getElementById("idOrla").value;
   const url = `/veureOrla?idOrla=${idOrla}`; // Replace with your API endpoint
   try {
@@ -18,10 +18,12 @@ async function getUserData() {
   }
 }
 
-function printLists() {
-  // let htmlContentLlista = "";
-  // let htmlContentOrla = "";
-  // Recorrem totes les cançons de l'array
+export async function printLists() {
+  await getUserData()
+    .then((data) => {
+      users = data;
+    })
+    .catch((error) => console.error(error));
 
   usersNotInOrlaRole2 = document.getElementById("usersNotInOrla-role2");
   usersNotInOrlaRole1 = document.getElementById("usersNotInOrla-role1");
@@ -29,9 +31,7 @@ function printLists() {
   role2Users = document.getElementById("role-2");
 
   for (let id in users) {
-    // Obtenim la informació de cada cançó
     let userData = users[id];
-    // Creem una entrada HTML per a cada cançó amb un estil i una funció de clic
     if (userData["isInOrla"]) {
       addUserToProperDiv(userData, id);
     } else {
@@ -40,7 +40,7 @@ function printLists() {
   }
 }
 
-function addUserToOrla(id) {
+export function addUserToOrla(id) {
   const userData = users[id];
   addUserToProperDiv(userData, id);
   const element = document.getElementById(`llista-${id}`);
@@ -57,7 +57,7 @@ function addUserToProperDiv(userData, id) {
   }
 }
 
-function removeUserToProperDiv(userData, id) {
+export function removeUserToProperDiv(userData, id) {
   if (userData["role"] == 1) {
     usersNotInOrlaRole1.innerHTML += generarUserLlista(id, userData);
   } else if (userData["role"] == 2) {
@@ -79,7 +79,7 @@ function generarUserLlista(id, userData) {
 </div>`;
 }
 
-function removeUserFromOrla(id) {
+export function removeUserFromOrla(id) {
   const userData = users[id];
   removeUserToProperDiv(userData, id);
   const element = document.getElementById(`orla-${id}`);
@@ -87,11 +87,11 @@ function removeUserFromOrla(id) {
   users[id]["isInOrla"] = false;
 }
 
-function showUsersInfo() {
+export function showUsersInfo() {
   console.log(users);
 }
 
-function saveUpdatedOrla() {
+export function saveUpdatedOrla() {
   const usersInOrla = Object.keys(users).filter(
     (key) => users[key].isInOrla === 1 || users[key].isInOrla === true
   );

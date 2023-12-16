@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor Orles</title>
     <!-- <?php require "Head.php" ?> -->
-    <script src="/js/orla.js"></script>
+    <!-- <script src="/js/orla.js"></script> -->
 </head>
 
 <body>
@@ -83,12 +83,7 @@
 <?php require "Scripts.php" ?>
 <script>
     document.addEventListener("DOMContentLoaded", function (event) {
-        getUserData()
-            .then((data) => {
-                users = data;
-                printLists();
-            })
-            .catch((error) => console.error(error));
+        printLists();
     });
 </script>
 
