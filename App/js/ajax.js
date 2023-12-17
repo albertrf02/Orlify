@@ -70,6 +70,9 @@ function generateUser() {
 }
 
 
+
+
+
 function editUserClass() {
     // Asegúrate de tener una referencia al contenedor de usuarios
     var usersContainer = $("#users-container-class");
@@ -94,18 +97,46 @@ function editUserClass() {
                 // Limpiar el contenedor antes de agregar nuevos elementos
                 usersContainer.empty();
 
-                users.forEach(function (user) {
-                    var userHtml = `
-                    <div class="flex flex-wrap items-center mb-4">
-                    <input id="user-${user.id}" type="checkbox" name="selectedUsersClass[]" value="${user.id}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="user-${user.id}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">${user.name} ${user.surname}</label>
-                    <input type="hidden" name="userClassId" value="${userClassId}">
-                </div>
-                    `;
+                console.log("Número de usuarios:", users);
 
-                    // Agregar el HTML del usuario al contenedor
-                    usersContainer.append(userHtml);
+                if (users === 0) {
+                    // Si no hay usuarios, mostrar un mensaje
+                    usersContainer.append('<p class="text-gray-500">Aquesta classe no té alumnes</p>');
+                } else {
+
+                users.forEach(function (user) {
+                    var userCardHtml = `
+                    <div class="mb-4 flex items-center space-x-4">
+    <ul class="w-full">
+        <li class="flex items-center justify-between p-5 border border-gray-200 rounded-lg">
+        <input type="hidden" name="userClassId" value="${userClassId}">
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg mr-4" src="../avatars/${user.avatar}" alt="${user.name}"/>
+                <div class="flex-grow">
+                    <div class="text-lg font-semibold">${user.name} ${user.surname}</div>
+                    <div class="text-gray-500 dark:text-gray-400">${user.email}</div>
+                </div>
+                <div class="flex items-center">
+                    <input id="user-${user.id}" type="checkbox" name="selectedUsersClass[]" value="${user.id}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                </div>
+            </label>
+        </li>
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+                    `;
+                
+                    usersContainer.append(userCardHtml);
                 });
+
+                }
+                
             },
             error: function (error) {
                 console.error("Error en la solicitud AJAX: ", error);

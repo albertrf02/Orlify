@@ -319,6 +319,24 @@ class Users
     }
 
 
+    public function getStudent() {
+        $stm = $this->sql->prepare('SELECT * FROM users u 
+                                    LEFT JOIN users_classgroup c ON u.id = c.idUser
+                                    WHERE (u.role = 1 AND c.idUser IS NULL);');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+    public function getTeacher() {
+        $stm = $this->sql->prepare('SELECT * FROM users u 
+                                    LEFT JOIN users_classgroup c ON u.id = c.idUser
+                                    WHERE u.role = 2;');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+
+
     public function insertGeneratedUser($name, $surname, $username, $password, $email, $role) {
         $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email, role) VALUES (:name, :surname, :username, :password, :email, :role);');
         $stm->execute([':name' => $name, ':surname' => $surname, ':username' => $username, ':password' => $password, ':email' => $email, ':role' => $role]);

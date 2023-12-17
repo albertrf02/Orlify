@@ -98,11 +98,12 @@ class ClassController
 
         $usersClass = $model2->getUsersByClassId($classId);
 
+        $count0 = 0;
         if (!empty($usersClass)) {
             $response->set("usersClass", $usersClass);
             $response->setJSON();
         } else {
-            $response->set('error', 'error');
+            $response->set('usersClass', $count0);
             $response->setJSON();
         }
 
@@ -115,6 +116,7 @@ class ClassController
 
     $userIds = $_POST['selectedUsersClass'];
     $classId = $request->get(INPUT_POST, "userClassId");
+
 
         if (!is_null($userIds) && is_array($userIds)) {
             $model2 = $container->get("classes");

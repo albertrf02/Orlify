@@ -323,9 +323,10 @@
                 </div>
             </div>
 
+
             <div id="pagina-classes-add" class="pagina hidden">
                 <div class="grid gap-4">
-                    <form class="border-2 mb-8 p-4" action="/adduserclass" method="POST">
+                    <form class="border-2 mb-8 p-4 bg-white rounded-lg" action="/adduserclass" method="POST">
                         <div class="mb-8">
                             <p class="mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Seleccionar Clase:</p>
                             <?php foreach ($classes as $class) :?>
@@ -348,24 +349,64 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Seleccionar usuaris:</div>
-                        <div id="users-container" class="grid grid-cols-6 grid-rows-4 gap-4 max-h-48 overflow-auto mb-8">
-                            <?php foreach ($usersClasses as $userClass) :?>
-                                <div class="flex items-center mb-4">
-                                    <input id="user-checkbox-<?= $userClass['id']; ?>" type="checkbox" name="selectedUsers[]" value="<?= $userClass['id']; ?>" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="user-checkbox-<?= $userClass['id']; ?>" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"><?= $userClass['name']; ?> - <?= $roles[$userClass['role']]['name']; ?></label>
-                                </div>
-                            <?php endforeach ?>
+                        <div class="mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Seleccionar usuarios:</div>
+                        
+                        <div id="users-container" class="grid grid-cols-6 gap-4 mb-8">
+    <!-- Contenedor para Profesores con scrollbar -->
+    <div class="col-span-6 md:col-span-3 max-h-48 overflow-auto">
+        <h2 class="text-lg font-semibold mb-4">Profesores</h2>
+        <?php foreach ($professors as $profesor) :?>
+            <div class="mb-4 flex items-center space-x-4">
+                <ul class="w-full">
+                    <li class="flex items-center justify-between p-5 border border-gray-200 rounded-lg">
+                        <img class="w-24 h-24 mb-3 rounded-full shadow-lg mr-4" src="<?= '../avatars/' . $profesor['avatar'] ?>" alt="<?= $profesor['name']?>"/>
+                        <div class="flex-grow">
+                            <div class="text-lg font-semibold"><?= $profesor['name'] . " " . $profesor['surname']?></div>
+                            <div class="text-gray-500 dark:text-gray-400"><?= $profesor['email'] ?></div>
                         </div>
+                        <div class="flex items-center">
+                            <input id="user-checkbox-<?= $profesor['id']; ?>" type="checkbox" name="selectedUsers[]" value="<?= $profesor['id']; ?>" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        <?php endforeach ?>
+    </div>
+
+    <!-- Contenedor para Estudiantes con scrollbar -->
+    <div class="col-span-6 md:col-span-3 max-h-48 overflow-auto">
+        <h2 class="text-lg font-semibold mb-4">Alumnes</h2>
+        <?php foreach ($students as $student) :?>
+            <div class="mb-4 flex items-center space-x-4">
+                <ul class="w-full">
+                    <li class="flex items-center justify-between p-5 border border-gray-200 rounded-lg">
+                        <img class="w-24 h-24 mb-3 rounded-full shadow-lg mr-4" src="<?= '../avatars/' . $student['avatar'] ?>" alt="<?= $student['name']?>"/>
+                        <div class="flex-grow">
+                            <div class="text-lg font-semibold"><?= $student['name'] . " " . $student['surname']?></div>
+                            <div class="text-gray-500 dark:text-gray-400"><?= $student['email'] ?></div>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="user-checkbox-<?= $student['id']; ?>" type="checkbox" name="selectedUsers[]" value="<?= $student['id']; ?>" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        <?php endforeach ?>
+    </div>
+</div>
+
+
+
                         <div class="flex justify-center">
                             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-24">Importar</button>
                         </div>
                     </form>
                     <button class="generateUser block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                    Toggle modal
+                        Toggle modal
                     </button>
                 </div>
             </div>
+
 
 
 
@@ -485,29 +526,31 @@
     
 
     <div id="editUsersClass" data-modal-backdrop="editUsersClass" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative p-4 w-full max-w-2xl max-h-full">
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Edit Users Class
-                    </h3>
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="editUsersClass">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                </div>
-                <form action="/deleteuserclass" method="POST" class="border-2 mb-8 p-4">
-                    <div id="users-container-class" class="grid grid-cols-1 md:grid-cols-3 grid-rows-4 gap-4 max-h-48 md:max-h-full overflow-auto mb-8 p-4"></div>
-                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                        <button data-modal-hide="editUsersClass" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
-                    </div>
-                </form>
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Eliminar usuaris
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="editUsersClass">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
             </div>
+            <form action="/deleteuserclass" method="POST" class="border-2 mb-8 p-4">
+                <div id="users-container-class" class="flex flex-col w-full max-h-48 overflow-y-auto"> 
+                    
+                </div>
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                    <button data-modal-hide="editUsersClass" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
 
 
