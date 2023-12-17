@@ -7,28 +7,37 @@ class UserController
 
     public function update($request, $response, $container)
     {
-
         $id = $request->get(INPUT_POST, "id-edit");
         $name = $request->get(INPUT_POST, "name-edit");
         $surname = $request->get(INPUT_POST, "surname-edit");
         $password = $request->get(INPUT_POST, "password-edit");
         $role = $request->get(INPUT_POST, "role-edit");
         $email = $request->get(INPUT_POST, "email-edit");
-
+    
         $model = $container->get("users");
-
-        $checkPassword = $model->getUser($email);
-
-        if ($password === $checkPassword['password']) {
-            $update = $model->updateUser($id, $name, $surname, $password, $role);
-        } else {
+    
+        $currentUser = $model->getUser($email);
+    
+        $name = !empty($name) ? $name : $currentUser['name'];
+        $surname = !empty($surname) ? $surname : $currentUser['surname'];
+        $role = !empty($role) ? $role : $currentUser['role'];
+    
+        if (!empty($password)) {
             $hashPassword = $model->hashPassword($password);
-            $update = $model->updateUser($id, $name, $surname, $hashPassword, $role);
+        } else {
+            $hashPassword = $currentUser['password'];
         }
-
+    
+        $update = $model->updateUser($id, $name, $surname, $hashPassword, $role);
+    
         $response->redirect("Location: /admin");
+
         return $response;
     }
+
+
+
+    
 
     public function delete($request, $response, $container)
     {

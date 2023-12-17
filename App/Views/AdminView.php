@@ -14,26 +14,37 @@
                 <li>
                     <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-users" data-collapse-toggle="dropdown-users">
                         <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
-                            <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>
+                            <path d="M7 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm2 1H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
                         </svg>
-                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Users</span>
+                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Usuaris</span>
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                         </svg>
                     </button>
                     <ul id="dropdown-users" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="#" id="users-edit" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Edit Users</a>
+                            <button id="users-edit" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+                                    <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm-1.391 7.361.707-3.535a3 3 0 0 1 .82-1.533L7.929 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h4.259a2.975 2.975 0 0 1-.15-1.639ZM8.05 17.95a1 1 0 0 1-.981-1.2l.708-3.536a1 1 0 0 1 .274-.511l6.363-6.364a3.007 3.007 0 0 1 4.243 0 3.007 3.007 0 0 1 0 4.243l-6.365 6.363a1 1 0 0 1-.511.274l-3.536.708a1.07 1.07 0 0 1-.195.023Z"/>
+                                </svg>
+                                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Editar usuaris</span>
+                            </button>
                         </li>
                         <li>
-                            <a href="#" id="users-add" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add Users</a>
+                            <button id="users-add" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+                                    <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z"/>
+                                </svg>
+                                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Afegir usuaris</span>
+                            </button>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-classes" data-collapse-toggle="dropdown-classes">
                         <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
-                            <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>
+                            <path d="M14.5 0A3.987 3.987 0 0 0 11 2.1a4.977 4.977 0 0 1 3.9 5.858A3.989 3.989 0 0 0 14.5 0ZM9 13h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z"/>
+                            <path d="M5 19h10v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2ZM5 7a5.008 5.008 0 0 1 4-4.9 3.988 3.988 0 1 0-3.9 5.859A4.974 4.974 0 0 1 5 7Zm5 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm5-1h-.424a5.016 5.016 0 0 1-1.942 2.232A6.007 6.007 0 0 1 17 17h2a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5ZM5.424 9H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h2a6.007 6.007 0 0 1 4.366-5.768A5.016 5.016 0 0 1 5.424 9Z"/>
                         </svg>
                         <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Classes</span>
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -42,10 +53,20 @@
                     </button>
                     <ul id="dropdown-classes" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="#" id="classes-edit" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Edit Classes</a>
+                            <button id="classes-edit" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+                                    <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm-1.391 7.361.707-3.535a3 3 0 0 1 .82-1.533L7.929 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h4.259a2.975 2.975 0 0 1-.15-1.639ZM8.05 17.95a1 1 0 0 1-.981-1.2l.708-3.536a1 1 0 0 1 .274-.511l6.363-6.364a3.007 3.007 0 0 1 4.243 0 3.007 3.007 0 0 1 0 4.243l-6.365 6.363a1 1 0 0 1-.511.274l-3.536.708a1.07 1.07 0 0 1-.195.023Z"/>
+                                </svg>
+                                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Editar classes</span>
+                            </button>
                         </li>
                         <li>
-                            <a href="#" id="classes-add" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add Classes</a>
+                            <button id="classes-add" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+                                    <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z"/>
+                                </svg>
+                                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Afegir alumnes</span>
+                            </button>
                         </li>
                     </ul>
                 </li>
@@ -53,10 +74,11 @@
         </div>
     </aside>
 
-    <div class="p-4 sm:ml-64 h-screen">
+    <div class="p-4 sm:ml-64 min-h-screen bg-background">
         <div class="p-4 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-            <div id="search-users-edit" class="pagina flex items-center justify-center">
-                <div class="flex items-center justify-between bg-white dark:bg-gray-900">
+
+            <div id="search-users-edit" class="pagina flex items-center justify-center mb-8">
+                <div class="flex items-center justify-between bg-white dark:bg-gray-900 rounded-lg">
                     <label for="table-search" class="sr-only">Search</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -68,10 +90,11 @@
                     </div>
                 </div>
             </div>
+
             <div id="pagina-users-edit" class="pagina flex flex-col">
                 <div class="flex flex-wrap justify-center">
                     <?php foreach ($users as $user) : ?>
-                        <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <div class="flex justify-end px-4 pt-4">
                                 <?php if (!isset($user['role']) && $user['role'] === NULL) : ?>
                                     <div class="py-4">
@@ -88,12 +111,25 @@
                                 <?php endif ?>
                             </div>
                             <div class="flex flex-col items-center pb-10">
-                                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="../img/logo.png" alt="Bonnie image"/>
+                                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="<?= '../avatars/' . $user['avatar'] ?>" alt="<?= $user['name']?>"/>
                                 <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"><?= $user['name'] . ' ' . $user['surname'] ?></h5>
                                 <span class="text-sm text-gray-500 dark:text-gray-400"><?= $user['email'] ?></span>
                                 <div class="flex mt-4 md:mt-6">
-                                    <a href="#" type="button" data-edit-user-id="<?= $user['id']; ?>" data-modal-target="editUserModal" data-modal-show="editUserModal" class="editUserModal inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Editar</a>
-                                    <a href="#" type="button" data-delete-user-id="<?= $user['id']; ?>" data-modal-target="deleteUserModal" data-modal-show="deleteUserModal" class="deleteUserModal inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 border border-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-700 dark:border-red-700 dark:hover:bg-red-800 dark:focus:ring-red-800 ms-3">Eliminar</a>
+                                    <div class="mr-4">
+                                        <button data-edit-user-id="<?= $user['id']; ?>" data-modal-target="editUserModal" data-modal-show="editUserModal" class="editUserModal block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z"/>
+                                                <path d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button data-delete-user-id="<?= $user['id']; ?>" data-modal-target="deleteUserModal" data-modal-show="deleteUserModal" class="deleteUserModal block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="button">
+                                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -134,77 +170,89 @@
                 </div>
             </div>
 
-            <div id="pagina-users-add" class="pagina">
+            <div id="pagina-users-add" class="pagina hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    <form class="border-2 mb-8 lg:mb-0 p-4" action="/doregister" method="POST">
-                        <div class="mb-5 flex items-center justify-center">
-                            <a><img src="../img/logo.png" alt="Orlify" class="h-10"></a>
-                        </div> 
-                        <input type="hidden" name="formType" value="adminRegistration">
-                        <div class="mb-5 grid grid-cols-2 gap-4">
-                            <div class="mb-5">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
-                                <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
-                            </div>
-                            <div class="mb-5">
-                                <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cognoms</label>
-                                <input type="text" name="lastname" id="lastname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
-                            </div>
-                        </div>
-                        <div class="mb-5 grid grid-cols-2 gap-4">
-                            <div class="mb-5">
-                                <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom d'usuari</label>
-                                <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
-                            </div>
-                            <div class="mb-5">
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
-                            </div>
-                        </div>
-                        <div class="mb-5 grid grid-cols-2 gap-4">
-                            <div class="mb-5">
-                                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contrasenya</label>
-                                <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                            </div>
-                            <div class="mb-5">
-                                <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-                                <select name="role" id="role" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <?php foreach ($roles as $role) : ?>
-                                    <option value="<?= $role['idRole']; ?>" <?= ($user['role'] == $role['idRole']) ? 'selected' : ''; ?>>
-                                        <?= $role['name']; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="flex justify-center">
-                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-24">Afegir</button>
-                        </div>
-                    </form>
-
-                    <form class="border-2 flex flex-col justify-between h-full p-4" action="/importcsv" method="POST" enctype="multipart/form-data">
-                        <div class="mb-5 flex items-center justify-center">
-                            <a><img src="../img/logo.png" alt="Orlify" class="h-10"></a>
-                        </div>
-                        <div id="dropContainer" class="mb-5 flex items-center justify-center">
-                            <label for="file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                                    </svg>
-                                    <p id="fileNames" class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                    <div class="items-center justify-center">
+                        <form class="bg-white mb-8 lg:mb-0 p-4 rounded-lg" action="/doregister" method="POST">
+                            <div class="mb-5 flex items-center justify-center">
+                                <a><img src="../img/logo.png" alt="Orlify" class="h-10"></a>
+                            </div> 
+                            <input type="hidden" name="formType" value="adminRegistration">
+                            <div class="mb-5 grid grid-cols-2 gap-4">
+                                <div class="mb-5">
+                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
+                                    <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                                 </div>
-                                <input id="file" type="file" name="file" accept=".csv" class="hidden" required/>
-                            </label>
-                        </div>
-                        <div class="flex justify-center">
-                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-24">Importar</button>
-                        </div>
-                    </form>
+                                <div class="mb-5">
+                                    <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cognoms</label>
+                                    <input type="text" name="lastname" id="lastname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                                </div>
+                            </div>
+                            <div class="mb-5 grid grid-cols-2 gap-4">
+                                <div class="mb-5">
+                                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom d'usuari</label>
+                                    <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                                </div>
+                                <div class="mb-5">
+                                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                    <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                                </div>
+                            </div>
+                            <div class="mb-5 grid grid-cols-2 gap-4">
+                                <div class="mb-5">
+                                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contrasenya</label>
+                                    <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                                </div>
+                                <div class="mb-5">
+                                    <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                                    <select name="role" id="role" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <?php foreach ($roles as $role) : ?>
+                                        <option value="<?= $role['idRole']; ?>" <?= ($user['role'] == $role['idRole']) ? 'selected' : ''; ?>>
+                                            <?= $role['name']; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex justify-center">
+                                <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    <svg class="w-6 h-6 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="items-center justify-center">
+                        <form class="bg-white flex flex-col justify-between h-full p-4 rounded-lg" action="/importcsv" method="POST" enctype="multipart/form-data">
+                            <div class="mb-5 flex items-center justify-center">
+                                <a><img src="../img/logo.png" alt="Orlify" class="h-10"></a>
+                            </div>
+                            <div id="dropContainer" class="mb-5 flex items-center justify-center">
+                                <label for="file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                        </svg>
+                                        <p id="fileNames" class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                    </div>
+                                    <input id="file" type="file" name="file" accept=".csv" class="hidden" required/>
+                                </label>
+                            </div>
+                            <div class="flex justify-center">
+                                <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    <svg class="w-6 h-6 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z"/>
+                                        <path d="M14.067 0H7v5a2 2 0 0 1-2 2H0v4h7.414l-1.06-1.061a1 1 0 1 1 1.414-1.414l2.768 2.768a1 1 0 0 1 0 1.414l-2.768 2.768a1 1 0 0 1-1.414-1.414L7.414 13H0v5a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.933-2Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
-            <div id="pagina-classes-edit" class="pagina flex flex-col items-center justify-center">
+            <div id="pagina-classes-edit" class="pagina flex flex-col items-center justify-center hidden">
                 <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                     <div class="flex items-center justify-between mb-4">
                         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Classes</h5>
@@ -215,40 +263,51 @@
                                 <li class="py-3 sm:py-4">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0">
-                                            <div class="flex justify-end px-4 pt-4">
-                                                <?php if ($class['state'] === 0) : ?>
-                                                    <div class="py-4">
-                                                        <div class="flex items-center">
-                                                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
-                                                        </div>
+                                            <?php if ($class['state'] === 0) : ?>
+                                                <div class="py-4">
+                                                    <div class="flex items-center">
+                                                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
                                                     </div>
-                                                <?php else : ?>
-                                                    <div class="py-4">
-                                                        <div class="flex items-center">
-                                                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                                        </div>
+                                                </div>
+                                            <?php else : ?>
+                                                <div class="py-4">
+                                                    <div class="flex items-center">
+                                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
                                                     </div>
-                                                <?php endif ?>
-                                            </div>
+                                                </div>
+                                            <?php endif ?>
                                         </div>
                                         <div class="flex-1 min-w-0 ms-4">
-                                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                                <?= $class['className'] ?>
-                                            </p>
+                                            <div class="py-2">
+                                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                    <?= $class['className'] ?>
+                                                </p>
+                                            </div>
                                         </div>
                                         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                                             <?php if ($class['state'] === 0) : ?>
-                                                
-                                                <button data-delete-class-id="<?= $class['id']; ?>" data-modal-target="deleteClassModal" data-modal-toggle="deleteClassModal" class="deleteClassModal block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                                                Toggle modal
-                                                </button>
+                                                <div>
+                                                    <button data-delete-class-id="<?= $class['id']; ?>" data-modal-target="deleteClassModal" data-modal-toggle="deleteClassModal" class="deleteClassModal block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                                                        <svg class="w-6 h-6 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                                                        </svg>
+                                                    </button>
+                                                </div>
                                             <?php else : ?>
-                                                <button data-delete-class-id="<?= $class['id']; ?>" data-modal-target="deleteClassModal" data-modal-toggle="deleteClassModal" class="deleteClassModal block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="button">
-                                                Toggle modal
-                                                </button>
-                                                <button data-edit-class-users-id="<?= $class['id']; ?>" data-modal-target="editUsersClass" data-modal-toggle="editUsersClass" class="editUsersClass block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                                            View Users
-                                        </button>
+                                                <div class="mr-4">
+                                                    <button data-delete-class-id="<?= $class['id']; ?>" data-modal-target="deleteClassModal" data-modal-toggle="deleteClassModal" class="deleteClassModal block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="button">
+                                                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <button data-edit-class-users-id="<?= $class['id']; ?>" data-modal-target="editUsersClass" data-modal-toggle="editUsersClass" class="editUsersClass block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                                                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                                                            <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                                                        </svg>
+                                                    </button>
+                                                </div>
                                             <?php endif ?>  
                                         </div>
                                     </div>
@@ -256,13 +315,15 @@
                             <?php endforeach ?>
                         </ul>
                     </div>
-                    <button data-modal-target="addClassModal" data-modal-toggle="addClassModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                    Toggle modal
+                    <button data-modal-target="addClassModal" data-modal-toggle="addClassModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                        <svg class="w-6 h-6 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.546.5a9.5 9.5 0 1 0 9.5 9.5 9.51 9.51 0 0 0-9.5-9.5ZM13.788 11h-3.242v3.242a1 1 0 1 1-2 0V11H5.304a1 1 0 0 1 0-2h3.242V5.758a1 1 0 0 1 2 0V9h3.242a1 1 0 1 1 0 2Z"/>
+                        </svg>
                     </button>
                 </div>
             </div>
 
-            <div id="pagina-classes-add" class="pagina">
+            <div id="pagina-classes-add" class="pagina hidden">
                 <div class="grid gap-4">
                     <form class="border-2 mb-8 p-4" action="/adduserclass" method="POST">
                         <div class="mb-8">
@@ -341,15 +402,15 @@
                         <input type="hidden" name="email-edit" id="email-edit" value="">
                         <div class="col-span-6 sm:col-span-3">
                             <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
-                            <input type="text" name="name-edit" id="name-edit" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bonnie">
+                            <input type="text" name="name-edit" id="name-edit" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cognoms</label>
-                            <input type="text" name="surname-edit" id="surname-edit" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Green">
+                            <input type="text" name="surname-edit" id="surname-edit" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" name="password-edit" id="password-edit" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="e.g. +(12)3456 789">
+                            <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contrasenya</label>
+                            <input type="text" name="password-edit" id="password-edit" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
@@ -359,7 +420,7 @@
                     </div>
                 </div>
                 <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save all</button>
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Guardar</button>
                 </div>
             </form>
         </div>

@@ -1,51 +1,69 @@
 import $ from "jquery";
 
 function adminPages() {
-    $(document).ready(function () {
-        $("#pagina-users-edit").show();
-        $("#search-users-edit").show();
-        $("#pagina-users-add").hide();
-        $("#pagina-classes-edit").hide();
-        $("#pagina-classes-add").hide();
-        $("#search-class-user").hide();
-        
-    });
+  $(document).ready(function () {
+      // Recuperar el estado actual desde sessionStorage
+      var currentPage = sessionStorage.getItem('currentPage');
 
-    $(document).ready(function () {
-        $("#users-edit").click(function (e) {
-            e.preventDefault();
-            $(".pagina").hide();
-            $("#pagina-users-edit").show();
-            $("#search-users-edit").show();
-            window.history.pushState(null, null, '/admin');
-        });
-    });
+      // Si no hay estado almacenado, mostrar la página por defecto
+      if (!currentPage) {
+          currentPage = 'pagina-users-edit';
+      }
 
-    $(document).ready(function () {
+      // Ocultar todas las páginas y el navegador de búsqueda de usuarios
+      $(".pagina").hide();
+      $("#search-users-edit").hide();
+      $("#search-class-user").hide();
+
+      // Mostrar la página actual y el navegador correspondiente
+      $("#" + currentPage).show();
+      if (currentPage === 'pagina-users-edit') {
+          $("#search-users-edit").show();
+      } else if (currentPage === 'pagina-classes-add') {
+          $("#search-class-user").show();
+      }
+
+      // Manejar los clics en los enlaces
+      $("#users-edit").click(function (e) {
+          e.preventDefault();
+          $(".pagina").hide();
+          $("#pagina-users-edit").show();
+          $("#search-users-edit").show();
+          window.history.pushState(null, null, '/admin');
+          // Almacenar el estado actual en sessionStorage
+          sessionStorage.setItem('currentPage', 'pagina-users-edit');
+      });
+
       $("#users-add").click(function (e) {
           e.preventDefault();
           $(".pagina").hide();
           $("#pagina-users-add").show();
+          $("#search-users-edit").hide(); // Ocultar el navegador de búsqueda de usuarios para agregar usuarios
+          window.history.pushState(null, null, '/admin');
+          sessionStorage.setItem('currentPage', 'pagina-users-add');
       });
-  });
 
-  $(document).ready(function () {
-    $("#classes-edit").click(function (e) {
-        e.preventDefault();
-        $(".pagina").hide();
-        $("#pagina-classes-edit").show();
-    });
+      $("#classes-edit").click(function (e) {
+          e.preventDefault();
+          $(".pagina").hide();
+          $("#pagina-classes-edit").show();
+          $("#search-class-user").hide(); // Ocultar el navegador de búsqueda de usuarios para clases
+          window.history.pushState(null, null, '/admin');
+          sessionStorage.setItem('currentPage', 'pagina-classes-edit');
+      });
 
-    $(document).ready(function () {
       $("#classes-add").click(function (e) {
           e.preventDefault();
           $(".pagina").hide();
           $("#pagina-classes-add").show();
           $("#search-class-user").show();
+          window.history.pushState(null, null, '/admin');
+          sessionStorage.setItem('currentPage', 'pagina-classes-add');
       });
   });
-});
 }
+
+
 
 function equipDirectiuPages() {
 

@@ -131,11 +131,12 @@ function editUserModal() {
                 var user = data['user'][0];
                 var roles = data['roles'];
 
-          $("#title").text(user.id);
+          $("#title").text(user.name + " " + user.surname);
+
           $("#id-edit").val(user.id);
-          $("#name-edit").val(user.name);
-          $("#surname-edit").val(user.surname);
-          $("#password-edit").val(user.password);
+          $("#name-edit").val("");
+          $("#surname-edit").val("");
+          $("#password-edit").val("");
           $("#email-edit").val(user.email);
 
           var roleSelect = $("#role-edit");
@@ -267,35 +268,45 @@ function searchUser() {
                             // Iterar sobre los usuarios y agregarlos al contenedor
                             users.forEach(function (user) {
                                 var userHtml = `
-                                        <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                                            <!-- User Status Indicator -->
-                                            <div class="flex justify-end px-4 pt-4">
-                                                ${user.role === null ? `
-                                                    <div class="py-4">
-                                                        <div class="flex items-center">
-                                                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
-                                                        </div>
-                                                    </div>` :
-                                                    `<div class="py-4">
-                                                        <div class="flex items-center">
-                                                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                                        </div>
-                                                    </div>`
-                                                }
-                                            </div>
-                                            <div class="flex flex-col items-center pb-10">
-                                                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="../img/logo.png" alt="${user.name} ${user.surname} image"/>
-                                                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">${user.name} ${user.surname}</h5>
-                                                <span class="text-sm text-gray-500 dark:text-gray-400">${user.email}</span>
-                                                <div class="flex mt-4 md:mt-6">
-                                                    <!-- Edit and Delete Buttons -->
-                                                    <a href="#" type="button" data-edit-user-id="${user.id}" data-modal-target="editUserModal" data-modal-show="editUserModal" class="editUserModal inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Editar</a>
-    
-                                                    <a href="#" type="button" data-delete-user-id="${user.id}" data-modal-target="deleteUserModal" data-modal-show="deleteUserModal" class="deleteUserModal inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 border border-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-700 dark:border-red-700 dark:hover:bg-red-800 dark:focus:ring-red-800 ms-3">Eliminar</a>
-                                                </div>
-                                            </div>
+                                <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            <div class="flex justify-end px-4 pt-4">
+                            ${user.role === null ? `
+                                    <div class="py-4">
+                                        <div class="flex items-center">
+                                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
                                         </div>
-                                `;
+                                    </div> ` :
+                                    `<div class="py-4">
+                                        <div class="flex items-center">
+                                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
+                                        </div>
+                                    </div>`
+                                }
+                            </div>
+                            <div class="flex flex-col items-center pb-10">
+                                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="<?= '../avatars/${user.avatar}" alt="${user.name}"/>
+                                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">${user.name} ${user.surname}</h5>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">${user.email}</span>
+                                <div class="flex mt-4 md:mt-6">
+                                    <div class="mr-4">
+                                        <button data-edit-user-id="${user.id}" data-modal-target="editUserModal" data-modal-show="editUserModal" class="editUserModal block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z"/>
+                                                <path d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button data-delete-user-id="${user.id}" data-modal-target="deleteUserModal" data-modal-show="deleteUserModal" class="deleteUserModal block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="button">
+                                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    `;
     
                                 usersContainer.append(userHtml);
 
