@@ -109,9 +109,18 @@ INSERT INTO `users` (`Id`, `name`, `surname`, `username`, `password`, `email`, `
 (1, 'albert', 'rocas', 'arocas', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'arocas@cendrassos.net', NULL, 1),
 (2, 'john', 'doe', 'jdoe', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'john@doe.com', NULL, 2),
 (3, 'emma', 'smith', 'esmith', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'emma@smith.com', NULL, 1),
-(4, 'david', 'brown', 'dbrown', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'david@brown.com', NULL, 2),
+(4, 'david', 'brown', 'dbrown', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'david@brown.com', NULL, 1),
 (5, 'sophie', 'martin', 'smartin', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'sophie@martin.com', NULL, 1),
-(6, 'alejandro', 'espinoza', 'aespinoza', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'aespinoza@cendrassos.net', NULL, 1);
+(6, 'alejandro', 'espinoza', 'aespinoza', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'aespinoza@cendrassos.net', NULL, 1),
+(7, 'lisa', 'miller', 'lmiller', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'lisa@miller.com', NULL, 1),
+(8, 'peter', 'wilson', 'pwilson', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'peter@wilson.com', NULL, 1),
+(9, 'grace', 'rodriguez', 'grodriguez', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'grace@rodriguez.com', NULL, 1),
+(10, 'olivia', 'anderson', 'oanderson', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'olivia@anderson.com', NULL, 2),
+(11, 'nathan', 'lopez', 'nlopez', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'nathan@lopez.com', NULL, 1),
+(12, 'zoey', 'garcia', 'zgarcia', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'zoey@garcia.com', NULL, 1),
+(13, 'isaac', 'turner', 'iturner', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'isaac@turner.com', NULL, 1),
+(14, 'chloe', 'roberts', 'croberts', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'chloe@roberts.com', NULL, 1);
+
 
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva1.jpeg', '1', '1');
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva2.png', '0', '1');
@@ -121,6 +130,14 @@ INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL,
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva3.jpg', '1', '4');
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva1.jpeg', '1', '5');
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva2.png', '1', '6');
+INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva3.jpg', '1', '7');
+INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva1.jpeg', '1', '8');
+INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva2.png', '1', '9');
+INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva3.jpg', '1', '10');
+INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva1.jpeg', '1', '11');
+INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva2.png', '1', '12');
+INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva3.jpg', '1', '13');
+INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva1.jpeg', '1', '14');
 
 
 INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'DAW2');
@@ -141,3 +158,12 @@ INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('2', '1');
 INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('3', '1');
 INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('4', '1');
 INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('5', '1');
+INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('6', '1');
+INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('7', '1');
+INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('8', '1');
+INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('9', '1');
+INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('10', '1');
+INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('11', '1');
+INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('12', '1');
+INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('13', '1');
+INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('14', '1');

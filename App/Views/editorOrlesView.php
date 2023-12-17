@@ -13,24 +13,22 @@
     <div class="flex p-4">
         <div class="flex p-4">
             <div id="role-2" class="flex-container"></div>
-            <hr style="margin-top: 20px;" id="hr-editOrla1">
-            <div id="role-1" class="flex-container"></div>
-            <hr style="margin-top: 200px;" id="hr-editOrla2">
-            <div class="flex-container">
+            <hr style="margin-top: 20px;" id="hr-editOrla">
+            <div id="role-1" class="flex-container">
+            </div>
+            <div id="bottom-div" class="flex-container">
                 <h1>Profes</h1>
-                <div id="usersNotInOrla-role2" class="flex-container">
-                </div>
-                <div class="flowbite-divider"></div>
+                <div id="usersNotInOrla-role2" class="flex-container"></div>
+                <div class="divider"></div>
                 <h1>Alumnes</h1>
-                <div id="usersNotInOrla-role1" class="flex-container">
-                </div>
+                <div id="usersNotInOrla-role1" class="flex-container"></div>
+                <form method="post" action="/saveOrla?action=saveOrla" id="saveOrla">
+                    <input type="hidden" id="orlaValues" name="orlaValues" value="">
+                    <input type="hidden" id="idOrla" name="idOrla" value="<?= $idOrla ?>">
+                    <button type="button" onclick="saveUpdatedOrla()" id="saveOrlaButton">Guardar Orla</button>
+                </form>
             </div>
         </div>
-        <form method="post" action="/saveOrla?action=saveOrla" id="saveOrla">
-            <input type="hidden" id="orlaValues" name="orlaValues" value="">
-            <input type="hidden" id="idOrla" name="idOrla" value="<?= $idOrla ?>">
-            <button type="button" onclick="saveUpdatedOrla()" id="saveOrlaButton">Guardar Orla</button>
-        </form>
 </body>
 
 
@@ -49,13 +47,9 @@
         justify-content: center;
     }
 
-    #hr-editOrla1 {
+    #hr-editOrla {
         border: 1px solid #313030;
         width: 1000px;
-    }
-
-    #hr-editOrla2 {
-        border: 1px solid #313030;
     }
 
     #saveOrlaButton {
@@ -70,13 +64,37 @@
         display: flex;
     }
 
-    .flowbite-divider {
+    .divider {
         border-left: 1px solid #ccc;
-        /* Establece el estilo de la barra de separación */
         margin-left: 10px;
-        /* Ajusta el espacio a la izquierda de la barra según sea necesario */
         padding-left: 10px;
-        /* Ajusta el espacio entre la barra y el contenido del siguiente div según sea necesario */
+    }
+
+    #role-1 {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 750px;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    #role-2 {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 500px;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    #bottom-div {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #ffffff;
+        padding: 10px;
+        box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        height: 200px;
     }
 </style>
 <?php require "Scripts.php" ?>

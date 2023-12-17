@@ -11,7 +11,7 @@
 <?php require "MenuView.php" ?>
 
 <body>
-    <iframe src="/orla/iframe?idOrla=<?= $idOrla ?>" frameborder="0" width="100%" height="650px"></iframe>
+    <iframe src="/orla/iframe?idOrla=<?= $idOrla ?>" frameborder="0" width="100%" height="1000px"></iframe>
     <form action="/orla-pdf" method="get">
         <label for="paperFormat">Tria el format del PDF:</label>
         <select id="paperFormat" name="paperFormat">
