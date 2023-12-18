@@ -101,10 +101,6 @@ INSERT INTO `roles` (`name`) VALUES ('teacher');
 INSERT INTO `roles` (`name`) VALUES ('team');
 INSERT INTO `roles` (`name`) VALUES ('admin');
 
--- Modificar les taules
-ALTER TABLE photography
-ADD FOREIGN KEY (idUser) REFERENCES Users(id);
-
 INSERT INTO `users` (`Id`, `name`, `surname`, `username`, `password`, `email`, `avatar`, role) VALUES
 (1, 'albert', 'rocas', 'arocas', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'arocas@cendrassos.net', NULL, 1),
 (2, 'john', 'doe', 'jdoe', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'john@doe.com', NULL, 2),
