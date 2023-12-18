@@ -2,7 +2,8 @@
 
 namespace App\Middleware;
 
-class Auth {
+class Auth
+{
 
     /**
      * Middleware que gestiona l'autenticació
@@ -38,7 +39,143 @@ class Auth {
         } else {
             $response->redirect("location: /login");
         }
-        
+
+        return $response;
+    }
+
+    public static function admin($request, $response, $container, $next)
+    {
+
+        $user = $request->get("SESSION", "user");
+        $logged = $request->get("SESSION", "logged");
+
+        if (!isset($logged)) {
+            $user = "";
+            $logged = false;
+        }
+
+        // si l'usuari està logat permetem carregar el recurs
+        if ($logged) {
+
+            $userModel = $container->get("users");
+
+            $email = $request->get("SESSION", "user")["email"];
+            $user = $userModel->getUser($email);
+
+            $response->set("user", $user);
+            $response->set("logged", $logged);
+
+            if ($user["role"] == "4") {
+                $response = \Emeset\Middleware::next($request, $response, $container, $next);
+            } else {
+                $response->redirect("location: /");
+            }
+        } else {
+            $response->redirect("location: /login");
+        }
+
+        return $response;
+    }
+
+    public static function equipDirectiu($request, $response, $container, $next)
+    {
+
+        $user = $request->get("SESSION", "user");
+        $logged = $request->get("SESSION", "logged");
+
+        if (!isset($logged)) {
+            $user = "";
+            $logged = false;
+        }
+
+        // si l'usuari està logat permetem carregar el recurs
+        if ($logged) {
+
+            $userModel = $container->get("users");
+
+            $email = $request->get("SESSION", "user")["email"];
+            $user = $userModel->getUser($email);
+
+            $response->set("user", $user);
+            $response->set("logged", $logged);
+
+            if ($user["role"] == "3") {
+                $response = \Emeset\Middleware::next($request, $response, $container, $next);
+            } else {
+                $response->redirect("location: /");
+            }
+        } else {
+            $response->redirect("location: /login");
+        }
+
+        return $response;
+    }
+
+    public static function professor($request, $response, $container, $next)
+    {
+
+        $user = $request->get("SESSION", "user");
+        $logged = $request->get("SESSION", "logged");
+
+        if (!isset($logged)) {
+            $user = "";
+            $logged = false;
+        }
+
+        // si l'usuari està logat permetem carregar el recurs
+        if ($logged) {
+
+            $userModel = $container->get("users");
+
+            $email = $request->get("SESSION", "user")["email"];
+            $user = $userModel->getUser($email);
+
+            $response->set("user", $user);
+            $response->set("logged", $logged);
+
+            if ($user["role"] == "2") {
+                $response = \Emeset\Middleware::next($request, $response, $container, $next);
+            } else {
+                $response->redirect("location: /");
+            }
+        } else {
+            $response->redirect("location: /login");
+        }
+
+        return $response;
+    }
+
+    public static function alumne($request, $response, $container, $next)
+    {
+
+        $user = $request->get("SESSION", "user");
+        $logged = $request->get("SESSION", "logged");
+
+        if (!isset($logged)) {
+            $user = "";
+            $logged = false;
+        }
+
+        // si l'usuari està logat permetem carregar el recurs
+        if ($logged) {
+
+            $userModel = $container->get("users");
+
+            $email = $request->get("SESSION", "user")["email"];
+            $user = $userModel->getUser($email);
+
+            $response->set("user", $user);
+            $response->set("logged", $logged);
+
+            if ($user["role"] == "1") {
+                $response = \Emeset\Middleware::next($request, $response, $container, $next);
+            } else {
+                $response->redirect("location: /");
+            }
+        } else {
+            $response->redirect("location: /login");
+        }
+
         return $response;
     }
 }

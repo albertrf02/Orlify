@@ -1,50 +1,49 @@
 import $ from "jquery";
 
 function adminPages() {
-    $(document).ready(function () {
-        $("#pagina-users-edit").show();
-        $("#search-users-edit").show();
-        $("#pagina-users-add").hide();
-        $("#pagina-classes-edit").hide();
-        $("#pagina-classes-add").hide();
-        $("#search-class-user").hide();
-        
-    });
+  $(document).ready(function () {
+    $("#pagina-users-edit").show();
+    $("#search-users-edit").show();
+    $("#pagina-users-add").hide();
+    $("#pagina-classes-edit").hide();
+    $("#pagina-classes-add").hide();
+    $("#search-class-user").hide();
+  });
 
-    $(document).ready(function () {
-        $("#users-edit").click(function (e) {
-            e.preventDefault();
-            $(".pagina").hide();
-            $("#pagina-users-edit").show();
-            $("#search-users-edit").show();
-            window.history.pushState(null, null, '/admin');
-        });
+  $(document).ready(function () {
+    $("#users-edit").click(function (e) {
+      e.preventDefault();
+      $(".pagina").hide();
+      $("#pagina-users-edit").show();
+      $("#search-users-edit").show();
+      window.history.pushState(null, null, "/admin");
     });
+  });
 
-    $(document).ready(function () {
-      $("#users-add").click(function (e) {
-          e.preventDefault();
-          $(".pagina").hide();
-          $("#pagina-users-add").show();
-      });
+  $(document).ready(function () {
+    $("#users-add").click(function (e) {
+      e.preventDefault();
+      $(".pagina").hide();
+      $("#pagina-users-add").show();
+    });
   });
 
   $(document).ready(function () {
     $("#classes-edit").click(function (e) {
-        e.preventDefault();
-        $(".pagina").hide();
-        $("#pagina-classes-edit").show();
+      e.preventDefault();
+      $(".pagina").hide();
+      $("#pagina-classes-edit").show();
     });
 
     $(document).ready(function () {
       $("#classes-add").click(function (e) {
-          e.preventDefault();
-          $(".pagina").hide();
-          $("#pagina-classes-add").show();
-          $("#search-class-user").show();
+        e.preventDefault();
+        $(".pagina").hide();
+        $("#pagina-classes-add").show();
+        $("#search-class-user").show();
       });
+    });
   });
-});
 }
 
 function equipDirectiuPages() {
@@ -128,5 +127,25 @@ function perfilPages() {
     });
   });
 }
+function toggleFormVisibility() {
+  var form = document.getElementById("avatarForm");
+  form.style.display = form.style.display === "none" ? "block" : "none";
+}
 
-export { adminPages, equipDirectiuPages, recoverPages, perfilPages };
+function showTab(tabName) {
+  document.getElementById("imagesTabContent").style.display =
+    tabName === "images" ? "block" : "none";
+  document.getElementById("orlesTabContent").style.display =
+    tabName === "orles" ? "block" : "none";
+  document.getElementById("carnetTabContent").style.display =
+    tabName === "carnet" ? "block" : "none";
+}
+
+export {
+  adminPages,
+  equipDirectiuPages,
+  recoverPages,
+  perfilPages,
+  toggleFormVisibility,
+  showTab,
+};
