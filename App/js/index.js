@@ -14,6 +14,9 @@ import { deleteClassModal } from "./ajax.js";
 import { dragAndDrop, checkFile } from "./dragAndDrop.js";
 import { toggleOrlaPublic } from "./equipDirectiu.js";
 import { camera } from "./camera.js";
+import { DatatablesModal } from "./ajax.js";
+import { searchUserTeacher } from "./ajax.js";
+
 
 
 adminPages();
@@ -123,8 +126,10 @@ window.toggleOrlaPublic = toggleOrlaPublic;
 
 
 deleteClassModal();
+searchUserTeacher();
 searchUserClass();
 teacherPages();
-camera();
+DatatablesModal();
 dragAndDrop();
+camera();
 checkFile();

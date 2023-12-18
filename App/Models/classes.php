@@ -67,11 +67,21 @@ public function addUserClass($userIds, $classId) {
 }
 
     public function getClassByUser($id) {
-        $stm = $this->sql->prepare("SELECT u.id, u.username, cg.className FROM users u JOIN users_classgroup uc ON u.id = uc.idUser JOIN classgroup cg ON uc.idGroupClass = cg.id WHERE u.id = :userId;");
+        $stm = $this->sql->prepare("SELECT u.id, u.username, uc.idGroupClass, cg.className FROM users u JOIN users_classgroup uc ON u.id = uc.idUser JOIN classgroup cg ON uc.idGroupClass = cg.id WHERE u.id = :userId;");
         $stm->execute([':userId' => $id]);
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getUsersByClass($idClass) {
+        $stm = $this->sql->prepare("SELECT u.id, u.name, u.surname, u.username, u.email 
+        FROM users u 
+        JOIN users_classgroup uc ON u.id = uc.idUser 
+        WHERE uc.idGroupClass = :idClass AND u.role != 2;
+        ");
+        $stm->execute([':idClass' => $idClass]);
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
 
+    
 }

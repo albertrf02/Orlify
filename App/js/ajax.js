@@ -8,7 +8,7 @@ function editUserModal() {
         var userId = $this.data("edit-user-id");
 
 
- 
+
         $.ajax({
             url: '/updateuserajax',
             method: 'POST',
@@ -21,103 +21,103 @@ function editUserModal() {
 
 
 
-          $("#title").text(user.id);
-          $("#id-edit").val(user.id);
-          $("#id-edit2").val(user.id);
-          $("#name-edit").val(user.name);
-          $("#surname-edit").val(user.surname);
-          $("#password-edit").val(user.password);
-          $("#email-edit").val(user.email);
-          $("#username").val(user.username);
+                $("#title").text(user.id);
+                $("#id-edit").val(user.id);
+                $("#id-edit2").val(user.id);
+                $("#name-edit").val(user.name);
+                $("#surname-edit").val(user.surname);
+                $("#password-edit").val(user.password);
+                $("#email-edit").val(user.email);
+                $("#username").val(user.username);
 
-          var roleSelect = $("#role-edit");
-          roleSelect.empty();
+                var roleSelect = $("#role-edit");
+                roleSelect.empty();
 
-          roles.forEach(function (role) {
-            roleSelect.append(
-              $("<option>", {
-                value: role.idRole,
-                text: role.name,
-                selected: user.role == role.idRole,
-              })
-            );
-          });
+                roles.forEach(function (role) {
+                    roleSelect.append(
+                        $("<option>", {
+                            value: role.idRole,
+                            text: role.name,
+                            selected: user.role == role.idRole,
+                        })
+                    );
+                });
 
-          // Mostrar el modal cambiando las clases de visibilidad
-          $("#editUserModal").removeClass("hidden");
-          $("body").addClass("overflow-hidden");
-        },
-        error: function (error) {
-          console.error("Error en la solicitud AJAX: ", error);
-        },
-      });
+                // Mostrar el modal cambiando las clases de visibilidad
+                $("#editUserModal").removeClass("hidden");
+                $("body").addClass("overflow-hidden");
+            },
+            error: function (error) {
+                console.error("Error en la solicitud AJAX: ", error);
+            },
+        });
     });
 }
 
 // Función para abrir el modal de eliminación
 function deleteUserModal() {
-  $(document)
-    .off("click", ".deleteUserModal")
-    .on("click", ".deleteUserModal", function (event) {
-      event.preventDefault();
-      var $this = $(this);
-      var userId = $this.data("delete-user-id");
+    $(document)
+        .off("click", ".deleteUserModal")
+        .on("click", ".deleteUserModal", function (event) {
+            event.preventDefault();
+            var $this = $(this);
+            var userId = $this.data("delete-user-id");
 
 
-      $.ajax({
-        url: "/deleteuserajax",
-        method: "POST",
-        data: { userId: userId },
-        dataType: "json",
-        success: function (data) {
-          var user = data["user"];
+            $.ajax({
+                url: "/deleteuserajax",
+                method: "POST",
+                data: { userId: userId },
+                dataType: "json",
+                success: function (data) {
+                    var user = data["user"];
 
-          $("#id-delete").val(user.id);
+                    $("#id-delete").val(user.id);
 
-          // Mostrar el modal cambiando las clases de visibilidad
-          $("#deleteUserModal").removeClass("hidden");
-          $("body").addClass("overflow-hidden");
-        },
-        error: function (error) {
-          console.error("Error en la solicitud AJAX: ", error);
-        },
-      });
-    });
+                    // Mostrar el modal cambiando las clases de visibilidad
+                    $("#deleteUserModal").removeClass("hidden");
+                    $("body").addClass("overflow-hidden");
+                },
+                error: function (error) {
+                    console.error("Error en la solicitud AJAX: ", error);
+                },
+            });
+        });
 }
 
 function deleteClassModal() {
     $(document)
-    .off("click", ".deleteClassModal")
-    .on("click", ".deleteClassModal", function (event) {
-        event.preventDefault();
-        var $this = $(this);
-        var classId = $this.data("delete-class-id");
+        .off("click", ".deleteClassModal")
+        .on("click", ".deleteClassModal", function (event) {
+            event.preventDefault();
+            var $this = $(this);
+            var classId = $this.data("delete-class-id");
 
-        console.log(classId);
+            console.log(classId);
 
-        $.ajax({
-        url: "/editclassajax",
-        method: "POST",
-        data: { classId: classId },
-        dataType: "json",
-        success: function (data) {
+            $.ajax({
+                url: "/editclassajax",
+                method: "POST",
+                data: { classId: classId },
+                dataType: "json",
+                success: function (data) {
 
-            console.log(data);
+                    console.log(data);
 
-            var classroom = data["class"][0];
-
-            
-            $("#id-delete-class").val(classroom.id);
+                    var classroom = data["class"][0];
 
 
+                    $("#id-delete-class").val(classroom.id);
 
 
-        },
-        error: function (error) {
-            console.error("Error en la solicitud AJAX: ", error);
-        },
+
+
+                },
+                error: function (error) {
+                    console.error("Error en la solicitud AJAX: ", error);
+                },
+            });
         });
-    });
 }
 
 function searchUser() {
@@ -255,37 +255,37 @@ function searchUser() {
 }
 
 function searchUserEquipDirectiu() {
-  $(document).ready(function () {
-    $("#table-search-usersEd").on("input", function () {
-      var searchQuery = $(this).val();
+    $(document).ready(function () {
+        $("#table-search-usersEd").on("input", function () {
+            var searchQuery = $(this).val();
 
-      console.log(searchQuery);
+            console.log(searchQuery);
 
-      if (searchQuery.length >= 3) {
-        $.ajax({
-          url: "/searchuserajax",
-          method: "POST",
-          data: { query: searchQuery },
-          dataType: "json",
-          success: function (data) {
-            console.log(data);
+            if (searchQuery.length >= 3) {
+                $.ajax({
+                    url: "/searchuserajax",
+                    method: "POST",
+                    data: { query: searchQuery },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
 
-            var users = data["users"];
+                        var users = data["users"];
 
-            var currentPage = data["currentPage"];
+                        var currentPage = data["currentPage"];
 
-            var totalPages = data["totalPages"];
+                        var totalPages = data["totalPages"];
 
-            console.log(currentPage);
+                        console.log(currentPage);
 
-            console.log(totalPages);
+                        console.log(totalPages);
 
-            // Limpiar el contenido actual antes de agregar nuevos resultados
-            $("#pagina-usersEd").empty();
+                        // Limpiar el contenido actual antes de agregar nuevos resultados
+                        $("#pagina-usersEd").empty();
 
-            // Iterar sobre los usuarios y agregarlos al contenedor
-            users.forEach(function (user) {
-              var userHtml = `
+                        // Iterar sobre los usuarios y agregarlos al contenedor
+                        users.forEach(function (user) {
+                            var userHtml = `
                             <div class="flex items-center justify-between py-4 bg-white dark:bg-gray-900">
                                 <label for="table-search" class="sr-only">Search</label>
                                 <div class="relative">
@@ -302,40 +302,34 @@ function searchUserEquipDirectiu() {
                                 <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/3 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                     <!-- User Status Indicator -->
                                     <div class="flex justify-end px-4 pt-4">
-                                        ${
-                                          user.role === null
-                                            ? `
+                                        ${user.role === null
+                                    ? `
                                         <div class="py-4">
                                             <div class="flex items-center">
                                                 <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
                                             </div>
                                         </div>`
-                                            : `<div class="py-4">
+                                    : `<div class="py-4">
                                             <div class="flex items-center">
                                                 <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
                                             </div>
                                         </div>`
-                                        }
+                                }
                                     </div>
                                     <div class="flex flex-col items-center pb-10">
-                                        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="../img/logo.png" alt="${
-                                          user.name
-                                        } ${user.surname} image"/>
-                                        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">${
-                                          user.name
-                                        } ${user.surname}</h5>
-                                        <span class="text-sm text-gray-500 dark:text-gray-400">${
-                                          user.email
-                                        }</span>
+                                        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="../img/logo.png" alt="${user.name
+                                } ${user.surname} image"/>
+                                        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">${user.name
+                                } ${user.surname}</h5>
+                                        <span class="text-sm text-gray-500 dark:text-gray-400">${user.email
+                                }</span>
                                         <div class="flex mt-4 md:mt-6">
                                             <!-- Edit and Delete Buttons -->
-                                            <a href="#" type="button" data-edit-user-id="${
-                                              user.id
-                                            }" data-modal-target="editUserModal" data-modal-show="editUserModal" class="editUserModal inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Editar</a>
+                                            <a href="#" type="button" data-edit-user-id="${user.id
+                                }" data-modal-target="editUserModal" data-modal-show="editUserModal" class="editUserModal inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Editar</a>
 
-                                            <a href="#" type="button" data-delete-user-id="${
-                                              user.id
-                                            }" data-modal-target="deleteUserModal" data-modal-show="deleteUserModal" class="deleteUserModal inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 border border-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-700 dark:border-red-700 dark:hover:bg-red-800 dark:focus:ring-red-800 ms-3">Eliminar</a>
+                                            <a href="#" type="button" data-delete-user-id="${user.id
+                                }" data-modal-target="deleteUserModal" data-modal-show="deleteUserModal" class="deleteUserModal inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 border border-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-700 dark:border-red-700 dark:hover:bg-red-800 dark:focus:ring-red-800 ms-3">Eliminar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -345,16 +339,15 @@ function searchUserEquipDirectiu() {
                                 <nav aria-label="Page navigation example">
                                     <ul class="flex items-center -space-x-px h-8 text-sm">
                                         <li>
-                                        ${
-                                          currentPage > 1
-                                            ? `<a href="#" class="flex items-center justify-center w-8 h-8 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-l hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        ${currentPage > 1
+                                    ? `<a href="#" class="flex items-center justify-center w-8 h-8 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-l hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                                 <span class="sr-only">Previous</span>
                                                 <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
                                                 </svg>
                                             </a>`
-                                            : ""
-                                        }
+                                    : ""
+                                }
                                             
                                         </li>
                                         <li>
@@ -363,32 +356,31 @@ function searchUserEquipDirectiu() {
                                             </a>
                                         </li>
                                         <li>
-                                        ${
-                                          currentPage < totalPages
-                                            ? `<a href="#" class="flex items-center justify-center w-8 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        ${currentPage < totalPages
+                                    ? `<a href="#" class="flex items-center justify-center w-8 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                                 <span class="sr-only">Next</span>
                                                 <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                                                 </svg>
                                             </a>`
-                                            : ""
-                                        }
+                                    : ""
+                                }
                                             
                                         </li>
                                     </ul>
                                 </nav>
                             </div>`;
 
-              $("#pagina-users").append(userHtml);
-            });
-          },
-          error: function (error) {
-            console.error("Error en la solicitud AJAX: ", error);
-          },
+                            $("#pagina-users").append(userHtml);
+                        });
+                    },
+                    error: function (error) {
+                        console.error("Error en la solicitud AJAX: ", error);
+                    },
+                });
+            }
         });
-      }
     });
-  });
 }
 
 
@@ -402,7 +394,7 @@ function searchUserClass() {
 
         // Inicializar array para almacenar IDs de usuarios seleccionados
         var selectedUserIds = [];
-        
+
         $usersContainer.off('change', 'input[type="checkbox"]');
 
         // Manejar cambios en los checkboxes
@@ -504,22 +496,197 @@ function searchUserClass() {
     });
 }
 
+function DatatablesModal() {
+    $(document).off("click", "a[data-modal-target='datatableModal']").on("click", "a[data-modal-target='datatableModal']", function (event) {
+        event.preventDefault();
+        var $this = $(this);
+        var idClass = $this.data("class-id");
+
+        $.ajax({
+            url: '/getclassajax',
+            method: 'POST',
+            data: { idClass: idClass },
+            dataType: "json",
+            success: function (data) {
+                var users = data['users'];
+
+                // Limpiar el modal
+                var $modalBody = $(".p-4.md\\:p-5.space-y-4");
+                $modalBody.empty();
+
+                // Agregar los títulos al modal
+                var titlesHTML = `
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-center">Nom</th>
+                                    <th scope="col" class="px-6 py-3 text-center">Cognom</th>
+                                    <th scope="col" class="px-6 py-3 text-center">Correu electrònic</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                $modalBody.append(titlesHTML);
+
+                // Recorrer los usuarios y agregarlos al modal
+                users.forEach(function (currentUser) {
+                    var userHTML = `
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4 text-center">${currentUser.name}</td>
+                            <td class="px-6 py-4 text-center">${currentUser.surname}</td>
+                            <td class="px-6 py-4 text-center">${currentUser.email}</td>
+                        </tr>`;
+                    $modalBody.find('tbody').append(userHTML);
+                });
+
+                // Cerrar la tabla
+                var closingHTML = `</tbody></table></div>`;
+                $modalBody.append(closingHTML);
+
+                console.log(data);
+            },
+
+            error: function (error) {
+                console.error("Error en la solicitud AJAX: ", error);
+            },
+        });
+    });
+}
 
 
+function searchUserTeacher() {
+    $(document).ready(function () {
+        var $searchInput = $('#new-table-search-users');
+        var lastSearchQuery = ''; // Variable para almacenar la última búsqueda
+
+        $searchInput.on('input', function () {
+            var searchQuery = $searchInput.val();
+
+            console.log(searchQuery);
+
+            if (searchQuery.length >= 3 || searchQuery === '') {
+                // Verificar si el texto de búsqueda ha cambiado
+                if (searchQuery !== lastSearchQuery) {
+                    lastSearchQuery = searchQuery; // Actualizar la última búsqueda
+
+                    $.ajax({
+                        url: '/searchuserajax',
+                        method: 'POST',
+                        data: { query: searchQuery },
+                        dataType: "json",
+                        success: function (data) {
+                            console.log(data);
+                            
+                            var users = data['users'];
+                            var currentPage = data['currentPage'];
+                            var totalPages = data['totalPages'];
+
+                            console.log(currentPage);
+                            console.log(totalPages);
+
+                            // Limpiar el contenido actual antes de agregar nuevos resultados
+                            var $paginaUsers = $('#new-pagina-users');
+                            $paginaUsers.html('');
+
+                            var usersContainer = $('<div class="flex flex-wrap justify-center"></div>');
 
 
+                            // Iterar sobre los usuarios y agregarlos al contenedor
+                            users.forEach(function (user) {
+                                console.log({user});
+
+                                var userHtml = `
+                                        <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                            <!-- User Status Indicator -->
+                                            <div class="flex justify-end px-4 pt-4">
+                                                ${user.role === null ? `
+                                                    <div class="py-4">
+                                                        <div class="flex items-center">
+                                                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
+                                                        </div>
+                                                    </div>` :
+                                                    `<div class="py-4">
+                                                        <div class="flex items-center">
+                                                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
+                                                        </div>
+                                                    </div>`
+                                                }
+                                            </div>
+                                            <div class="flex flex-col items-center pb-10">
+                                                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="../img/logo.png" alt="${user.name} ${user.surname} image"/>
+                                                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">${user.name} ${user.surname}</h5>
+                                                <span class="text-sm text-gray-500 dark:text-gray-400">${user.email}</span>
+                                                <div class="flex mt-4 md:mt-6">
+                                                    <a href="#" type="button" data-edit-user-id="${user.id}" data-modal-target="editUserModal" data-modal-show="editUserModal" class="editUserModal inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Dades</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                `;
+                                console.log("id de usuario "  + user.id)
+                                usersContainer.append(userHtml);
+
+                            });
+                            $paginaUsers.append(usersContainer);
 
 
+                            var paginationHtml = `
+                            <div class="flex items-center justify-center mt-4">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="flex items-center -space-x-px h-8 text-sm">
+                                        <li>
+                                            ${
+                                                currentPage > 1 ? 
+                                                `<a href="#" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                                    <span class="sr-only">Previous</span>
+                                                    <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                                                    </svg>
+                                                </a>` : ''
+                                            }
+                                        </li>
+                                        ${
+                                            Array.from({ length: totalPages }, (_, i) => {
+                                                const pageNumber = i + 1;
+                                                return `
+                                                    <li>
+                                                        <a href="?page=${pageNumber}" class="${pageNumber === currentPage ? 'z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'}">
+                                                            ${pageNumber}
+                                                        </a>
+                                                    </li>
+                                                `;
+                                            }).join('')
+                                        }
+                                        <li>
+                                            ${
+                                                currentPage < totalPages ? 
+                                                `<a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                                    <span class="sr-only">Next</span>
+                                                    <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                                    </svg>
+                                                </a>` : ''
+                                            }
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>`;
+
+                            $paginaUsers.append(paginationHtml);
 
 
-
-
-
-
-
-
-
-
+    
+                            
+                        },
+                        error: function (error) {
+                            console.error('Error en la solicitud AJAX: ', error);
+                        }
+                    });
+                }
+            }
+        });
+    });
+}
 
 
 
@@ -539,3 +706,10 @@ export { deleteUserModal };
 export { editUserModal };
 export { searchUserEquipDirectiu };
 export { deleteClassModal };
+export { DatatablesModal };
+export { searchUserTeacher };
+
+
+
+
+

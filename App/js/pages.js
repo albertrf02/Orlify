@@ -109,6 +109,7 @@ function teacherPages()
           $("#new-pagina-users").show();
           $("#new-pagina-grups").hide();
           $("#new-pagina-orles").hide();
+          $("#search-users-edit").show();
       });
 
       $("#new-grups").click(function (e) {
@@ -116,6 +117,7 @@ function teacherPages()
           $("#new-pagina-users").hide();
           $("#new-pagina-grups").show();
           $("#new-pagina-orles").hide();
+          $("#search-users-edit").hide();
       });
 
       $("#new-classes").click(function (e) {
@@ -123,6 +125,7 @@ function teacherPages()
           $("#new-pagina-users").hide();
           $("#new-pagina-grups").hide();
           $("#new-pagina-orles").show();
+          $("#search-users-edit").hide();
       });
  
       });
