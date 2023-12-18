@@ -299,10 +299,10 @@ class ViewsController
 
         $model = $container->get("users");
         $model2 = $container->get("classes");
-        
+        $userModel = $container->get("users");
         $allUsers = $model->getAllUsers();
         $allClass = $model2->getClassByUser($id);
-
+        $userOrla = $userModel->getOrlaFromClassByUserId($id);
 
         $countUsers = 9;
         $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
@@ -314,6 +314,7 @@ class ViewsController
         $response->set("currentPage", $page);
         $response->set("totalPages", $totalPages);
         $response->set("classes", $allClass);
+        $response->set("userOrla", $userOrla);
         $response->SetTemplate("TeacherView.php");
         return $response;
     }

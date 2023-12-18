@@ -169,12 +169,12 @@ function searchUser() {
                                                             <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
                                                         </div>
                                                     </div>` :
-                                                    `<div class="py-4">
+                                        `<div class="py-4">
                                                         <div class="flex items-center">
                                                             <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
                                                         </div>
                                                     </div>`
-                                                }
+                                    }
                                             </div>
                                             <div class="flex flex-col items-center pb-10">
                                                 <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="../img/logo.png" alt="${user.name} ${user.surname} image"/>
@@ -189,7 +189,7 @@ function searchUser() {
                                             </div>
                                         </div>
                                 `;
-    
+
                                 usersContainer.append(userHtml);
 
                             });
@@ -201,38 +201,35 @@ function searchUser() {
                                 <nav aria-label="Page navigation example">
                                     <ul class="flex items-center -space-x-px h-8 text-sm">
                                         <li>
-                                            ${
-                                                currentPage > 1 ? 
-                                                `<a href="#" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                            ${currentPage > 1 ?
+                                    `<a href="#" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                                     <span class="sr-only">Previous</span>
                                                     <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
                                                     </svg>
                                                 </a>` : ''
-                                            }
+                                }
                                         </li>
-                                        ${
-                                            Array.from({ length: totalPages }, (_, i) => {
-                                                const pageNumber = i + 1;
-                                                return `
+                                        ${Array.from({ length: totalPages }, (_, i) => {
+                                    const pageNumber = i + 1;
+                                    return `
                                                     <li>
                                                         <a href="?page=${pageNumber}" class="${pageNumber === currentPage ? 'z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'}">
                                                             ${pageNumber}
                                                         </a>
                                                     </li>
                                                 `;
-                                            }).join('')
-                                        }
+                                }).join('')
+                                }
                                         <li>
-                                            ${
-                                                currentPage < totalPages ? 
-                                                `<a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                            ${currentPage < totalPages ?
+                                    `<a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                                     <span class="sr-only">Next</span>
                                                     <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                                                     </svg>
                                                 </a>` : ''
-                                            }
+                                }
                                         </li>
                                     </ul>
                                 </nav>
@@ -241,8 +238,8 @@ function searchUser() {
                             $paginaUsers.append(paginationHtml);
 
 
-    
-                            
+
+
                         },
                         error: function (error) {
                             console.error('Error en la solicitud AJAX: ', error);
@@ -577,7 +574,7 @@ function searchUserTeacher() {
                         dataType: "json",
                         success: function (data) {
                             console.log(data);
-                            
+
                             var users = data['users'];
                             var currentPage = data['currentPage'];
                             var totalPages = data['totalPages'];
@@ -587,6 +584,7 @@ function searchUserTeacher() {
 
                             // Limpiar el contenido actual antes de agregar nuevos resultados
                             var $paginaUsers = $('#new-pagina-users');
+
                             $paginaUsers.html('');
 
                             var usersContainer = $('<div class="flex flex-wrap justify-center"></div>');
@@ -594,36 +592,37 @@ function searchUserTeacher() {
 
                             // Iterar sobre los usuarios y agregarlos al contenedor
                             users.forEach(function (user) {
-                                console.log({user});
+                                console.log({ user });
 
                                 var userHtml = `
-                                        <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                                            <!-- User Status Indicator -->
-                                            <div class="flex justify-end px-4 pt-4">
-                                                ${user.role === null ? `
-                                                    <div class="py-4">
-                                                        <div class="flex items-center">
-                                                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
-                                                        </div>
-                                                    </div>` :
-                                                    `<div class="py-4">
-                                                        <div class="flex items-center">
-                                                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                                        </div>
-                                                    </div>`
-                                                }
-                                            </div>
-                                            <div class="flex flex-col items-center pb-10">
-                                                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="../img/logo.png" alt="${user.name} ${user.surname} image"/>
-                                                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">${user.name} ${user.surname}</h5>
-                                                <span class="text-sm text-gray-500 dark:text-gray-400">${user.email}</span>
+                                <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <!-- User Status Indicator -->
+                                    <div class="flex justify-end px-4 pt-4">
+                                        ${user.role === null ? `
+                                            <div class="py-4">
+                                                <div class="flex items-center">
+                                                    <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
+                                                </div>
+                                            </div>` :
+                                        `<div class="py-4">
+                                                <div class="flex items-center">
+                                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
+                                                </div>
+                                            </div>`
+                                    }
+                                    </div>
+                                    <div class="flex flex-col items-center pb-10">
+                                        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="${user.photoLink}" alt="${user.surname} image"/>
+                                        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">${user.name} ${user.surname}</h5>
+                                        <span class="text-sm text-gray-500 dark:text-gray-400">${user.email}</span>
+                            
                                                 <div class="flex mt-4 md:mt-6">
                                                     <a href="#" type="button" data-edit-user-id="${user.id}" data-modal-target="editUserModal" data-modal-show="editUserModal" class="editUserModal inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Dades</a>
                                                 </div>
                                             </div>
                                         </div>
                                 `;
-                                console.log("id de usuario "  + user.id)
+                                console.log("id de usuario " + user.id)
                                 usersContainer.append(userHtml);
 
                             });
@@ -635,38 +634,35 @@ function searchUserTeacher() {
                                 <nav aria-label="Page navigation example">
                                     <ul class="flex items-center -space-x-px h-8 text-sm">
                                         <li>
-                                            ${
-                                                currentPage > 1 ? 
-                                                `<a href="#" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                            ${currentPage > 1 ?
+                                    `<a href="#" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                                     <span class="sr-only">Previous</span>
                                                     <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
                                                     </svg>
                                                 </a>` : ''
-                                            }
+                                }
                                         </li>
-                                        ${
-                                            Array.from({ length: totalPages }, (_, i) => {
-                                                const pageNumber = i + 1;
-                                                return `
+                                        ${Array.from({ length: totalPages }, (_, i) => {
+                                    const pageNumber = i + 1;
+                                    return `
                                                     <li>
                                                         <a href="?page=${pageNumber}" class="${pageNumber === currentPage ? 'z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'}">
                                                             ${pageNumber}
                                                         </a>
                                                     </li>
                                                 `;
-                                            }).join('')
-                                        }
+                                }).join('')
+                                }
                                         <li>
-                                            ${
-                                                currentPage < totalPages ? 
-                                                `<a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                            ${currentPage < totalPages ?
+                                    `<a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                                     <span class="sr-only">Next</span>
                                                     <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                                                     </svg>
                                                 </a>` : ''
-                                            }
+                                }
                                         </li>
                                     </ul>
                                 </nav>
@@ -674,10 +670,8 @@ function searchUserTeacher() {
 
                             $paginaUsers.append(paginationHtml);
 
-
-    
-                            
                         },
+                        
                         error: function (error) {
                             console.error('Error en la solicitud AJAX: ', error);
                         }
@@ -686,6 +680,7 @@ function searchUserTeacher() {
             }
         });
     });
+    
 }
 
 

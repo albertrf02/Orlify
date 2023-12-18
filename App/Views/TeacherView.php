@@ -42,7 +42,7 @@
         </div>
     </aside>
     <div class="p-4 sm:ml-64 h-screen">
-        <div class="p-4 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        <div id="clear" class="p-4 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
             <div id="search-users-edit" class="pagina flex items-center justify-center">
                 <div class="flex items-center justify-between bg-white dark:bg-gray-900">
                     <label for="table-search" class="sr-only">Search</label>
@@ -77,7 +77,7 @@
                                 <?php endif ?>
                             </div>
                             <div class="flex flex-col items-center pb-10">
-                                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="../img/logo.png" alt="Bonnie image" />
+                                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="<?= $user['photoLink'] ?>" alt="Bonnie image" />
                                 <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"><?= $user['name'] . ' ' . $user['surname'] ?></h5>
                                 <span class="text-sm text-gray-500 dark:text-gray-400"><?= $user['email'] ?></span>
                                 <div class="flex mt-4 md:mt-6">
@@ -229,8 +229,7 @@
                 </div>
                 <!-- Main modal -->
                 <div id="datatableModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div class="relative p-4 w-full max-w-2xl max-h-full">
-                        <!-- Modal content -->
+                    <div class="relative p-4 w-full max-w-2xl max-h-full overflow-auto scrollbar scrollbar-thumb-blue-500 scrollbar-thin">
                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                             <!-- Modal header -->
                             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -245,7 +244,7 @@
                                 </button>
                             </div>
                             <!-- Modal body -->
-                            <div class="p-4 md:p-5 space-y-4">
+                            <div class="p-4 md:p-5 space-y-4 overflow-auto scrollbar scrollbar-thumb-blue-500 scrollbar-thin max-h-full">
                             </div>
                         </div>
                     </div>
@@ -256,28 +255,35 @@
                 <div>
                     <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                         <div class="flex items-center justify-between mb-4">
-                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Les teves orles</h5>
+                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white mb-5">Les teves orles</h5>
                         </div>
                         <div class="flow-root">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                                <?php foreach ($classes as $class) : ?>
-                                    <li class="py-3 sm:py-4 flex items-center justify-between">
-                                        <div class="flex items-center">
-                                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                                <?= $class["className"]; ?>
-                                            </p>
+                                <div class="flex flex-wrap gap-4">
+                                    <?php $orlesVisibles = false; ?>
+                                    <?php foreach ($userOrla as $orla) : ?>
+                                        <?php if ($orla['visibility'] == 1) : ?>
+                                            <div class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8 mx-auto">
+                                                <img src="/img/imatge_orles.png" alt="imatge_orles" width="100px" class="mx-auto mt-4">
+                                                <div class="p-4 flex flex-wrap justify-center">
+                                                    <a href="/orla/iframe?idOrla=<?= $orla['id'] ?>" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                                                        Veure
+                                                        <?= $orla['name'] ?>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <?php $orlesVisibles = true; ?>
+                                        <?php endif ?>
+                                    <?php endforeach ?>
+
+                                    <?php if (!$orlesVisibles) : ?>
+                                        <div class="flex flex-col items-center p-2 rounded">
+                                            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                                                No tens cap orla visible
+                                            </h5>
                                         </div>
-                                        <div class="inline-flex items-center">
-
-                                            <a href="#" data-modal-target="datatableModal" data-modal-toggle="datatableModal" data-class-id="<?= $class['idGroupClass']; ?>" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                Orla
-                                            </a>
-
-                                        </div>
-                                    </li>
-
-                                <?php endforeach ?>
+                                    <?php endif ?>
+                                </div>
                             </ul>
                         </div>
                     </div>

@@ -100,35 +100,40 @@ function recoverPages() {
   });
 }
 
-function teacherPages() 
-    {
-      $(document).ready(function () {
-        $("#new-users").click(function (e) {
-          e.preventDefault();
-          $("#new-pagina-users").show();
-          $("#new-pagina-grups").hide();
-          $("#new-pagina-orles").hide();
-          $("#search-users-edit").show();
-      });
+function teacherPages() {
+  $(document).ready(function () {
+    // Ocultar las secciones de grupos y orlas al inicio
+    $("#new-pagina-users").show();
+    $("#new-pagina-grups").hide();
+    $("#new-pagina-orles").hide();
+    $("#search-users-edit").show();
 
-      $("#new-grups").click(function (e) {
-          e.preventDefault();
-          $("#new-pagina-users").hide();
-          $("#new-pagina-grups").show();
-          $("#new-pagina-orles").hide();
-          $("#search-users-edit").hide();
-      });
+    $("#new-users").click(function (e) {
+      e.preventDefault();
+      $("#new-pagina-users").show();
+      $("#new-pagina-grups").hide();
+      $("#new-pagina-orles").hide();
+      $("#search-users-edit").show();
+    });
 
-      $("#new-classes").click(function (e) {
-          e.preventDefault();
-          $("#new-pagina-users").hide();
-          $("#new-pagina-grups").hide();
-          $("#new-pagina-orles").show();
-          $("#search-users-edit").hide();
-      });
- 
-      });
-  }
+    $("#new-grups").click(function (e) {
+      e.preventDefault();
+      $("#new-pagina-users").hide();
+      $("#new-pagina-grups").show();
+      $("#new-pagina-orles").hide();
+      $("#search-users-edit").hide();
+    });
+
+    $("#new-classes").click(function (e) {
+      e.preventDefault();
+      $("#new-pagina-users").hide();
+      $("#new-pagina-grups").hide();
+      $("#new-pagina-orles").show();
+      $("#search-users-edit").hide();
+    });
+  });
+}
+
 
 function perfilPages() {
   document.addEventListener("DOMContentLoaded", function () {
