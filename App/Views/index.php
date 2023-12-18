@@ -13,15 +13,6 @@
 <body>
   <?php require "MenuView.php" ?>
 
-  <div>
-    <div>
-
-    </div>
-    <div>
-
-    </div>
-  </div>
-
   <script src="/js/bundle.js"></script>
   <script src="/js/flowbite.js"></script>
 </body>
