@@ -136,10 +136,10 @@ INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL,
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva1.jpeg', '1', '14');
 
 
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'DAW2');
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'DAW1');
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'SMX1');
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'SMX2');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'DAW2');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'DAW1');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'SMX1');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'SMX2');
 
 INSERT INTO `orla` (`id`, `name`, `visibility`, `idCreator`, `idClassGroup`) VALUES (NULL, 'orla1', '0', '1', '2');
 
@@ -149,17 +149,17 @@ INSERT INTO `user_orla` (`id`, `idUser`, `idOrla`) VALUES (NULL, '3', '1');
 INSERT INTO `user_orla` (`id`, `idUser`, `idOrla`) VALUES (NULL, '4', '1');
 INSERT INTO `user_orla` (`id`, `idUser`, `idOrla`) VALUES (NULL, '5', '1');
 
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('1', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('2', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('3', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('4', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('5', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('6', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('7', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('8', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('9', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('10', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('11', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('12', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('13', '1');
-INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('14', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('1', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('2', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('3', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('4', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('5', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('6', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('7', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('8', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('9', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('10', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('11', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('12', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('13', '1');
+INSERT INTO `users_classGroup` (`idUser`, `idGroupClass`) VALUES ('14', '1');
