@@ -6,10 +6,13 @@ class ViewsController
 {
     public function index($request, $response, $container)
     {
+        $modelOrles = $container->get("orles");
+        $allOrles = $modelOrles->getPublicOrlesAndClass();
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
         $response->setSession("error", "");
         $response->SetTemplate("index.php");
+        $response->set("orles", $allOrles);
         return $response;
     }
 
@@ -249,16 +252,6 @@ class ViewsController
         $modelusers = $container->get("users");
 
         $response->SetTemplate("CarnetView.php");
-        return $response;
-    }
-
-    function publicOrles($request, $response, $container)
-    {
-        $modelOrles = $container->get("orles");
-        $allOrles = $modelOrles->getPublicOrlesAndClass();
-        $response->set("orles", $allOrles);
-
-        $response->SetTemplate("publicOrlesView.php");
         return $response;
     }
 
