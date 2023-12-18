@@ -127,10 +127,10 @@ INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL,
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva1.jpeg', '1', '14');
 
 
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'DAW2');
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'DAW1');
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'SMX1');
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'SMX2');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'DAW2');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'DAW1');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'SMX1');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'SMX2');
 
 INSERT INTO `orla` (`id`, `name`, `visibility`, `idCreator`, `idClassGroup`) VALUES (NULL, 'orla1', '0', '1', '2');
 
