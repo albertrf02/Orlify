@@ -31,7 +31,7 @@ class LoginController
 
         $response->setSession("logged", false);
         $response->setSession("user", null);
-        $response->redirect("Location: /");
+        $response->redirect("Location: /login");
 
         return $response;
     }
@@ -53,11 +53,11 @@ class LoginController
 
 
         $hashPassword = $model->hashPassword($password);
-        $register = $model->register($name, $lastname, $username, $hashPassword, $email ,$role);
+        $register = $model->register($name, $lastname, $username, $hashPassword, $email, $role);
 
         if ($form === 'userRegistration') {
-            $response->redirect("Location: /");
-        } else if ($form === 'adminRegistration'){
+            $response->redirect("Location: /login");
+        } else if ($form === 'adminRegistration') {
             $response->redirect("Location: /admin");
 
         }

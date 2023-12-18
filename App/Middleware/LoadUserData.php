@@ -2,7 +2,8 @@
 
 namespace App\Middleware;
 
-class LoadUserData {
+class LoadUserData
+{
     public static function loadUserData($request, $response, $container, $next)
     {
 
@@ -26,7 +27,7 @@ class LoadUserData {
         }
 
         $response = \Emeset\Middleware::next($request, $response, $container, $next);
-        
+
         return $response;
     }
 }
