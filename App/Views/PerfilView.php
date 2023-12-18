@@ -64,7 +64,6 @@
                 </ul>
 
                 <div class="p-4">
-                    <!-- Content for the selected tab goes here -->
                     <div id="imagesTabContent">
                         <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-2">
                             <?php foreach ($userPhotos as $photo): ?>
@@ -81,12 +80,10 @@
                                                 class="h-48 w-48 object-cover rounded cursor-pointer">
                                         </button>
                                     </form>
-
-                                    <!-- Report button -->
                                     <?php if ($photo["defaultPhoto"] !== 1): ?>
                                         <div class="absolute top-0 right-0 mt-2 mr-5 text-2xl">
-                                            <button data-modal-target="popup-modal-<?= $photo['id']; ?>"
-                                                data-modal-toggle="popup-modal"
+                                            <button data-modal-target="report-modal-<?= $photo['id']; ?>"
+                                                data-modal-toggle="report-modal"
                                                 class="block text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                                 type="button">
                                                 <svg class="w-6 h-6 text-red-800 dark:text-red-500" aria-hidden="true"
@@ -99,7 +96,7 @@
                                     <?php endif ?>
 
                                     <!-- Modal for reporting image -->
-                                    <div id="popup-modal-<?= $photo['id']; ?>" tabindex="-1"
+                                    <div id="report-modal-<?= $photo['id']; ?>" tabindex="-1"
                                         class="hidden fixed inset-0 z-50 overflow-hidden">
                                         <div class="absolute inset-0 bg-black opacity-50"></div>
                                         <div class="flex items-center justify-center h-full">
@@ -107,7 +104,7 @@
                                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                                     <button type="button"
                                                         class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                        data-modal-hide="popup-modal-<?= $photo['id']; ?>">
+                                                        data-modal-hide="report-modal-<?= $photo['id']; ?>">
                                                         <svg class="w-3 h-3" aria-hidden="true"
                                                             xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 14 14">
@@ -140,7 +137,7 @@
                                                                     </button>
                                                                 </form>
 
-                                                                <button data-modal-hide="popup-modal-<?= $photo['id']; ?>"
+                                                                <button data-modal-hide="report-modal-<?= $photo['id']; ?>"
                                                                     type="button"
                                                                     class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                                                                     No, cancel
@@ -158,24 +155,31 @@
                     </div>
                 </div>
                 <div id="orlesTabContent" style="display: none;">
-                    <?php $orlesVisibles = false; ?>
-                    <?php foreach ($userOrla as $orla): ?>
-                        <?php if ($orla['visibility'] == 1): ?>
-                            <a href="/orla/iframe?idOrla=<?= $orla['id'] ?>"
-                                class="edit-button text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 font-medium rounded-lg text-sm inline-flex items-end px-5 py-2 text-center">
-                                Veure
-                                <?= $orla['name'] ?>
-                            </a>
-                            <?php $orlesVisibles = true; ?>
-                        <?php endif ?>
-                    <?php endforeach ?>
-                    <?php if (!$orlesVisibles): ?>
-                        <div class="flex flex-col items-center p-2 rounded">
-                            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                                No tens cap orla visible
-                            </h5>
+                    <div
+                        class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8 mx-auto">
+                        <img src="/img/imatge_orles.png" alt="imatge_orles" width="100px" class="mx-auto mt-4">
+                        <div class="p-4 flex flex-wrap justify-center">
+                            <?php $orlesVisibles = false; ?>
+                            <?php foreach ($userOrla as $orla): ?>
+                                <?php if ($orla['visibility'] == 1): ?>
+                                    <a href="/orla/iframe?idOrla=<?= $orla['id'] ?>"
+                                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                                        Veure
+                                        <?= $orla['name'] ?>
+                                    </a>
+                                    <?php $orlesVisibles = true; ?>
+                                <?php endif ?>
+                            <?php endforeach ?>
+
+                            <?php if (!$orlesVisibles): ?>
+                                <div class="flex flex-col items-center p-2 rounded">
+                                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                                        No tens cap orla visible
+                                    </h5>
+                                </div>
+                            <?php endif ?>
                         </div>
-                    <?php endif ?>
+                    </div>
                 </div>
                 <div id="carnetTabContent" style="display: none;">
                     <div
@@ -206,22 +210,6 @@
     </div>
 
     <?php require "Scripts.php" ?>
-
-    <script>
-        function toggleFormVisibility() {
-            var form = document.getElementById("avatarForm");
-            form.style.display = form.style.display === "none" ? "block" : "none";
-        }
-
-        function showTab(tabName) {
-            document.getElementById("imagesTabContent").style.display =
-                tabName === "images" ? "block" : "none";
-            document.getElementById("orlesTabContent").style.display =
-                tabName === "orles" ? "block" : "none";
-            document.getElementById("carnetTabContent").style.display =
-                tabName === "carnet" ? "block" : "none";
-        }
-    </script>
 </body>
 
 </html>

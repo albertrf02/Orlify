@@ -246,6 +246,12 @@ class Users
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function deleteReport($reportId)
+    {
+        $stm = $this->sql->prepare('DELETE FROM reports WHERE id = :reportId');
+        $stm->execute([':reportId' => $reportId]);
+    }
+
     public function deleteReportAndPhoto($reportId)
     {
         // Retrieve idPhoto before deleting the report
@@ -271,6 +277,7 @@ class Users
     ');
         $stm->execute([':idPhoto' => $idPhoto]);
     }
+
     public function insert($name, $surname, $username, $password, $email)
     {
         $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email) VALUES (:name, :surname, :username, :password, :email);');

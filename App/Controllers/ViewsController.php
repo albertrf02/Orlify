@@ -124,6 +124,12 @@ class ViewsController
             $action = $_REQUEST["action"];
 
             if ($action === "deleteReport") {
+                $modelUsers->deleteReport($_GET['report_id']);
+
+                $response->redirect("Location: /equipDirectiu");
+            }
+
+            if ($action === "deleteReportedImage") {
                 $modelUsers->deleteReportAndPhoto($_GET['report_id']);
 
                 $response->redirect("Location: /equipDirectiu");

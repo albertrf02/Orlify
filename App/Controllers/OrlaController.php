@@ -56,12 +56,27 @@ class OrlaController
         return $response;
     }
 
+    private function isSecure()
+    {
+        return
+            (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || $_SERVER['SERVER_PORT'] == 443;
+    }
+
     private function getRenderHTML($idOrla, $container)
     {
         // TODO add db logic to get the data from the orla
         $orlesModel = $container->get("orles");
 
         $orlaUsers = $orlesModel->getOrlaById($idOrla);
+
+        if ($this->isSecure()) {
+            $protocol = "https://";
+        } else {
+            $protocol = "http://";
+        }
+
+        $server = $protocol . $_SERVER['SERVER_NAME'];
 
         $role1Users = [];
         $role2Users = [];
@@ -81,7 +96,7 @@ class OrlaController
         $twig = new \Twig\Environment($loader);
 
         // Render our view
-        $htmlContent = $twig->render('orla.html.twig', ['role1Users' => $role1Users, 'role2Users' => $role2Users]);
+        $htmlContent = $twig->render('orla.html.twig', ['role1Users' => $role1Users, 'role2Users' => $role2Users, 'server' => $server]);
         return $htmlContent;
     }
 
@@ -110,36 +125,23 @@ class OrlaController
         //TODO get orla name from db
         $orlaName = "orlaName";
 
-        // Execute wkhtmltopdf command
-        $descriptorspec = array(
-            0 => array("pipe", "r"),  // stdin
-            1 => array("pipe", "w"),  // stdout
-            2 => array("pipe", "w")   // stderr
-        );
-
         $papersize = isset($_GET["paperFormat"]) ? $_GET["paperFormat"] : "A4";
 
-        $process = proc_open("wkhtmltopdf --orientation Landscape --page-size $papersize - -", $descriptorspec, $pipes);
+        $options = new \Dompdf\Options();
+        $options->set('isRemoteEnabled', true);
+        // instantiate and use the dompdf class
+        $dompdf = new \Dompdf\Dompdf($options);
 
-        if (is_resource($process)) {
-            // Pass HTML content to wkhtmltopdf via stdin
-            fwrite($pipes[0], $htmlContent);
-            fclose($pipes[0]);
+        $dompdf->loadHtml($htmlContent);
 
-            // Read the output from stdout
-            $pdfContent = stream_get_contents($pipes[1]);
-            fclose($pipes[1]);
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper($papersize, 'landscape');
 
-            // Close the process
-            $return_value = proc_close($process);
+        // Render the HTML as PDF
+        $dompdf->render();
 
-            // Send the generated PDF to the client
-            header('Content-Type: application/pdf');
-            header('Content-Disposition: attachment; filename=' . $orlaName . '.pdf');
-            header('Content-Length: ' . strlen($pdfContent));
-            flush(); // Flush system output buffer
-            echo $pdfContent;
-        }
+        // Output the generated PDF to Browser
+        $dompdf->stream();
     }
 
     public function editOrla($request, $response, $container)

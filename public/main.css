@@ -1026,9 +1026,6 @@ input:checked + .toggle-bg {
 .bottom-0 {
   bottom: 0px;
 }
-.bottom-6 {
-  bottom: 1.5rem;
-}
 .bottom-\[60px\] {
   bottom: 60px;
 }
@@ -1117,6 +1114,9 @@ input:checked + .toggle-bg {
 }
 .me-3 {
   margin-inline-end: 0.75rem;
+}
+.ml-16 {
+  margin-left: 4rem;
 }
 .ml-2 {
   margin-left: 0.5rem;
@@ -1229,6 +1229,9 @@ input:checked + .toggle-bg {
 .h-3 {
   height: 0.75rem;
 }
+.h-32 {
+  height: 8rem;
+}
 .h-4 {
   height: 1rem;
 }
@@ -1292,6 +1295,9 @@ input:checked + .toggle-bg {
 .w-3 {
   width: 0.75rem;
 }
+.w-32 {
+  width: 8rem;
+}
 .w-4 {
   width: 1rem;
 }
@@ -1348,9 +1354,6 @@ input:checked + .toggle-bg {
 }
 .flex-shrink-0 {
   flex-shrink: 0;
-}
-.flex-grow {
-  flex-grow: 1;
 }
 .-translate-x-full {
   --tw-translate-x: -100%;
@@ -1627,6 +1630,10 @@ input:checked + .toggle-bg {
   --tw-bg-opacity: 1;
   background-color: rgb(63 131 248 / var(--tw-bg-opacity));
 }
+.bg-blue-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(28 100 242 / var(--tw-bg-opacity));
+}
 .bg-blue-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(26 86 219 / var(--tw-bg-opacity));
@@ -1877,6 +1884,10 @@ input:checked + .toggle-bg {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(224 36 36 / var(--tw-text-opacity));
+}
 .text-red-700 {
   --tw-text-opacity: 1;
   color: rgb(200 30 30 / var(--tw-text-opacity));
@@ -2057,6 +2068,11 @@ input:checked + .toggle-bg {
   background-color: rgb(225 239 254 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-blue-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(118 169 250 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-blue-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(26 86 219 / var(--tw-bg-opacity));
@@ -2082,9 +2098,19 @@ input:checked + .toggle-bg {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-gray-900:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-orange-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 90 31 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-red-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 128 128 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-red-800:hover {
@@ -2476,6 +2502,11 @@ input:checked + .toggle-bg {
 :is(.dark .dark\:focus\:ring-gray-600:focus) {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(75 85 99 / var(--tw-ring-opacity));
+}
+
+:is(.dark .dark\:focus\:ring-gray-700:focus) {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(55 65 81 / var(--tw-ring-opacity));
 }
 
 :is(.dark .dark\:focus\:ring-red-800:focus) {
