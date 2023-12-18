@@ -124,9 +124,13 @@
             </div>
         </div>
 
-        <!-- Image Section -->
         <div class="w-1/2 shadow-2xl">
-            <img class="object-cover w-full h-screen hidden md:block" src="https://source.unsplash.com/IXUM4cJynP0">
+            <div class="image-container-login">
+                <img class="object-cover w-full h-screen hidden md:block" src="https://source.unsplash.com/IXUM4cJynP0">
+                <div class="overlay-login">
+                    <p>Your text goes here</p>
+                </div>
+            </div>
         </div>
     </div>
 
