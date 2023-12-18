@@ -130,6 +130,6 @@ searchUserTeacher();
 searchUserClass();
 teacherPages();
 DatatablesModal();
-dragAndDrop();
 camera();
+dragAndDrop();
 checkFile();
