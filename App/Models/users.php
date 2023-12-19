@@ -207,7 +207,7 @@ class Users
 
     public function getClassGroups()
     {
-        $stm = $this->sql->prepare('SELECT * FROM classgroup;');
+        $stm = $this->sql->prepare('SELECT * FROM classGroup;');
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -359,7 +359,7 @@ class Users
             AND
             users.id = users_classgroup.idUser
             AND 
-            classgroup.id = orla.idClassGroup
+            classGroup.id = orla.idClassGroup
             AND users.id=:idUser;
         QUERY;
         $stm = $this->sql->prepare($query);
