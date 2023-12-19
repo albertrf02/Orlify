@@ -131,7 +131,6 @@ class Users
         $stm->execute([':id' => $id, ':password' => $hashPassword]);
     }
 
-
     public function getPhotos($idUser)
     {
         $stm = $this->sql->prepare('select * from photography where idUser=:idUser;');
