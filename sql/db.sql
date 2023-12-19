@@ -15,7 +15,7 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE,
     avatar VARCHAR(255),
     role INT,
-    token varchar(250) NOT NULL,
+    token varchar(250) NOT NULL DEFAULT 0,
     token_expiration datetime,
     token_carnet varchar(255)
 );
@@ -92,10 +92,6 @@ INSERT INTO `roles` (`name`) VALUES ('teacher');
 INSERT INTO `roles` (`name`) VALUES ('team');
 INSERT INTO `roles` (`name`) VALUES ('admin');
 
--- Modificar les taules
-ALTER TABLE photography
-ADD FOREIGN KEY (idUser) REFERENCES Users(id);
-
 INSERT INTO `users` (`Id`, `name`, `surname`, `username`, `password`, `email`, `avatar`, role) VALUES
 (1, 'albert', 'rocas', 'arocas', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'arocas@cendrassos.net', NULL, 1),
 (2, 'john', 'doe', 'jdoe', '$2y$10$fnefNZkgBjPJfmRN0SxeQuQ9K8Q5e2rrb11CpGeFvQMLV79fM6aUO', 'john@doe.com', NULL, 2),
@@ -131,10 +127,10 @@ INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL,
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva1.jpeg', '1', '14');
 
 
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'DAW2');
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'DAW1');
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'SMX1');
-INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'SMX2');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'DAW2');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'DAW1');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'SMX1');
+INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'SMX2');
 
 INSERT INTO `orla` (`id`, `name`, `visibility`, `idCreator`, `idClassGroup`) VALUES (NULL, 'orla1', '0', '1', '2');
 
