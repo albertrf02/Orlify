@@ -20,6 +20,7 @@ import { DatatablesModal } from "./ajax.js";
 import { searchUserTeacher } from "./ajax.js";
 
 import * as orla from "./orla.js";
+import { cookie } from "./cookie.js";
 
 
 adminPages();
@@ -43,7 +44,7 @@ window.removeUserFromOrla = orla.removeUserFromOrla;
 window.showUsersInfo = orla.showUsersInfo;
 window.saveUpdatedOrla = orla.saveUpdatedOrla;
 
-
+cookie();
 deleteClassModal();
 searchUserTeacher();
 searchUserClass();
