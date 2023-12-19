@@ -6,10 +6,13 @@ class ViewsController
 {
     public function index($request, $response, $container)
     {
+        $modelOrles = $container->get("orles");
+        $allOrles = $modelOrles->getPublicOrlesAndClass();
         $error = $request->get("SESSION", "error");
         $response->set("error", $error);
         $response->setSession("error", "");
         $response->SetTemplate("index.php");
+        $response->set("orles", $allOrles);
         return $response;
     }
 
@@ -252,18 +255,26 @@ class ViewsController
     function carnet($request, $response, $container)
     {
         $modelusers = $container->get("users");
+        if (isset($_GET["token_carnet"])) {
+            $tokenCarnet = $_GET["token_carnet"];
+            $user = $modelusers->getUserByTokenCarnet($tokenCarnet);
+            $response->set("user", $user);
+            $response->SetTemplate("CarnetView.php");
+        } else {
+            $response->setBody("token no proporcionat");
+            return $response;
+        }
 
-        $response->SetTemplate("CarnetView.php");
         return $response;
     }
 
-    function publicOrles($request, $response, $container)
+    function getTokenCarnet($request, $response, $container)
     {
-        $modelOrles = $container->get("orles");
-        $allOrles = $modelOrles->getPublicOrlesAndClass();
-        $response->set("orles", $allOrles);
+        $modelusers = $container->get("users");
+        $getToken = $modelusers->getTokenCarnet($_SESSION["user"]["id"]);
 
-        $response->SetTemplate("publicOrlesView.php");
+        $response->setJSON();
+        $response->setBody(json_encode($getToken));
         return $response;
     }
 

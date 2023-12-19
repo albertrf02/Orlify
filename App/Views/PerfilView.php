@@ -201,6 +201,10 @@
                             <a href="/carnet"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-4">Veure el
                                 Carnet </a>
+                            <a href="#" onclick="printToken()"
+                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-4">Veure
+                                token
+                            </a>
                         </div>
                     </div>
                 </div>

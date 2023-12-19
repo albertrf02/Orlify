@@ -20,6 +20,8 @@ import { DatatablesModal } from "./ajax.js";
 import { searchUserTeacher } from "./ajax.js";
 
 import * as orla from "./orla.js";
+
+import * as carnet from "./carnet.js";
 import { generateUser } from "./ajax.js";
 import { slider } from "./slider.js";
 import { cookie } from "./cookie.js";
@@ -33,6 +35,7 @@ searchUser();
 equipDirectiuPages();
 recoverPages();
 perfilPages();
+window.printToken = carnet.printToken;
 
 window.toggleFormVisibility = toggleFormVisibility;
 window.showTab = showTab;

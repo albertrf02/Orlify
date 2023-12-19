@@ -14,13 +14,10 @@
         <div class="flex p-4">
             <div id="role-2" class="flex-container"></div>
             <hr style="margin-top: 20px;" id="hr-editOrla">
-            <div id="role-1" class="flex-container">
-            </div>
+            <div id="role-1" class="flex-container"></div>
             <div id="bottom-div" class="flex-container">
-                <h1>Profes</h1>
                 <div id="usersNotInOrla-role2" class="flex-container"></div>
                 <div class="divider"></div>
-                <h1>Alumnes</h1>
                 <div id="usersNotInOrla-role1" class="flex-container"></div>
                 <form method="post" action="/saveOrla?action=saveOrla" id="saveOrla">
                     <input type="hidden" id="orlaValues" name="orlaValues" value="">
@@ -95,6 +92,8 @@
         box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
         text-align: center;
         height: 200px;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 </style>
 <?php require "Scripts.php" ?>
