@@ -38,6 +38,11 @@
                                 <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Afegir usuaris</span>
                             </button>
                         </li>
+                        <li>
+                        <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group dark:text-white dark:hover:bg-gray-700">
+                            <button class="generateUser block text-white bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:focus:ring-blue-800" type="button">Generar usuari  </button>
+                        </div>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -77,7 +82,7 @@
     <div class="p-4 sm:ml-64 min-h-screen bg-background">
         <div class="p-4 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
 
-            <div id="search-users-edit" class="pagina flex items-center justify-center mb-8">
+            <div id="search-users-edit" class="pagina flex items-center justify-center mb-8 hidden">
                 <div class="flex items-center justify-between bg-white dark:bg-gray-900 rounded-lg">
                     <label for="table-search" class="sr-only">Search</label>
                     <div class="relative">
@@ -91,7 +96,7 @@
                 </div>
             </div>
 
-            <div id="pagina-users-edit" class="pagina flex flex-col">
+            <div id="pagina-users-edit" class="pagina flex flex-col hidden">
                 <div class="flex flex-wrap justify-center">
                     <?php foreach ($users as $user) : ?>
                         <div class="w-full max-w-xs sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -252,6 +257,7 @@
                 </div>
             </div>
 
+
             <div id="pagina-classes-edit" class="pagina flex flex-col items-center justify-center hidden">
                 <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                     <div class="flex items-center justify-between mb-4">
@@ -323,107 +329,121 @@
                 </div>
             </div>
 
-
             <div id="pagina-classes-add" class="pagina hidden">
                 <div class="grid gap-4">
                     <form class="border-2 mb-8 p-4 bg-white rounded-lg" action="/adduserclass" method="POST">
                         <div class="mb-8">
-                            <p class="mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Seleccionar Clase:</p>
-                            <?php foreach ($classes as $class) :?>
-                                <div class="flex items-center mb-4">
-                                    <input type="radio" name="selectedClass" id="class-<?= $class['id']; ?>" value="<?= $class['id']; ?>" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="class-<?= $class['id']; ?>" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"><?= $class['className']; ?></label>
-                                </div>
-                            <?php endforeach ?>
-                        </div>
-                        <div id="search-class-user" class="pagina flex items-center justify-center">
-                            <div class="flex items-center justify-between bg-white dark:bg-gray-900">
-                                <label for="table-search-class-user" class="sr-only">Search</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                                        </svg>
+                            <p class="mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Clase:</p>
+                            <div class="flex items-center justify-center w-full h-full py-8 sm:py-4 px-2">
+                                <div class="w-full relative flex items-center justify-center">
+                                <button type="button" aria-label="slide backward" class="absolute z-30 left-0 ml-10 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer" id="prev">
+                                    <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <div class="w-full h-24 mx-auto overflow-x-hidden overflow-y-hidden">
+                                    <div id="slider" class="h-full flex lg:gap-4 md:gap-2 gap-6 items-center justify-start transition ease-out duration-700">
+                                        <?php foreach ($activeClasses as $activeClass): ?>
+                                            <div class="flex flex-shrink-0 relative w-full sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-1/3">
+                                                <img src="../img/Classroom.jpg" alt="Classe" class="object-cover object-center w-full h-16 md:h-24 lg:h-32 xl:h-40 rounded-lg" />
+                                                <div class="bg-gray-800 bg-opacity-30 absolute w-full h-full p-3 rounded-lg flex flex-col items-center justify-center">
+                                                    <div class="flex items-center mb-2">
+                                                        <h2 class="lg:text-sm md:text-xs text-xs leading-4 font-bold text-gray dark:text-gray-900 mb-0"><?= $activeClass['className']?></h2>
+                                                        <input type="radio" name="selectedClass" id="class-<?= $activeClass['id']; ?>" value="<?= $activeClass['id']; ?>" class="w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
-                                    <input type="text" id="table-search-class-user" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users">
+                                </div>
+                                <button type="button" aria-label="slide forward" class="absolute z-30 right-0 mr-4 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400" id="next">
+                                    <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Seleccionar usuarios:</div>
-                        
+                        <div class="flex gap-4 mb-2">
+                            <div class="flex-1 max-h-48 overflow-auto flex items-center justify-center">
+                                <div id="search-class-teacher" class="pagina">
+                                    <div class="flex items-center justify-between bg-white dark:bg-gray-900" style="width: 80%;">
+                                        <label for="table-search-class-teacher" class="sr-only">Search</label>
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                                </svg>
+                                            </div>
+                                            <input type="text" id="table-search-class-teacher" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cercar professors">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-1 max-h-48 overflow-auto flex items-center justify-center">
+                                <div id="search-class-student" class="pagina">
+                                    <div class="flex items-center justify-between bg-white dark:bg-gray-900" style="width: 80%;">
+                                        <label for="table-search-class-student" class="sr-only">Search</label>
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                                </svg>
+                                            </div>
+                                            <input type="text" id="table-search-class-student" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cercar alumnes">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div id="users-container" class="grid grid-cols-6 gap-4 mb-8">
-    <!-- Contenedor para Profesores con scrollbar -->
-    <div class="col-span-6 md:col-span-3 max-h-48 overflow-auto">
-        <h2 class="text-lg font-semibold mb-4">Profesores</h2>
-        <?php foreach ($professors as $profesor) :?>
-            <div class="mb-4 flex items-center space-x-4">
-                <ul class="w-full">
-                    <li class="flex items-center justify-between p-5 border border-gray-200 rounded-lg">
-                        <img class="w-24 h-24 mb-3 rounded-full shadow-lg mr-4" src="<?= '../avatars/' . $profesor['avatar'] ?>" alt="<?= $profesor['name']?>"/>
-                        <div class="flex-grow">
-                            <div class="text-lg font-semibold"><?= $profesor['name'] . " " . $profesor['surname']?></div>
-                            <div class="text-gray-500 dark:text-gray-400"><?= $profesor['email'] ?></div>
+                            <div class="col-span-6 md:col-span-3 max-h-48 overflow-auto users-container-teacher">
+                                <?php foreach ($professors as $profesor) :?>
+                                    <div class="mb-4 flex items-center space-x-4">
+                                        <ul class="w-full">
+                                            <li class="flex items-center justify-between p-5 border border-gray-200 rounded-lg">
+                                                <div class="flex-grow">
+                                                    <div class="text-lg font-semibold"><?= $profesor['name'] . " " . $profesor['surname']?></div>
+                                                    <div class="text-gray-500 dark:text-gray-400"><?= $profesor['email'] ?></div>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <input id="user-checkbox-<?= $profesor['id']; ?>" type="checkbox" name="selectedUsers[]" value="<?= $profesor['id']; ?>" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                <?php endforeach ?>
+                            </div>
+                            <div class="col-span-6 md:col-span-3 max-h-48 overflow-auto users-container-student">
+                                <?php foreach ($students as $student) :?>
+                                    <div class="mb-4 flex items-center space-x-4">
+                                        <ul class="w-full">
+                                            <li class="flex items-center justify-between p-5 border border-gray-200 rounded-lg">
+                                                <div class="flex-grow">
+                                                    <div class="text-lg font-semibold"><?= $student['name'] . " " . $student['surname']?></div>
+                                                    <div class="text-gray-500 dark:text-gray-400"><?= $student['email'] ?></div>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <input id="user-checkbox-<?= $student['id']; ?>" type="checkbox" name="selectedUsers[]" value="<?= $student['id']; ?>" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                <?php endforeach ?>
+                            </div>
                         </div>
-                        <div class="flex items-center">
-                            <input id="user-checkbox-<?= $profesor['id']; ?>" type="checkbox" name="selectedUsers[]" value="<?= $profesor['id']; ?>" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        <?php endforeach ?>
-    </div>
-
-    <!-- Contenedor para Estudiantes con scrollbar -->
-    <div class="col-span-6 md:col-span-3 max-h-48 overflow-auto">
-        <h2 class="text-lg font-semibold mb-4">Alumnes</h2>
-        <?php foreach ($students as $student) :?>
-            <div class="mb-4 flex items-center space-x-4">
-                <ul class="w-full">
-                    <li class="flex items-center justify-between p-5 border border-gray-200 rounded-lg">
-                        <img class="w-24 h-24 mb-3 rounded-full shadow-lg mr-4" src="<?= '../avatars/' . $student['avatar'] ?>" alt="<?= $student['name']?>"/>
-                        <div class="flex-grow">
-                            <div class="text-lg font-semibold"><?= $student['name'] . " " . $student['surname']?></div>
-                            <div class="text-gray-500 dark:text-gray-400"><?= $student['email'] ?></div>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="user-checkbox-<?= $student['id']; ?>" type="checkbox" name="selectedUsers[]" value="<?= $student['id']; ?>" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        <?php endforeach ?>
-    </div>
-</div>
-
-
-
                         <div class="flex justify-center">
-                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-24">Importar</button>
+                            <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <svg class="w-6 h-6 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z"/>
+                                </svg>
+                            </button>
                         </div>
                     </form>
-                    <button class="generateUser block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                        Toggle modal
-                    </button>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-            
-
         </div>
     </div>
-
-    
-
-
-
 
     <div id="editUserModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative w-full max-w-2xl max-h-full">
@@ -466,9 +486,6 @@
             </form>
         </div>
     </div>
-</div>
-
-
 
     <div id="deleteUserModal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
@@ -485,16 +502,14 @@
                         <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
-                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esteu segur que voleu suprimir aquest usuari?</h3>
-                        <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">Sí, n'estic segur</button>
-                        <button data-modal-hide="deleteUserModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel·lar</button>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esteu segur que voleu desactivar aquest usuari?</h3>
+                        <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">Desactivar</button>
+                        <button data-modal-hide="deleteUserModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel·lar</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
-
 
     <div id="deleteClassModal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
@@ -511,91 +526,79 @@
                         <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
-                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
-                        <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
-                            Yes, I'm sure
-                        </button>
-                        <button data-modal-hide="deleteClassModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esteu segur que voleu desactivar aquesta classe?</h3>
+                        <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">Desactivar</button>
+                        <button data-modal-hide="deleteClassModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel·lar</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
-
-    
 
     <div id="editUsersClass" data-modal-backdrop="editUsersClass" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-2xl max-h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Eliminar usuaris
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="editUsersClass">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            <form action="/deleteuserclass" method="POST" class="border-2 mb-8 p-4">
-                <div id="users-container-class" class="flex flex-col w-full max-h-48 overflow-y-auto"> 
-                    
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Eliminar alumnes</h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="editUsersClass">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
                 </div>
-                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                    <button data-modal-hide="editUsersClass" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-<div id="addClassModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-md max-h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Sign in to our platform
-                </h3>
-                <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="addClassModal">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            <div class="p-4 md:p-5">
-                <form class="space-y-4" action="/addclass" method="POST">
-                    <div>
-                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class</label>
-                        <input type="text" name="class" id="class" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
+                <form action="/deleteuserclass" method="POST" class="border-2 mb-8 p-4">
+                    <div class="flex-1 max-h-48 overflow-auto flex items-center justify-center">
+                        <div id="search-class-student" class="pagina">
+                            <div class="flex items-center justify-between bg-white dark:bg-gray-900" style="width: 80%;">
+                                <label for="table-search-class-student" class="sr-only">Search</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                        </svg>
+                                    </div>
+                                    <input type="text" id="table-search-class-student" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cercar alumnes">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
+                    <div id="users-container-class" class="flex flex-col w-full max-h-48 overflow-y-auto"> 
+                        
+                    </div>
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Eliminar</button>
+                        <button data-modal-hide="editUsersClass" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel·lar</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-</div> 
+
+    <div id="addClassModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Afegir classe</h3>
+                    <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="addClassModal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="p-4 md:p-5">
+                    <form class="space-y-4" action="/addclass" method="POST">
+                        <div>
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
+                            <input type="text" name="class" id="class" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                        </div>
+                        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Crear</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> 
 
 
 

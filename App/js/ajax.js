@@ -110,7 +110,6 @@ function editUserClass() {
     <ul class="w-full">
         <li class="flex items-center justify-between p-5 border border-gray-200 rounded-lg">
         <input type="hidden" name="userClassId" value="${userClassId}">
-                <img class="w-24 h-24 mb-3 rounded-full shadow-lg mr-4" src="../avatars/${user.avatar}" alt="${user.name}"/>
                 <div class="flex-grow">
                     <div class="text-lg font-semibold">${user.name} ${user.surname}</div>
                     <div class="text-gray-500 dark:text-gray-400">${user.email}</div>
@@ -404,11 +403,11 @@ function searchUser() {
 }
 
 
-function searchUserClass() {
+function searchTeacherClass() {
     $(document).ready(function () {
-        var $searchInput = $('#table-search-class-user');
+        var $searchInput = $('#table-search-class-teacher');
         var lastSearchQuery = '';
-        var $usersContainer = $('#users-container');
+        var $usersContainer = $('.users-container-teacher');
         var $submitButton = $('#submit-button');
 
         // Inicializar array para almacenar IDs de usuarios seleccionados
@@ -437,7 +436,7 @@ function searchUserClass() {
                     lastSearchQuery = searchQuery;
 
                     $.ajax({
-                        url: '/searchuserclassajax',
+                        url: '/searchteacherclassajax',
                         method: 'POST',
                         data: { query: searchQuery },
                         dataType: "json",
@@ -457,12 +456,22 @@ function searchUserClass() {
                             users.forEach(function (user) {
                                 var isChecked = selectedUserIds.includes(user.id);
                                 var userHtml = `
-                                    <div class="flex items-center mb-4">
-                                        <input id="default-checkbox-${user.id}" type="checkbox" name="user_ids[]" value="${user.id}" ${isChecked ? 'checked' : ''} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="default-checkbox-${user.id}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                            ${user.name}  - <span class="role-name">${getRoleName(user.role)}</span>
-                                        </label>
+                                    <div class="mb-4 flex items-center space-x-4">
+                                        <ul class="w-full">
+                                            <li class="flex items-center justify-between p-5 border border-gray-200 rounded-lg">
+                                                <div class="flex-grow">
+                                                    <div class="text-lg font-semibold">${user.name} ${user.surname}</div>
+                                                    <div class="text-gray-500 dark:text-gray-400">${user.email}</div>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <input id="default-checkbox-${user.id}" type="checkbox" name="selectedUsers[]" value="${user.id}" ${isChecked ? 'checked' : ''} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
+
+
+
                                 `;
 
                                 usersSectionHtml += userHtml;
@@ -516,7 +525,128 @@ function searchUserClass() {
 }
 
 
-export { searchUser, searchUserClass };
+function searchStudentClass() {
+    $(document).ready(function () {
+        var $searchInput = $('#table-search-class-student');
+        var lastSearchQuery = '';
+        var $usersContainer = $('.users-container-student');
+        var $submitButton = $('#submit-button');
+
+        // Inicializar array para almacenar IDs de usuarios seleccionados
+        var selectedUserIds = [];
+        
+        $usersContainer.off('change', 'input[type="checkbox"]');
+
+        // Manejar cambios en los checkboxes
+        $usersContainer.on('change', 'input[type="checkbox"]', function () {
+            var userId = $(this).val();
+            if ($(this).is(':checked')) {
+                selectedUserIds.push(userId);
+            } else {
+                selectedUserIds = selectedUserIds.filter(id => id !== userId);
+            }
+        });
+
+        $searchInput.on('input', function () {
+            var searchQuery = $searchInput.val();
+
+            console.log(searchQuery);
+
+            if (searchQuery.length >= 3 || searchQuery === '') {
+
+                if (searchQuery !== lastSearchQuery) {
+                    lastSearchQuery = searchQuery;
+
+                    $.ajax({
+                        url: '/searchstudentclassajax',
+                        method: 'POST',
+                        data: { query: searchQuery },
+                        dataType: "json",
+                        success: function (data) {
+                            console.log(data);
+
+                            var users = data['users'];
+                            var roles = data['roles'];
+
+                            // Crear la sección de selección de usuarios
+                            var usersSectionHtml = '';
+
+                            function getRoleName(roleId) {
+                                return roles[roleId]['name'];
+                            }
+
+                            users.forEach(function (user) {
+                                var isChecked = selectedUserIds.includes(user.id);
+                                var userHtml = `
+
+
+
+                                    <div class="mb-4 flex items-center space-x-4">
+                                        <ul class="w-full">
+                                            <li class="flex items-center justify-between p-5 border border-gray-200 rounded-lg">
+                                                <div class="flex-grow">
+                                                    <div class="text-lg font-semibold">${user.name} ${user.surname}</div>
+                                                    <div class="text-gray-500 dark:text-gray-400">${user.email}</div>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <input id="default-checkbox-${user.id}" type="checkbox" name="selectedUsers[]" value="${user.id}" ${isChecked ? 'checked' : ''} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                `;
+
+                                usersSectionHtml += userHtml;
+                            });
+
+                            // Actualizar el contenido del contenedor de usuarios
+                            $usersContainer.html(usersSectionHtml);
+
+                            $usersContainer.off('change', 'input[type="checkbox"]');
+
+                            // Manejar cambios en los checkboxes
+                            $usersContainer.on('change', 'input[type="checkbox"]', function () {
+                                var userId = $(this).val();
+                                if ($(this).is(':checked')) {
+                                    selectedUserIds.push(userId);
+                                } else {
+                                    selectedUserIds = selectedUserIds.filter(id => id !== userId);
+                                }
+                            });
+
+                            // Actualizar el estado de los checkboxes existentes
+                            $('input[type="checkbox"]').each(function () {
+                                var userId = $(this).val();
+                                var isChecked = selectedUserIds.includes(userId);
+                                $(this).prop('checked', isChecked);
+                            });
+
+                            // Eliminar eventos de cambio anteriores para evitar duplicados
+                            $submitButton.off('click');
+
+                            // Manejar clic en el botón
+                            $submitButton.on('click', function (e) {
+                                e.preventDefault();
+                                if (selectedUserIds.length > 0) {
+                                    // Solo permitir enviar el formulario si hay usuarios seleccionados
+                                    console.log("Formulario enviado con usuarios seleccionados: ", selectedUserIds);
+                                    // Agregar aquí la lógica para enviar el formulario si es necesario
+                                } else {
+                                    console.log("No hay usuarios seleccionados. No se enviará el formulario.");
+                                }
+                            });
+                        },
+                        error: function (error) {
+                            console.error('Error en la solicitud AJAX: ', error);
+                        }
+                    });
+                }
+            }
+        });
+    });
+}
+
+export { searchUser, searchTeacherClass, searchStudentClass };
 export { deleteUserModal };
 export { editUserModal };
 export { editUserClass };

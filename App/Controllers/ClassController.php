@@ -45,14 +45,39 @@ class ClassController
 }
 
 
-    function searchUserClassAjax ($request, $response, $container) {
+    function searchTeacherClassAjax ($request, $response, $container) {
 
         $query = $request->get(INPUT_POST, "query");
 
         $model = $container->get("users");
         $model2 = $container->get("classes");
 
-        $users = $model2->searchUserClassAjax($query);
+        $users = $model2->searchTeacherClassAjax($query);
+        $roles = $model->getRoles();
+        
+
+        if (!empty($users)) {
+            $response->set("users", $users);
+            $response->set("roles", $roles);
+            $response->setJSON();
+        } else {
+            $response->set('error', 'error');
+            $response->setJSON();
+        }
+
+        return $response;
+
+    }
+
+
+    function searchStudentClassAjax ($request, $response, $container) {
+
+        $query = $request->get(INPUT_POST, "query");
+
+        $model = $container->get("users");
+        $model2 = $container->get("classes");
+
+        $users = $model2->searchStudentClassAjax($query);
         $roles = $model->getRoles();
         
 

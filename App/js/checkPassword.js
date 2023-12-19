@@ -18,4 +18,8 @@ function checkPassword() {
         return regex.test(contrasenya);
     }
 }
-export{checkPassword};
+
+
+   
+    
+export{checkPassword };

@@ -44,6 +44,7 @@ class ViewsController
         $allUsers = $model->getAllUsers();
         $roles = $model->getRoles();
         $classes = $model2->getClasses();
+        $activeClasses = $model2->getActiveClasses();
         $students = $model->getStudent();
         $professors = $model->getTeacher();
 
@@ -59,6 +60,7 @@ class ViewsController
         $response->set("users", $users);
         $response->set("roles", $roles);
         $response->set("classes", $classes);
+        $response->set("activeClasses", $activeClasses);
         $response->set("currentPage", $page);
         $response->set("totalPages", $totalPages);
 

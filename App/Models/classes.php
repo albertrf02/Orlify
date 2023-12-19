@@ -39,6 +39,12 @@ class Classes
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getActiveClasses() {
+        $stm = $this->sql->prepare('SELECT * FROM classgroup WHERE state = 1;');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function getClass($id) {
         $stm = $this->sql->prepare('SELECT * FROM classgroup WHERE id = :id;');
         $stm->execute([':id' => $id]);
@@ -50,13 +56,28 @@ class Classes
         $stm->execute([':id' => $id, ':newState' => $newState]);
     }
     
-    public function searchUserClassAjax($query)
+    public function searchTeacherClassAjax($query)
 {
-    $stm = $this->sql->prepare('SELECT * FROM users WHERE name LIKE :query AND role IN (1, 2);');
+    $stm = $this->sql->prepare('SELECT * FROM users WHERE name LIKE :query AND role = 2;');
     $query = "{$query}%";
     $stm->execute([':query' => $query]);
     return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
 }
+
+public function searchStudentClassAjax($query)
+{
+    $stm = $this->sql->prepare('SELECT * FROM users u 
+    LEFT JOIN users_classgroup c ON u.id = c.idUser
+    WHERE (u.role = 1 AND c.idUser IS NULL AND u.name LIKE :query);');
+    $query = "{$query}%";
+    $stm->execute([':query' => $query]);
+    return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+
+
+
+
 
 public function addUserClass($userIds, $classId) {
     $stmt = $this->sql->prepare('INSERT INTO users_classgroup (idUser, idGroupClass) VALUES (:userId, :classId);');
@@ -85,7 +106,13 @@ public function getUsersByClassId($classId)
     return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
 }
 
-
+/**
+ * [addClass description]
+ *
+ * @param   [type]  $className  [$className description]
+ *
+ * @return  [type]              [return description]
+ */
 public function addClass($className) {
     $stmt = $this->sql->prepare('INSERT INTO classgroup (className) VALUES (:className);');
 

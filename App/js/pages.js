@@ -13,14 +13,19 @@ function adminPages() {
       // Ocultar todas las páginas y el navegador de búsqueda de usuarios
       $(".pagina").hide();
       $("#search-users-edit").hide();
-      $("#search-class-user").hide();
+      $("#search-class-teacher").hide();
+      $("#search-class-student").hide();
+
 
       // Mostrar la página actual y el navegador correspondiente
       $("#" + currentPage).show();
       if (currentPage === 'pagina-users-edit') {
           $("#search-users-edit").show();
       } else if (currentPage === 'pagina-classes-add') {
-          $("#search-class-user").show();
+          $("#search-class-teacher").show();          
+          $("#search-class-student").show();
+
+
       }
 
       // Manejar los clics en los enlaces
@@ -38,7 +43,7 @@ function adminPages() {
           e.preventDefault();
           $(".pagina").hide();
           $("#pagina-users-add").show();
-          $("#search-users-edit").hide(); // Ocultar el navegador de búsqueda de usuarios para agregar usuarios
+          $("#search-users-edit").hide();
           window.history.pushState(null, null, '/admin');
           sessionStorage.setItem('currentPage', 'pagina-users-add');
       });
@@ -47,7 +52,8 @@ function adminPages() {
           e.preventDefault();
           $(".pagina").hide();
           $("#pagina-classes-edit").show();
-          $("#search-class-user").hide(); // Ocultar el navegador de búsqueda de usuarios para clases
+          $("#search-class-teacher").hide(); // Ocultar el navegador de búsqueda de usuarios para clases
+          $("#search-class-student").hide(); // Ocultar el navegador de búsqueda de usuarios para clases
           window.history.pushState(null, null, '/admin');
           sessionStorage.setItem('currentPage', 'pagina-classes-edit');
       });
@@ -56,7 +62,8 @@ function adminPages() {
           e.preventDefault();
           $(".pagina").hide();
           $("#pagina-classes-add").show();
-          $("#search-class-user").show();
+          $("#search-class-teacher").show();
+          $("#search-class-student").show(); // Ocultar el navegador de búsqueda de usuarios para clases
           window.history.pushState(null, null, '/admin');
           sessionStorage.setItem('currentPage', 'pagina-classes-add');
       });
