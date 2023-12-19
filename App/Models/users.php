@@ -108,7 +108,11 @@ class Users
 
     public function getAllUsers()
     {
-        $stm = $this->sql->prepare('SELECT users.*, roles.name AS roleName FROM users LEFT JOIN roles ON users.role = roles.idRole;');
+        $stm = $this->sql->prepare('SELECT users.*, roles.name AS roleName, photography.link AS photoLink 
+        FROM users 
+        LEFT JOIN roles ON users.role = roles.idRole 
+        LEFT JOIN photography ON users.id = photography.idUser AND photography.defaultPhoto = 1
+        ;');
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -126,7 +130,6 @@ class Users
         $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE id = :id;');
         $stm->execute([':id' => $id, ':password' => $hashPassword]);
     }
-
 
     public function getPhotos($idUser)
     {
@@ -172,7 +175,11 @@ class Users
 
     public function searchUserAjax($query)
     {
-        $stm = $this->sql->prepare('SELECT * FROM users WHERE name LIKE :query;');
+        $stm = $this->sql->prepare('SELECT users.*, photography.link AS photoLink 
+        FROM users 
+        LEFT JOIN photography ON users.id = photography.idUser AND photography.defaultPhoto = 1
+        WHERE users.name LIKE :query
+        ');
         $query = "{$query}%";
         $stm->execute([':query' => $query]);
         return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
@@ -335,6 +342,12 @@ class Users
         $stm->execute([':password' => $password, ':token' => $token]);
     }
 
+    public function insertPhotoByID($link,$idUser)
+    {
+    $stm = $this->sql->prepare('INSERT INTO photography(link, idUser) VALUES (:link, :idUser);');
+    $stm->execute([':link' => $link, ':idUser' => $idUser]);
+    }
+
     public function getAvatars()
     {
         $avatarPath = __DIR__ . "/../../public/avatars/";
@@ -367,15 +380,47 @@ class Users
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getUsersClass()
+    public function insertCard($url, $idUser)
     {
+        $stm = $this->sql->prepare('INSERT INTO studentcard (url, idStudent) VALUES (:url, :idUser);');
+        $stm->execute([':url' => $url, ':idUser' => $idUser]);
+    }
 
-        $stm = $this->sql->prepare('SELECT * FROM users WHERE role = 1 OR role = 2;');
+  
+    public function getUsersClass() {
+        $stm = $this->sql->prepare('SELECT * FROM users u 
+                                    LEFT JOIN users_classgroup c ON u.id = c.idUser
+                                    WHERE (u.role = 1 AND c.idUser IS NULL) OR u.role = 2;');
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
-
-
     }
+
+
+    public function getStudent() {
+        $stm = $this->sql->prepare('SELECT * FROM users u 
+                                    LEFT JOIN users_classgroup c ON u.id = c.idUser
+                                    WHERE (u.role = 1 AND c.idUser IS NULL);');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+    public function getTeacher() {
+        $stm = $this->sql->prepare('SELECT * FROM users u 
+                                    LEFT JOIN users_classgroup c ON u.id = c.idUser
+                                    WHERE u.role = 2;');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+
+
+    public function insertGeneratedUser($name, $surname, $username, $password, $email, $role) {
+        $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email, role) VALUES (:name, :surname, :username, :password, :email, :role);');
+        $stm->execute([':name' => $name, ':surname' => $surname, ':username' => $username, ':password' => $password, ':email' => $email, ':role' => $role]);
+    }
+    
+    
+
 
     public function getTokenCarnet($idUser)
     {

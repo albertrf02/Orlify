@@ -30,6 +30,7 @@ $app->get("/logout", [LoginController::class, "logout"]);
 $app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/professor", [ViewsController::class, "teacher"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/canviarContrasenya", [ViewsController::class, "canviarContrasenya"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/carnet", [ViewsController::class, "carnet"]);
 $app->get("/carnet-token", [ViewsController::class, "getTokenCarnet"], [[\App\Middleware\Auth::class, "auth"]]);
@@ -59,6 +60,9 @@ $app->post("/updateuser", [UserController::class, "update"]);
 $app->post("/deleteuser", [UserController::class, "delete"]);
 $app->post("/dorecover", [RecoverController::class, "recover"]);
 $app->post("/dorecoverpassword", [RecoverController::class, "password"]);
+$app->post("/doinsertphoto", [UserController::class, "insertPhoto"]);
+$app->post("/camera", [ViewsController::class, "camera"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->post("/doinsertphotoweb", [UserController::class, "insertPhotoWeb"]);
 
 
 
@@ -77,11 +81,30 @@ $app->post("/searchuserajax", [UserController::class, "searchUserAjax"]);
 $app->post("/editclassajax", [ClassController::class, "editClassAjax"]);
 $app->post("/editclass", [ClassController::class, "editClass"]);
 
-$app->post("/searchuserclassajax", [ClassController::class, "searchUserClassAjax"]);
+$app->post("/searchteacherclassajax", [ClassController::class, "searchTeacherClassAjax"]);
 
+$app->post("/searchuserclassajax", [ClassController::class, "searchUserClassAjax"]);
+$app->post("/searchUserTeacher", [ClassController::class, "searchUserAjax"]);
+
+$app->post("/getclassajax", [ClassController::class, "getClassAjax"]);
 
 
 $app->post("/adduserclass", [ClassController::class, "addUserClass"]);
+
+
+$app->post("/viewuserclass", [ClassController::class, "viewUserClass"]);
+
+$app->post("/deleteuserclass", [ClassController::class, "deleteUserClass"]);
+
+$app->post("/addclass", [ClassController::class, "addClass"]);
+
+
+$app->post("/insertgeneratdeuser", [UserController::class, "insertGeneratedUser"]);
+
+$app->post("/searchstudentclassajax", [ClassController::class, "searchStudentClassAjax"]);
+
+
+
 
 
 

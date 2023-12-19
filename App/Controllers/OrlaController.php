@@ -153,4 +153,22 @@ class OrlaController
         return $response;
     }
 
+    public function getOrlaByClass($request, $response, $container)
+    {
+        $idClass = $request->get(INPUT_POST, "idClass");
+
+        $model = $container->get("orles");
+        $orla = $model->getOrlaByClassId($idClass);
+
+        if (!empty($orla)) {
+            $response->set('orla', $orla);
+            $response->setJSON();
+        } else {
+            $response->set('error', 'error');
+            $response->setJSON();
+        }
+
+        return $response;
+    }
+
 }

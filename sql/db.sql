@@ -158,3 +158,5 @@ INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('11', '1');
 INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('12', '1');
 INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('13', '1');
 INSERT INTO `users_classgroup` (`idUser`, `idGroupClass`) VALUES ('14', '1');
+ALTER TABLE classgroup
+ADD COLUMN state TINYINT(1) NOT NULL DEFAULT 1;
