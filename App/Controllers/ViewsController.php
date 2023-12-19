@@ -297,5 +297,40 @@ class ViewsController
         $response->SetTemplate("CanviarContrasenyaView.php");
         return $response;
     }
+
+    function teacher($request, $response, $container)
+    {
+        $id = $request->get("SESSION", "user")["id"];
+
+        $model = $container->get("users");
+        $model2 = $container->get("classes");
+        $userModel = $container->get("users");
+        $allUsers = $model->getAllUsers();
+        $allClass = $model2->getClassByUser($id);
+        $userOrla = $userModel->getOrlaFromClassByUserId($id);
+
+        $countUsers = 9;
+        $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
+        $start = ($page - 1) * $countUsers;
+        $users = array_slice($allUsers, $start, $countUsers);
+        $totalPages = ceil(count($allUsers) / $countUsers);
+
+        $response->set("users", $users);
+        $response->set("currentPage", $page);
+        $response->set("totalPages", $totalPages);
+        $response->set("classes", $allClass);
+        $response->set("userOrla", $userOrla);
+        $response->SetTemplate("TeacherView.php");
+        return $response;
+    }
+
+    function camera($request, $response, $container)
+    {
+        $idUser = $request->get(INPUT_POST,"id-edit");
+        $response->set("idUser", $idUser);
+
+        $response->SetTemplate("Camera.php");
+        return $response;
+    }
 }
 

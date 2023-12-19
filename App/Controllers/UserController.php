@@ -222,6 +222,56 @@ class UserController
 
 
     
+    public function insertPhoto($request, $response, $container)
+    {
+    $idUser = $request->get(INPUT_POST, "id-edit");
+    
+    $carpeta = "../public/img/" . $idUser . "/";
+    
+    if (!file_exists($carpeta)) {
+        mkdir($carpeta, 0777, true);
+    }
+    
+    $fileName = basename($_FILES['file']['name']);
+    $uploadFile = $carpeta . $fileName;
+    
+    move_uploaded_file($_FILES['file']['tmp_name'], $uploadFile);
+
+    $linkBDD = "../img/" . $idUser . "/" . $fileName;
+
+    $model = $container->get("users");
+    $model->insertPhotoByID($linkBDD, $idUser);
+
+    $response->redirect("Location: /professor");
+    return $response;
+    }
+    
+
+    public function insertPhotoWeb($request, $response, $container)
+    {   
+    $idUser = $request->get(INPUT_POST, "id-edit");
+    $link = $_POST['capturedImageData'];
+
+    $carpeta = "../public/img/" . $idUser . "/";
+    if (!file_exists($carpeta)) {
+        mkdir($carpeta, 0777, true);
+    }
+
+    $timestamp = date('YmdHis'); 
+    $nombreArchivo = 'captured_image_' . $timestamp . '.png';
+    $rutaDestino = $carpeta . $nombreArchivo; 
+    file_put_contents($rutaDestino, file_get_contents($link));
+
+    
+    $linkBDD = "../img/" . $idUser . "/" . $nombreArchivo;
+
+    $model = $container->get("users");
+    $model->insertPhotoByID($linkBDD, $idUser);
+
+    $response->redirect("Location: /professor");
+    return $response;
+    }
+
     
 }
 

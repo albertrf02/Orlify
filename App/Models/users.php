@@ -108,7 +108,11 @@ class Users
 
     public function getAllUsers()
     {
-        $stm = $this->sql->prepare('SELECT users.*, roles.name AS roleName FROM users LEFT JOIN roles ON users.role = roles.idRole;');
+        $stm = $this->sql->prepare('SELECT users.*, roles.name AS roleName, photography.link AS photoLink 
+        FROM users 
+        LEFT JOIN roles ON users.role = roles.idRole 
+        LEFT JOIN photography ON users.id = photography.idUser AND photography.defaultPhoto = 1
+        ;');
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -126,7 +130,6 @@ class Users
         $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE id = :id;');
         $stm->execute([':id' => $id, ':password' => $hashPassword]);
     }
-
 
     public function getPhotos($idUser)
     {
@@ -172,7 +175,11 @@ class Users
 
     public function searchUserAjax($query)
     {
-        $stm = $this->sql->prepare('SELECT * FROM users WHERE name LIKE :query;');
+        $stm = $this->sql->prepare('SELECT users.*, photography.link AS photoLink 
+        FROM users 
+        LEFT JOIN photography ON users.id = photography.idUser AND photography.defaultPhoto = 1
+        WHERE users.name LIKE :query
+        ');
         $query = "{$query}%";
         $stm->execute([':query' => $query]);
         return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
@@ -333,6 +340,12 @@ class Users
     {
         $stm = $this->sql->prepare('UPDATE users SET password = :password WHERE token = :token');
         $stm->execute([':password' => $password, ':token' => $token]);
+    }
+
+    public function insertPhotoByID($link,$idUser)
+    {
+    $stm = $this->sql->prepare('INSERT INTO photography(link, idUser) VALUES (:link, :idUser);');
+    $stm->execute([':link' => $link, ':idUser' => $idUser]);
     }
 
     public function getAvatars()

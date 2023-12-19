@@ -175,6 +175,25 @@ class ClassController
 
 
    }
+
+
+    public function getClassAjax($request, $response, $container)
+    {
+        $idClass = $request->get(INPUT_POST, "idClass");
+
+        $model = $container->get("classes");
+        $users = $model->getUsersByClass($idClass);
+
+        if (!empty($users)) {
+            $response->set('users', $users);
+            $response->setJSON();
+        } else {
+            $response->set('error', 'error');
+            $response->setJSON();
+        }
+
+        return $response;
+    }
     
 
 

@@ -67,9 +67,9 @@ function adminPages() {
           window.history.pushState(null, null, '/admin');
           sessionStorage.setItem('currentPage', 'pagina-classes-add');
       });
-    });
-  
+  });
 }
+
 
 
 
@@ -127,6 +127,41 @@ function recoverPages() {
   });
 }
 
+function teacherPages() {
+  $(document).ready(function () {
+    // Ocultar las secciones de grupos y orlas al inicio
+    $("#new-pagina-users").show();
+    $("#new-pagina-grups").hide();
+    $("#new-pagina-orles").hide();
+    $("#search-users-edit").show();
+
+    $("#new-users").click(function (e) {
+      e.preventDefault();
+      $("#new-pagina-users").show();
+      $("#new-pagina-grups").hide();
+      $("#new-pagina-orles").hide();
+      $("#search-users-edit").show();
+    });
+
+    $("#new-grups").click(function (e) {
+      e.preventDefault();
+      $("#new-pagina-users").hide();
+      $("#new-pagina-grups").show();
+      $("#new-pagina-orles").hide();
+      $("#search-users-edit").hide();
+    });
+
+    $("#new-classes").click(function (e) {
+      e.preventDefault();
+      $("#new-pagina-users").hide();
+      $("#new-pagina-grups").hide();
+      $("#new-pagina-orles").show();
+      $("#search-users-edit").hide();
+    });
+  });
+}
+
+
 function perfilPages() {
   document.addEventListener("DOMContentLoaded", function () {
     const modalButtons = document.querySelectorAll("[data-modal-toggle]");
@@ -174,5 +209,6 @@ export {
   recoverPages,
   perfilPages,
   toggleFormVisibility,
+  teacherPages,
   showTab,
 };

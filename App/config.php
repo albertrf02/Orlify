@@ -14,4 +14,6 @@ return [
         "db" => Emeset\Env::get("db", "orlify"),
         "host" => Emeset\Env::get("host", "localhost")
     ],
+    "url" => Emeset\Env::get("url", "localhost")
+
 ];

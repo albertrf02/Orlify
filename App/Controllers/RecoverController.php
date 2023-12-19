@@ -38,7 +38,7 @@ class RecoverController
                             . "(Aquest enllaç és vàlid durant 15 minuts des del moment en què es va sol·licitar per primera vegada aquest reajustament)<br><br>"
                             . "Si no heu sol·licitat aquest restabliment de contrasenya, no es necessita cap acció.";
             $mail->send();
-        
+       
         } catch (Exception $e) {
             echo "El correo electrónico no pudo ser enviado. Error: {$mail->ErrorInfo}";
         }
