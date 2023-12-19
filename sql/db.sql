@@ -21,18 +21,18 @@ CREATE TABLE users (
 );
 
 -- Crear la tabla ClassGroup
-CREATE TABLE classGroup (
+CREATE TABLE classgroup (
     id INT AUTO_INCREMENT PRIMARY KEY,
     className VARCHAR(255)
 );
 
 -- Crear la taula de la relació users - classGroup
-CREATE TABLE users_classGroup (
+CREATE TABLE users_classgroup (
     idUser INT,
     idGroupClass INT,
     PRIMARY KEY (idUser, idGroupClass),
     FOREIGN KEY (idUser) REFERENCES users(id),
-    FOREIGN KEY (idGroupClass) REFERENCES classGroup(id)
+    FOREIGN KEY (idGroupClass) REFERENCES classgroup(id)
 );
 
 -- Crear la taula de les orles
@@ -71,7 +71,7 @@ CREATE TABLE roles (
 -- Alter the orla table to include a foreign key for classGroup
 ALTER TABLE orla
 ADD COLUMN idClassGroup INT,
-ADD FOREIGN KEY (idClassGroup) REFERENCES classGroup(id);
+ADD FOREIGN KEY (idClassGroup) REFERENCES classgroup(id);
 
 
 -- Create a table to relate users with orla
@@ -127,10 +127,10 @@ INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL,
 INSERT INTO `photography` (`Id`, `link`, `defaultPhoto`, `idUser`) VALUES (NULL, '/imatges_usuaris/fotoProva1.jpeg', '1', '14');
 
 
-INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'DAW2');
-INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'DAW1');
-INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'SMX1');
-INSERT INTO `classGroup` (`id`, `className`) VALUES (NULL, 'SMX2');
+INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'DAW2');
+INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'DAW1');
+INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'SMX1');
+INSERT INTO `classgroup` (`id`, `className`) VALUES (NULL, 'SMX2');
 
 INSERT INTO `orla` (`id`, `name`, `visibility`, `idCreator`, `idClassGroup`) VALUES (NULL, 'orla1', '0', '1', '2');
 
