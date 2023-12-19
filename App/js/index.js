@@ -15,6 +15,7 @@ import { deleteClassModal } from "./ajax.js";
 import { dragAndDrop, checkFile } from "./dragAndDrop.js";
 import { toggleOrlaPublic } from "./equipDirectiu.js";
 import * as orla from "./orla.js";
+import * as carnet from "./carnet.js";
 
 adminPages();
 checkPassword();
@@ -26,6 +27,7 @@ equipDirectiuPages();
 searchUserEquipDirectiu();
 recoverPages();
 perfilPages();
+window.printToken = carnet.printToken;
 window.toggleFormVisibility = toggleFormVisibility;
 window.showTab = showTab;
 window.toggleOrlaPublic = toggleOrlaPublic;

@@ -250,8 +250,26 @@ class ViewsController
     function carnet($request, $response, $container)
     {
         $modelusers = $container->get("users");
+        if (isset($_GET["token_carnet"])) {
+            $tokenCarnet = $_GET["token_carnet"];
+            $user = $modelusers->getUserByTokenCarnet($tokenCarnet);
+            $response->set("user", $user);
+            $response->SetTemplate("CarnetView.php");
+        } else {
+            $response->setBody("token no proporcionat");
+            return $response;
+        }
 
-        $response->SetTemplate("CarnetView.php");
+        return $response;
+    }
+
+    function getTokenCarnet($request, $response, $container)
+    {
+        $modelusers = $container->get("users");
+        $getToken = $modelusers->getTokenCarnet($_SESSION["user"]["id"]);
+
+        $response->setJSON();
+        $response->setBody(json_encode($getToken));
         return $response;
     }
 

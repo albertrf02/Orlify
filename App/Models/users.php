@@ -367,12 +367,6 @@ class Users
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function insertCard($url, $idUser)
-    {
-        $stm = $this->sql->prepare('INSERT INTO studentcard (url, idStudent) VALUES (:url, :idUser);');
-        $stm->execute([':url' => $url, ':idUser' => $idUser]);
-    }
-
     public function getUsersClass()
     {
 
@@ -383,4 +377,40 @@ class Users
 
     }
 
+    public function getTokenCarnet($idUser)
+    {
+        $stm = $this->sql->prepare('SELECT token_carnet FROM users WHERE id = :idUser;');
+        $stm->execute([':idUser' => $idUser]);
+        $getToken = $stm->fetch(\PDO::FETCH_ASSOC);
+        $token_carnet = $getToken["token_carnet"];
+
+        if (empty($token_carnet)) {
+            $token_carnet = $this->generateRandomToken();
+            $updateToken = $this->sql->prepare('UPDATE users SET token_carnet = :token_carnet WHERE id = :idUser;');
+            $updateToken->execute([':idUser' => $idUser, ':token_carnet' => $token_carnet]);
+        }
+
+        return $token_carnet;
+
+    }
+
+    public function getUserByTokenCarnet($token_carnet)
+    {
+        $stm = $this->sql->prepare('SELECT * FROM users WHERE token_carnet = :token_carnet;');
+        $stm->execute([':token_carnet' => $token_carnet]);
+        return $stm->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    private function generateRandomToken()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+
+        for ($i = 0; $i < 10; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+
+        return $randomString;
+    }
 }

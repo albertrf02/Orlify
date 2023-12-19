@@ -16,10 +16,9 @@ CREATE TABLE users (
     avatar VARCHAR(255),
     role INT,
     token varchar(250) NOT NULL,
-    token_expiration datetime
+    token_expiration datetime,
+    token_carnet varchar(255)
 );
-
-
 
 -- Crear la tabla ClassGroup
 CREATE TABLE classGroup (
@@ -54,14 +53,6 @@ CREATE TABLE photography (
     idUser INT,
     FOREIGN KEY (idUser) REFERENCES users(id)
     );
-
--- Crear la taula per a la tarjeta
-CREATE TABLE studentCard (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    url VARCHAR(255),
-    idStudent INT UNIQUE,
-    FOREIGN KEY (idStudent) REFERENCES users(id)
-);
 
 CREATE TABLE reports (
     id INT AUTO_INCREMENT PRIMARY KEY,
