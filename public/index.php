@@ -42,15 +42,13 @@ $app->get("/professor", [ViewsController::class, "teacher"], [[\App\Middleware\A
 $app->get("/publicOrles", [ViewsController::class, "publicOrles"]);
 $app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"], [[\App\Middleware\Auth::class, "auth"]]);
 
-
-
+$app->post("/saveOrla", [OrlaController::class, "saveOrla"], [[Middleware\Auth::class, "auth"]]);
 $app->get("/orla/edit", [OrlaController::class, "editOrla"], [[Middleware\Auth::class, "auth"]]);
 $app->get("/orla/view", [OrlaController::class, "viewOrla"], [[Middleware\Auth::class, "auth"]]);
 $app->get("/orla-pdf", [OrlaController::class, "orlaToPDF"], [[Middleware\Auth::class, "auth"]]);
 $app->get("/orla/iframe", [OrlaController::class, "iframeOrla"], [[Middleware\Auth::class, "auth"]]);
 
 
-$app->post("/saveOrla", [OrlaController::class, "saveOrla"], [[Middleware\Auth::class, "auth"]]);
 $app->post("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[Middleware\Auth::class, "auth"]]);
 $app->post("/report-image", [UserController::class, "reportImages"], [[Middleware\Auth::class, "auth"]]);
 $app->post("/perfil", [ViewsController::class, "perfil"], [[Middleware\Auth::class, "auth"]]);
