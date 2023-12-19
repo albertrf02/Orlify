@@ -10,6 +10,12 @@
   <title>Orlify</title>
 </head>
 
+<?php var_dump($_SESSION); ?>
+
+
+
+
+
 <body>
   <?php require "MenuView.php" ?>
 

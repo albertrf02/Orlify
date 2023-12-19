@@ -373,14 +373,40 @@ class Users
         $stm->execute([':url' => $url, ':idUser' => $idUser]);
     }
 
-    public function getUsersClass()
-    {
-
-        $stm = $this->sql->prepare('SELECT * FROM users WHERE role = 1 OR role = 2;');
+  
+    public function getUsersClass() {
+        $stm = $this->sql->prepare('SELECT * FROM users u 
+                                    LEFT JOIN users_classgroup c ON u.id = c.idUser
+                                    WHERE (u.role = 1 AND c.idUser IS NULL) OR u.role = 2;');
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
-
-
     }
+
+
+    public function getStudent() {
+        $stm = $this->sql->prepare('SELECT * FROM users u 
+                                    LEFT JOIN users_classgroup c ON u.id = c.idUser
+                                    WHERE (u.role = 1 AND c.idUser IS NULL);');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+    public function getTeacher() {
+        $stm = $this->sql->prepare('SELECT * FROM users u 
+                                    LEFT JOIN users_classgroup c ON u.id = c.idUser
+                                    WHERE u.role = 2;');
+        $stm->execute();
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+
+
+    public function insertGeneratedUser($name, $surname, $username, $password, $email, $role) {
+        $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email, role) VALUES (:name, :surname, :username, :password, :email, :role);');
+        $stm->execute([':name' => $name, ':surname' => $surname, ':username' => $username, ':password' => $password, ':email' => $email, ':role' => $role]);
+    }
+    
+    
+
 
 }

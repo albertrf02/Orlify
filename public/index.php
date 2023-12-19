@@ -77,11 +77,26 @@ $app->post("/searchuserajax", [UserController::class, "searchUserAjax"]);
 $app->post("/editclassajax", [ClassController::class, "editClassAjax"]);
 $app->post("/editclass", [ClassController::class, "editClass"]);
 
-$app->post("/searchuserclassajax", [ClassController::class, "searchUserClassAjax"]);
+$app->post("/searchteacherclassajax", [ClassController::class, "searchTeacherClassAjax"]);
 
 
 
 $app->post("/adduserclass", [ClassController::class, "addUserClass"]);
+
+
+$app->post("/viewuserclass", [ClassController::class, "viewUserClass"]);
+
+$app->post("/deleteuserclass", [ClassController::class, "deleteUserClass"]);
+
+$app->post("/addclass", [ClassController::class, "addClass"]);
+
+
+$app->post("/insertgeneratdeuser", [UserController::class, "insertGeneratedUser"]);
+
+$app->post("/searchstudentclassajax", [ClassController::class, "searchStudentClassAjax"]);
+
+
+
 
 
 

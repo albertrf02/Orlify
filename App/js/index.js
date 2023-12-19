@@ -1,8 +1,7 @@
 import { checkPassword, changePassword } from "./checkPassword.js";
 import { editUserModal } from "./ajax.js";
 import { deleteUserModal } from "./ajax.js";
-import { searchUser, searchUserClass } from "./ajax.js";
-import { searchUserEquipDirectiu } from "./ajax.js";
+import { searchUser, searchTeacherClass, searchStudentClass } from "./ajax.js";
 import {
   adminPages,
   equipDirectiuPages,
@@ -11,10 +10,13 @@ import {
   toggleFormVisibility,
   showTab,
 } from "./pages.js";
+import { editUserClass } from "./ajax.js";
 import { deleteClassModal } from "./ajax.js";
 import { dragAndDrop, checkFile } from "./dragAndDrop.js";
 import { toggleOrlaPublic } from "./equipDirectiu.js";
 import * as orla from "./orla.js";
+import { generateUser } from "./ajax.js";
+import { slider } from "./slider.js";
 
 adminPages();
 checkPassword();
@@ -23,9 +25,9 @@ editUserModal();
 deleteUserModal();
 searchUser();
 equipDirectiuPages();
-searchUserEquipDirectiu();
 recoverPages();
 perfilPages();
+
 window.toggleFormVisibility = toggleFormVisibility;
 window.showTab = showTab;
 window.toggleOrlaPublic = toggleOrlaPublic;
@@ -39,4 +41,9 @@ window.saveUpdatedOrla = orla.saveUpdatedOrla;
 
 dragAndDrop();
 deleteClassModal();
-searchUserClass();
+searchTeacherClass();
+editUserClass();
+generateUser();
+searchStudentClass();
+slider();
+

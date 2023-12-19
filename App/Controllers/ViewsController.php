@@ -41,18 +41,23 @@ class ViewsController
         $allUsers = $model->getAllUsers();
         $roles = $model->getRoles();
         $classes = $model2->getClasses();
-        $usersClasses = $model->getUsersClass();
+        $activeClasses = $model2->getActiveClasses();
+        $students = $model->getStudent();
+        $professors = $model->getTeacher();
 
-        $countUsers = 9;
+
+        $countUsers = 12;
         $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
         $start = ($page - 1) * $countUsers;
         $users = array_slice($allUsers, $start, $countUsers);
         $totalPages = ceil(count($allUsers) / $countUsers);
 
-        $response->set("usersClasses", $usersClasses);
+        $response->set("students", $students);
+        $response->set("professors", $professors);
         $response->set("users", $users);
         $response->set("roles", $roles);
         $response->set("classes", $classes);
+        $response->set("activeClasses", $activeClasses);
         $response->set("currentPage", $page);
         $response->set("totalPages", $totalPages);
 
