@@ -206,23 +206,23 @@
                         <div class="flow-root">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                                 <?php foreach ($classes as $class) : ?>
-                                    <li class="py-3 sm:py-4 flex items-center justify-between">
-                                        <div class="flex items-center">
-                                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                                <?= $class["className"]; ?>
-                                            </p>
-                                        </div>
-                                        <div class="inline-flex items-center">
-
-                                            <a href="#" data-modal-target="datatableModal" data-modal-toggle="datatableModal" data-class-id="<?= $class['idGroupClass']; ?>" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                Veure alumnes
-                                            </a>
-
-                                        </div>
-                                    </li>
-
+                                    <?php if ($class["state"] == 1) : ?>
+                                        <li class="py-3 sm:py-4 flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
+                                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                    <?= $class["className"]; ?>
+                                                </p>
+                                            </div>
+                                            <div class="inline-flex items-center">
+                                                <a href="#" data-modal-target="datatableModal" data-modal-toggle="datatableModal" data-class-id="<?= $class['idGroupClass']; ?>" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                    Veure alumnes
+                                                </a>
+                                            </div>
+                                        </li>
+                                    <?php endif; ?>
                                 <?php endforeach ?>
+
                             </ul>
                         </div>
                     </div>
