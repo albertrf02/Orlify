@@ -83,10 +83,24 @@
         </div>
 
         <div class="w-1/2 shadow-2xl">
-            <div class="image-container-login">
-                <img class="object-cover w-full h-screen hidden md:block" src="https://source.unsplash.com/IXUM4cJynP0">
-                <div class="overlay-login">
-                    <p>Your text goes here</p>
+            <div class="image-container-login relative">
+                <img class="object-cover w-full h-screen hidden md:block" src="https://source.unsplash.com/IXUM4cJynP0"
+                    alt="Background Image">
+                <div
+                    class="overlay-login absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white p-8">
+                    <h1 class="text-6xl font-bold text-black mb-4">Orlify</h1>
+                    <p class="text-sm text-gray-700 mb-10">Visualitza les nostres orles publiques clicant el següent
+                        botó
+                    </p>
+                    <a href="/"
+                        class="inline-flex items-center w-full px-5 py-3 mb-3 mr-1 text-base font-semibold text-white no-underline align-middle bg-blue-600 border border-transparent border-solid rounded-md cursor-pointer select-none sm:mb-0 sm:w-auto hover:bg-blue-700 hover:border-blue-700 hover:text-white focus-within:bg-blue-700 focus-within:border-blue-700">
+                        Orles publiques
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
