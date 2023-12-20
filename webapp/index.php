@@ -18,14 +18,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-screen flex items-center justify-center bg-gray-400 backdrop-blur">
-
-
-
-  <script src="js/main.js"></script>
-</body>
-
-<body class="bg-background">
+<body class="bg-background min-h-screen flex items-center justify-center bg-gray-400 backdrop-blur">
   <div class="min-h-screen flex items-center justify-center">
     <div class="bg-white p-5 rounded shadow-md w-full sm:w-96">
       <form action="/carnet" method="GET" class="max-w-sm mx-auto">
@@ -43,7 +36,7 @@
       if ($tokenCarnet) {
         $iframeSrc = "/carnet?token_carnet=" . urlencode($tokenCarnet);
       } else {
-        echo "Token not provided";
+        "Token not provided";
         exit;
       }
       ?>
@@ -55,8 +48,7 @@
     </div>
   </div>
   <?php require "Scripts.php" ?>
+  <script src="js/main.js"></script>
 </body>
-
-
 
 </html>
