@@ -11,7 +11,7 @@
     <title>Login</title>
 </head>
 
-<body>
+<body class="bg-background">
     <div class="w-full flex flex-wrap">
 
         <!-- Login Section -->
@@ -72,7 +72,7 @@
                     </div>
                     <button type="submit"
                         class="mt-4 w-full text-white bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:focus:ring-blue-800">Iniciar
-                        sessiò</button>
+                        sessió</button>
                 </form>
                 <div class="mt-6 flex items-center justify-center">
                     <p class="block mb-2 text-sm font-medium text-grey-800 dark:text-white">No tens compte ? <a

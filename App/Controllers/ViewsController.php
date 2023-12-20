@@ -45,7 +45,6 @@ class ViewsController
         $students = $model->getStudent();
         $professors = $model->getTeacher();
 
-
         $countUsers = 12;
         $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
         $start = ($page - 1) * $countUsers;
@@ -61,7 +60,104 @@ class ViewsController
         $response->set("currentPage", $page);
         $response->set("totalPages", $totalPages);
 
+        $modelUsers = $container->get("users");
+        $modelOrles = $container->get("orles");
+        $modelClasses = $container->get("classes");
+
+
+        $allGroups = $modelUsers->getClassGroups();
+        $allOrles = $modelOrles->getOrles();
+
+        $classes = $modelClasses->getClasses();
+
+        $response->set("groups", $allGroups);
+
+        $classNames = [];
+
+        foreach ($allOrles as $orla) {
+            $idOrla = $orla["id"];
+            $className = $modelOrles->getClassByOrlaId($idOrla);
+            $classNames[$idOrla] = $className;
+        }
+
+        $response->set("classNames", $classNames);
+        $response->set("orles", $allOrles);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST["action"])) {
+            $action = $_REQUEST["action"];
+
+            if ($action === "createOrla") {
+                $name = $_POST["name"];
+                $group = $_POST["group"];
+                $idCreator = $_SESSION["user"]["id"];
+
+                $idOrla = $modelOrles->createOrla($name, $group, $idCreator);
+
+                $response->redirect("Location: /orla/edit?idOrla=" . $idOrla);
+            }
+
+            if ($action === "toggleOrlaPublic") {
+                $idOrla = $_POST['idOrla'];
+                $isChecked = $_POST['isChecked'];
+
+                if ($isChecked) {
+                    $modelOrles->setOrlaPublicOn($idOrla);
+                } else {
+                    $modelOrles->setOrlaPublicOff($idOrla);
+                }
+
+                $response->redirect("Location: /admin");
+
+            }
+
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {
+            $action = $_REQUEST["action"];
+
+            if ($action === "deleteReport") {
+                $modelUsers->deleteReport($_GET['report_id']);
+
+                $response->redirect("Location: /admin");
+            }
+
+            if ($action === "deleteReportedImage") {
+                $modelUsers->deleteReportAndPhoto($_GET['report_id']);
+
+                $response->redirect("Location: /admin");
+            }
+
+            if ($action === "deleteOrla") {
+                $idOrla = $_GET['idOrla'];
+                $modelOrles->deleteOrla($idOrla);
+
+                $response->redirect("Location: /admin");
+            }
+
+            if ($action === "activateOrla") {
+                $idOrla = $_GET["idOrla"];
+
+                $modelOrles->setOrlaVisibilityOn($idOrla);
+
+                $response->redirect("Location: /admin");
+            }
+
+            if ($action === "deactivateOrla") {
+                $idOrla = $_GET["idOrla"];
+
+                $modelOrles->setOrlaVisibilityOff($idOrla);
+
+                $response->redirect("Location: /admin");
+            }
+
+        }
+
+        $reportedImages = $modelUsers->getReportedImages();
+
+        $response->set("reportedImages", $reportedImages);
+        
         $response->SetTemplate("AdminView.php");
+
         return $response;
     }
 
@@ -79,9 +175,13 @@ class ViewsController
 
         $modelUsers = $container->get("users");
         $modelOrles = $container->get("orles");
+        $modelClasses = $container->get("classes");
+
 
         $allGroups = $modelUsers->getClassGroups();
         $allOrles = $modelOrles->getOrles();
+
+        $classes = $modelClasses->getClasses();
 
         $response->set("groups", $allGroups);
 
@@ -168,6 +268,7 @@ class ViewsController
         $reportedImages = $modelUsers->getReportedImages();
 
         $response->set("reportedImages", $reportedImages);
+        $response->set("classes", $classes);
         $response->SetTemplate("equipDirectiuView.php");
         return $response;
     }
@@ -305,11 +406,11 @@ class ViewsController
         $model = $container->get("users");
         $model2 = $container->get("classes");
         $userModel = $container->get("users");
-        $allUsers = $model->getAllUsers();
+        $allUsers = $model->getAllStudents();
         $allClass = $model2->getClassByUser($id);
         $userOrla = $userModel->getOrlaFromClassByUserId($id);
 
-        $countUsers = 9;
+        $countUsers = 12;
         $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
         $start = ($page - 1) * $countUsers;
         $users = array_slice($allUsers, $start, $countUsers);

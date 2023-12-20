@@ -29,6 +29,11 @@ $app->get("/register", [ViewsController::class, "register"]);
 $app->get("/logout", [LoginController::class, "logout"]);
 $app->get("/publicOrles", [ViewsController::class, "publicOrles"]);
 $app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::class, "auth"]]);
+
+
+
+
+
 $app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/professor", [ViewsController::class, "teacher"], [[\App\Middleware\Auth::class, "auth"]]);

@@ -8,7 +8,7 @@
     <title>Registrar-se</title>
 </head>
 
-<body">
+<body class="bg-background">
     <div class="w-full flex flex-wrap">
 
         <!-- Login Section -->

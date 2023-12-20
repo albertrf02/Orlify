@@ -8,7 +8,7 @@
     <title>Perfil</title>
 </head>
 
-<body style="overflow-y: visible;">
+<body class="bg-background">
 
     <?php require "MenuView.php" ?>
 
