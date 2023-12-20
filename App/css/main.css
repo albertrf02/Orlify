@@ -54,3 +54,16 @@
   color: #000; /* Change the text color */
   font-size: 24px; /* Adjust the font size */
 }
+
+.footer-orlaRendered {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f8f8; /* Set the background color of the footer */
+  padding: 10px; /* Add padding to space the buttons */
+  text-align: center;
+}
+
+.footer-orlaRendered a {
+  margin: 0 10px; /* Adjust the margin between buttons */
+}

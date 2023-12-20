@@ -2,6 +2,10 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-image: url("/img/fonsOrles.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 #profes,
@@ -10,10 +14,6 @@ body {
   margin: 20px auto;
   padding: 20px;
   text-align: center;
-}
-
-h1 {
-  color: #333;
 }
 
 .user {
@@ -37,6 +37,14 @@ p {
 }
 
 hr {
-  border: 1px solid #313030;
-  width: 1000px;
+  border: 1px solid #ffffff;
+  width: 700px;
+}
+
+body,
+h1,
+p,
+img {
+  margin: 0;
+  padding: 0;
 }

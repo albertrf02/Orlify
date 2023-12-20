@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Hello World</title>
+  <title>Carnet</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -12,13 +12,13 @@
   <meta name="theme-color" content="white" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <meta name="apple-mobile-web-app-title" content="Hello World" />
+  <meta name="apple-mobile-web-app-title" content="Carnet" />
   <meta name="msapplication-TileImage" content="images/hello-icon-144.png" />
   <meta name="msapplication-TileColor" content="#FFFFFF" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-background min-h-screen flex items-center justify-center bg-gray-400 backdrop-blur">
+<body class="flowbite h-screen flex items-center justify-center bg-gray-400 backdrop-blur">
   <div class="bg-white p-5 rounded shadow-md w-full sm:w-96">
     <form action="/carnet" method="GET" class="max-w-sm mx-auto">
       <label for="token" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Token:</label>
@@ -35,7 +35,7 @@
     if ($tokenCarnet) {
       $iframeSrc = "/carnet?token_carnet=" . urlencode($tokenCarnet);
     } else {
-      echo "Token not provided";
+      "Token not provided";
       exit;
     }
     ?>
