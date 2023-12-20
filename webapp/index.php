@@ -17,16 +17,22 @@
   <meta name="msapplication-TileColor" content="#FFFFFF" />
 </head>
 
-<body class="flowbite h-screen flex items-center justify-center bg-gray-400 backdrop-blur">
-
+<body class="min-h-screen flex items-center justify-center bg-gray-400 backdrop-blur">
   <?php
-  $tokenCarnet = "V7Tz6n3hhq";
-  $iframeSrc = "/carnet?token_carnet=" . urlencode($tokenCarnet);
+  $tokenCarnet = isset($_GET['token_carnet']) ? $_GET['token_carnet'] : null;
+
+  if ($tokenCarnet) {
+    $iframeSrc = "/carnet?token_carnet=" . urlencode($tokenCarnet);
+  } else {
+    echo "Token not provided";
+    exit;
+  }
   ?>
 
-  <iframe src="<?php echo $iframeSrc; ?>" frameborder="0" width="100%" height="1000px"></iframe>
+  <iframe src="<?php echo $iframeSrc; ?>" class="w-full h-full border-none"></iframe>
   <script src="js/main.js"></script>
-  <script src="js/main.js"></script>
+</body>
+
 </body>
 
 </html>
