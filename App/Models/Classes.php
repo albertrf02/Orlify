@@ -78,11 +78,6 @@ class Classes
         return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-
-
-
-
-
     public function addUserClass($userIds, $classId)
     {
         $stmt = $this->sql->prepare('INSERT INTO users_classgroup (idUser, idGroupClass) VALUES (:userId, :classId);');
@@ -108,6 +103,7 @@ class Classes
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    
     public function getUsersByClass($idClass)
     {
         $stm = $this->sql->prepare("SELECT u.id, u.name, u.surname, u.username, u.email 
@@ -119,7 +115,7 @@ class Classes
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-
+    
     public function getUsersByClassId($classId)
     {
         $stm = $this->sql->prepare('SELECT u.* FROM users u
@@ -129,13 +125,7 @@ class Classes
         return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    /**
-     * [addClass description]
-     *
-     * @param   [type]  $className  [$className description]
-     *
-     * @return  [type]              [return description]
-     */
+    
     public function addClass($className)
     {
         $stmt = $this->sql->prepare('INSERT INTO classgroup (className) VALUES (:className);');
@@ -143,8 +133,4 @@ class Classes
         $stmt->execute([':className' => $className]);
 
     }
-
-
-
-
 }
