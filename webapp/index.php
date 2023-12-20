@@ -19,32 +19,29 @@
 </head>
 
 <body class="bg-background min-h-screen flex items-center justify-center bg-gray-400 backdrop-blur">
-  <div class="min-h-screen flex items-center justify-center">
-    <div class="bg-white p-5 rounded shadow-md w-full sm:w-96">
-      <form action="/carnet" method="GET" class="max-w-sm mx-auto">
-        <label for="token" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Token:</label>
-        <input type="text" id="token" name="token_carnet"
-          class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          required>
-        <button type="submit"
-          class="mt-4 w-full text-white bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:focus:ring-blue-800">Submit</button>
-      </form>
+  <div class="bg-white p-5 rounded shadow-md w-full sm:w-96">
+    <form action="/carnet" method="GET" class="max-w-sm mx-auto">
+      <label for="token" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Token:</label>
+      <input type="text" id="token" name="token_carnet"
+        class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        required>
+      <button type="submit"
+        class="mt-4 w-full text-white bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:focus:ring-blue-800">Submit</button>
+    </form>
 
-      <?php
-      $tokenCarnet = isset($_GET['token_carnet']) ? $_GET['token_carnet'] : null;
+    <?php
+    $tokenCarnet = isset($_GET['token_carnet']) ? $_GET['token_carnet'] : null;
 
-      if ($tokenCarnet) {
-        $iframeSrc = "/carnet?token_carnet=" . urlencode($tokenCarnet);
-      } else {
-        "Token not provided";
-        exit;
-      }
-      ?>
+    if ($tokenCarnet) {
+      $iframeSrc = "/carnet?token_carnet=" . urlencode($tokenCarnet);
+    } else {
+      echo "Token not provided";
+      exit;
+    }
+    ?>
 
-      <div class="flex flex-col items-center">
-
-        <iframe src="<?php echo $iframeSrc; ?>" class="w-full h-full border-none"></iframe>
-      </div>
+    <div class="flex flex-col items-center">
+      <iframe src="<?php echo $iframeSrc; ?>" class="w-full h-full border-none"></iframe>
     </div>
   </div>
   <?php require "Scripts.php" ?>
