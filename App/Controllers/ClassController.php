@@ -223,7 +223,7 @@ class ClassController
     }
 
     /**
-     * Afegeix una nova classe i redirigeix a la pàgina d'administració.
+     * Afegeix una nova classe i redirigeix a la pàgina d'admin.
      *
      * @param \Emeset\Http\Request $request Petició HTTP amb les dades de la sol·licitud.
      * @param \Emeset\Http\Response $response Resposta HTTP per redirigir a una altra pàgina.
