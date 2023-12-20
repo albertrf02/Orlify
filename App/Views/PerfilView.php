@@ -94,7 +94,6 @@
                                             </button>
                                         </div>
                                     <?php endif ?>
-
                                     <!-- Modal for reporting image -->
                                     <div id="report-modal-<?= $photo['id']; ?>" tabindex="-1"
                                         class="hidden fixed inset-0 z-50 overflow-hidden">
