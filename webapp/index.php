@@ -15,6 +15,7 @@
   <meta name="apple-mobile-web-app-title" content="Hello World" />
   <meta name="msapplication-TileImage" content="images/hello-icon-144.png" />
   <meta name="msapplication-TileColor" content="#FFFFFF" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="min-h-screen flex items-center justify-center bg-gray-400 backdrop-blur">
