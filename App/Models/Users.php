@@ -128,7 +128,7 @@ class Users
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    
+
 
 
 
@@ -199,16 +199,16 @@ class Users
     }
 
     public function searchUserStudentAjax($query)
-{
-    $stm = $this->sql->prepare('SELECT users.*, photography.link AS photoLink 
+    {
+        $stm = $this->sql->prepare('SELECT users.*, photography.link AS photoLink 
     FROM users 
     LEFT JOIN photography ON users.id = photography.idUser AND photography.defaultPhoto = 1
     WHERE users.name LIKE :query AND users.role = 1
     ');
-    $query = "{$query}%";
-    $stm->execute([':query' => $query]);
-    return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
-}
+        $query = "{$query}%";
+        $stm->execute([':query' => $query]);
+        return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
 
 
@@ -240,7 +240,7 @@ class Users
 
     public function getClassGroups()
     {
-        $stm = $this->sql->prepare('SELECT * FROM classGroup;');
+        $stm = $this->sql->prepare('SELECT * FROM classgroup;');
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -368,10 +368,10 @@ class Users
         $stm->execute([':password' => $password, ':token' => $token]);
     }
 
-    public function insertPhotoByID($link,$idUser)
+    public function insertPhotoByID($link, $idUser)
     {
-    $stm = $this->sql->prepare('INSERT INTO photography(link, idUser) VALUES (:link, :idUser);');
-    $stm->execute([':link' => $link, ':idUser' => $idUser]);
+        $stm = $this->sql->prepare('INSERT INTO photography(link, idUser) VALUES (:link, :idUser);');
+        $stm->execute([':link' => $link, ':idUser' => $idUser]);
     }
 
     public function getAvatars()
@@ -392,13 +392,13 @@ class Users
     public function getOrlaFromClassByUserId($idUser)
     {
         $query = <<<QUERY
-            SELECT classGroup.className, users.name, orla.id, orla.visibility, orla.name FROM classGroup, users, users_classgroup, orla
+            SELECT classgroup.className, users.name, orla.id, orla.visibility, orla.name FROM classgroup, users, users_classgroup, orla
             WHERE 
-            classGroup.id = users_classgroup.idGroupClass
+            classgroup.id = users_classgroup.idGroupClass
             AND
             users.id = users_classgroup.idUser
             AND 
-            classGroup.id = orla.idClassGroup
+            classgroup.id = orla.idClassGroup
             AND users.id=:idUser;
         QUERY;
         $stm = $this->sql->prepare($query);
@@ -412,8 +412,9 @@ class Users
         $stm->execute([':url' => $url, ':idUser' => $idUser]);
     }
 
-  
-    public function getUsersClass() {
+
+    public function getUsersClass()
+    {
         $stm = $this->sql->prepare('SELECT * FROM users u 
                                     LEFT JOIN users_classgroup c ON u.id = c.idUser
                                     WHERE (u.role = 1 AND c.idUser IS NULL) OR u.role = 2;');
@@ -422,30 +423,33 @@ class Users
     }
 
 
-    public function getStudent() {
+    public function getStudent()
+    {
         $stm = $this->sql->prepare('SELECT * FROM users u 
                                     LEFT JOIN users_classgroup c ON u.id = c.idUser
                                     WHERE (u.role = 1 AND c.idUser IS NULL);');
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
-    
-    public function getTeacher() {
+
+    public function getTeacher()
+    {
         $stm = $this->sql->prepare('SELECT * FROM users u 
                                     LEFT JOIN users_classgroup c ON u.id = c.idUser
                                     WHERE u.role = 2;');
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
-    
 
 
-    public function insertGeneratedUser($name, $surname, $username, $password, $email, $role) {
+
+    public function insertGeneratedUser($name, $surname, $username, $password, $email, $role)
+    {
         $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email, role) VALUES (:name, :surname, :username, :password, :email, :role);');
         $stm->execute([':name' => $name, ':surname' => $surname, ':username' => $username, ':password' => $password, ':email' => $email, ':role' => $role]);
     }
-    
-    
+
+
 
 
     public function getTokenCarnet($idUser)

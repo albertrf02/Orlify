@@ -64,7 +64,7 @@ class Orles
             ELSE FALSE
         END AS isInOrla
         FROM users u
-        INNER JOIN users_classGroup ucg ON u.id = ucg.idUser
+        INNER JOIN users_classgroup ucg ON u.id = ucg.idUser
         LEFT JOIN user_orla uo ON u.id = uo.idUser AND uo.idOrla = :idOrla
         INNER JOIN orla o ON ucg.idGroupClass = o.idClassGroup
         LEFT JOIN photography p ON u.id = p.idUser AND p.defaultPhoto = TRUE
@@ -118,9 +118,9 @@ class Orles
     public function getClassByOrlaId($idOrla)
     {
         $query = <<<QUERY
-        SELECT classGroup.className FROM classGroup, orla
+        SELECT classgroup.className FROM classgroup, orla
         WHERE 
-        classGroup.id = orla.idClassGroup
+        classgroup.id = orla.idClassGroup
         AND orla.id=:idOrla;
         QUERY;
         $stm = $this->sql->prepare($query);
@@ -131,10 +131,10 @@ class Orles
     public function getOrlaByClassId($idClass)
     {
         $query = <<<QUERY
-        SELECT orla.id, orla.name, orla.visibility, orla.idCreator, orla.idClassGroup FROM orla, classGroup
+        SELECT orla.id, orla.name, orla.visibility, orla.idCreator, orla.idClassGroup FROM orla, classgroup
         WHERE 
-        classGroup.id = orla.idClassGroup
-        AND classGroup.id=:idClass;
+        classgroup.id = orla.idClassGroup
+        AND classgroup.id=:idClass;
         QUERY;
         $stm = $this->sql->prepare($query);
         $stm->execute([':idClass' => $idClass]);
