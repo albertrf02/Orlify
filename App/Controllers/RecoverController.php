@@ -33,20 +33,20 @@ class RecoverController
             $mail->isHTML(true);
             $mail->Subject = 'Sol·licitud de restabliment de contrasenya: Orlify';
             $mail->Body = "S'ha sol·licitat un restabliment de contrasenya per al compte de $email al lloc Orlify.<br><br>"
-                            . "Per confirmar aquesta petició, i establir una contrasenya nova per al compte, feu clic a l'enllaç següent:<br><br>"
-                            . "<a href='http://localhost:8080/recoverpassword/$token'>http://localhost:8080/recoverpassword/$token</a><br>"
-                            . "(Aquest enllaç és vàlid durant 15 minuts des del moment en què es va sol·licitar per primera vegada aquest reajustament)<br><br>"
-                            . "Si no heu sol·licitat aquest restabliment de contrasenya, no es necessita cap acció.";
+                . "Per confirmar aquesta petició, i establir una contrasenya nova per al compte, feu clic a l'enllaç següent:<br><br>"
+                . "<a href='http://localhost:8080/recoverpassword/$token'>http://localhost:8080/recoverpassword/$token</a><br>"
+                . "(Aquest enllaç és vàlid durant 15 minuts des del moment en què es va sol·licitar per primera vegada aquest reajustament)<br><br>"
+                . "Si no heu sol·licitat aquest restabliment de contrasenya, no es necessita cap acció.";
             $mail->send();
-       
+
         } catch (Exception $e) {
             echo "El correo electrónico no pudo ser enviado. Error: {$mail->ErrorInfo}";
         }
 
-        $response->redirect("Location: /");
+        $response->redirect("Location: /home");
         return $response;
     }
-   
+
     function password($request, $response, $container)
     {
         $new_passowrd = $request->get(INPUT_POST, "new_password");
@@ -60,10 +60,10 @@ class RecoverController
 
             $hashPassword = $model->hashPassword($new_passowrd);             //hash password
             $recover = $model->updatePasswordByToken($hashPassword, $token);
-            $response->redirect("Location: /login");
+            $response->redirect("Location: /");
             return $response;
 
-        } else{
+        } else {
             $response->setSession("errorpass", "Les contrasenyes no coincideixen");
             $response->redirect("Location: /recoverpassword/$token");
             return $response;

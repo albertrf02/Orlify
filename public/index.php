@@ -26,24 +26,21 @@ $contenidor = new Container(__DIR__ . "/../App/config.php");
 
 $app = new \Emeset\Emeset($contenidor);
 
-$app->get("/", [ViewsController::class, "index"], [[Middleware\LoadUserData::class, "loadUserData"]]);
-$app->get("/login", [ViewsController::class, "login"]);
+$app->get("/home", [ViewsController::class, "index"], [[Middleware\LoadUserData::class, "loadUserData"]]);
+$app->get("/", [ViewsController::class, "login"]);
 $app->get("/register", [ViewsController::class, "register"]);
 $app->get("/logout", [LoginController::class, "logout"]);
 
-$app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::class, "admin"]]);
 $app->get("/canviarContrasenya", [ViewsController::class, "canviarContrasenya"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/carnet-token", [ViewsController::class, "getTokenCarnet"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/carnet", [ViewsController::class, "carnet"]);
 
 
-
-
-
-$app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "equipDirectiu"]]);
 $app->get("/orles", [ViewsController::class, "orles"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);
-$app->get("/professor", [ViewsController::class, "teacher"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->get("/professor", [ViewsController::class, "teacher"], [[\App\Middleware\Auth::class, "professor"]]);
 $app->get("/publicOrles", [ViewsController::class, "publicOrles"]);
 $app->get("/veureOrla", [OrlaController::class, "getUsersFromOrla"], [[\App\Middleware\Auth::class, "auth"]]);
 

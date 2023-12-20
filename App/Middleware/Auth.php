@@ -37,7 +37,7 @@ class Auth
             $response->set("logged", $logged);
             $response = \Emeset\Middleware::next($request, $response, $container, $next);
         } else {
-            $response->redirect("location: /login");
+            $response->redirect("location: /");
         }
 
         return $response;
@@ -68,10 +68,10 @@ class Auth
             if ($user["role"] == "4") {
                 $response = \Emeset\Middleware::next($request, $response, $container, $next);
             } else {
-                $response->redirect("location: /");
+                $response->redirect("location: /home");
             }
         } else {
-            $response->redirect("location: /login");
+            $response->redirect("location: /");
         }
 
         return $response;
@@ -102,10 +102,10 @@ class Auth
             if ($user["role"] == "3") {
                 $response = \Emeset\Middleware::next($request, $response, $container, $next);
             } else {
-                $response->redirect("location: /");
+                $response->redirect("location: /home");
             }
         } else {
-            $response->redirect("location: /login");
+            $response->redirect("location: /");
         }
 
         return $response;
@@ -136,10 +136,10 @@ class Auth
             if ($user["role"] == "2") {
                 $response = \Emeset\Middleware::next($request, $response, $container, $next);
             } else {
-                $response->redirect("location: /");
+                $response->redirect("location: /home");
             }
         } else {
-            $response->redirect("location: /login");
+            $response->redirect("location: /");
         }
 
         return $response;
@@ -170,10 +170,10 @@ class Auth
             if ($user["role"] == "1") {
                 $response = \Emeset\Middleware::next($request, $response, $container, $next);
             } else {
-                $response->redirect("location: /");
+                $response->redirect("location: /home");
             }
         } else {
-            $response->redirect("location: /login");
+            $response->redirect("location: /");
         }
 
         return $response;

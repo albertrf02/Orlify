@@ -16,11 +16,11 @@ class LoginController
         if ($login) {
             $response->setSession("logged", true);
             $response->setSession("user", $login);
-            $response->redirect("Location: /");
+            $response->redirect("Location: /home");
         } else {
             $response->setSession("logged", false);
             $response->setSession("error", "Usuari o contrasenya incorrectes");
-            $response->redirect("Location: /login");
+            $response->redirect("Location: /");
         }
 
         return $response;
@@ -31,7 +31,7 @@ class LoginController
 
         $response->setSession("logged", false);
         $response->setSession("user", null);
-        $response->redirect("Location: /login");
+        $response->redirect("Location: /");
 
         return $response;
     }
@@ -56,7 +56,7 @@ class LoginController
         $register = $model->register($name, $lastname, $username, $hashPassword, $email, $role);
 
         if ($form === 'userRegistration') {
-            $response->redirect("Location: /login");
+            $response->redirect("Location: /");
         } else if ($form === 'adminRegistration') {
             $response->redirect("Location: /admin");
 

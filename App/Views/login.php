@@ -20,9 +20,7 @@
             <div class="bg-white p-5 rounded w-full sm:w-96">
                 <form class="max-w-sm mx-auto" action="/dologin" method="post">
                     <div class="mb-5 flex items-center justify-center">
-                        <a href="/">
-                            <img src="/img/logo.png" class="h-10" alt="orlify">
-                        </a>
+                        <img src="/img/logo.png" class="h-10" alt="orlify">
                     </div>
 
                     <?php if ($error != "") { ?>
@@ -84,7 +82,7 @@
 
         <div class="w-1/2 shadow-2xl">
             <div class="image-container-login relative">
-                <img class="object-cover w-full h-screen hidden md:block" src="https://source.unsplash.com/IXUM4cJynP0"
+                <img class="object-cover w-full h-screen hidden md:block" src="img/backgroundImage.jpg"
                     alt="Background Image">
                 <div
                     class="overlay-login absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white p-8">
@@ -92,7 +90,7 @@
                     <p class="text-sm text-gray-700 mb-10">Visualitza les nostres orles publiques clicant el següent
                         botó
                     </p>
-                    <a href="/"
+                    <a href="/home"
                         class="inline-flex items-center w-full px-5 py-3 mb-3 mr-1 text-base font-semibold text-white no-underline align-middle bg-blue-600 border border-transparent border-solid rounded-md cursor-pointer select-none sm:mb-0 sm:w-auto hover:bg-blue-700 hover:border-blue-700 hover:text-white focus-within:bg-blue-700 focus-within:border-blue-700">
                         Orles publiques
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
