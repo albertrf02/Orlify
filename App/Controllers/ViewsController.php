@@ -4,6 +4,16 @@ namespace App\Controllers;
 
 class ViewsController
 {
+    /**
+     * Controlador para la página principal de la aplicación.
+     *
+     * @param \Emeset\Http\Request $request Objeto de solicitud HTTP.
+     * @param \Emeset\Http\Response $response Objeto de respuesta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Objeto de respuesta HTTP con datos para la plantilla.
+     */
+
     public function index($request, $response, $container)
     {
         $modelOrles = $container->get("orles");
@@ -16,6 +26,15 @@ class ViewsController
         return $response;
     }
 
+    /**
+     * Controlador per a la pàgina d'inici de sessió.
+     *
+     * @param \Emeset\Http\Request $request Objecte de sol·licitud HTTP.
+     * @param \Emeset\Http\Response $response Objecte de resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Objecte de resposta HTTP amb dades per a la plantilla i possiblement un missatge d'error.
+     */
     public function login($request, $response, $container)
     {
 
@@ -26,6 +45,15 @@ class ViewsController
         return $response;
     }
 
+    /**
+     * Controlador per a la pàgina de registre d'usuaris.
+     *
+     * @param \Emeset\Http\Request $request Objecte de sol·licitud HTTP.
+     * @param \Emeset\Http\Response $response Objecte de resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Objecte de resposta HTTP amb dades per a la plantilla i possiblement un missatge d'error.
+     */
     public function register($request, $response, $container)
     {
 
@@ -36,6 +64,15 @@ class ViewsController
         return $response;
     }
 
+    /**
+     * Controlador per a la pàgina d'administració.
+     *
+     * @param \Emeset\Http\Request $request Objecte de sol·licitud HTTP.
+     * @param \Emeset\Http\Response $response Objecte de resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Objecte de resposta HTTP amb dades per a la plantilla.
+     */
     public function admin($request, $response, $container)
     {
 
@@ -164,6 +201,15 @@ class ViewsController
         return $response;
     }
 
+    /**
+     * Mostra la vista de l'editor d'orles amb l'identificador d'orla proporcionat.
+     *
+     * @param \Emeset\Http\Request $request Petició HTTP.
+     * @param \Emeset\Http\Response $response Resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Resposta HTTP amb la vista de l'editor d'orles.
+     */
     public function orlaEditor($request, $response, $container)
     {
         $idOrla = $_GET["idOrla"];
@@ -173,6 +219,16 @@ class ViewsController
         return $response;
     }
 
+    /**
+     * Gestiona les operacions relacionades amb l'equip directiu, com la creació d'orles, la gestió de visibilitat,
+     * la manipulació de reports d'imatges i altres accions administratives.
+     *
+     * @param \Emeset\Http\Request $request Petició HTTP.
+     * @param \Emeset\Http\Response $response Resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Resposta HTTP amb dades per a la vista de l'equip directiu.
+     */
     public function equipDirectiu($request, $response, $container)
     {
 
@@ -276,6 +332,16 @@ class ViewsController
         return $response;
     }
 
+    /**
+     * Gestiona les operacions relacionades amb el perfil d'un usuari, com la configuració de fotos, la selecció d'avatar,
+     * i la visualització d'informació personal i imatges relacionades amb l'usuari.
+     *
+     * @param \Emeset\Http\Request $request Petició HTTP.
+     * @param \Emeset\Http\Response $response Resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Resposta HTTP amb dades per a la vista del perfil de l'usuari.
+     */
     public function perfil($request, $response, $container)
     {
         $userId = $_SESSION["user"]["id"];
@@ -315,19 +381,45 @@ class ViewsController
         return $response;
     }
 
+    /**
+     * Controlador per a la pàgina de recuperació de contrasenya.
+     *
+     * @param \Emeset\Http\Request $request Objecte de sol·licitud HTTP.
+     * @param \Emeset\Http\Response $response Objecte de resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Objecte de resposta HTTP amb dades per a la plantilla.
+     */
     function recover($request, $response, $container)
     {
         $response->SetTemplate("Recover.php");
         return $response;
     }
 
-
+    /**
+     * Controlador per a la pàgina de gestió de tokens invàlids.
+     *
+     * @param \Emeset\Http\Request $request Objecte de sol·licitud HTTP.
+     * @param \Emeset\Http\Response $response Objecte de resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Objecte de resposta HTTP amb dades per a la plantilla.
+     */
     function invalidtoken($request, $response, $container)
     {
         $response->SetTemplate("InvalidToken.php");
         return $response;
     }
 
+    /**
+     * Controlador per a la pàgina de recuperació de contrasenya mitjançant un token.
+     *
+     * @param \Emeset\Http\Request $request Objecte de sol·licitud HTTP.
+     * @param \Emeset\Http\Response $response Objecte de resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Objecte de resposta HTTP amb dades per a la plantilla.
+     */
     function recoverpassword($request, $response, $container)
     {
         date_default_timezone_set('Europe/Madrid');
@@ -353,6 +445,15 @@ class ViewsController
         }
     }
 
+    /**
+     * Gestiona la generació del carnet d'un usuari a partir d'un token proporcionat.
+     *
+     * @param \Emeset\Http\Request $request Petició HTTP.
+     * @param \Emeset\Http\Response $response Resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Resposta HTTP amb dades per a la vista del carnet o un missatge d'error.
+     */
     function carnet($request, $response, $container)
     {
         $modelusers = $container->get("users");
@@ -375,6 +476,15 @@ class ViewsController
         }
     }
 
+    /**
+     * Obté el token de carnet associat a l'usuari actual i el retorna en format JSON.
+     *
+     * @param \Emeset\Http\Request $request Petició HTTP.
+     * @param \Emeset\Http\Response $response Resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Resposta HTTP amb el token de carnet en format JSON.
+     */
     function getTokenCarnet($request, $response, $container)
     {
         $modelusers = $container->get("users");
@@ -385,6 +495,15 @@ class ViewsController
         return $response;
     }
 
+    /**
+     * Gestiona el procés de canvi de contrasenya per a l'usuari actual.
+     *
+     * @param \Emeset\Http\Request $request Petició HTTP.
+     * @param \Emeset\Http\Response $response Resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Resposta HTTP amb el resultat del canvi de contrasenya o missatge d'error.
+     */
     function canviarContrasenya($request, $response, $container)
     {
         $userModel = $container->get("users");
@@ -416,6 +535,15 @@ class ViewsController
         return $response;
     }
 
+    /**
+     * Controlador per a la pàgina del professor.
+     *
+     * @param \Emeset\Http\Request $request Objecte de sol·licitud HTTP.
+     * @param \Emeset\Http\Response $response Objecte de resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Objecte de resposta HTTP amb dades per a la plantilla.
+     */
     function teacher($request, $response, $container)
     {
         $id = $request->get("SESSION", "user")["id"];
@@ -442,6 +570,15 @@ class ViewsController
         return $response;
     }
 
+    /**
+     * Controlador per a la pàgina de la càmera.
+     *
+     * @param \Emeset\Http\Request $request Objecte de sol·licitud HTTP.
+     * @param \Emeset\Http\Response $response Objecte de resposta HTTP.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Objecte de resposta HTTP amb dades per a la plantilla.
+     */
     function camera($request, $response, $container)
     {
         $idUser = $request->get(INPUT_POST, "id-edit");

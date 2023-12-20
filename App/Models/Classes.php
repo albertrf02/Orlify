@@ -33,6 +33,11 @@ class Classes
         $this->options = $options;
     }
 
+    /**
+     * Obté les classes des de la base de dades.
+     *
+     * @return array Dades de les classes en forma d'array.
+     */
     public function getClasses()
     {
         $stm = $this->sql->prepare('SELECT * FROM classgroup;');
@@ -40,6 +45,11 @@ class Classes
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Obté les classes actives des de la base de dades.
+     *
+     * @return array Dades de les classes actives en forma d'array.
+     */
     public function getActiveClasses()
     {
         $stm = $this->sql->prepare('SELECT * FROM classgroup WHERE state = 1;');
@@ -47,6 +57,14 @@ class Classes
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+
+    /**
+     * Obté les dades d'una classe específica a partir del seu identificador.
+     *
+     * @param int $id Identificador de la classe que es vol obtenir.
+     *
+     * @return array Dades de la classe en forma d'array.
+     */
     public function getClass($id)
     {
         $stm = $this->sql->prepare('SELECT * FROM classgroup WHERE id = :id;');
@@ -54,12 +72,27 @@ class Classes
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Modifica l'estat d'una classe específica a partir del seu identificador.
+     *
+     * @param int $id Identificador de la classe que es vol modificar.
+     * @param int $newState Nou estat que es vol assignar a la classe.
+     *
+     * @return void
+     */
     public function editClass($id, $newState)
     {
         $stm = $this->sql->prepare('UPDATE classgroup SET state = :newState WHERE id = :id;');
         $stm->execute([':id' => $id, ':newState' => $newState]);
     }
 
+    /**
+     * Cerca professors a partir d'un fragment de nom mitjançant una crida AJAX.
+     *
+     * @param string $query Fragment de nom per a la cerca.
+     *
+     * @return array Dades dels professors trobats en forma d'array associatiu.
+     */
     public function searchTeacherClassAjax($query)
     {
         $stm = $this->sql->prepare('SELECT * FROM users WHERE name LIKE :query AND role = 2;');
@@ -68,6 +101,13 @@ class Classes
         return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Cerca estudiants a partir d'un fragment de nom mitjançant una crida AJAX.
+     *
+     * @param string $query Fragment de nom per a la cerca.
+     *
+     * @return array Dades dels estudiants trobats en forma d'array.
+     */
     public function searchStudentClassAjax($query)
     {
         $stm = $this->sql->prepare('SELECT * FROM users u 
@@ -78,11 +118,14 @@ class Classes
         return $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-
-
-
-
-
+    /**
+     * Afegeix usuaris a una classe específica mitjançant les seves identificacions d'usuari.
+     *
+     * @param array $userIds Array d'identificacions d'usuari que es volen afegir a la classe.
+     * @param int $classId Identificació de la classe a la qual es volen afegir els usuaris.
+     *
+     * @return void
+     */
     public function addUserClass($userIds, $classId)
     {
         $stmt = $this->sql->prepare('INSERT INTO users_classgroup (idUser, idGroupClass) VALUES (:userId, :classId);');
@@ -92,6 +135,14 @@ class Classes
         }
     }
 
+    /**
+     * Elimina usuaris d'una classe específica mitjançant les seves identificacions d'usuari.
+     *
+     * @param array $userIds Array d'identificacions d'usuari que es volen eliminar de la classe.
+     * @param int $classId Identificació de la classe de la qual es volen eliminar els usuaris.
+     *
+     * @return void
+     */
     public function deleteUserClass($userIds, $classId)
     {
         $stmt = $this->sql->prepare('DELETE FROM users_classgroup WHERE idUser = :userId AND idGroupClass = :classId');
@@ -101,6 +152,13 @@ class Classes
         }
     }
 
+    /**
+     * Obté les classes associades a un usuari a partir de la seva identificació.
+     *
+     * @param int $id Identificació de l'usuari per al qual es volen obtenir les classes associades.
+     *
+     * @return array Dades de les classes associades a l'usuari en forma d'array.
+     */
     public function getClassByUser($id)
     {
         $stm = $this->sql->prepare("SELECT u.id, u.username, uc.idGroupClass, cg.className, cg.state FROM users u JOIN users_classgroup uc ON u.id = uc.idUser JOIN classgroup cg ON uc.idGroupClass = cg.id WHERE u.id = :userId;");
@@ -108,6 +166,13 @@ class Classes
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Obté els usuaris associats a una classe específica a partir de la seva identificació.
+     *
+     * @param int $idClass Identificació de la classe per a la qual es volen obtenir els usuaris associats.
+     *
+     * @return array Dades dels usuaris associats a la classe en forma d'array.
+     */
     public function getUsersByClass($idClass)
     {
         $stm = $this->sql->prepare("SELECT u.id, u.name, u.surname, u.username, u.email 
@@ -120,6 +185,13 @@ class Classes
     }
 
 
+    /**
+     * Obté els usuaris associats a una classe específica a partir de la seva identificació de classe.
+     *
+     * @param int $classId Identificació de la classe per a la qual es volen obtenir els usuaris associats.
+     *
+     * @return array Dades dels usuaris associats a la classe en forma d'array.
+     */
     public function getUsersByClassId($classId)
     {
         $stm = $this->sql->prepare('SELECT u.* FROM users u
@@ -130,11 +202,11 @@ class Classes
     }
 
     /**
-     * [addClass description]
+     * Afegeix una nova classe a la base de dades.
      *
-     * @param   [type]  $className  [$className description]
+     * @param string $className Nom de la nova classe a afegir.
      *
-     * @return  [type]              [return description]
+     * @return void
      */
     public function addClass($className)
     {

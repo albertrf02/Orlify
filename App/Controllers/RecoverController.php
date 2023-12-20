@@ -7,6 +7,15 @@ use PHPMailer\PHPMailer\Exception;
 
 class RecoverController
 {
+    /**
+     * Gestiona el procés de recuperació de contrasenya per correu electrònic.
+     *
+     * @param \Emeset\Http\Request $request Petició HTTP amb l'adreça de correu electrònic per a la recuperació.
+     * @param \Emeset\Http\Response $response Resposta HTTP per gestionar el redirigiment després de la recuperació.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Resposta HTTP que redirigeix a la pàgina d'inici després de la recuperació.
+     */
     function recover($request, $response, $container)
     {
         $email = $request->get(INPUT_POST, "email");
@@ -47,6 +56,15 @@ class RecoverController
         return $response;
     }
 
+    /**
+     * Gestiona el procés de canvi de contrasenya després de la recuperació.
+     *
+     * @param \Emeset\Http\Request $request Petició HTTP amb les noves contrasenyes i el token de recuperació.
+     * @param \Emeset\Http\Response $response Resposta HTTP per gestionar el redirigiment després del canvi de contrasenya.
+     * @param \Emeset\Container $container
+     *
+     * @return \Emeset\Http\Response Resposta HTTP que redirigeix a la pàgina d'inici després del canvi de contrasenya.
+     */
     function password($request, $response, $container)
     {
         $new_passowrd = $request->get(INPUT_POST, "new_password");

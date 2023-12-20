@@ -33,12 +33,27 @@ class Orles
         $this->options = $options;
     }
 
+    /**
+     * Crea una nova orla amb la informació proporcionada.
+     *
+     * @param string $name Nom de l'orla.
+     * @param int $group Identificador del grup de classe associat.
+     * @param int $idCreator Identificador de l'usuari creador de l'orla.
+     *
+     * @return int Identificador de l'orla creada.
+     */
     public function createOrla($name, $group, $idCreator)
     {
         $stm = $this->sql->prepare('INSERT INTO orla (name, visibility, public, idCreator, idClassGroup) VALUES (:name, :visibility, :public, :idCreator, :idClassGroup);');
         $stm->execute([':name' => $name, ':visibility' => 0, ':public' => 0, ':idCreator' => $idCreator, ':idClassGroup' => $group]);
         return $this->sql->lastInsertId();
     }
+
+    /**
+     * Obté totes les orles disponibles de la base de dades.
+     *
+     * @return array Un array amb la informació de totes les orles.
+     */
 
     public function getOrles()
     {
@@ -47,6 +62,12 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Obté informació detallada dels usuaris associats a un grup d'una orla específica.
+     *
+     * @param int $idOrla L'identificador de la orla.
+     * @return array Un array associatiu amb la informació dels usuaris.
+     */
     public function getUserFromGroupInOrla($idOrla)
     {
         $query = <<<QUERY
@@ -76,13 +97,23 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-
+    /**
+     * Elimina les associacions d'usuaris amb una orla específica.
+     *
+     * @param int $idOrla L'identificador de la orla.
+     */
     public function deleteUsersFromOrla($idOrla)
     {
         $stm = $this->sql->prepare('DELETE FROM user_orla WHERE idOrla = :idOrla;');
         $stm->execute([':idOrla' => $idOrla]);
     }
 
+    /**
+     * Afegeix usuaris a una orla específica.
+     *
+     * @param int   $idOrla    L'identificador de la orla.
+     * @param array $usersOrla Un array d'identificadors d'usuaris per afegir a la orla.
+     */
     public function addUsersToOrla($idOrla, $usersOrla)
     {
         $stm = $this->sql->prepare('INSERT INTO user_orla (idUser, idOrla) VALUES (:idUser, :idOrla);');
@@ -91,6 +122,13 @@ class Orles
         }
     }
 
+    /**
+     * Obté les dades d'usuaris que pertanyen a una orla específica, incloent el nom, el cognom, el rol i el vincle a la fotografia.
+     *
+     * @param int $idOrla L'identificador de la orla.
+     *
+     * @return array Un array associatiu amb les dades dels usuaris.
+     */
     public function getOrlaById($idOrla)
     {
         $query = <<<QUERY
@@ -106,6 +144,11 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Elimina les dades relacionades amb una orla específica de les taules user_orla i orla.
+     *
+     * @param int $idOrla L'identificador de la orla a eliminar.
+     */
     public function deleteOrla($idOrla)
     {
         $deleteUserOrla = $this->sql->prepare('DELETE FROM user_orla WHERE idOrla = :idOrla;');
@@ -115,6 +158,12 @@ class Orles
         $deleteOrla->execute([':idOrla' => $idOrla]);
     }
 
+    /**
+     * Obté el nom de la classe associada a una orla específica.
+     *
+     * @param int $idOrla L'identificador de la orla.
+     * @return array Retorna un array amb les dades de la classe associada a la orla.
+     */
     public function getClassByOrlaId($idOrla)
     {
         $query = <<<QUERY
@@ -128,6 +177,12 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Obté les orles associades a una classe específica.
+     *
+     * @param int $idClass L'identificador de la classe.
+     * @return array Retorna un array amb les orles associades a la classe.
+     */
     public function getOrlaByClassId($idClass)
     {
         $query = <<<QUERY
@@ -141,18 +196,33 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Activa la visibilitat pública d'una orla específica.
+     *
+     * @param int $idOrla L'identificador de l'orla.
+     */
     public function setOrlaPublicOn($idOrla)
     {
         $stm = $this->sql->prepare('UPDATE orla SET public = 1 WHERE id = :idOrla;');
         $stm->execute([":idOrla" => $idOrla]);
     }
 
+    /**
+     * Desactiva la publicació d'una orla específica.
+     *
+     * @param int $idOrla L'identificador de l'orla.
+     */
     public function setOrlaPublicOff($idOrla)
     {
         $stm = $this->sql->prepare('UPDATE orla SET public = 0 WHERE id = :idOrla;');
         $stm->execute([":idOrla" => $idOrla]);
     }
 
+    /**
+     * Obté totes les orles públiques juntament amb la informació de les classes associades.
+     *
+     * @return array Les dades de les orles públiques amb informació de les classes.
+     */
     public function getPublicOrlesAndClass()
     {
         $stm = $this->sql->prepare('SELECT * FROM orla, classgroup WHERE orla.idClassGroup = classgroup.id AND public = 1;');
@@ -160,12 +230,22 @@ class Orles
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Activa la visibilitat d'una orla específica.
+     *
+     * @param int $idOrla L'identificador de l'orla.
+     */
     public function setOrlaVisibilityOn($idOrla)
     {
         $stm = $this->sql->prepare('UPDATE orla SET visibility = 1 WHERE id = :idOrla;');
         $stm->execute([":idOrla" => $idOrla]);
     }
 
+    /**
+     * Desactiva la visibilitat d'una orla específica.
+     *
+     * @param int $idOrla L'identificador de l'orla.
+     */
     public function setOrlaVisibilityOff($idOrla)
     {
         $stm = $this->sql->prepare('UPDATE orla SET visibility = 0 WHERE id = :idOrla;');

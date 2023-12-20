@@ -4,6 +4,15 @@ namespace App\Middleware;
 
 class LoadUserData
 {
+    /**
+     * Carrega les dades de l'usuari si aquest està autenticat i les afegeix a la resposta.
+     *
+     * @param \Emeset\Http\Request $request petició HTTP
+     * @param \Emeset\Http\Response $response resposta HTTP
+     * @param \Emeset\Container $container  
+     * @param callable $next  següent middleware o controlador.   
+     * @return \Emeset\Http\Response resposta HTTP
+     */
     public static function loadUserData($request, $response, $container, $next)
     {
 

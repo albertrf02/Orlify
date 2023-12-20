@@ -43,6 +43,15 @@ class Auth
         return $response;
     }
 
+    /**
+     * Middleware que gestiona l'autenticació de l'administrador
+     *
+     * @param \Emeset\Http\Request $request petició HTTP
+     * @param \Emeset\Http\Response $response resposta HTTP
+     * @param \Emeset\Container $container  
+     * @param callable $next  següent middleware o controlador.   
+     * @return \Emeset\Http\Response resposta HTTP
+     */
     public static function admin($request, $response, $container, $next)
     {
 
@@ -77,6 +86,15 @@ class Auth
         return $response;
     }
 
+    /**
+     * Middleware que gestiona l'autenticació de l'equip directiu
+     *
+     * @param \Emeset\Http\Request $request petició HTTP
+     * @param \Emeset\Http\Response $response resposta HTTP
+     * @param \Emeset\Container $container  
+     * @param callable $next  següent middleware o controlador.   
+     * @return \Emeset\Http\Response resposta HTTP
+     */
     public static function equipDirectiu($request, $response, $container, $next)
     {
 
@@ -111,6 +129,15 @@ class Auth
         return $response;
     }
 
+    /**
+     * Middleware que gestiona l'autenticació del professor
+     *
+     * @param \Emeset\Http\Request $request petició HTTP
+     * @param \Emeset\Http\Response $response resposta HTTP
+     * @param \Emeset\Container $container  
+     * @param callable $next  següent middleware o controlador.   
+     * @return \Emeset\Http\Response resposta HTTP
+     */
     public static function professor($request, $response, $container, $next)
     {
 
@@ -145,6 +172,15 @@ class Auth
         return $response;
     }
 
+    /**
+     * Middleware que gestiona l'autenticació de l'alumne
+     *
+     * @param \Emeset\Http\Request $request petició HTTP
+     * @param \Emeset\Http\Response $response resposta HTTP
+     * @param \Emeset\Container $container  
+     * @param callable $next  següent middleware o controlador.   
+     * @return \Emeset\Http\Response resposta HTTP
+     */
     public static function alumne($request, $response, $container, $next)
     {
 
