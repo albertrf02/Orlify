@@ -197,9 +197,11 @@
                             </div>
                         </div>
                         <div class="text-right rtl:text-left">
-                            <a href="/carnet"
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-4">Veure el
-                                Carnet </a>
+                            <form action="/carnet" method="GET">
+                                <label for="token">Token:</label>
+                                <input type="text" id="token" name="token_carnet" required>
+                                <button type="submit">Veure el Carnet</button>
+                            </form>
                             <a href="#" onclick="printToken()"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-4">Veure
                                 token

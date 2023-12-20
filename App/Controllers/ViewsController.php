@@ -158,7 +158,7 @@ class ViewsController
         $reportedImages = $modelUsers->getReportedImages();
 
         $response->set("reportedImages", $reportedImages);
-        
+
         $response->SetTemplate("AdminView.php");
 
         return $response;
@@ -356,17 +356,23 @@ class ViewsController
     function carnet($request, $response, $container)
     {
         $modelusers = $container->get("users");
-        if (isset($_GET["token_carnet"])) {
-            $tokenCarnet = $_GET["token_carnet"];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["token_carnet"])) {
+            $tokenCarnet = $_REQUEST["token_carnet"];
             $user = $modelusers->getUserByTokenCarnet($tokenCarnet);
-            $response->set("user", $user);
-            $response->SetTemplate("CarnetView.php");
+
+            if ($user) {
+                $response->set("user", $user);
+                $response->setTemplate("CarnetView.php");
+                return $response;
+            } else {
+                $response->setBody("Invalid token");
+                return $response;
+            }
         } else {
-            $response->setBody("token no proporcionat");
+            $response->setBody("Token not provided");
             return $response;
         }
-
-        return $response;
     }
 
     function getTokenCarnet($request, $response, $container)
@@ -438,7 +444,7 @@ class ViewsController
 
     function camera($request, $response, $container)
     {
-        $idUser = $request->get(INPUT_POST,"id-edit");
+        $idUser = $request->get(INPUT_POST, "id-edit");
         $response->set("idUser", $idUser);
 
         $response->SetTemplate("Camera.php");
