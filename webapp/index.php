@@ -29,10 +29,17 @@
   }
   ?>
 
-  <iframe src="<?php echo $iframeSrc; ?>" class="w-full h-full border-none"></iframe>
-  <script src="js/main.js"></script>
-</body>
+  <div class="flex flex-col items-center">
+    <form action="/carnet" method="GET" class="mb-4">
+      <label for="token" class="mr-2">Token:</label>
+      <input type="text" id="token" name="token_carnet" class="border border-gray-400 p-2" required>
+      <button type="submit" class="bg-blue-500 text-white p-2 ml-2">Submit</button>
+    </form>
 
+    <iframe src="<?php echo $iframeSrc; ?>" class="w-full h-full border-none"></iframe>
+  </div>
+
+  <script src="js/main.js"></script>
 </body>
 
 </html>
