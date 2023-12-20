@@ -18,6 +18,13 @@
 </head>
 
 <body class="min-h-screen flex items-center justify-center bg-gray-400 backdrop-blur">
+
+  <form action="/carnet" method="GET" class="mb-4">
+    <label for="token" class="mr-2">Token:</label>
+    <input type="text" id="token" name="token_carnet" class="border border-gray-400 p-2" required>
+    <button type="submit" class="bg-blue-500 text-white p-2 ml-2">Submit</button>
+  </form>
+
   <?php
   $tokenCarnet = isset($_GET['token_carnet']) ? $_GET['token_carnet'] : null;
 
@@ -30,11 +37,6 @@
   ?>
 
   <div class="flex flex-col items-center">
-    <form action="/carnet" method="GET" class="mb-4">
-      <label for="token" class="mr-2">Token:</label>
-      <input type="text" id="token" name="token_carnet" class="border border-gray-400 p-2" required>
-      <button type="submit" class="bg-blue-500 text-white p-2 ml-2">Submit</button>
-    </form>
 
     <iframe src="<?php echo $iframeSrc; ?>" class="w-full h-full border-none"></iframe>
   </div>
