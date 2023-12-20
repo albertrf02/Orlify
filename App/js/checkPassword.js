@@ -1,11 +1,21 @@
 import $ from "jquery";
 
+/**
+ * Comprova la contrasenya abans d'enviar el formulari.
+ *
+ * @return  {void}  No retorna cap valor explícit.
+ */
 function checkPassword() {
   $(document).ready(function () {
+    // S'afegeix un esdeveniment 'submit' al formulari amb l'id "registerForm"
     $("#registerForm").submit(function (event) {
+      // Obté el valor del camp de contrasenya
       const contrasenya = $("#password").val();
+
+      // Validació de la contrasenya amb la funció validarContrasenya
       const esValida = validarContrasenya(contrasenya);
 
+      // Si la contrasenya no és vàlida, s'atura l'enviament del formulari i es mostra un alert
       if (!esValida) {
         event.preventDefault();
         alert(
@@ -15,26 +25,41 @@ function checkPassword() {
     });
   });
 
+  /**
+   * Validació de la contrasenya mitjançant una expressió regular.
+   *
+   * @param   {string}  contrasenya  La contrasenya a validar.
+   * @return  {boolean}              Retorna true si la contrasenya és vàlida, sinó false.
+   */
   function validarContrasenya(contrasenya) {
+    // Expressió regular que requereix almenys una lletra, un número i té una longitud entre 6 i 13 caràcters
     const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d-]{6,13}$/;
+
+    // Comprova si la contrasenya compleix la condició de l'expressió regular
     return regex.test(contrasenya);
   }
 }
 
+/**
+ * Gestiona el canvi de contrasenya en un formulari utilitzant jQuery.
+ *
+ * @return  {void}  No retorna cap valor explícit.
+ */
 function changePassword() {
   $(document).ready(function () {
+    // Funció per mostrar un missatge d'error en un div específic
     function showErrorMessage(divId, errorMessage) {
       var errorDiv = $("#" + divId);
 
       if (errorMessage !== "") {
         errorDiv.text(errorMessage);
-        errorDiv.show(); // Show the error div
+        errorDiv.show(); // Mostra el div d'error
       } else {
-        errorDiv.hide(); // Hide the error div if there's no error message
+        errorDiv.hide(); // Amaga el div d'error si no hi ha cap missatge d'error
       }
     }
 
-    // Function to check if the new password matches the confirmation password
+    // Funció per comprovar si la nova contrasenya coincideix amb la confirmació de contrasenya
     function checkPasswordMatch() {
       var newPassword = $("#newPassword").val();
       var confirmPassword = $("#confirmPassword").val();
@@ -49,7 +74,7 @@ function changePassword() {
       }
     }
 
-    // Function to check if the new password is empty
+    // Funció per comprovar si la nova contrasenya no està buida
     function checkNewPasswordNotEmpty() {
       var newPassword = $("#newPassword").val();
 
@@ -63,10 +88,11 @@ function changePassword() {
       }
     }
 
+    // Funció per comprovar el format de la nova contrasenya
     function checkNewPasswordFormat() {
       var newPassword = $("#newPassword").val();
 
-      // Check if the password is not empty before validating format
+      // Comprova si la contrasenya no està buida abans de validar el format
       if (newPassword !== "") {
         var isValid = validarContrasenya(newPassword);
 
@@ -79,61 +105,68 @@ function changePassword() {
           showErrorMessage("newPasswordFormatError", "");
         }
       } else {
-        // Password is empty, hide the format error
+        // La contrasenya està buida, amaga l'error de format
         showErrorMessage("newPasswordFormatError", "");
       }
     }
 
+    // Inicialitza els missatges d'error
     showErrorMessage("passwordMatchError", "");
     showErrorMessage("newPasswordEmptyError", "");
     showErrorMessage("newPasswordFormatError", "");
 
-    // Bind the checkPasswordMatch function to the input events
+    // Associa la funció checkPasswordMatch als esdeveniments d'entrada dels camps de contrasenya
     $("#newPassword, #confirmPassword").keyup(checkPasswordMatch);
 
-    // Bind the checkNewPasswordNotEmpty function to the input events
+    // Associa la funció checkNewPasswordNotEmpty als esdeveniments d'entrada del camp de nova contrasenya
     $("#newPassword").keyup(checkNewPasswordNotEmpty);
 
-    // Bind the checkNewPasswordFormat function to the input events
+    // Associa la funció checkNewPasswordFormat als esdeveniments d'entrada del camp de nova contrasenya
     $("#newPassword").keyup(checkNewPasswordFormat);
 
-    // Submit handler for the form
+    // Gestor de l'enviament del formulari
     $("form").submit(function (event) {
       var newPassword = $("#newPassword").val();
       var confirmPassword = $("#confirmPassword").val();
 
-      // Check if the passwords match before submitting the form
+      // Comprova si les contrasenyes coincideixen abans d'enviar el formulari
       if (newPassword !== confirmPassword) {
         showErrorMessage(
           "passwordMatchError",
           "Les contrasenyes no coincideixen"
         );
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault(); // Evita l'enviament del formulari
       }
 
-      // Check if the new password is not empty
+      // Comprova si la nova contrasenya no està buida abans d'enviar el formulari
       if (newPassword === "") {
         showErrorMessage(
           "newPasswordEmptyError",
           "La nova contrasenya no pot estar buida"
         );
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault(); // Evita l'enviament del formulari
       }
 
+      // Funció per validar el format de la nova contrasenya
       function validarContrasenya(contrasenya) {
         const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d-]{6,13}$/;
         return regex.test(contrasenya);
       }
 
-      // Check if the new password format is valid
+      // Comprova si el format de la nova contrasenya és vàlid
       var isValidFormat = validarContrasenya(newPassword);
       if (!isValidFormat) {
         showErrorMessage(
           "newPasswordFormatError",
           "La nova contrasenya no compleix el format requerit"
         );
+        event.preventDefault(); // Evita l'enviament del formulari
       }
     });
   });
 }
-export { checkPassword, changePassword };
+
+export { 
+  checkPassword, 
+  changePassword 
+};

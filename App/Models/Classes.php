@@ -215,8 +215,4 @@ class Classes
         $stmt->execute([':className' => $className]);
 
     }
-
-
-
-
 }
