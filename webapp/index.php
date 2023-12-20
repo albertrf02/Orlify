@@ -21,15 +21,15 @@
   <div
     class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8">
     <div class="flex items-start p-5">
-      <img class="w-24 h-24 mr-4 rounded-lg shadow-lg" src="<?= '../avatars/' . $user["avatar"] ?>"
-        alt="<?= $user["name"] ?>" />
+      <img class="w-24 h-24 mr-4 rounded-lg shadow-lg" src="<?= '../avatars/' . $_SESSION["avatar"] ?>"
+        alt="<?= $_SESSION["name"] ?>" />
       <div>
         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-          <?= $user["name"] ?>
-          <?= $user["surname"] ?>
+          <?= $_SESSION["name"] ?>
+          <?= $_SESSION["surname"] ?>
         </h5>
         <span class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-          <?= $user["email"] ?>
+          <?= $_SESSION["email"] ?>
         </span>
       </div>
     </div>
