@@ -18,7 +18,14 @@
 </head>
 
 <body class="flowbite h-screen flex items-center justify-center bg-gray-400 backdrop-blur">
-  <iframe src="/carnet" frameborder="0" width="100%" height="1000px"></iframe>
+
+  <?php
+  $tokenCarnet = "V7Tz6n3hhq";
+  $iframeSrc = "/carnet?token_carnet=" . urlencode($tokenCarnet);
+  ?>
+
+  <iframe src="<?php echo $iframeSrc; ?>" frameborder="0" width="100%" height="1000px"></iframe>
+  <script src="js/main.js"></script>
   <script src="js/main.js"></script>
 </body>
 
