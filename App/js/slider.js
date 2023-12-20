@@ -1,20 +1,29 @@
+import $ from "jquery";
+
 function slider() {
+    const sliderElement = $("#slider");
+    const nextButton = $("#next");
+    const prevButton = $("#prev");
+
+    if (!sliderElement.length || !nextButton.length || !prevButton.length) {
+        return;
+    }
+
     let defaultTransform = 0;
     let cardWidth = calculateCardWidth();
     const cardsPerMove = calculateCardsPerMove();
 
-    window.addEventListener("resize", function () {
+    $(window).on("resize", function () {
         cardWidth = calculateCardWidth();
         updateSliderTransform();
     });
 
     function calculateCardWidth() {
-        const desktopWidth = 768; // Adjust this value based on your breakpoint for desktop screens
+        const desktopWidth = 768;
         const maxWidth = 1210;
-        const minWidth = 392.5; // Adjust this value based on your mobile width
-        const windowWidth = window.innerWidth;
+        const minWidth = 392.5;
+        const windowWidth = $(window).width();
 
-        // Choose the card width based on the window width
         if (windowWidth >= desktopWidth) {
             return maxWidth;
         } else {
@@ -23,7 +32,7 @@ function slider() {
     }
 
     function calculateCardsPerMove() {
-        return Math.floor(window.innerWidth / cardWidth);
+        return Math.floor($(window).width() / cardWidth);
     }
 
     function goNext() {
@@ -31,29 +40,25 @@ function slider() {
         updateSliderTransform();
     }
 
-    const next = document.getElementById("next");
-    next.addEventListener("click", goNext);
+    nextButton.on("click", goNext);
 
     function goPrev() {
         defaultTransform += cardWidth * cardsPerMove;
         updateSliderTransform();
     }
 
-    const prev = document.getElementById("prev");
-    prev.addEventListener("click", goPrev);
+    prevButton.on("click", goPrev);
 
     function updateSliderTransform() {
-        var slider = document.getElementById("slider");
-
-        if (Math.abs(defaultTransform) >= slider.scrollWidth) {
+        if (Math.abs(defaultTransform) >= sliderElement[0].scrollWidth) {
             defaultTransform = 0;
         }
 
         if (defaultTransform > 0) {
-            defaultTransform = -slider.scrollWidth + slider.clientWidth;
+            defaultTransform = -sliderElement[0].scrollWidth + sliderElement.width();
         }
 
-        slider.style.transform = "translateX(" + defaultTransform + "px)";
+        sliderElement.css("transform", "translateX(" + defaultTransform + "px)");
     }
 }
 

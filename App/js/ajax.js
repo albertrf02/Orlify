@@ -162,6 +162,7 @@ function editUserModal() {
                 var user = data['user'];
                 var roles = data['roles'];
 
+
           $("#title").text(user.name + " " + user.surname);
 
           $("#id-edit").val(user.id);
@@ -271,7 +272,7 @@ function deleteClassModal() {
 function searchUser() {
     $(document).ready(function () {
         var $searchInput = $('#table-search-users');
-        var lastSearchQuery = ''; // Variable para almacenar la última búsqueda
+        var lastSearchQuery = '';
 
         $searchInput.on('input', function () {
             var searchQuery = $searchInput.val();
@@ -394,8 +395,6 @@ function searchUser() {
                             </div>`;
 
                             $paginaUsers.append(paginationHtml);
-
-
 
 
                         },
@@ -733,7 +732,7 @@ function searchUserTeacher() {
                         success: function (data) {
                             console.log(data);
 
-                            var users = data['users'];
+                            var users = data['student'];
                             var currentPage = data['currentPage'];
                             var totalPages = data['totalPages'];
 

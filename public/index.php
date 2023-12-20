@@ -35,6 +35,11 @@ $app->get("/admin", [ViewsController::class, "admin"], [[\App\Middleware\Auth::c
 $app->get("/canviarContrasenya", [ViewsController::class, "canviarContrasenya"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/carnet-token", [ViewsController::class, "getTokenCarnet"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/carnet", [ViewsController::class, "carnet"]);
+
+
+
+
+
 $app->get("/equipDirectiu", [ViewsController::class, "equipDirectiu"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/orles", [ViewsController::class, "orles"], [[\App\Middleware\Auth::class, "auth"]]);
 $app->get("/perfil", [ViewsController::class, "perfil"], [[\App\Middleware\Auth::class, "auth"]]);

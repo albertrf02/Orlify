@@ -59,18 +59,18 @@ class UserController
         $model = $container->get("users");
         $newUsers = $model->searchUserAjax($query);
 
-        $countUsers = 9;
+        $student = $model->searchUserStudentAjax($query);
+
+        $countUsers = 12;
         $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
         $start = ($page - 1) * $countUsers;
         $users = array_slice($newUsers, $start, $countUsers);
         $totalPages = ceil(count($newUsers) / $countUsers);
 
-        $response->set("users", $users);
-        $response->set("currentPage", $page);
-        $response->set("totalPages", $totalPages);
 
         if (!empty($newUsers)) {
             $response->set("users", $users);
+            $response->set("student", $student);
             $response->set("currentPage", $page);
             $response->set("totalPages", $totalPages);
             $response->setJSON();
