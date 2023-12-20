@@ -48,8 +48,8 @@ class Users
 
     public function register($name, $lastname, $username, $password, $email, $role)
     {
-        $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email, role) VALUES (:name, :surname, :username, :password, :email, :role);');
-        $stm->execute([':name' => $name, ':surname' => $lastname, ':username' => $username, ':password' => $password, ':email' => $email, ':role' => $role]);
+        $stm = $this->sql->prepare('INSERT INTO users (name, surname, username, password, email, avatar, role) VALUES (:name, :surname, :username, :password, :email, :avatar, :role);');
+        $stm->execute([':name' => $name, ':surname' => $lastname, ':username' => $username, ':password' => $password, ':email' => $email, 'avatar' => "avatar-nen1.png", ':role' => $role]);
     }
 
     public function hashPassword($password)
