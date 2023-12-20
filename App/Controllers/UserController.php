@@ -223,54 +223,76 @@ class UserController
 
     
     public function insertPhoto($request, $response, $container)
-    {
+{
+    // Get the user ID from the request
     $idUser = $request->get(INPUT_POST, "id-edit");
     
-    $carpeta = "../public/img/" . $idUser . "/";
+    // Define the folder path where the photo will be stored
+    $folder = "../public/img/" . $idUser . "/";
     
-    if (!file_exists($carpeta)) {
-        mkdir($carpeta, 0777, true);
+    // If the folder doesn't exist, create it
+    if (!file_exists($folder)) {
+        mkdir($folder, 0777, true);
     }
     
+    // Get the name of the uploaded file
     $fileName = basename($_FILES['file']['name']);
-    $uploadFile = $carpeta . $fileName;
+    // Define the complete file path where the photo will be stored
+    $uploadFile = $folder . $fileName;
     
+    // Move the uploaded file to the desired location
     move_uploaded_file($_FILES['file']['tmp_name'], $uploadFile);
 
+    // Define the path that will be stored in the database
     $linkBDD = "../img/" . $idUser . "/" . $fileName;
 
+    // Get the users model
     $model = $container->get("users");
+    // Insert the photo into the database
     $model->insertPhotoByID($linkBDD, $idUser);
 
+    // Redirect to the professor page
     $response->redirect("Location: /professor");
     return $response;
-    }
+}
     
 
-    public function insertPhotoWeb($request, $response, $container)
-    {   
+public function insertPhotoWeb($request, $response, $container)
+{   
+    // Get the user ID from the request
     $idUser = $request->get(INPUT_POST, "id-edit");
+    // Get the link of the photo from the request
     $link = $_POST['capturedImageData'];
 
-    $carpeta = "../public/img/" . $idUser . "/";
-    if (!file_exists($carpeta)) {
-        mkdir($carpeta, 0777, true);
+    // Define the folder path where the photo will be stored
+    $folder = "../public/img/" . $idUser . "/";
+    // If the folder doesn't exist, create it
+    if (!file_exists($folder)) {
+        mkdir($folder, 0777, true);
     }
 
+    // Get the current time in 'YmdHis' format 
     $timestamp = date('YmdHis'); 
-    $nombreArchivo = 'captured_image_' . $timestamp . '.png';
-    $rutaDestino = $carpeta . $nombreArchivo; 
-    file_put_contents($rutaDestino, file_get_contents($link));
+    // Define the name of the photo file
+    $fileName = 'captured_image_' . $timestamp . '.png';
+    // Define the complete file path where the photo will be stored
+    $destinationPath = $folder . $fileName; 
+    // Save the photo to the specified path
+    file_put_contents($destinationPath, file_get_contents($link));
 
-    
-    $linkBDD = "../img/" . $idUser . "/" . $nombreArchivo;
+    // Define the path that will be stored in the database
+    $linkBDD = "../img/" . $idUser . "/" . $fileName;
 
+    // Get the users model
     $model = $container->get("users");
+    // Insert the photo into the database
     $model->insertPhotoByID($linkBDD, $idUser);
 
+    // Redirect to the professor page
     $response->redirect("Location: /professor");
     return $response;
-    }
+}
+
 
     
 }

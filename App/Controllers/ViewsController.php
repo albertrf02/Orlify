@@ -110,9 +110,7 @@ class ViewsController
                 }
 
                 $response->redirect("Location: /admin");
-
             }
-
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {
@@ -152,7 +150,6 @@ class ViewsController
 
                 $response->redirect("Location: /admin");
             }
-
         }
 
         $reportedImages = $modelUsers->getReportedImages();
@@ -223,9 +220,7 @@ class ViewsController
                 }
 
                 $response->redirect("Location: /equipDirectiu");
-
             }
-
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_REQUEST["action"])) {
@@ -265,7 +260,6 @@ class ViewsController
 
                 $response->redirect("Location: /equipDirectiu");
             }
-
         }
 
         $reportedImages = $modelUsers->getReportedImages();
@@ -346,7 +340,6 @@ class ViewsController
             $response->set("token", $token);
             $response->setTemplate("RecoverPassword.php");
             return $response;
-
         } else {
             $response->redirect("Location: /invalidtoken");
             return $response;
@@ -418,37 +411,53 @@ class ViewsController
 
     function teacher($request, $response, $container)
     {
+        // Get the user ID from the session
         $id = $request->get("SESSION", "user")["id"];
 
+        // Get the users model
         $model = $container->get("users");
+        // Get the classes model
         $model2 = $container->get("classes");
-        $userModel = $container->get("users");
+        // Get all students
         $allUsers = $model->getAllStudents();
+        // Get all classes by user
         $allClass = $model2->getClassByUser($id);
-        $userOrla = $userModel->getOrlaFromClassByUserId($id);
+        // Get the user's orla from the class
+        $userOrla = $model->getOrlaFromClassByUserId($id);
 
+        // Set the number of users per page
         $countUsers = 12;
+        // Get the current page number from the request, default to 1 if not set
         $page = isset($_REQUEST['page']) && is_numeric($_REQUEST['page']) && $_REQUEST['page'] > 0 ? $_REQUEST['page'] : 1;
+        // Calculate the start index for the slice
         $start = ($page - 1) * $countUsers;
+        // Get a slice of the users array for the current page
         $users = array_slice($allUsers, $start, $countUsers);
+        // Calculate the total number of pages
         $totalPages = ceil(count($allUsers) / $countUsers);
 
+        // Set the users, current page, total pages, classes, and user orla in the response
         $response->set("users", $users);
         $response->set("currentPage", $page);
         $response->set("totalPages", $totalPages);
         $response->set("classes", $allClass);
         $response->set("userOrla", $userOrla);
+        // Set the template for the response
         $response->SetTemplate("TeacherView.php");
+        // Return the response
         return $response;
     }
 
     function camera($request, $response, $container)
     {
+        // Get the user ID from the request
         $idUser = $request->get(INPUT_POST, "id-edit");
+        // Set the user ID in the response
         $response->set("idUser", $idUser);
 
+        // Set the template for the response
         $response->SetTemplate("Camera.php");
+        // Return the response
         return $response;
     }
 }
-
