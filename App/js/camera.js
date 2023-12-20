@@ -1,5 +1,13 @@
+/**
+ * Function that handles the camera
+ * @return  {void}  No return value
+ */
 function camera() {
+    /**
+     * Listens for the 'DOMContentLoaded' event
+     */
     document.addEventListener('DOMContentLoaded', function() {
+        // Gets DOM elements
         const video = document.getElementById('videoElement');
         const activateButton = document.getElementById('activateButton');
         const deactivateButton = document.getElementById('deactivateButton');
@@ -9,9 +17,11 @@ function camera() {
 
         let stream;
 
+        // If the activation button exists
         if (activateButton) {
             activateButton.addEventListener('click', async () => {
                 try {
+                    // Tries to get the camera stream
                     stream = await navigator.mediaDevices.getUserMedia({ video: true });
                     video.srcObject = stream;
                     video.classList.remove('hidden');
@@ -23,12 +33,17 @@ function camera() {
             });
         }
 
+        // If the deactivation button exists
         if (deactivateButton) {
             deactivateButton.addEventListener('click', () => {
                 stopCamera();
             });
         }
 
+        /**
+         * Function to stop the camera
+         * @return  {void}  No return value
+         */
         function stopCamera() {
             if (stream) {
                 const tracks = stream.getTracks();
@@ -42,6 +57,7 @@ function camera() {
             activateButton.classList.remove('hidden');
         }
 
+        // If the capture button exists
         if (captureButton) {
             captureButton.addEventListener('click', () => {
                 const containerWidth = 320;

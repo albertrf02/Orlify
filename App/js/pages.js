@@ -112,37 +112,50 @@ function recoverPages() {
   });
 }
 
+/**
+ * Function that handles the functionality for teacher pages.
+ * Controls the visibility of different sections (users, groups, classes) in the teacher dashboard.
+ */
 function teacherPages() {
+  /**
+   * Listens for the 'DOMContentLoaded' event to ensure the DOM is fully loaded.
+   */
   $(document).ready(function () {
-    // Ocultar las secciones de grupos y orlas al inicio
-    $("#new-pagina-users").show();
-    $("#new-pagina-grups").hide();
-    $("#new-pagina-orles").hide();
-    $("#search-users-edit").show();
-
-    $("#new-users").click(function (e) {
-      e.preventDefault();
+      // Initially hides the group and orla sections
       $("#new-pagina-users").show();
       $("#new-pagina-grups").hide();
       $("#new-pagina-orles").hide();
       $("#search-users-edit").show();
-    });
 
-    $("#new-grups").click(function (e) {
-      e.preventDefault();
-      $("#new-pagina-users").hide();
-      $("#new-pagina-grups").show();
-      $("#new-pagina-orles").hide();
-      $("#search-users-edit").hide();
-    });
+      // Click event for 'new users' section
+      $("#new-users").click(function (e) {
+          e.preventDefault();
+          // Shows the users page and hides the others
+          $("#new-pagina-users").show();
+          $("#new-pagina-grups").hide();
+          $("#new-pagina-orles").hide();
+          $("#search-users-edit").show();
+      });
 
-    $("#new-classes").click(function (e) {
-      e.preventDefault();
-      $("#new-pagina-users").hide();
-      $("#new-pagina-grups").hide();
-      $("#new-pagina-orles").show();
-      $("#search-users-edit").hide();
-    });
+      // Click event for 'new groups' section
+      $("#new-grups").click(function (e) {
+          e.preventDefault();
+          // Shows the groups page and hides the others
+          $("#new-pagina-users").hide();
+          $("#new-pagina-grups").show();
+          $("#new-pagina-orles").hide();
+          $("#search-users-edit").hide();
+      });
+
+      // Click event for 'new classes' section
+      $("#new-classes").click(function (e) {
+          e.preventDefault();
+          // Shows the classes page and hides the others
+          $("#new-pagina-users").hide();
+          $("#new-pagina-grups").hide();
+          $("#new-pagina-orles").show();
+          $("#search-users-edit").hide();
+      });
   });
 }
 

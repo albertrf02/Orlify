@@ -417,27 +417,40 @@ function searchUser() {
   });
 }
 
+/**
+ * Handles the Datatables Modal functionality.
+ * Binds click event to elements triggering a modal for DataTables.
+ */
 function DatatablesModal() {
+  // Removes any previous click event handlers and adds a new one
   $(document)
     .off("click", "a[data-modal-target='datatableModal']")
     .on("click", "a[data-modal-target='datatableModal']", function (event) {
+      // Prevents the default action
       event.preventDefault();
+      // Gets the clicked element and the class id
       var $this = $(this);
       var idClass = $this.data("class-id");
 
+      // Makes an AJAX request to retrieve class data
       $.ajax({
         url: "/getclassajax",
         method: "POST",
         data: { idClass: idClass },
         dataType: "json",
+        /**
+         * Handles the success of the AJAX request.
+         * @param  {Object}  data  The data returned from the server
+         */
         success: function (data) {
+          // Retrieves users from the data
           var users = data["users"];
 
-          // Limpiar el modal
+          // Clears the modal content
           var $modalBody = $(".p-4.md\\:p-5.space-y-4");
           $modalBody.empty();
 
-          // Agregar los títulos al modal
+          // Adds table headers to the modal
           var titlesHTML = `
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -452,7 +465,7 @@ function DatatablesModal() {
                 `;
           $modalBody.append(titlesHTML);
 
-          // Recorrer los usuarios y agregarlos al modal
+          // Loops through users and adds them to the modal table
           users.forEach(function (currentUser) {
             var userHTML = `
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -463,19 +476,24 @@ function DatatablesModal() {
             $modalBody.find("tbody").append(userHTML);
           });
 
-          // Cerrar la tabla
+          // Closes the table
           var closingHTML = `</tbody></table></div>`;
           $modalBody.append(closingHTML);
 
           console.log(data);
         },
 
+        /**
+         * Handles errors that occur during the AJAX request.
+         * @param  {Object}  error  The error returned from the server
+         */
         error: function (error) {
-          console.error("Error en la solicitud AJAX: ", error);
+          console.error("Error in the AJAX request: ", error);
         },
       });
     });
 }
+
 
 function searchTeacherClass() {
   $(document).ready(function () {
